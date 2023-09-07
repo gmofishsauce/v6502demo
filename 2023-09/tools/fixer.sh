@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# Usage: cat ALL_PAGES | ./tools/getter.sh
+# This is a hack to getter.sh that just rewrites the reduced files.
+# Usage: cat ALL_PAGES | ./tools/fixer.sh
 # Run from root of repo
-# Places downloaded files in $RAW
-# Places reduced files in $CONTENT (WaybackMachine header and footer removed)
+# Overwrites reduced files in $CONTENT (WaybackMachine header and footer removed)
 
 # Subdirectory for raw downloads
 RAW="./raw"
@@ -21,19 +21,16 @@ while read url ; do
 	name=$(echo $url | sed 's#^.*/##' | sed 's/%../_/g' | tr '.?=&' _)
 	name="${name}.html"
 
-	if [ -r $RAW/$name ] ; then
-		echo "$name: already downloaded."
-		continue
-	fi
+	# === This tool does not download. Use getter.sh to do that. ===
+	# url="${URLBASE}/$url"
+	# echo "Fetching $url to $name ..."
 
-	url="${URLBASE}/$url"
-	echo "Fetching $url to $name ..."
-
-	wget $url -O $name
-	mv $name $RAW
+	# wget $url -O $name
+	# mv $name $RAW
+	# === end of chopout ===
 
 	echo $DOCTYPE                      > $CONTENT/$name
-	echo '<html lang="en" dir="ltr">' >> $CONTENT/$name
+	echo '<html lang="en">'           >> $CONTENT/$name
 	echo '<head>'                     >> $CONTENT/$name
 	grep '<title>' $RAW/$name         >> $CONTENT/$name
 	echo '</head>'                    >> $CONTENT/$name
@@ -47,6 +44,8 @@ while read url ; do
 	DATE=$(date)
 	echo "<!-- written by getter $DATE -->" >> $CONTENT/$name
 
-	echo "Pausing ..."
-	sleep $(jot -r 1 2 6)
+	# === Since no downloads, no reason to pause between files. ===
+	# echo "Pausing ..."
+	# sleep $(jot -r 1 2 6)
+	# === end ===
 done
