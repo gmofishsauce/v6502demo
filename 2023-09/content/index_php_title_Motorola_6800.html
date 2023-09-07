@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<html lang="en" dir="ltr">
+<head>
+<title>Motorola 6800 - VisualChips</title>
+</head>
+<body>
+		<!-- start content -->
+<p>See <a href="https://web.archive.org/web/20210405071405/http://en.wikipedia.org/wiki/Motorola_6800" class="external text" rel="nofollow">Wikipedia</a> for good technical and historical information and references on the Motorola 6800.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Chip_Photos"><span class="tocnumber">1</span> <span class="toctext">Chip Photos</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Chip_Simulator"><span class="tocnumber">2</span> <span class="toctext">Chip Simulator</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Points_of_Interest"><span class="tocnumber">3</span> <span class="toctext">Points of Interest</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Block_Diagram"><span class="tocnumber">4</span> <span class="toctext">Block Diagram</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Resources"><span class="tocnumber">5</span> <span class="toctext">Resources</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h3> <span class="mw-headline" id="Chip_Photos"> Chip Photos </span></h3>
+<p>We <a href="https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/pages/Motorola_6800_die_shots.html" class="external text" rel="nofollow">depackaged, deprocessed and photographed</a> a later depletion-load version of the chip, which shows signs in the layout of the previous enhancement-load version.  Ijor then captured polygons from the photos - here are JPEG images, which may be easier to explore than the svg format:
+</p><p><a href="https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-1200w.jpg" title="Medium size"><img alt="Medium size" src="/web/20210405071405im_/http://visual6502.org/wiki/images/7/77/Mc6800a-Layout-svg-150h.jpg" width="150" height="145"/></a>
+<a href="https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-8980w.jpg" title="Full size (14Mbyte)"><img alt="Full size (14Mbyte)" src="/web/20210405071405im_/http://visual6502.org/wiki/images/7/77/Mc6800a-Layout-svg-150h.jpg" width="150" height="145"/></a>
+</p><p>The recaptured polygon data closely resembles the original layout which defined the masks used to manufacture the chip, and is a great deal easier to study than the photographs.
+</p>
+<h3> <span class="mw-headline" id="Chip_Simulator"> Chip Simulator </span></h3>
+<p>From the polygons we were able to construct a netlist, and Segher then labelled many of interior nodes, and so we present our JavaScript simulator: <a href="https://web.archive.org/web/20210405071405/http://visual6502.org/JSSim/expert-6800.html?nosim=t" class="external text" rel="nofollow">(graphical mode)</a> <a href="https://web.archive.org/web/20210405071405/http://visual6502.org/JSSim/expert-6800.html?graphics=f&amp;loglevel=4&amp;steps=20" class="external text" rel="nofollow">(non-graphical mode)</a>. As with our 6502 simulator, you can explore the layout and the behaviour, find signals and transistors by name, and share short test programs by URL.
+</p>
+<h3> <span class="mw-headline" id="Points_of_Interest"> Points of Interest </span></h3>
+<p>We've found these interesting features (more detail to be added):
+</p>
+<ul><li> register circuit using resistive feedback and enhancement-style pullups
+</li><li> data latch circuit using weak feedback transistor
+</li><li> clock pulse shaping
+<ul><li> both <a href="https://web.archive.org/web/20210405071405/http://visual6502.org/JSSim/expert-6800.html?nosim=t&amp;find=251" class="external text" rel="nofollow">node 251</a> and <a href="https://web.archive.org/web/20210405071405/http://visual6502.org/JSSim/expert-6800.html?nosim=t&amp;find=abh/ahd" class="external text" rel="nofollow">abh/ahd</a> are inverted phi2 signals
+</li><li> <a href="https://web.archive.org/web/20210405071405/http://visual6502.org/JSSim/expert-6800.html?nosim=t&amp;find=95" class="external text" rel="nofollow">node 95</a> is phi2 and not abh/ahd and therefore a phi2 with a delayed rising edge
+</li></ul>
+</li><li> resistive bus pullup
+</li><li> Manchester carry chain
+</li><li> <a href="https://web.archive.org/web/20210405071405/http://visual6502.org/JSSim/expert-6800.html?nosim=t&amp;find=t5074&amp;panx=214.1&amp;pany=105.8&amp;zoom=12.4" class="external text" rel="nofollow">unexplained circuit</a> isolating IRQ and HALT near PHI1 pin
+</li></ul>
+<h3> <span class="mw-headline" id="Block_Diagram"> Block Diagram </span></h3>
+<p>Here's the block diagram from the <a href="https://web.archive.org/web/20210405071405/http://www.google.com/patents?id=6OkAAAAAEBAJ&amp;zoom=4&amp;pg=PA3#v=onepage&amp;q&amp;f=false" class="external text" rel="nofollow">1976 topology patent</a> (See also <a href="https://web.archive.org/web/20210405071405/http://www.freepatentsonline.com/4090236.pdf" class="external text" rel="nofollow">this later patent.</a>):
+<a href="/web/20210405071405/http://visual6502.org/wiki/index.php?title=File:M6800-arch.png" class="image"><img alt="M6800-arch.png" src="/web/20210405071405im_/http://visual6502.org/wiki/images/e/ea/M6800-arch.png" width="938" height="696"/></a>
+</p>
+<h3> <span class="mw-headline" id="Resources"> Resources </span></h3>
+<ul><li> <a href="https://web.archive.org/web/20210405071405/http://en.wikipedia.org/wiki/Motorola_6800" class="external text" rel="nofollow">Wikipedia article</a>
+</li><li> <a href="https://web.archive.org/web/20210405071405/http://people.sinclair.edu/nickreeder/eet252/datasheets/MC6800.pdf" class="external text" rel="nofollow">Datasheet (pdf)</a> (Nick Reeder at Sinclair Community College)
+</li><li> <a href="https://web.archive.org/web/20210405071405/ftp://ftp.comlab.ox.ac.uk/pub/Cards/txt/6800.txt" class="external text" rel="nofollow">Instruction set summary</a> (comlab at Oxford University)
+</li><li> <a href="https://web.archive.org/web/20210405071405/http://www.sbprojects.com/sbasm/6800.htm#model" class="external text" rel="nofollow">Programming Model</a> (website for SB-assembler)
+</li><li> <a href="https://web.archive.org/web/20210405071405/http://www.freepatentsonline.com/4090236.pdf" class="external text" rel="nofollow">US Patent 4090236</a> for single power supply NMOS microprocessor (filed 1976, granted '78) contains block diagrams, state transition diagrams, instruction decode tables, circuit and logic diagrams
+</li><li> <a href="https://web.archive.org/web/20210405071405/http://www.google.com/patents/about?id=6OkAAAAAEBAJ" class="external text" rel="nofollow">US Patent 3987418</a> for MOS microprocessor topography (filed 1974, granted '76) contains floorplan, low resolution layout mask images, block diagram
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 19/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:143-0!1!0!!en!2!edit=0 and timestamp 20210404143018 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071405/http://visual6502.org/wiki/index.php?title=Motorola_6800">http://visual6502.org/wiki/index.php?title=Motorola_6800</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+</body>
+</html>
+<!-- written by getter Wed Sep  6 23:24:29 PDT 2023 -->

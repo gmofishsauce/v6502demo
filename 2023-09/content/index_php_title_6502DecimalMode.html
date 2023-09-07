@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<html lang="en" dir="ltr">
+<head>
+<title>6502DecimalMode - VisualChips</title>
+</head>
+<body>
+		<!-- start content -->
+<p>The 6502 had a couple of unique selling points compared to its predecessor the 6800, and the decimal mode was crucial because it was patent protected. It saves an instruction and a couple of cycles from each byte of decimal arithmetic, and removes the half-carry from the status byte - it also works for both addition and subtraction.
+</p><p>Decimal mode only affects ADC and SBC instructions, and on the NMOS 6502 only usefully sets the C flag. The N, V and Z flags are set, but don't correspond to what you might expect from a 10's complement decimal operation.
+</p><p>Nonetheless, all four flags are set, so it's worth understanding how they are set, and why. (See <a href="https://web.archive.org/web/20210405071434/http://www.atariage.com/forums/topic/163876-flags-on-decimal-mode-on-the-nmos-6502" class="external text" rel="nofollow">Ijor's paper</a>, and <a href="https://web.archive.org/web/20210405071434/http://www.6502.org/tutorials/decimal_mode.html" class="external text" rel="nofollow">Bruce Clark's tutorial</a>)
+</p><p>Many (software) emulators have decimal mode correct, and many have it incorrect or missing. The same is true for <a href="https://web.archive.org/web/20210405071434/http://forum.6502.org/viewtopic.php?t=1673" class="external text" rel="nofollow">various re-implemented 6502 cores</a>. Because the CMOS 6502 and later parts set the flags differently from the NMOS 6502, correctness can only be judged relative to a specific part.
+</p><p>Bruce Clark's tutorial contains a test program which can test all the flags (for the various CPU models) and will report the first failing case.  Using this, we can collect some specific 'difficult' cases for use on a slow model, or for a rapid test of new code, or for illustration of the 6502 datapath in action.  Some of the following tests are now found in the <a href="https://web.archive.org/web/20210405071434/https://github.com/mnaberez/py65/tree/master/src/py65/tests/devices" class="external text" rel="nofollow">py65 test suite</a>
+</p><p>We need a list of interesting signals to probe to observe the decimal mode adjustments. (The presently released JSSim doesn't have C34 named, but it will on next update)
+</p><p>The two operands, and the carry in, are added as a pair of nibbles. The carry-out from bit3 is adjusted in decimal mode, but only for ADC. So the ALU is not a binary byte-wide ALU with a decimal adjustment, it is a pair of binary nibble ALUs with a decimal adjustment.  In the tests, we don't specifically need to test that carry-in is used (except to prove that carry-out is changing the carry bit, if we have that freedom)
+</p><p>Some of the tests below are found in Bruce Clark's <a href="https://web.archive.org/web/20210405071434/http://www.6502.org/tutorials/vflag.html#b" class="external text" rel="nofollow">V flag tutorial</a>. Others are taken from failing cases when running his <a href="https://web.archive.org/web/20210405071434/http://www.6502.org/tutorials/decimal_mode.html#B" class="external text" rel="nofollow">decimal mode test suite</a>.
+</p><p>(For other test suites, see <a href="/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502TestPrograms" title="6502TestPrograms">6502TestPrograms</a>)
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Tests_for_ADC"><span class="tocnumber">1</span> <span class="toctext">Tests for ADC</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Tests_for_SBC"><span class="tocnumber">2</span> <span class="toctext">Tests for SBC</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Decimal_mode_and_the_NES.27_RP2A03G"><span class="tocnumber">3</span> <span class="toctext">Decimal mode and the NES' RP2A03G</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#References"><span class="tocnumber">4</span> <span class="toctext">References</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h3> <span class="mw-headline" id="Tests_for_ADC"> Tests for ADC </span></h3>
+<ul><li> 00 + 00 and C=0 gives 00 and N=0 V=0 Z=1 C=0 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=30&amp;a=0&amp;d=a9c848a900286900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 79 + 00 and C=1 gives 80 and N=1 V=1 Z=0 C=0 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a90f48a979286900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 24 + 56 and C=0 gives 80 and N=1 V=1 Z=0 C=0 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a90a48a924286956ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 93 + 82 and C=0 gives 75 and N=0 V=1 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a98e48a993286982ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 89 + 76 and C=0 gives 65 and N=0 V=0 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9fe48a989286976ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 89 + 76 and C=1 gives 66 and N=0 V=0 Z=1 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9fd48a989286976ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 80 + f0 and C=0 gives d0 and N=0 V=1 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9ba48a9802869f0ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 80 + fa and C=0 gives e0 and N=1 V=0 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a97e48a9802869faea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 2f + 4f and C=0 gives 74 and N=0 V=0 Z=0 C=0 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9fe48a92f28694fea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 6f + 00 and C=1 gives 76 and N=0 V=0 Z=0 C=0 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9ff48a96f286900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li></ul>
+<h3> <span class="mw-headline" id="Tests_for_SBC"> Tests for SBC </span></h3>
+<ul><li> 00 - 00 and C=0 gives 99 and N=1 V=0 Z=0 C=0 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a94e48a90028e900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 00 - 00 and C=1 gives 00 and N=0 V=0 Z=1 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9c948a90028e900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 00 - 01 and C=1 gives 99 and N=1 V=0 Z=0 C=0 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a97f48a90028e901ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 0a - 00 and C=1 gives 0a and N=0 V=0 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9cb48a90a28e900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 0b - 00 and C=0 gives 0a and N=0 V=0 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a9ca48a90b28e900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 9a - 00 and C=1 gives 9a and N=1 V=0 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a94b48a99a28e900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li><li> 9b - 00 and C=0 gives 9a and N=1 V=0 Z=0 C=1 (<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=56&amp;a=0&amp;d=a94a48a99b28e900ea08aa6849c2ea" class="external text" rel="nofollow">simulate</a>)
+</li></ul>
+<p>One form of test program sets all the input flags using PLP:
+</p>
+<pre>lda #$c8
+pha
+lda #$00
+plp
+adc #$00
+nop
+</pre>
+<p>and to calculate what that initial value of PLP should be, we can use a bit more code
+</p>
+<pre>php
+pla
+eor #$c3   // #$c2 if we don't want to invert the carry
+nop
+</pre>
+<h3> <span class="mw-headline" id="Decimal_mode_and_the_NES.27_RP2A03G"> Decimal mode and the NES' RP2A03G </span></h3>
+<p>The CPU in the NES' RP2A03G does not implement decimal mode for ADC and SBC operations, but it does correctly handle the setting and clearing of the D flag.
+</p><p>In <a href="https://web.archive.org/web/20210405071434/http://metopal.com/2012/02/12/famicom-brain/" class="external text" rel="nofollow">this blog post</a> by Nathan Altice, Brian Bagnall’s "On the Edge: The Spectacular Rise and Fall of Commodore (2006)" is quoted:
+</p>
+<blockquote>
+[Commodore 64 programmer] Robert Russell investigated the NES, along with one of the original 6502 engineers, Will Mathis. “I remember we had the chip designer of the 6502,” recalls Russell. “He scraped the [NES] chip down to the die and took pictures.”
+</blockquote>
+<blockquote>
+The excavation amazed Russell. “The Nintendo core processor was a 6502 designed with the patented technology scraped off,” says Russell. “We actually skimmed off the top of the chip inside of it to see what it was, and it was exactly a 6502. We looked at where we had the patents and they had gone in and deleted the circuitry where our patents were.”
+</blockquote>
+<p>With visual6502 and images from Quietust's investigation of the 2A03 we can see that a small number of changes, only to the polysilicon mask, disable the decimal adjustment by removing 5 transistors.  When poly shapes are deleted, the former source and drain of transistor become contiguous, so the effect is of shorting the transistor, or making it permanently on. (These are pulldown transistors, and it's normal for them to be on, although they would typically have a 10k resistance.  Shorting them will cause some additional power dissipation from the corresponding pullup but presumably insignificant compared to the thousands of other pullups which will be active at any give time.)
+</p><p>The first note of the difference is this odd contact cut which has no surrounding poly or active: see <a href="https://web.archive.org/web/20210405071434/http://uxul.org/~noname/chips/strange-via-1.png" class="external text" rel="nofollow">this image</a> - which turns out to be due to the removal of <a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=t1329&amp;panx=289.2&amp;pany=446.7&amp;zoom=12.4" class="external text" rel="nofollow">the t1329 transistor</a>.  It's one of two transistors normally used by the <a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=dpc18_~DAA&amp;panx=257.4&amp;pany=417.3&amp;zoom=2.4" class="external text" rel="nofollow">"dpc22_#DSA"</a> signal as a pulldown to effect decimal adjust during subtraction. The other is <a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=t3212,t1329&amp;panx=287.0&amp;pany=437.6&amp;zoom=12.4" class="external text" rel="nofollow">t3212</a> which is just off the top of the two images linked above.
+</p>
+<div class="thumb tnone"><div class="thumbinner" style="width:820px;"><a href="/web/20210405071434/http://visual6502.org/wiki/index.php?title=File:6502-decimal-subtract-visual6502.png" class="image"><img alt="t3212 and t1329 in visual6502" src="/web/20210405071434im_/http://visual6502.org/wiki/images/7/76/6502-decimal-subtract-visual6502.png" width="818" height="631" class="thumbimage"/></a>  <div class="thumbcaption">Transistors t3212 and t1329 in visual6502</div></div></div>
+<p>The corresponding adjustment for ADC <a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=dpc18_~DAA&amp;panx=257.4&amp;pany=417.3&amp;zoom=2.4" class="external text" rel="nofollow">(dpc18_#DAA)</a> affects three transistors: <a href="https://web.archive.org/web/20210405071434/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=t2750,t2202,t2556&amp;panx=249.9&amp;pany=456.7&amp;zoom=5.0" class="external text" rel="nofollow">t2750, t2202, t2556</a>
+</p><p>In the case of t2556 the control line runs through the transistor - but still the poly is removed locally with a minimal change. That leaves some floating poly, but as the other two transistors don't exist any more, it's irrelevant.
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:280px;"><a href="/web/20210405071434/http://visual6502.org/wiki/index.php?title=File:NES-2A03-decimal-DAA-removed.png" class="image"><img alt="" src="/web/20210405071434im_/http://visual6502.org/wiki/images/8/89/NES-2A03-decimal-DAA-removed.png" width="278" height="200" class="thumbimage"/></a>  <div class="thumbcaption">Transistor t2556 in NES 2A03</div></div></div></div>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:280px;"><a href="/web/20210405071434/http://visual6502.org/wiki/index.php?title=File:6502-decimal-DAA-removed-visual6502.png" class="image"><img alt="" src="/web/20210405071434im_/http://visual6502.org/wiki/images/thumb/7/78/6502-decimal-DAA-removed-visual6502.png/278px-6502-decimal-DAA-removed-visual6502.png" width="278" height="194" class="thumbimage"/></a>  <div class="thumbcaption"><div class="magnify"><a href="/web/20210405071434/http://visual6502.org/wiki/index.php?title=File:6502-decimal-DAA-removed-visual6502.png" class="internal" title="Enlarge"><img src="/web/20210405071434im_/http://visual6502.org/wiki/skins/common/images/magnify-clip.png" width="15" height="11" alt=""/></a></div>Transistor t2556 in visual6502</div></div></div></div>
+<p>With these 5 transistors removed, there was no need to change the decode ROM and no need to change the status register.
+</p>
+<h3> <span class="mw-headline" id="References"> References </span></h3>
+<ul><li> <a href="https://web.archive.org/web/20210405071434/http://forums.nesdev.com/viewtopic.php?t=2828" class="external text" rel="nofollow">Post</a> "What Commodore Found in the NES" on NESdev forum
+</li><li> <a href="https://web.archive.org/web/20210405071434/http://metopal.com/2012/02/12/famicom-brain/" class="external text" rel="nofollow">Blog post</a> "Whence Came the Famicom’s Brain?" by Nathan Altice
+</li><li> <a href="https://web.archive.org/web/20210405071434/http://www.qmtpro.com/~nes/chipimages/#rp2a03" class="external text" rel="nofollow">2A03 chip images</a> on Quietus' reverse-engineering site
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 15/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:54-0!1!0!!en!2!edit=0 and timestamp 20210405071214 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502DecimalMode">http://visual6502.org/wiki/index.php?title=6502DecimalMode</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+</body>
+</html>
+<!-- written by getter Wed Sep  6 23:19:04 PDT 2023 -->

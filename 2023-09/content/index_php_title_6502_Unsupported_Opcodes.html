@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<html lang="en" dir="ltr">
+<head>
+<title>6502 Unsupported Opcodes - VisualChips</title>
+</head>
+<body>
+		<!-- start content -->
+<p>The 6502 is famous for doing interesting and sometimes useful things when the program includes invalid (or unspecified) opcodes.
+</p><p>For a list of all opcodes and some explanation of what they do, see <a href="/web/20210405071251/http://visual6502.org/wiki/index.php?title=6502_all_256_Opcodes" title="6502 all 256 Opcodes">6502 all 256 Opcodes</a>.
+</p><p>The visual6502 simulator can help when investigating what these opcodes do, and why - see below for a few cases and pointers for exploration.
+</p>
+<h2> <span class="mw-headline" id="examples"> examples </span></h2>
+<ul><li> <a href="https://web.archive.org/web/20210405071251/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=16&amp;a=5555&amp;d=44&amp;a=0&amp;d=af5555ea&amp;loglevel=2&amp;logmore=dpc3_SBX,dpc23_SBAC,plaOutputs,DPControl" class="external text" rel="nofollow">LAX</a> will load both A and X - notice signals SBX and SBAC which control the writes to X and to A.
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=26&amp;a=0&amp;d=ea42eaea&amp;loglevel=2" class="external text" rel="nofollow">KIL</a> will put the T-state counter into an unrecoverable state
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=26&amp;a=0&amp;d=a9ffa2f08b5aeaea&amp;loglevel=2&amp;logmore=DPControl" class="external text" rel="nofollow">XAA #$5A</a> (also known as ANE) with A=FF
+<ul><li> and <a href="https://web.archive.org/web/20210405071251/http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=26&amp;a=0&amp;d=a900a2f08b5aeaea&amp;loglevel=2&amp;logmore=DPControl" class="external text" rel="nofollow">with A=00</a> shows A is OR with 00 before AND with X and the immediate value
+</li><li> for more detail see the explanation page: <a href="/web/20210405071251/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_(XAA,_ANE)" title="6502 Opcode 8B (XAA, ANE)">6502 Opcode 8B (XAA, ANE)</a>
+</li></ul>
+</li></ul>
+<h2> <span class="mw-headline" id="some_background"> some background </span></h2>
+<p>Beware: different revisions of 6502 and versions from different manufacturers may have different behaviours.
+</p><p>For some of these opcodes, the chip does something logically predictable and our model has the same behaviour. But there may be opcodes which are not logically predictable, because they cause marginal voltages on the chip as different drivers fight one another, or a node which is undriven is sampled at a later time. In those cases, our visual6502 simulator, which is just a switch-level simulator with a couple of coarse heuristics for modelling contention and charge storage, won't do the same as a chip.
+</p><p>In fact, as some opcodes produce results which vary from one chip to another, no deterministic simulator could be 'accurate'.  (A simulator could let you know that something is amiss)
+</p><p>But note that the underlying circuit data which we now have includes transistor strengths and an approximation of capacitative load: it could easily be extended for resistance and more accurate capacitance. So a more refined (lower level) simulation might shed more light on these undocumented opcodes. In fact, <a href="https://web.archive.org/web/20210405071251/https://github.com/pmonta/FPGA-netlist-tools" class="external text" rel="nofollow">the FPGA model</a> works differently - it moves charge from one node to another - and it might be more accurate for the difficult cases.
+</p>
+<h2> <span class="mw-headline" id="resources"> resources </span></h2>
+<ul><li> back to parent page <a href="/web/20210405071251/http://visual6502.org/wiki/index.php?title=6502Observations" title="6502Observations">6502Observations</a>
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.youtube.com/watch?v=N9DYmlprCKA#t=5m20" class="external text" rel="nofollow">Michael Steil's presentation at 27C3</a> youtube link direct to section on illegal opcodes
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.pagetable.com/?p=39" class="external text" rel="nofollow">How MOS 6502 Illegal Opcodes really work</a> on Michael Steil's blog
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.viceteam.org/plain/64doc.txt" class="external text" rel="nofollow">64doc.txt</a> by VICE team
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.ffd2.com/fridge/docs/6502-NMOS.extra.opcodes" class="external text" rel="nofollow">Extra Instructions Of The 65XX Series CPU</a> by Adam Vardy
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://members.chello.nl/taf.offenga/illopc31.txt" class="external text" rel="nofollow">6502 Undocumented Opcodes</a> by Freddy Offenga
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.oxyron.de/html/opcodes02.html" class="external text" rel="nofollow">6502/6510/8500/8502 Opcode matrix</a> by "Graham"
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://bbc.nvg.org/doc/6502OpList.txt" class="external text" rel="nofollow">Full 6502 Opcode List Including Undocumented Opcodes</a> by J.G.Harston
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.pagetable.com/?p=517" class="external text" rel="nofollow">Michael Steil's presentation at 27C3</a> (pagetable.com links to 6 sections on youtube)
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.viceteam.org/plain/BUGS" class="external text" rel="nofollow">Vice BUGS document</a> mentions XAA being used in a Mastertronic loader
+</li><li> <a href="https://web.archive.org/web/20210405071251/http://www.atlantis-prophecy.org/recollection/?load=online&amp;issue=1&amp;sub=article&amp;id=4" class="external text" rel="nofollow">An examination of an early tape loader</a> by Fungus/Nostalgia/Onslaught
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 11/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:63-0!1!0!!en!2!edit=0 and timestamp 20210404161213 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071251/http://visual6502.org/wiki/index.php?title=6502_Unsupported_Opcodes">http://visual6502.org/wiki/index.php?title=6502_Unsupported_Opcodes</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+</body>
+</html>
+<!-- written by getter Wed Sep  6 23:20:46 PDT 2023 -->

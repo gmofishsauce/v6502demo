@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" dir="ltr">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=1WaXNDFE" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={"autoplay":"on","unmuteOverlay":"hidden"};</script>
+<script type="text/javascript" src="/_static/js/ruffle.js" defer="true"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit","20210405071302","https://web.archive.org/","web","/_static/",
+	      "1617606782");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+<title>6502 BRK and B bit - VisualChips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="generator" content="MediaWiki 1.16.0"/>
+<link rel="shortcut icon" href="/web/20210405071302im_/http://visual6502.org/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20210405071302/http://visual6502.org/wiki/opensearch_desc.php" title="VisualChips (en)"/>
+<link title="Creative Commons" type="application/rdf+xml" href="/wiki/index.php?title=6502_BRK_and_B_bit&amp;action=creativecommons" rel="meta"/>
+<link rel="copyright" href="https://web.archive.org/web/20210405071302/http://creativecommons.org/licenses/by-nc-sa/3.0/"/>
+<link rel="alternate" type="application/atom+xml" title="VisualChips Atom feed" href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Special:RecentChanges&amp;feed=atom"/>
+<link rel="stylesheet" href="/web/20210405071302cs_/http://visual6502.org/wiki/skins/common/shared.css?270" media="screen"/>
+<link rel="stylesheet" href="/web/20210405071302cs_/http://visual6502.org/wiki/skins/common/commonPrint.css?270" media="print"/>
+<link rel="stylesheet" href="/web/20210405071302cs_/http://visual6502.org/wiki/skins/monobook/main.css?270" media="screen"/>
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?270" media="screen" /><![endif]-->
+<link rel="stylesheet" href="/web/20210405071302cs_/http://visual6502.org/wiki/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000"/>
+<link rel="stylesheet" href="/web/20210405071302cs_/http://visual6502.org/wiki/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" media="print"/>
+<link rel="stylesheet" href="/web/20210405071302cs_/http://visual6502.org/wiki/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000"/>
+<link rel="stylesheet" href="/web/20210405071302cs_/http://visual6502.org/wiki/index.php?title=-&amp;action=raw&amp;maxage=18000&amp;gen=css"/>
+<script>
+var skin="monobook",
+stylepath="/wiki/skins",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/",
+wgArticlePath="/wiki/index.php?title=$1",
+wgScriptPath="/wiki",
+wgScriptExtension=".php",
+wgScript="/wiki/index.php",
+wgVariantArticlePath=false,
+wgActionPaths={},
+wgServer="https://web.archive.org/web/20210405071302/http://visual6502.org",
+wgCanonicalNamespace="",
+wgCanonicalSpecialPageName=false,
+wgNamespaceNumber=0,
+wgPageName="6502_BRK_and_B_bit",
+wgTitle="6502 BRK and B bit",
+wgAction="view",
+wgArticleId=59,
+wgIsArticle=true,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="en",
+wgContentLanguage="en",
+wgBreakFrames=false,
+wgCurRevisionId=796,
+wgVersion="1.16.0",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Main Page",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "VisualChips", "5": "VisualChips talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "visualchips": 4, "visualchips_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "image": 6, "image_talk": 7},
+wgSiteName="VisualChips",
+wgCategories=[],
+wgRestrictionEdit=["autoconfirmed"],
+wgRestrictionMove=["autoconfirmed"];
+</script><script src="/web/20210405071302js_/http://visual6502.org/wiki/skins/common/wikibits.js?270"></script>
+<script src="/web/20210405071302js_/http://visual6502.org/wiki/skins/common/ajax.js?270"></script>
+<script src="/web/20210405071302js_/http://visual6502.org/wiki/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=monobook&amp;270"></script>
+
+</head>
+<body class="mediawiki ltr ns-0 ns-subject page-6502_BRK_and_B_bit skin-monobook">
+<div id="globalWrapper">
+<div id="column-content"><div id="content">
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading">6502 BRK and B bit</h1>
+	<div id="bodyContent">
+		<h3 id="siteSub">From VisualChips</h3>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+		<!-- start content -->
+<p>The 6502 has 4 sources of interrupt-like behaviour: BRK, RESET, IRQ and NMI.
+</p><p>Much has been said about these - it's common to find confusion about the behaviour of the B bit in the pushed status word - and we can say a little more, with reference to our in-browser simulation of the NMOS 6502.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#the_B_flag_and_the_various_mechanisms"><span class="tocnumber">1</span> <span class="toctext">the B flag and the various mechanisms</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#IRQ_preceding_a_BRK_instruction"><span class="tocnumber">2</span> <span class="toctext">IRQ preceding a BRK instruction</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#late_NMI_will_not_half-modify_vector_reads"><span class="tocnumber">3</span> <span class="toctext">late NMI will not half-modify vector reads</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#NMI_preceding_a_BRK"><span class="tocnumber">4</span> <span class="toctext">NMI preceding a BRK</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#NMI_masked_by_BRK"><span class="tocnumber">5</span> <span class="toctext">NMI masked by BRK</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#masking_of_the_stack_writes_during_RESET"><span class="tocnumber">6</span> <span class="toctext">masking of the stack writes during RESET</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Resources"><span class="tocnumber">7</span> <span class="toctext">Resources</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h2> <span class="mw-headline" id="the_B_flag_and_the_various_mechanisms"> the B flag and the various mechanisms </span></h2>
+<p>First technical point: the B flag position in the status register is not a bit in the status register: it is unaffected by PLP and RTI. However, the 6502 does push the register with either a 1 or 0. The intention is to distinguish a BRK from an IRQ, which is needed because these two share the same vector.  Brad Taylor says:
+</p>
+<ul><li> software instructions BRK &amp; PHP will push the B flag as being 1. 
+</li><li> hardware interrupts IRQ &amp; NMI will push the B flag as being 0. 
+</li></ul>
+<p>As it happens, there are bugs such that this description isn't strictly true in all situations, and the root cause is that the machinery for
+</p>
+<ul><li> recording a pending hardware interrupt  (using a control signal called D1x1)
+</li><li> forcing zero into the IR so the PLA performs the interrupt actions (uses D1x1, but at a different time to saving B)
+</li><li> saving a value in the B position (distinguishing BRK/PHP from a pending hardware interrupt)
+</li><li> forcing the appropriate values on the address bus to fetch the vector destination
+</li></ul>
+<p>are separate and independent.
+</p><p>(Note that the visual6502 sim reports the P register as if B was a storage element: in fact it is observing the node which conditionally drives the data bus during a push of P. See <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=p4&amp;panx=431.8&amp;pany=310.8&amp;zoom=10.7" class="external text" rel="nofollow">here.</a>
+This node is the output of an inverter and is a doubly-inverted D1x1.)
+</p>
+<h2> <span class="mw-headline" id="IRQ_preceding_a_BRK_instruction"> IRQ preceding a BRK instruction </span></h2>
+<p>(D1x1 was named by Balazs Beregnyei in his <a href="https://web.archive.org/web/20210405071302/http://www.downloads.reactivemicro.com/Public/Electronics/CPU/6502%20Schematic.pdf" class="external text" rel="nofollow">giant schematic</a>.  By all means refer to the schematic but note that it is a description of Rockwell's version of the 6502)
+</p><p><a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?graphics=f&amp;a=0&amp;d=58eaeaea&amp;irq0=5&amp;irq1=6&amp;steps=36&amp;loglevel=3&amp;logmore=irq,D1x1,DPControl" class="external text" rel="nofollow">Here's an URL</a> which uses CLI and sets off a very short IRQ pulse.
+</p><p>You'll see that the D1x1 signal latches the pending interrupt, causes the pushed B to be zero, and is then cleared during the vector pull. This same signal is gated by 'Fetch' to produce 'ClearIR' (which jams zero into the IR)
+</p><p>Note also that the address pushed is for the instruction after the BRK. The BRK has masked the IRQ, because the IRQ handler will inspect the saved P and process the BRK.
+</p>
+<h2> <span class="mw-headline" id="late_NMI_will_not_half-modify_vector_reads"> late NMI will not half-modify vector reads </span></h2>
+<p>This is a (necessary) feature: if an NMI occurs during the read of high and low vectors, it must not modify only the second read: modifying neither or both will determine whether the interrupt acts like an NMI or like the BRK/IRQ which is in progress.
+</p><p>We note it here because we can point out the mechanism: <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=t970&amp;panx=52.2&amp;pany=123.3&amp;zoom=12.4" class="external text" rel="nofollow">transistor t970</a>, where the logic is:
+</p>
+<pre> 1368&nbsp;:= NMIP and not NMIL and not &lt;VEC&gt;.phi2
+ NMIG&nbsp;:= &lt;1368&gt;.phi1 or (&lt;NMIG&gt;.phi2 and not &lt;brk-done&gt;.phi1)
+</pre>
+<p>(Note that not all these signal names are presently known to the visual6502 netlist. Will be fixed.)
+</p>
+<h2> <span class="mw-headline" id="NMI_preceding_a_BRK"> NMI preceding a BRK </span></h2>
+<ul><li> <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?graphics=f&amp;a=fffa&amp;d=4040&amp;a=4040&amp;d=40&amp;a=0&amp;d=58ea00eaea&amp;nmi0=7&amp;steps=36&amp;loglevel=3&amp;logmore=irq,nmi,res,D1x1" class="external text" rel="nofollow">Here's an example</a> showing the RTI and resumption - note that the BRK has never been executed.
+</li></ul>
+<p>Because the B bit is stored as a 1, even though the NMI vector has been followed, in this case, the NMI handler could inspect the saved P register, in case a BRK was interrupted. It would then have to adjust the saved PC. This all takes time, and yet NMI is usually for rapid interrupt servicing.
+</p><p>As the NMI handler would not normally inspect P, this is a case of NMI masking BRK. If BRK is an OS call, it would not be made, and so you can't do that on a system using NMI.
+</p>
+<h2> <span class="mw-headline" id="NMI_masked_by_BRK"> NMI masked by BRK </span></h2>
+<p>We thought we'd seen a late NMI during a BRK being ignored. Watch this space: we might have to retract that.
+</p>
+<ul><li> <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?graphics=f&amp;a=0&amp;d=58ea00eaea&amp;nmi0=17&amp;steps=36&amp;loglevel=3&amp;logmore=irq,nmi,brk-done,D1x1,INTG,264,202,629,967,646,480" class="external text" rel="nofollow">late NMI during BRK</a>
+</li></ul>
+<h2> <span class="mw-headline" id="masking_of_the_stack_writes_during_RESET"> masking of the stack writes during RESET </span></h2>
+<p>This is a feature of the NMOS 6502 but not all other versions.
+</p>
+<ul><li> <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?graphics=f&amp;a=0&amp;d=58ea00eaea&amp;reset0=4&amp;reset1=8&amp;steps=36&amp;loglevel=3&amp;logmore=irq,nmi,res,brk-done" class="external text" rel="nofollow">Here's</a> a reset, showing that the 3 stack writes happen as reads.
+</li></ul>
+<p>The logic which causes these writes to be suppressed is as follows:
+</p>
+<pre> WR&nbsp;:= op-T-mem-store
+   or op-T2-php/pha
+   or op-T4-brk
+   or SD1 or SD2
+   or (PCH/DB) or (PCL/DB)
+ (R/#W)&nbsp;:= not (&lt;WR&gt;.phi2 and not RESG and RDY)
+ R/#W&nbsp;:= &lt;(R/#W)&gt;.phi1
+</pre>
+<p>with the writes during RESET suppressed by <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=t3455&amp;panx=392.1&amp;pany=199.6&amp;zoom=12.4" class="external text" rel="nofollow">transistor t3455</a>
+</p>
+<h2> <span class="mw-headline" id="Resources"> Resources </span></h2>
+<ul><li> back to parent page <a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502Observations" title="6502Observations">6502Observations</a>
+</li><li> <a href="https://web.archive.org/web/20210405071302/http://www.pagetable.com/?p=410" class="external text" rel="nofollow">Internals of BRK/IRQ/NMI/RESET on a MOS 6502</a> by Michael Steil on pagetable.com
+</li><li> <a href="https://web.archive.org/web/20210405071302/http://en.wikipedia.org/wiki/Interrupts_in_65xx_processors" class="external text" rel="nofollow">Interrupts in 65xx processors</a> (wikipedia)
+</li><li> <a href="https://web.archive.org/web/20210405071302/http://nesdev.parodius.com/the%20%27B%27%20flag%20&amp;%20BRK%20instruction.txt" class="external text" rel="nofollow">The B flag</a> by Brad Taylor
+</li><li> <a href="https://web.archive.org/web/20210405071302/http://forum.6502.org/viewtopic.php?p=13036#13036" class="external text" rel="nofollow">B flag discussion</a> on 6502.org
+</li><li> <a href="https://web.archive.org/web/20210405071302/http://www.6502.org/tutorials/interrupts.html" class="external text" rel="nofollow">Investigating Interrupts</a> tutorial by Garth Wilson
+</li><li> <a href="https://web.archive.org/web/20210405071302/http://www.6502.org/tutorials/register_preservation.html" class="external text" rel="nofollow">Register Preservation Using The Stack (and a BRK handler)</a> tutorial by Bruce Clark
+</li><li> IRQ handler in the <a href="https://web.archive.org/web/20210405071302/http://mdfs.net/Docs/Comp/BBC/OS1-20/DC1C" class="external text" rel="nofollow">BBC micro OS1.20</a>
+</li><li> <a href="https://web.archive.org/web/20210405071302/http://wiki.nesdev.com/w/index.php/CPU_interrupts" class="external text" rel="nofollow">CPU Interrupts</a> on Nesdev wiki
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 27/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:59-0!1!0!!en!2!edit=0 and timestamp 20210404215231 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit">http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				 <li id="ca-nstab-main" class="selected"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit" title="View the content page [c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Talk:6502_BRK_and_B_bit&amp;action=edit&amp;redlink=1" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit&amp;action=edit" title="This page is protected.
+You can view its source [e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit&amp;action=history" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Special:UserLogin&amp;returnto=6502_BRK_and_B_bit" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(/web/20210405071302im_/http://visual6502.org/images/6502/jssim_01_sm.png);" href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Main_Page" title="Visit the main page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=VisualChips:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=VisualChips:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/web/20210405071302/http://visual6502.org/wiki/index.php" id="searchform">
+				<input type="hidden" name="title" value="Special:Search"/>
+				<input id="searchInput" title="Search VisualChips" accesskey="f" type="search" name="search"/>
+				<input type="submit" name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists"/>&nbsp;
+				<input type="submit" name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text"/>
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Special:WhatLinksHere/6502_BRK_and_B_bit" title="List of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Special:RecentChangesLinked/6502_BRK_and_B_bit" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=Special:SpecialPages" title="List of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit&amp;oldid=796" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-poweredbyico"><a href="https://web.archive.org/web/20210405071302/http://www.mediawiki.org/"><img src="/web/20210405071302im_/http://visual6502.org/wiki/skins/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki"/></a></div>
+	<div id="f-copyrightico"><a href="https://web.archive.org/web/20210405071302/http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="https://web.archive.org/web/20210405071302im_/http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt="Attribution-NonCommercial-ShareAlike 3.0 Unported" width="88" height="31"/></a></div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 26 August 2013, at 08:56.</li>
+		<li id="viewcount">This page has been accessed 118,916 times.</li>
+		<li id="copyright">Content is available under <a href="https://web.archive.org/web/20210405071302/http://creativecommons.org/licenses/by-nc-sa/3.0/" class="external ">Attribution-NonCommercial-ShareAlike 3.0 Unported</a>.</li>
+		<li id="privacy"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=VisualChips:Privacy_policy" title="VisualChips:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=VisualChips:About" title="VisualChips:About">About VisualChips</a></li>
+		<li id="disclaimer"><a href="/web/20210405071302/http://visual6502.org/wiki/index.php?title=VisualChips:General_disclaimer" title="VisualChips:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.056 secs. --></body></html>
+<!--
+     FILE ARCHIVED ON 07:13:02 Apr 05, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 06:19:28 Sep 07, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 124.031
+  exclusion.robots: 0.159
+  exclusion.robots.policy: 0.144
+  cdx.remote: 0.084
+  esindex: 0.014
+  LoadShardBlock: 81.227 (3)
+  PetaboxLoader3.datanode: 264.656 (4)
+  load_resource: 1963.095
+  PetaboxLoader3.resolve: 1754.185
+-->

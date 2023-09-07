@@ -1,0 +1,1286 @@
+Script started on Wed Sep  6 23:18:44 2023
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+[?1034hbash-3.2$ cat ALL_PAGES | ./getter.sh
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502DecimalMode to index_php_title_6502DecimalMode.html ...
+--2023-09-06 23:19:04--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502DecimalMode
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502DecimalMode [following]
+--2023-09-06 23:19:04--  https://web.archive.org/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502DecimalMode
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 29566 (29K) [text/html]
+Saving to: ‘index_php_title_6502DecimalMode.html’
+
+index_php_title_6502DecimalMode.   0%[                                                          ]       0  --.-KB/s               index_php_title_6502DecimalMode. 100%[=========================================================>]  28.87K  --.-KB/s    in 0.003s  
+
+2023-09-06 23:19:04 (11.1 MB/s) - ‘index_php_title_6502DecimalMode.html’ saved [29566/29566]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502Observations to index_php_title_6502Observations.html ...
+--2023-09-06 23:19:10--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502Observations
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071311/http://visual6502.org/wiki/index.php?title=6502Observations [following]
+--2023-09-06 23:19:10--  https://web.archive.org/web/20210405071311/http://visual6502.org/wiki/index.php?title=6502Observations
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 16180 (16K) [text/html]
+Saving to: ‘index_php_title_6502Observations.html’
+
+index_php_title_6502Observations   0%[                                                          ]       0  --.-KB/s               index_php_title_6502Observations 100%[=========================================================>]  15.80K  --.-KB/s    in 0s      
+
+2023-09-06 23:19:11 (49.3 MB/s) - ‘index_php_title_6502Observations.html’ saved [16180/16180]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502TestPrograms to index_php_title_6502TestPrograms.html ...
+--2023-09-06 23:19:16--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502TestPrograms
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071412/http://visual6502.org/wiki/index.php?title=6502TestPrograms [following]
+--2023-09-06 23:19:16--  https://web.archive.org/web/20210405071412/http://visual6502.org/wiki/index.php?title=6502TestPrograms
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 21129 (21K) [text/html]
+Saving to: ‘index_php_title_6502TestPrograms.html’
+
+index_php_title_6502TestPrograms   0%[                                                          ]       0  --.-KB/s               index_php_title_6502TestPrograms 100%[=========================================================>]  20.63K  --.-KB/s    in 0s      
+
+2023-09-06 23:19:16 (49.9 MB/s) - ‘index_php_title_6502TestPrograms.html’ saved [21129/21129]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_-_simulating_in_real_time_on_an_FPGA to index_php_title_6502_-_simulating_in_real_time_on_an_FPGA.html ...
+--2023-09-06 23:19:22--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_-_simulating_in_real_time_on_an_FPGA
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071450/http://visual6502.org/wiki/index.php?title=6502_-_simulating_in_real_time_on_an_FPGA [following]
+--2023-09-06 23:19:22--  https://web.archive.org/web/20210405071450/http://visual6502.org/wiki/index.php?title=6502_-_simulating_in_real_time_on_an_FPGA
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 25699 (25K) [text/html]
+Saving to: ‘index_php_title_6502_-_simulating_in_real_time_on_an_FPGA.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_-_simulatin 100%[=========================================================>]  25.10K  --.-KB/s    in 0s      
+
+2023-09-06 23:19:23 (73.6 MB/s) - ‘index_php_title_6502_-_simulating_in_real_time_on_an_FPGA.html’ saved [25699/25699]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit to index_php_title_6502_BRK_and_B_bit.html ...
+--2023-09-06 23:19:26--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit [following]
+--2023-09-06 23:19:26--  https://web.archive.org/web/20210405071302/http://visual6502.org/wiki/index.php?title=6502_BRK_and_B_bit
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 24120 (24K) [text/html]
+Saving to: ‘index_php_title_6502_BRK_and_B_bit.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_BRK_and_B_b 100%[=========================================================>]  23.55K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:19:28 (10.5 MB/s) - ‘index_php_title_6502_BRK_and_B_bit.html’ saved [24120/24120]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Hijacking to index_php_title_6502_Interrupt_Hijacking.html ...
+--2023-09-06 23:19:32--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Hijacking
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071346/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Hijacking [following]
+--2023-09-06 23:19:33--  https://web.archive.org/web/20210405071346/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Hijacking
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 34726 (34K) [text/html]
+Saving to: ‘index_php_title_6502_Interrupt_Hijacking.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Interrupt_H 100%[=========================================================>]  33.91K  --.-KB/s    in 0.003s  
+
+2023-09-06 23:19:35 (11.1 MB/s) - ‘index_php_title_6502_Interrupt_Hijacking.html’ saved [34726/34726]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Recognition_Stages_and_Tolerances to index_php_title_6502_Interrupt_Recognition_Stages_and_Tolerances.html ...
+--2023-09-06 23:19:40--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Recognition_Stages_and_Tolerances
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071501/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Recognition_Stages_and_Tolerances [following]
+--2023-09-06 23:19:40--  https://web.archive.org/web/20210405071501/http://visual6502.org/wiki/index.php?title=6502_Interrupt_Recognition_Stages_and_Tolerances
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 42637 (42K) [text/html]
+Saving to: ‘index_php_title_6502_Interrupt_Recognition_Stages_and_Tolerances.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Interrupt_R 100%[=========================================================>]  41.64K  --.-KB/s    in 0.05s   
+
+2023-09-06 23:19:42 (873 KB/s) - ‘index_php_title_6502_Interrupt_Recognition_Stages_and_Tolerances.html’ saved [42637/42637]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_(XAA,_ANE) to index_php_title_6502_Opcode_8B_(XAA,_ANE).html ...
+--2023-09-06 23:19:46--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_(XAA,_ANE)
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071521/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_%28XAA%2C_ANE%29 [following]
+--2023-09-06 23:19:47--  https://web.archive.org/web/20210405071521/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_%28XAA%2C_ANE%29
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 30072 (29K) [text/html]
+Saving to: ‘index_php_title_6502_Opcode_8B_(XAA,_ANE).html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Opcode_8B_( 100%[=========================================================>]  29.37K  --.-KB/s    in 0s      
+
+2023-09-06 23:19:48 (67.5 MB/s) - ‘index_php_title_6502_Opcode_8B_(XAA,_ANE).html’ saved [30072/30072]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_(XAA,_ANE)_explained to index_php_title_6502_Opcode_8B_(XAA,_ANE)_explained.html ...
+--2023-09-06 23:19:52--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_(XAA,_ANE)_explained
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071449/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_%28XAA%2C_ANE%29_explained [following]
+--2023-09-06 23:20:00--  https://web.archive.org/web/20210405071449/http://visual6502.org/wiki/index.php?title=6502_Opcode_8B_%28XAA%2C_ANE%29_explained
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 30423 (30K) [text/html]
+Saving to: ‘index_php_title_6502_Opcode_8B_(XAA,_ANE)_explained.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Opcode_8B_( 100%[=========================================================>]  29.71K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:20:01 (25.6 MB/s) - ‘index_php_title_6502_Opcode_8B_(XAA,_ANE)_explained.html’ saved [30423/30423]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_ROR_bug to index_php_title_6502_ROR_bug.html ...
+--2023-09-06 23:20:03--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_ROR_bug
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071445/http://visual6502.org/wiki/index.php?title=6502_ROR_bug [following]
+--2023-09-06 23:20:04--  https://web.archive.org/web/20210405071445/http://visual6502.org/wiki/index.php?title=6502_ROR_bug
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14619 (14K) [text/html]
+Saving to: ‘index_php_title_6502_ROR_bug.html’
+
+index_php_title_6502_ROR_bug.htm   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_ROR_bug.htm 100%[=========================================================>]  14.28K  --.-KB/s    in 0s      
+
+2023-09-06 23:20:05 (58.1 MB/s) - ‘index_php_title_6502_ROR_bug.html’ saved [14619/14619]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Stack_Register_High_Bits to index_php_title_6502_Stack_Register_High_Bits.html ...
+--2023-09-06 23:20:08--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Stack_Register_High_Bits
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071400/http://visual6502.org/wiki/index.php?title=6502_Stack_Register_High_Bits [following]
+--2023-09-06 23:20:10--  https://web.archive.org/web/20210405071400/http://visual6502.org/wiki/index.php?title=6502_Stack_Register_High_Bits
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 22400 (22K) [text/html]
+Saving to: ‘index_php_title_6502_Stack_Register_High_Bits.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Stack_Regis 100%[=========================================================>]  21.88K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:20:11 (12.0 MB/s) - ‘index_php_title_6502_Stack_Register_High_Bits.html’ saved [22400/22400]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_State_Machine to index_php_title_6502_State_Machine.html ...
+--2023-09-06 23:20:16--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_State_Machine
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine [following]
+--2023-09-06 23:20:16--  https://web.archive.org/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 23803 (23K) [text/html]
+Saving to: ‘index_php_title_6502_State_Machine.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_State_Machi 100%[=========================================================>]  23.25K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:20:17 (10.4 MB/s) - ‘index_php_title_6502_State_Machine.html’ saved [23803/23803]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts to index_php_title_6502_Taken_Branch_Delays_Interrupts.html ...
+--2023-09-06 23:20:19--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071529/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts [following]
+--2023-09-06 23:20:20--  https://web.archive.org/web/20210405071529/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 25255 (25K) [text/html]
+Saving to: ‘index_php_title_6502_Taken_Branch_Delays_Interrupts.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Taken_Branc 100%[=========================================================>]  24.66K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:20:22 (43.2 MB/s) - ‘index_php_title_6502_Taken_Branch_Delays_Interrupts.html’ saved [25255/25255]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts_Branches_and_interrupts to index_php_title_6502_Taken_Branch_Delays_Interrupts_Branches_and_interrupts.html ...
+--2023-09-06 23:20:26--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts_Branches_and_interrupts
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071347/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts_Branches_and_interrupts [following]
+--2023-09-06 23:20:27--  https://web.archive.org/web/20210405071347/http://visual6502.org/wiki/index.php?title=6502_Taken_Branch_Delays_Interrupts_Branches_and_interrupts
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14830 (14K) [text/html]
+Saving to: ‘index_php_title_6502_Taken_Branch_Delays_Interrupts_Branches_and_interrupts.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Taken_Branc 100%[=========================================================>]  14.48K  --.-KB/s    in 0s      
+
+2023-09-06 23:20:28 (58.4 MB/s) - ‘index_php_title_6502_Taken_Branch_Delays_Interrupts_Branches_and_interrupts.html’ saved [14830/14830]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Timing_States to index_php_title_6502_Timing_States.html ...
+--2023-09-06 23:20:30--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Timing_States
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071320/http://visual6502.org/wiki/index.php?title=6502_Timing_States [following]
+--2023-09-06 23:20:30--  https://web.archive.org/web/20210405071320/http://visual6502.org/wiki/index.php?title=6502_Timing_States
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 49928 (49K) [text/html]
+Saving to: ‘index_php_title_6502_Timing_States.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Timing_Stat 100%[=========================================================>]  48.76K  --.-KB/s    in 0.03s   
+
+2023-09-06 23:20:33 (1.59 MB/s) - ‘index_php_title_6502_Timing_States.html’ saved [49928/49928]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Timing_of_Interrupt_Handling to index_php_title_6502_Timing_of_Interrupt_Handling.html ...
+--2023-09-06 23:20:35--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Timing_of_Interrupt_Handling
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071552/http://visual6502.org/wiki/index.php?title=6502_Timing_of_Interrupt_Handling [following]
+--2023-09-06 23:20:38--  https://web.archive.org/web/20210405071552/http://visual6502.org/wiki/index.php?title=6502_Timing_of_Interrupt_Handling
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 24899 (24K) [text/html]
+Saving to: ‘index_php_title_6502_Timing_of_Interrupt_Handling.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Timing_of_I 100%[=========================================================>]  24.32K  --.-KB/s    in 0s      
+
+2023-09-06 23:20:40 (74.2 MB/s) - ‘index_php_title_6502_Timing_of_Interrupt_Handling.html’ saved [24899/24899]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Unsupported_Opcodes to index_php_title_6502_Unsupported_Opcodes.html ...
+--2023-09-06 23:20:45--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_Unsupported_Opcodes
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071251/http://visual6502.org/wiki/index.php?title=6502_Unsupported_Opcodes [following]
+--2023-09-06 23:20:46--  https://web.archive.org/web/20210405071251/http://visual6502.org/wiki/index.php?title=6502_Unsupported_Opcodes
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 20056 (20K) [text/html]
+Saving to: ‘index_php_title_6502_Unsupported_Opcodes.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_Unsupported 100%[=========================================================>]  19.59K  --.-KB/s    in 0s      
+
+2023-09-06 23:20:46 (59.6 MB/s) - ‘index_php_title_6502_Unsupported_Opcodes.html’ saved [20056/20056]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_all_256_Opcodes to index_php_title_6502_all_256_Opcodes.html ...
+--2023-09-06 23:20:51--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_all_256_Opcodes
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071535/http://visual6502.org/wiki/index.php?title=6502_all_256_Opcodes [following]
+--2023-09-06 23:20:52--  https://web.archive.org/web/20210405071535/http://visual6502.org/wiki/index.php?title=6502_all_256_Opcodes
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 32795 (32K) [text/html]
+Saving to: ‘index_php_title_6502_all_256_Opcodes.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_all_256_Opc 100%[=========================================================>]  32.03K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:21:03 (23.9 MB/s) - ‘index_php_title_6502_all_256_Opcodes.html’ saved [32795/32795]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_datapath to index_php_title_6502_datapath.html ...
+--2023-09-06 23:21:08--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_datapath
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071423/http://visual6502.org/wiki/index.php?title=6502_datapath [following]
+--2023-09-06 23:21:09--  https://web.archive.org/web/20210405071423/http://visual6502.org/wiki/index.php?title=6502_datapath
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 27448 (27K) [text/html]
+Saving to: ‘index_php_title_6502_datapath.html’
+
+index_php_title_6502_datapath.ht   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_datapath.ht 100%[=========================================================>]  26.80K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:21:09 (12.4 MB/s) - ‘index_php_title_6502_datapath.html’ saved [27448/27448]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_datapath_control_timing_fix to index_php_title_6502_datapath_control_timing_fix.html ...
+--2023-09-06 23:21:12--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_datapath_control_timing_fix
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071304/http://visual6502.org/wiki/index.php?title=6502_datapath_control_timing_fix [following]
+--2023-09-06 23:21:14--  https://web.archive.org/web/20210405071304/http://visual6502.org/wiki/index.php?title=6502_datapath_control_timing_fix
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 16163 (16K) [text/html]
+Saving to: ‘index_php_title_6502_datapath_control_timing_fix.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_datapath_co 100%[=========================================================>]  15.78K  --.-KB/s    in 0s      
+
+2023-09-06 23:21:16 (86.1 MB/s) - ‘index_php_title_6502_datapath_control_timing_fix.html’ saved [16163/16163]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_increment_PC_control to index_php_title_6502_increment_PC_control.html ...
+--2023-09-06 23:21:21--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_increment_PC_control
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071441/http://visual6502.org/wiki/index.php?title=6502_increment_PC_control [following]
+--2023-09-06 23:21:23--  https://web.archive.org/web/20210405071441/http://visual6502.org/wiki/index.php?title=6502_increment_PC_control
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 16971 (17K) [text/html]
+Saving to: ‘index_php_title_6502_increment_PC_control.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_increment_P 100%[=========================================================>]  16.57K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:21:26 (20.3 MB/s) - ‘index_php_title_6502_increment_PC_control.html’ saved [16971/16971]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_traces_of_6501 to index_php_title_6502_traces_of_6501.html ...
+--2023-09-06 23:21:28--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6502_traces_of_6501
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071532/http://visual6502.org/wiki/index.php?title=6502_traces_of_6501 [following]
+--2023-09-06 23:21:29--  https://web.archive.org/web/20210405071532/http://visual6502.org/wiki/index.php?title=6502_traces_of_6501
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 23229 (23K) [text/html]
+Saving to: ‘index_php_title_6502_traces_of_6501.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_6502_traces_of_6 100%[=========================================================>]  22.68K  --.-KB/s    in 0s      
+
+2023-09-06 23:21:32 (69.9 MB/s) - ‘index_php_title_6502_traces_of_6501.html’ saved [23229/23229]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6507_Decode_PLA to index_php_title_6507_Decode_PLA.html ...
+--2023-09-06 23:21:37--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6507_Decode_PLA
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071413/http://visual6502.org/wiki/index.php?title=6507_Decode_PLA [following]
+--2023-09-06 23:21:38--  https://web.archive.org/web/20210405071413/http://visual6502.org/wiki/index.php?title=6507_Decode_PLA
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 23219 (23K) [text/html]
+Saving to: ‘index_php_title_6507_Decode_PLA.html’
+
+index_php_title_6507_Decode_PLA.   0%[                                                          ]       0  --.-KB/s               index_php_title_6507_Decode_PLA. 100%[=========================================================>]  22.67K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:21:39 (14.0 MB/s) - ‘index_php_title_6507_Decode_PLA.html’ saved [23219/23219]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6507_Decode_ROM to index_php_title_6507_Decode_ROM.html ...
+--2023-09-06 23:21:42--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=6507_Decode_ROM
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071537/http://visual6502.org/wiki/index.php?title=6507_Decode_ROM [following]
+--2023-09-06 23:21:42--  https://web.archive.org/web/20210405071537/http://visual6502.org/wiki/index.php?title=6507_Decode_ROM
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 22941 (22K) [text/html]
+Saving to: ‘index_php_title_6507_Decode_ROM.html’
+
+index_php_title_6507_Decode_ROM.   0%[                                                          ]       0  --.-KB/s               index_php_title_6507_Decode_ROM. 100%[=========================================================>]  22.40K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:21:44 (35.3 MB/s) - ‘index_php_title_6507_Decode_ROM.html’ saved [22941/22941]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=650X_Schematic_Notes to index_php_title_650X_Schematic_Notes.html ...
+--2023-09-06 23:21:46--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=650X_Schematic_Notes
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071439/http://visual6502.org/wiki/index.php?title=650X_Schematic_Notes [following]
+--2023-09-06 23:21:46--  https://web.archive.org/web/20210405071439/http://visual6502.org/wiki/index.php?title=650X_Schematic_Notes
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 27423 (27K) [text/html]
+Saving to: ‘index_php_title_650X_Schematic_Notes.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_650X_Schematic_N 100%[=========================================================>]  26.78K  --.-KB/s    in 0s      
+
+2023-09-06 23:21:47 (83.6 MB/s) - ‘index_php_title_650X_Schematic_Notes.html’ saved [27423/27423]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=AMD to index_php_title_AMD.html ...
+--2023-09-06 23:21:53--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=AMD
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071418/http://visual6502.org/wiki/index.php?title=AMD [following]
+--2023-09-06 23:21:58--  https://web.archive.org/web/20210405071418/http://visual6502.org/wiki/index.php?title=AMD
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13796 (13K) [text/html]
+Saving to: ‘index_php_title_AMD.html’
+
+index_php_title_AMD.html           0%[                                                          ]       0  --.-KB/s               index_php_title_AMD.html         100%[=========================================================>]  13.47K  --.-KB/s    in 0s      
+
+2023-09-06 23:21:59 (598 MB/s) - ‘index_php_title_AMD.html’ saved [13796/13796]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Acorn to index_php_title_Acorn.html ...
+--2023-09-06 23:22:03--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Acorn
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071517/http://visual6502.org/wiki/index.php?title=Acorn [following]
+--2023-09-06 23:22:04--  https://web.archive.org/web/20210405071517/http://visual6502.org/wiki/index.php?title=Acorn
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15133 (15K) [text/html]
+Saving to: ‘index_php_title_Acorn.html’
+
+index_php_title_Acorn.html         0%[                                                          ]       0  --.-KB/s               index_php_title_Acorn.html       100%[=========================================================>]  14.78K  --.-KB/s    in 0s      
+
+2023-09-06 23:22:06 (47.3 MB/s) - ‘index_php_title_Acorn.html’ saved [15133/15133]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Atari to index_php_title_Atari.html ...
+--2023-09-06 23:22:10--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Atari
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071539/http://visual6502.org/wiki/index.php?title=Atari [following]
+--2023-09-06 23:22:12--  https://web.archive.org/web/20210405071539/http://visual6502.org/wiki/index.php?title=Atari
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15008 (15K) [text/html]
+Saving to: ‘index_php_title_Atari.html’
+
+index_php_title_Atari.html         0%[                                                          ]       0  --.-KB/s               index_php_title_Atari.html       100%[=========================================================>]  14.66K  --.-KB/s    in 0s      
+
+2023-09-06 23:22:28 (58.2 MB/s) - ‘index_php_title_Atari.html’ saved [15008/15008]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Atari%27s_6507_Schematics to index_php_title_Atari_s_6507_Schematics.html ...
+--2023-09-06 23:22:32--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Atari%27s_6507_Schematics
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071517/http://visual6502.org/wiki/index.php?title=Atari%27s_6507_Schematics [following]
+--2023-09-06 23:22:43--  https://web.archive.org/web/20210405071517/http://visual6502.org/wiki/index.php?title=Atari%27s_6507_Schematics
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 29895 (29K) [text/html]
+Saving to: ‘index_php_title_Atari_s_6507_Schematics.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Atari_s_6507_Sch 100%[=========================================================>]  29.19K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:22:44 (16.8 MB/s) - ‘index_php_title_Atari_s_6507_Schematics.html’ saved [29895/29895]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Balazs%27_schematic_and_documents to index_php_title_Balazs__schematic_and_documents.html ...
+--2023-09-06 23:22:46--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Balazs%27_schematic_and_documents
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071327/http://visual6502.org/wiki/index.php?title=Balazs%27_schematic_and_documents [following]
+--2023-09-06 23:22:48--  https://web.archive.org/web/20210405071327/http://visual6502.org/wiki/index.php?title=Balazs%27_schematic_and_documents
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15699 (15K) [text/html]
+Saving to: ‘index_php_title_Balazs__schematic_and_documents.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Balazs__schemati 100%[=========================================================>]  15.33K  --.-KB/s    in 0s      
+
+2023-09-06 23:22:48 (57.4 MB/s) - ‘index_php_title_Balazs__schematic_and_documents.html’ saved [15699/15699]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Chips_in_our_collection to index_php_title_Chips_in_our_collection.html ...
+--2023-09-06 23:22:53--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Chips_in_our_collection
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071411/http://visual6502.org/wiki/index.php?title=Chips_in_our_collection [following]
+--2023-09-06 23:22:55--  https://web.archive.org/web/20210405071411/http://visual6502.org/wiki/index.php?title=Chips_in_our_collection
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 59883 (58K) [text/html]
+Saving to: ‘index_php_title_Chips_in_our_collection.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Chips_in_our_col 100%[=========================================================>]  58.48K  --.-KB/s    in 0.03s   
+
+2023-09-06 23:22:57 (1.73 MB/s) - ‘index_php_title_Chips_in_our_collection.html’ saved [59883/59883]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Chips_listed_by_manufacturer to index_php_title_Chips_listed_by_manufacturer.html ...
+--2023-09-06 23:23:02--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Chips_listed_by_manufacturer
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071511/http://visual6502.org/wiki/index.php?title=Chips_listed_by_manufacturer [following]
+--2023-09-06 23:23:02--  https://web.archive.org/web/20210405071511/http://visual6502.org/wiki/index.php?title=Chips_listed_by_manufacturer
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 60206 (59K) [text/html]
+Saving to: ‘index_php_title_Chips_listed_by_manufacturer.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Chips_listed_by_ 100%[=========================================================>]  58.79K  --.-KB/s    in 0.03s   
+
+2023-09-06 23:23:03 (1.69 MB/s) - ‘index_php_title_Chips_listed_by_manufacturer.html’ saved [60206/60206]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Company_MOS_Technology to index_php_title_Company_MOS_Technology.html ...
+--2023-09-06 23:23:06--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Company_MOS_Technology
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071320/http://visual6502.org/wiki/index.php?title=Company_MOS_Technology [following]
+--2023-09-06 23:23:07--  https://web.archive.org/web/20210405071320/http://visual6502.org/wiki/index.php?title=Company_MOS_Technology
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14493 (14K) [text/html]
+Saving to: ‘index_php_title_Company_MOS_Technology.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Company_MOS_Tech 100%[=========================================================>]  14.15K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:07 (59.8 MB/s) - ‘index_php_title_Company_MOS_Technology.html’ saved [14493/14493]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Educational_Resources to index_php_title_Educational_Resources.html ...
+--2023-09-06 23:23:12--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Educational_Resources
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071309/http://visual6502.org/wiki/index.php?title=Educational_Resources [following]
+--2023-09-06 23:23:12--  https://web.archive.org/web/20210405071309/http://visual6502.org/wiki/index.php?title=Educational_Resources
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 17047 (17K) [text/html]
+Saving to: ‘index_php_title_Educational_Resources.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Educational_Reso 100%[=========================================================>]  16.65K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:23:13 (22.1 MB/s) - ‘index_php_title_Educational_Resources.html’ saved [17047/17047]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Fujitsu to index_php_title_Fujitsu.html ...
+--2023-09-06 23:23:17--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Fujitsu
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071335/http://visual6502.org/wiki/index.php?title=Fujitsu [following]
+--2023-09-06 23:23:17--  https://web.archive.org/web/20210405071335/http://visual6502.org/wiki/index.php?title=Fujitsu
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13856 (14K) [text/html]
+Saving to: ‘index_php_title_Fujitsu.html’
+
+index_php_title_Fujitsu.html       0%[                                                          ]       0  --.-KB/s               index_php_title_Fujitsu.html     100%[=========================================================>]  13.53K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:18 (629 MB/s) - ‘index_php_title_Fujitsu.html’ saved [13856/13856]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=General_Instrument to index_php_title_General_Instrument.html ...
+--2023-09-06 23:23:21--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=General_Instrument
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071520/http://visual6502.org/wiki/index.php?title=General_Instrument [following]
+--2023-09-06 23:23:21--  https://web.archive.org/web/20210405071520/http://visual6502.org/wiki/index.php?title=General_Instrument
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14165 (14K) [text/html]
+Saving to: ‘index_php_title_General_Instrument.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_General_Instrume 100%[=========================================================>]  13.83K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:22 (55.8 MB/s) - ‘index_php_title_General_Instrument.html’ saved [14165/14165]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Hanson%27s_Block_Diagram to index_php_title_Hanson_s_Block_Diagram.html ...
+--2023-09-06 23:23:24--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Hanson%27s_Block_Diagram
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071451/http://visual6502.org/wiki/index.php?title=Hanson%27s_Block_Diagram [following]
+--2023-09-06 23:23:25--  https://web.archive.org/web/20210405071451/http://visual6502.org/wiki/index.php?title=Hanson%27s_Block_Diagram
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15514 (15K) [text/html]
+Saving to: ‘index_php_title_Hanson_s_Block_Diagram.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Hanson_s_Block_D 100%[=========================================================>]  15.15K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:26 (65.8 MB/s) - ‘index_php_title_Hanson_s_Block_Diagram.html’ saved [15514/15514]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Hitachi to index_php_title_Hitachi.html ...
+--2023-09-06 23:23:32--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Hitachi
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071452/http://visual6502.org/wiki/index.php?title=Hitachi [following]
+--2023-09-06 23:23:34--  https://web.archive.org/web/20210405071452/http://visual6502.org/wiki/index.php?title=Hitachi
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13845 (14K) [text/html]
+Saving to: ‘index_php_title_Hitachi.html’
+
+index_php_title_Hitachi.html       0%[                                                          ]       0  --.-KB/s               index_php_title_Hitachi.html     100%[=========================================================>]  13.52K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:35 (574 MB/s) - ‘index_php_title_Hitachi.html’ saved [13845/13845]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Incrementers_and_adders to index_php_title_Incrementers_and_adders.html ...
+--2023-09-06 23:23:39--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Incrementers_and_adders
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071517/http://visual6502.org/wiki/index.php?title=Incrementers_and_adders [following]
+--2023-09-06 23:23:40--  https://web.archive.org/web/20210405071517/http://visual6502.org/wiki/index.php?title=Incrementers_and_adders
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 18081 (18K) [text/html]
+Saving to: ‘index_php_title_Incrementers_and_adders.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Incrementers_and 100%[=========================================================>]  17.66K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:42 (60.9 MB/s) - ‘index_php_title_Incrementers_and_adders.html’ saved [18081/18081]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Inmos to index_php_title_Inmos.html ...
+--2023-09-06 23:23:44--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Inmos
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071525/http://visual6502.org/wiki/index.php?title=Inmos [following]
+--2023-09-06 23:23:45--  https://web.archive.org/web/20210405071525/http://visual6502.org/wiki/index.php?title=Inmos
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13963 (14K) [text/html]
+Saving to: ‘index_php_title_Inmos.html’
+
+index_php_title_Inmos.html         0%[                                                          ]       0  --.-KB/s               index_php_title_Inmos.html       100%[=========================================================>]  13.64K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:47 (53.5 MB/s) - ‘index_php_title_Inmos.html’ saved [13963/13963]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Intel to index_php_title_Intel.html ...
+--2023-09-06 23:23:51--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Intel
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071324/http://visual6502.org/wiki/index.php?title=Intel [following]
+--2023-09-06 23:23:51--  https://web.archive.org/web/20210405071324/http://visual6502.org/wiki/index.php?title=Intel
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14173 (14K) [text/html]
+Saving to: ‘index_php_title_Intel.html’
+
+index_php_title_Intel.html         0%[                                                          ]       0  --.-KB/s               index_php_title_Intel.html       100%[=========================================================>]  13.84K  --.-KB/s    in 0s      
+
+2023-09-06 23:23:51 (58.8 MB/s) - ‘index_php_title_Intel.html’ saved [14173/14173]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=JssimUserHelp to index_php_title_JssimUserHelp.html ...
+--2023-09-06 23:23:57--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=JssimUserHelp
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071509/http://visual6502.org/wiki/index.php?title=JssimUserHelp [following]
+--2023-09-06 23:23:58--  https://web.archive.org/web/20210405071509/http://visual6502.org/wiki/index.php?title=JssimUserHelp
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 36032 (35K) [text/html]
+Saving to: ‘index_php_title_JssimUserHelp.html’
+
+index_php_title_JssimUserHelp.ht   0%[                                                          ]       0  --.-KB/s               index_php_title_JssimUserHelp.ht 100%[=========================================================>]  35.19K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:23:58 (35.1 MB/s) - ‘index_php_title_JssimUserHelp.html’ saved [36032/36032]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=MOS_6502 to index_php_title_MOS_6502.html ...
+--2023-09-06 23:24:03--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=MOS_6502
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071513/http://visual6502.org/wiki/index.php?title=MOS_6502 [following]
+--2023-09-06 23:24:03--  https://web.archive.org/web/20210405071513/http://visual6502.org/wiki/index.php?title=MOS_6502
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 20893 (20K) [text/html]
+Saving to: ‘index_php_title_MOS_6502.html’
+
+index_php_title_MOS_6502.html      0%[                                                          ]       0  --.-KB/s               index_php_title_MOS_6502.html    100%[=========================================================>]  20.40K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:04 (62.3 MB/s) - ‘index_php_title_MOS_6502.html’ saved [20893/20893]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=MOS_Technnology to index_php_title_MOS_Technnology.html ...
+--2023-09-06 23:24:08--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=MOS_Technnology
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071355/http://visual6502.org/wiki/index.php?title=MOS_Technnology [following]
+--2023-09-06 23:24:08--  https://web.archive.org/web/20210405071355/http://visual6502.org/wiki/index.php?title=MOS_Technnology
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14773 (14K) [text/html]
+Saving to: ‘index_php_title_MOS_Technnology.html’
+
+index_php_title_MOS_Technnology.   0%[                                                          ]       0  --.-KB/s               index_php_title_MOS_Technnology. 100%[=========================================================>]  14.43K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:09 (141 MB/s) - ‘index_php_title_MOS_Technnology.html’ saved [14773/14773]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Main_Page to index_php_title_Main_Page.html ...
+--2023-09-06 23:24:14--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Main_Page
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071425/http://visual6502.org/wiki/index.php?title=Main_Page [following]
+--2023-09-06 23:24:15--  https://web.archive.org/web/20210405071425/http://visual6502.org/wiki/index.php?title=Main_Page
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 22967 (22K) [text/html]
+Saving to: ‘index_php_title_Main_Page.html’
+
+index_php_title_Main_Page.html     0%[                                                          ]       0  --.-KB/s               index_php_title_Main_Page.html   100%[=========================================================>]  22.43K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:16 (211 MB/s) - ‘index_php_title_Main_Page.html’ saved [22967/22967]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Motorola to index_php_title_Motorola.html ...
+--2023-09-06 23:24:21--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Motorola
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071323/http://visual6502.org/wiki/index.php?title=Motorola [following]
+--2023-09-06 23:24:22--  https://web.archive.org/web/20210405071323/http://visual6502.org/wiki/index.php?title=Motorola
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14227 (14K) [text/html]
+Saving to: ‘index_php_title_Motorola.html’
+
+index_php_title_Motorola.html      0%[                                                          ]       0  --.-KB/s               index_php_title_Motorola.html    100%[=========================================================>]  13.89K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:23 (168 MB/s) - ‘index_php_title_Motorola.html’ saved [14227/14227]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Motorola_6800 to index_php_title_Motorola_6800.html ...
+--2023-09-06 23:24:28--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Motorola_6800
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071405/http://visual6502.org/wiki/index.php?title=Motorola_6800 [following]
+--2023-09-06 23:24:28--  https://web.archive.org/web/20210405071405/http://visual6502.org/wiki/index.php?title=Motorola_6800
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 20814 (20K) [text/html]
+Saving to: ‘index_php_title_Motorola_6800.html’
+
+index_php_title_Motorola_6800.ht   0%[                                                          ]       0  --.-KB/s               index_php_title_Motorola_6800.ht 100%[=========================================================>]  20.33K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:24:29 (8.89 MB/s) - ‘index_php_title_Motorola_6800.html’ saved [20814/20814]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Motorola_68000 to index_php_title_Motorola_68000.html ...
+--2023-09-06 23:24:35--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Motorola_68000
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071341/http://visual6502.org/wiki/index.php?title=Motorola_68000 [following]
+--2023-09-06 23:24:35--  https://web.archive.org/web/20210405071341/http://visual6502.org/wiki/index.php?title=Motorola_68000
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14467 (14K) [text/html]
+Saving to: ‘index_php_title_Motorola_68000.html’
+
+index_php_title_Motorola_68000.h   0%[                                                          ]       0  --.-KB/s               index_php_title_Motorola_68000.h 100%[=========================================================>]  14.13K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:35 (148 MB/s) - ‘index_php_title_Motorola_68000.html’ saved [14467/14467]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=NEC to index_php_title_NEC.html ...
+--2023-09-06 23:24:40--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=NEC
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071307/http://visual6502.org/wiki/index.php?title=NEC [following]
+--2023-09-06 23:24:41--  https://web.archive.org/web/20210405071307/http://visual6502.org/wiki/index.php?title=NEC
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13829 (14K) [text/html]
+Saving to: ‘index_php_title_NEC.html’
+
+index_php_title_NEC.html           0%[                                                          ]       0  --.-KB/s               index_php_title_NEC.html         100%[=========================================================>]  13.50K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:42 (1.61 GB/s) - ‘index_php_title_NEC.html’ saved [13829/13829]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=NMOS_Depletion_Mode_Transistors to index_php_title_NMOS_Depletion_Mode_Transistors.html ...
+--2023-09-06 23:24:44--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=NMOS_Depletion_Mode_Transistors
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071325/http://visual6502.org/wiki/index.php?title=NMOS_Depletion_Mode_Transistors [following]
+--2023-09-06 23:24:44--  https://web.archive.org/web/20210405071325/http://visual6502.org/wiki/index.php?title=NMOS_Depletion_Mode_Transistors
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 17125 (17K) [text/html]
+Saving to: ‘index_php_title_NMOS_Depletion_Mode_Transistors.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_NMOS_Depletion_M 100%[=========================================================>]  16.72K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:45 (146 MB/s) - ‘index_php_title_NMOS_Depletion_Mode_Transistors.html’ saved [17125/17125]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=National_Semiconductor to index_php_title_National_Semiconductor.html ...
+--2023-09-06 23:24:49--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=National_Semiconductor
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071349/http://visual6502.org/wiki/index.php?title=National_Semiconductor [following]
+--2023-09-06 23:24:49--  https://web.archive.org/web/20210405071349/http://visual6502.org/wiki/index.php?title=National_Semiconductor
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14111 (14K) [text/html]
+Saving to: ‘index_php_title_National_Semiconductor.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_National_Semicon 100%[=========================================================>]  13.78K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:50 (112 MB/s) - ‘index_php_title_National_Semiconductor.html’ saved [14111/14111]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Nintendo to index_php_title_Nintendo.html ...
+--2023-09-06 23:24:56--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Nintendo
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071333/http://visual6502.org/wiki/index.php?title=Nintendo [following]
+--2023-09-06 23:24:56--  https://web.archive.org/web/20210405071333/http://visual6502.org/wiki/index.php?title=Nintendo
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13958 (14K) [text/html]
+Saving to: ‘index_php_title_Nintendo.html’
+
+index_php_title_Nintendo.html      0%[                                                          ]       0  --.-KB/s               index_php_title_Nintendo.html    100%[=========================================================>]  13.63K  --.-KB/s    in 0s      
+
+2023-09-06 23:24:56 (157 MB/s) - ‘index_php_title_Nintendo.html’ saved [13958/13958]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Opcodes to index_php_title_Opcodes.html ...
+--2023-09-06 23:25:00--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Opcodes
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071448/http://visual6502.org/wiki/index.php?title=Opcodes [following]
+--2023-09-06 23:25:01--  https://web.archive.org/web/20210405071448/http://visual6502.org/wiki/index.php?title=Opcodes
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 33030 (32K) [text/html]
+Saving to: ‘index_php_title_Opcodes.html’
+
+index_php_title_Opcodes.html       0%[                                                          ]       0  --.-KB/s               index_php_title_Opcodes.html     100%[=========================================================>]  32.26K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:01 (233 MB/s) - ‘index_php_title_Opcodes.html’ saved [33030/33030]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Opcodes.txt to index_php_title_Opcodes_txt.html ...
+--2023-09-06 23:25:05--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Opcodes.txt
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071417/http://visual6502.org/wiki/index.php?title=Opcodes.txt [following]
+--2023-09-06 23:25:05--  https://web.archive.org/web/20210405071417/http://visual6502.org/wiki/index.php?title=Opcodes.txt
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 33048 (32K) [text/html]
+Saving to: ‘index_php_title_Opcodes_txt.html’
+
+index_php_title_Opcodes_txt.html   0%[                                                          ]       0  --.-KB/s               index_php_title_Opcodes_txt.html 100%[=========================================================>]  32.27K  --.-KB/s    in 0.001s  
+
+2023-09-06 23:25:10 (26.2 MB/s) - ‘index_php_title_Opcodes_txt.html’ saved [33048/33048]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Other_Chip_Image_Sites to index_php_title_Other_Chip_Image_Sites.html ...
+--2023-09-06 23:25:15--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Other_Chip_Image_Sites
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071321/http://visual6502.org/wiki/index.php?title=Other_Chip_Image_Sites [following]
+--2023-09-06 23:25:15--  https://web.archive.org/web/20210405071321/http://visual6502.org/wiki/index.php?title=Other_Chip_Image_Sites
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15811 (15K) [text/html]
+Saving to: ‘index_php_title_Other_Chip_Image_Sites.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Other_Chip_Image 100%[=========================================================>]  15.44K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:16 (72.1 MB/s) - ‘index_php_title_Other_Chip_Image_Sites.html’ saved [15811/15811]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Photos_of_MOS_6502D to index_php_title_Photos_of_MOS_6502D.html ...
+--2023-09-06 23:25:21--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Photos_of_MOS_6502D
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071533/http://visual6502.org/wiki/index.php?title=Photos_of_MOS_6502D [following]
+--2023-09-06 23:25:22--  https://web.archive.org/web/20210405071533/http://visual6502.org/wiki/index.php?title=Photos_of_MOS_6502D
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 16080 (16K) [text/html]
+Saving to: ‘index_php_title_Photos_of_MOS_6502D.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Photos_of_MOS_65 100%[=========================================================>]  15.70K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:23 (52.9 MB/s) - ‘index_php_title_Photos_of_MOS_6502D.html’ saved [16080/16080]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Photos_of_R6502 to index_php_title_Photos_of_R6502.html ...
+--2023-09-06 23:25:29--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Photos_of_R6502
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071447/http://visual6502.org/wiki/index.php?title=Photos_of_R6502 [following]
+--2023-09-06 23:25:29--  https://web.archive.org/web/20210405071447/http://visual6502.org/wiki/index.php?title=Photos_of_R6502
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14432 (14K) [text/html]
+Saving to: ‘index_php_title_Photos_of_R6502.html’
+
+index_php_title_Photos_of_R6502.   0%[                                                          ]       0  --.-KB/s               index_php_title_Photos_of_R6502. 100%[=========================================================>]  14.09K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:30 (59.6 MB/s) - ‘index_php_title_Photos_of_R6502.html’ saved [14432/14432]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=PolygonCaptureProgress to index_php_title_PolygonCaptureProgress.html ...
+--2023-09-06 23:25:35--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=PolygonCaptureProgress
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071307/http://visual6502.org/wiki/index.php?title=PolygonCaptureProgress [following]
+--2023-09-06 23:25:35--  https://web.archive.org/web/20210405071307/http://visual6502.org/wiki/index.php?title=PolygonCaptureProgress
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15374 (15K) [text/html]
+Saving to: ‘index_php_title_PolygonCaptureProgress.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_PolygonCapturePr 100%[=========================================================>]  15.01K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:36 (65.7 MB/s) - ‘index_php_title_PolygonCaptureProgress.html’ saved [15374/15374]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=RCA_1802E to index_php_title_RCA_1802E.html ...
+--2023-09-06 23:25:38--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=RCA_1802E
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/index.php?title=RCA_1802E [following]
+--2023-09-06 23:25:38--  https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/index.php?title=RCA_1802E
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 37137 (36K) [text/html]
+Saving to: ‘index_php_title_RCA_1802E.html’
+
+index_php_title_RCA_1802E.html     0%[                                                          ]       0  --.-KB/s               index_php_title_RCA_1802E.html   100%[=========================================================>]  36.27K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:38 (188 MB/s) - ‘index_php_title_RCA_1802E.html’ saved [37137/37137]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Rockwell to index_php_title_Rockwell.html ...
+--2023-09-06 23:25:42--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Rockwell
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071331/http://visual6502.org/wiki/index.php?title=Rockwell [following]
+--2023-09-06 23:25:43--  https://web.archive.org/web/20210405071331/http://visual6502.org/wiki/index.php?title=Rockwell
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13899 (14K) [text/html]
+Saving to: ‘index_php_title_Rockwell.html’
+
+index_php_title_Rockwell.html      0%[                                                          ]       0  --.-KB/s               index_php_title_Rockwell.html    100%[=========================================================>]  13.57K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:43 (663 MB/s) - ‘index_php_title_Rockwell.html’ saved [13899/13899]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=SGS_Thomson to index_php_title_SGS_Thomson.html ...
+--2023-09-06 23:25:45--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=SGS_Thomson
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071539/http://visual6502.org/wiki/index.php?title=SGS_Thomson [following]
+--2023-09-06 23:25:45--  https://web.archive.org/web/20210405071539/http://visual6502.org/wiki/index.php?title=SGS_Thomson
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13920 (14K) [text/html]
+Saving to: ‘index_php_title_SGS_Thomson.html’
+
+index_php_title_SGS_Thomson.html   0%[                                                          ]       0  --.-KB/s               index_php_title_SGS_Thomson.html 100%[=========================================================>]  13.59K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:47 (44.5 MB/s) - ‘index_php_title_SGS_Thomson.html’ saved [13920/13920]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=SMC to index_php_title_SMC.html ...
+--2023-09-06 23:25:49--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=SMC
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071418/http://visual6502.org/wiki/index.php?title=SMC [following]
+--2023-09-06 23:25:50--  https://web.archive.org/web/20210405071418/http://visual6502.org/wiki/index.php?title=SMC
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13789 (13K) [text/html]
+Saving to: ‘index_php_title_SMC.html’
+
+index_php_title_SMC.html           0%[                                                          ]       0  --.-KB/s               index_php_title_SMC.html         100%[=========================================================>]  13.47K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:52 (731 MB/s) - ‘index_php_title_SMC.html’ saved [13789/13789]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Sandbox to index_php_title_Sandbox.html ...
+--2023-09-06 23:25:54--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Sandbox
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071303/http://visual6502.org/wiki/index.php?title=Sandbox [following]
+--2023-09-06 23:25:55--  https://web.archive.org/web/20210405071303/http://visual6502.org/wiki/index.php?title=Sandbox
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13981 (14K) [text/html]
+Saving to: ‘index_php_title_Sandbox.html’
+
+index_php_title_Sandbox.html       0%[                                                          ]       0  --.-KB/s               index_php_title_Sandbox.html     100%[=========================================================>]  13.65K  --.-KB/s    in 0s      
+
+2023-09-06 23:25:55 (60.1 MB/s) - ‘index_php_title_Sandbox.html’ saved [13981/13981]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Siemens to index_php_title_Siemens.html ...
+--2023-09-06 23:25:59--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Siemens
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071447/http://visual6502.org/wiki/index.php?title=Siemens [following]
+--2023-09-06 23:25:59--  https://web.archive.org/web/20210405071447/http://visual6502.org/wiki/index.php?title=Siemens
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13840 (14K) [text/html]
+Saving to: ‘index_php_title_Siemens.html’
+
+index_php_title_Siemens.html       0%[                                                          ]       0  --.-KB/s               index_php_title_Siemens.html     100%[=========================================================>]  13.52K  --.-KB/s    in 0s      
+
+2023-09-06 23:26:00 (574 MB/s) - ‘index_php_title_Siemens.html’ saved [13840/13840]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Signetics to index_php_title_Signetics.html ...
+--2023-09-06 23:26:06--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Signetics
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071503/http://visual6502.org/wiki/index.php?title=Signetics [following]
+--2023-09-06 23:26:07--  https://web.archive.org/web/20210405071503/http://visual6502.org/wiki/index.php?title=Signetics
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13884 (14K) [text/html]
+Saving to: ‘index_php_title_Signetics.html’
+
+index_php_title_Signetics.html     0%[                                                          ]       0  --.-KB/s               index_php_title_Signetics.html   100%[=========================================================>]  13.56K  --.-KB/s    in 0s      
+
+2023-09-06 23:26:10 (427 MB/s) - ‘index_php_title_Signetics.html’ saved [13884/13884]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Sinclair to index_php_title_Sinclair.html ...
+--2023-09-06 23:26:15--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Sinclair
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071324/http://visual6502.org/wiki/index.php?title=Sinclair [following]
+--2023-09-06 23:26:19--  https://web.archive.org/web/20210405071324/http://visual6502.org/wiki/index.php?title=Sinclair
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13931 (14K) [text/html]
+Saving to: ‘index_php_title_Sinclair.html’
+
+index_php_title_Sinclair.html      0%[                                                          ]       0  --.-KB/s               index_php_title_Sinclair.html    100%[=========================================================>]  13.60K  --.-KB/s    in 0s      
+
+2023-09-06 23:26:19 (511 MB/s) - ‘index_php_title_Sinclair.html’ saved [13931/13931]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Synertek to index_php_title_Synertek.html ...
+--2023-09-06 23:26:25--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Synertek
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071353/http://visual6502.org/wiki/index.php?title=Synertek [following]
+--2023-09-06 23:26:26--  https://web.archive.org/web/20210405071353/http://visual6502.org/wiki/index.php?title=Synertek
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13860 (14K) [text/html]
+Saving to: ‘index_php_title_Synertek.html’
+
+index_php_title_Synertek.html      0%[                                                          ]       0  --.-KB/s               index_php_title_Synertek.html    100%[=========================================================>]  13.54K  --.-KB/s    in 0s      
+
+2023-09-06 23:26:28 (601 MB/s) - ‘index_php_title_Synertek.html’ saved [13860/13860]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Tektronix to index_php_title_Tektronix.html ...
+--2023-09-06 23:26:30--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Tektronix
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071535/http://visual6502.org/wiki/index.php?title=Tektronix [following]
+--2023-09-06 23:26:30--  https://web.archive.org/web/20210405071535/http://visual6502.org/wiki/index.php?title=Tektronix
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13900 (14K) [text/html]
+Saving to: ‘index_php_title_Tektronix.html’
+
+index_php_title_Tektronix.html     0%[                                                          ]       0  --.-KB/s               index_php_title_Tektronix.html   100%[=========================================================>]  13.57K  --.-KB/s    in 0s      
+
+2023-09-06 23:26:32 (576 MB/s) - ‘index_php_title_Tektronix.html’ saved [13900/13900]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Texas_Instruments to index_php_title_Texas_Instruments.html ...
+--2023-09-06 23:26:36--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Texas_Instruments
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071343/http://visual6502.org/wiki/index.php?title=Texas_Instruments [following]
+--2023-09-06 23:26:39--  https://web.archive.org/web/20210405071343/http://visual6502.org/wiki/index.php?title=Texas_Instruments
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14031 (14K) [text/html]
+Saving to: ‘index_php_title_Texas_Instruments.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_Texas_Instrument 100%[=========================================================>]  13.70K  --.-KB/s    in 0s      
+
+2023-09-06 23:26:41 (55.3 MB/s) - ‘index_php_title_Texas_Instruments.html’ saved [14031/14031]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=The_ChipSim_Simulator to index_php_title_The_ChipSim_Simulator.html ...
+--2023-09-06 23:26:47--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=The_ChipSim_Simulator
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071437/http://visual6502.org/wiki/index.php?title=The_ChipSim_Simulator [following]
+--2023-09-06 23:26:47--  https://web.archive.org/web/20210405071437/http://visual6502.org/wiki/index.php?title=The_ChipSim_Simulator
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 18473 (18K) [text/html]
+Saving to: ‘index_php_title_The_ChipSim_Simulator.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_The_ChipSim_Simu 100%[=========================================================>]  18.04K  --.-KB/s    in 0.002s  
+
+2023-09-06 23:26:50 (10.7 MB/s) - ‘index_php_title_The_ChipSim_Simulator.html’ saved [18473/18473]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=The_reverse_engineering_process to index_php_title_The_reverse_engineering_process.html ...
+--2023-09-06 23:26:52--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=The_reverse_engineering_process
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071453/http://visual6502.org/wiki/index.php?title=The_reverse_engineering_process [following]
+--2023-09-06 23:26:52--  https://web.archive.org/web/20210405071453/http://visual6502.org/wiki/index.php?title=The_reverse_engineering_process
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 22141 (22K) [text/html]
+Saving to: ‘index_php_title_The_reverse_engineering_process.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_The_reverse_engi 100%[=========================================================>]  21.62K  --.-KB/s    in 0s      
+
+2023-09-06 23:26:53 (67.7 MB/s) - ‘index_php_title_The_reverse_engineering_process.html’ saved [22141/22141]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Toshiba to index_php_title_Toshiba.html ...
+--2023-09-06 23:26:58--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Toshiba
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071403/http://visual6502.org/wiki/index.php?title=Toshiba [following]
+--2023-09-06 23:26:58--  https://web.archive.org/web/20210405071403/http://visual6502.org/wiki/index.php?title=Toshiba
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13858 (14K) [text/html]
+Saving to: ‘index_php_title_Toshiba.html’
+
+index_php_title_Toshiba.html       0%[                                                          ]       0  --.-KB/s               index_php_title_Toshiba.html     100%[=========================================================>]  13.53K  --.-KB/s    in 0s      
+
+2023-09-06 23:27:01 (529 MB/s) - ‘index_php_title_Toshiba.html’ saved [13858/13858]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=WikiContributionPolicy to index_php_title_WikiContributionPolicy.html ...
+--2023-09-06 23:27:04--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=WikiContributionPolicy
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071344/http://visual6502.org/wiki/index.php?title=WikiContributionPolicy [following]
+--2023-09-06 23:27:04--  https://web.archive.org/web/20210405071344/http://visual6502.org/wiki/index.php?title=WikiContributionPolicy
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 17299 (17K) [text/html]
+Saving to: ‘index_php_title_WikiContributionPolicy.html’
+
+                index_php_title_   0%[                                                          ]       0  --.-KB/s               index_php_title_WikiContribution 100%[=========================================================>]  16.89K  --.-KB/s    in 0s      
+
+2023-09-06 23:27:05 (55.7 MB/s) - ‘index_php_title_WikiContributionPolicy.html’ saved [17299/17299]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Z8400 to index_php_title_Z8400.html ...
+--2023-09-06 23:27:08--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Z8400
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071417/http://visual6502.org/wiki/index.php?title=Z8400 [following]
+--2023-09-06 23:27:08--  https://web.archive.org/web/20210405071417/http://visual6502.org/wiki/index.php?title=Z8400
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13995 (14K) [text/html]
+Saving to: ‘index_php_title_Z8400.html’
+
+index_php_title_Z8400.html         0%[                                                          ]       0  --.-KB/s               index_php_title_Z8400.html       100%[=========================================================>]  13.67K  --.-KB/s    in 0s      
+
+2023-09-06 23:27:09 (59.3 MB/s) - ‘index_php_title_Z8400.html’ saved [13995/13995]
+
+Pausing ...
+Fetching https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Zilog to index_php_title_Zilog.html ...
+--2023-09-06 23:27:13--  https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Zilog
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org/web/20210405071423/http://visual6502.org/wiki/index.php?title=Zilog [following]
+--2023-09-06 23:27:13--  https://web.archive.org/web/20210405071423/http://visual6502.org/wiki/index.php?title=Zilog
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14191 (14K) [text/html]
+Saving to: ‘index_php_title_Zilog.html’
+
+index_php_title_Zilog.html         0%[                                                          ]       0  --.-KB/s               index_php_title_Zilog.html       100%[=========================================================>]  13.86K  --.-KB/s    in 0s      
+
+2023-09-06 23:27:14 (66.0 MB/s) - ‘index_php_title_Zilog.html’ saved [14191/14191]
+
+Pausing ...
+bash-3.2$ ls
+ALL_PAGES	README.md	content		getter.sh	raw		typescript
+bash-3.2$ exit
+
+Script done on Wed Sep  6 23:28:59 2023

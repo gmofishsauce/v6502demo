@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<html lang="en" dir="ltr">
+<head>
+<title>6502 datapath - VisualChips</title>
+</head>
+<body>
+		<!-- start content -->
+<p>This page discusses the 6502 datapath, using the terminology from <a href="/web/20210405071423/http://visual6502.org/wiki/index.php?title=Hanson%27s_Block_Diagram" title="Hanson's Block Diagram">Hanson's Block Diagram</a> and is probably best understood by <a href="https://web.archive.org/web/20210405071423/http://www.pagetable.com/?p=39" class="external text" rel="nofollow">reference to it</a>
+</p><p>We're interested in which datapath control signals are active in each of the two phases.
+</p><p>A full cycle consists of phi1 and phi2.  When we say a signal is "effective", we mean it actually does something.
+</p><p>All datapath control signals are latched during phi2; they are set mostly from opcode and timing data, but also some internal state.  We work broadly from left to right. (Which is right to left on <a href="/web/20210405071423/http://visual6502.org/wiki/index.php?title=Balazs%27_schematic_and_documents" title="Balazs' schematic and documents">Balazs' schematic</a>)
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#External_busses_and_signals"><span class="tocnumber">1</span> <span class="toctext">External busses and signals</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Address_values"><span class="tocnumber">2</span> <span class="toctext">Address values</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#The_register_file"><span class="tocnumber">3</span> <span class="toctext">The register file</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#ALU_inputs"><span class="tocnumber">4</span> <span class="toctext">ALU inputs</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#ALU_operation_selection"><span class="tocnumber">5</span> <span class="toctext">ALU operation selection</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#ALU_output_register"><span class="tocnumber">6</span> <span class="toctext">ALU output register</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#The_Program_Counter"><span class="tocnumber">7</span> <span class="toctext">The Program Counter</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Precharge"><span class="tocnumber">8</span> <span class="toctext">Precharge</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#A_note_on_signal_naming"><span class="tocnumber">9</span> <span class="toctext">A note on signal naming</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h3> <span class="mw-headline" id="External_busses_and_signals"> External busses and signals </span></h3>
+<p>DOR is latched from DB during phi1, and driven onto the data pins in phi2, if a write is done (and, on the 6501, only if the asynchronous DBE signal is on).
+</p><p>DL is latched during phi2, and then put on ADL, ADH, or DB on the next phi1; during phi2, the old value in DL is put on that bus.
+</p><p>ABL and ABH can be loaded from ADL and ADH respectively during phi1; they are put on the address pins in that same phi1, and stay there until changed again.
+</p><p>R/#W is latched during phi2, and then delayed until phi1, where it is output.
+</p>
+<h3> <span class="mw-headline" id="Address_values"> Address values </span></h3>
+<dl><dt> ADL/ABL, ADH/ABH</dt><dd>
+</dd><dd> We already saw these.  Effective on the next phi1.
+</dd></dl>
+<dl><dt> 0/ADL0, 0/ADL1, 0/ADL2, 0/ADH0, 0/ADH(1-7)
+</dt><dd> These set the interrupt vector fetch address, and the zero page and stack high address.  Effective on phi2 and the next phi1.
+</dd></dl>
+<p><br/>
+</p>
+<h3> <span class="mw-headline" id="The_register_file"> The register file </span></h3>
+<dl><dt> Y/SB, X/SB, SB/Y, SB/X
+</dt><dd> Move the X and Y registers from/to the SB.  Latched on phi2, just like everything else; effective on the next phi1.
+</dd></dl>
+<dl><dt> SB/S, S/S, effective on the next phi1.
+</dt><dt> S/SB, S/ADL, effective on phi2 and the next phi1.
+</dt><dd> The S register is actually two latches in series.  This makes it possible to read a value from SB and write a value to ADL at the same time.  On phi2, the value from the "in" latch is forwarded to the "out" latch (and onto the driven bus, if any).
+</dd></dl>
+<p>(Note the <a href="/web/20210405071423/http://visual6502.org/wiki/index.php?title=6502_datapath_control_timing_fix" title="6502 datapath control timing fix">two "tuning fork" structures</a>, which have contacts
+either on the top or bottom, which select whether X, Y, A write SB
+and DB only during phi1, or slightly longer, during "not phi2". We think this might be a timing fix, or an option left open until after silicon showed which choice worked best)
+</p>
+<h3> <span class="mw-headline" id="ALU_inputs"> ALU inputs </span></h3>
+<dl><dt> SB/ADD, 0/ADD, nDB/ADD, DB/ADD, ADL/ADD
+</dt><dd> Two options for one side, three for the other.  Effective on the next phi1.
+</dd></dl>
+<h3> <span class="mw-headline" id="ALU_operation_selection"> ALU operation selection </span></h3>
+<dl><dt> ANDS, EORS, ORS, 1/ADDC, SRS, SUMS, DAA, DSA
+</dt><dd> Select the ALU operation. Effective on the next phi1 and phi2.
+</dd></dl>
+<p>(The overflow and carry out signals AVR and ACR are output from the ALU back to the control logic,
+latched during phi2, used in phi1.  The decimal carries are picked up at phi2 as well).
+</p>
+<h3> <span class="mw-headline" id="ALU_output_register"> ALU output register </span></h3>
+<p>The ALU output register (ADD) is written during phi2.  The value can be used the next cycle:
+</p>
+<dl><dt> ADD/SB7, ADD/SB(0-6), ADD/ADL, effective on phi2 and the next phi1.
+</dt><dd> The ADL output is for address calculations.  For output to SB, the top bit is handled separately for rotate right instructions: the ALU always computes a zero there; by not driving it to the bus a one will be read.
+</dd></dl>
+<dl><dt> SB/AC, effective on the next phi1.
+</dt><dd> Lines 1-3,5-7 are fed through the decimal adjust first, to finish the proper BCD add/subtract result if necessary, before writing it to the accumulator.
+</dd></dl>
+<dl><dt> AC/SB, AC/DB, effective on the next phi1.
+</dt><dd> Write the A reg back to one of the busses.
+</dd></dl>
+<h3> <span class="mw-headline" id="The_Program_Counter"> The Program Counter </span></h3>
+<dl><dt> ADH/PCH, PCH/PCH, PCL/PCL, ADL/PCL
+</dt><dd> select whether to use the current PC, or take a new value from the internal address busses.  Effective on the next phi1.
+</dd></dl>
+<dl><dt> PCH/DB, PCL/DB, PCH/ADH, PCL/ADL
+</dt><dd> write the PC to one of the busses.  Effective on phi2 and the next phi1.
+</dd></dl>
+<dl><dt> I/PC, effective during the next phi1 and phi2.
+</dt><dd> Increment the PC, or not.  When incrementing, the new value is put on ADL,ADH because there are no internal latches in the PC incrementer.  For every instruction, the first two bytes are fetched (during execution of the previous instruction); I/PC peeks ahead (or back, if you want to look at it that way) to the next instruction that is predecoded, so it can skip incrementing PC if that is a one-byte instruction.
+</dd></dl>
+<dl><dt> P/DB
+</dt><dd> Write the flag values to the DB; effective on phi2 and the next phi1.  The DB can be read to set the flag values as well; it is read during phi2, and then latched in the flag register on the next phi1.
+</dd></dl>
+<dl><dt> SB/DB, SB/ADH
+</dt><dd> Connect two busses together.  Effective on phi2 and the next phi1.
+</dd></dl>
+<h3> <span class="mw-headline" id="Precharge"> Precharge </span></h3>
+<p>All internal busses (SB, DB, ADL, ADH) are driven high during phi2, as a sort of precharge. In fact commonly they are also driven by data signals during phi2, causing an intermediate voltage to appear on the bus.
+</p>
+<h3> <span class="mw-headline" id="A_note_on_signal_naming"> A note on signal naming </span></h3>
+<p>In our <a href="https://web.archive.org/web/20210405071423/http://visual6502.org/JSSim/expert.html?graphics=f&amp;logmore=DPControl&amp;steps=10" class="external text" rel="nofollow">Javascript simulation</a> the datapath control signals are tabulated according to Hanson's names, but <a href="https://web.archive.org/web/20210405071423/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=dpc4_SSB,dpc5_SADL,dpc6_SBS,dpc7_SS&amp;panx=166.0&amp;pany=357.3&amp;zoom=6.2" class="external text" rel="nofollow">in the layout</a> they are named with a prefix according to their position across the chip. So
+</p>
+<ul><li> SSB, SADL, SBS, SS
+</li></ul>
+<p>will be found as
+</p>
+<ul><li> dpc4_SSB,dpc5_SADL,dpc6_SBS,dpc7_SS
+</li></ul>
+<p>in <a href="https://web.archive.org/web/20210405071423/https://github.com/trebonian/visual6502/blob/master/nodenames.js" class="external text" rel="nofollow">the source</a>. See also the table below.
+</p><p>As Balazs used another naming scheme in his very useful but incomplete schematic, we should also cross-reference his names:
+</p>
+<table cellspacing="0" border="1">
+<tr>
+<th> Balazs </th><th> Hanson </th><th> JSSim </th><th> note
+</th></tr>
+<tr>
+<td> R1x7
+</td><td> Y/SB
+</td><td>dpc0_YSB </td><td> drive sb from y
+</td></tr>
+<tr>
+<td> R1x6
+</td><td> SB/Y
+</td><td>dpc1_SBY </td><td> load y from sb
+</td></tr>
+<tr>
+<td> R1x5
+</td><td> X/SB
+</td><td>dpc2_XSB </td><td> drive sb from x
+</td></tr>
+<tr>
+<td> R1x4
+</td><td> SB/X
+</td><td>dpc3_SBX </td><td> load x from sb
+</td></tr>
+<tr>
+<td> R1x2
+</td><td> S/SB
+</td><td>dpc4_SSB </td><td> drive sb from stack pointer
+</td></tr>
+<tr>
+<td> R1x1
+</td><td> S/ADL
+</td><td>dpc5_SADL </td><td> drive adl from stack pointer
+</td></tr>
+<tr>
+<td> R1x3
+</td><td> SB/S
+</td><td>dpc6_SBS </td><td> load stack pointer from sb
+</td></tr>
+<tr>
+<td>&nbsp;?
+</td><td> S/S
+</td><td>dpc7_SS </td><td> recirculate stack pointer
+</td></tr>
+<tr>
+<td> R2x1
+</td><td> notDB/ADD
+</td><td>dpc8_nDBADD </td><td> alu b side: select not-idb input
+</td></tr>
+<tr>
+<td> R2x2
+</td><td> DB/ADD
+</td><td>dpc9_DBADD </td><td> alu b side: select idb input
+</td></tr>
+<tr>
+<td> R2x3
+</td><td> ADL/ADD
+</td><td>dpc10_ADLADD </td><td> alu b side: select adl input
+</td></tr>
+<tr>
+<td> R2x4 (??)
+</td><td> SB/ADD
+</td><td>dpc11_SBADD </td><td> alu a side: select sb
+</td></tr>
+<tr>
+<td> R2x5
+</td><td> 0/ADD
+</td><td>dpc12_0ADD </td><td> alu a side: select zero
+</td></tr>
+<tr>
+<td> R2x6
+</td><td> ORS
+</td><td>dpc13_ORS </td><td> alu op: a or b
+</td></tr>
+<tr>
+<td> R2x7
+</td><td> SRS
+</td><td>dpc14_SRS </td><td> alu op: logical right shift
+</td></tr>
+<tr>
+<td> R2x8
+</td><td> ANDS
+</td><td>dpc15_ANDS </td><td> alu op: a and b
+</td></tr>
+<tr>
+<td> R2x9
+</td><td> EORS
+</td><td>dpc16_EORS </td><td> alu op: a xor b (?)
+</td></tr>
+<tr>
+<td> R2x12
+</td><td> SUMS
+</td><td>dpc17_SUMS </td><td> alu op: a plus b (?)
+</td></tr>
+<tr>
+<td>&nbsp;?
+</td><td> DAA
+</td><td>dpc18_#DAA </td><td> decimal related (inverted)
+</td></tr>
+<tr>
+<td> R2x14,7
+</td><td> ADD/SB(7)
+</td><td>dpc19_ADDSB7 </td><td> alu to sb bit 7 only
+</td></tr>
+<tr>
+<td> R2x14
+</td><td> ADD/SB(0-6)
+</td><td>dpc20_ADDSB06 </td><td> alu to sb bits 6-0 only
+</td></tr>
+<tr>
+<td> R2x15
+</td><td> ADD/ADL
+</td><td>dpc21_ADDADL </td><td> alu to adl
+</td></tr>
+<tr>
+<td> R2x20,6
+</td><td> DSA
+</td><td>dpc22_#DSA </td><td> decimal related/SBC only (inverted)
+</td></tr>
+<tr>
+<td> R3x4
+</td><td> SB/AC
+</td><td>dpc23_SBAC </td><td> (optionally decimal-adjusted) sb to acc
+</td></tr>
+<tr>
+<td> R3x1
+</td><td> AC/SB
+</td><td>dpc24_ACSB </td><td> acc to sb
+</td></tr>
+<tr>
+<td> R3x3
+</td><td> SB/DB
+</td><td>dpc25_SBDB </td><td> sb pass-connects to idb (bi-directionally)
+</td></tr>
+<tr>
+<td> R3x2
+</td><td> AC/DB
+</td><td>dpc26_ACDB </td><td> acc to idb
+</td></tr>
+<tr>
+<td> R3x0
+</td><td> SB/ADH
+</td><td>dpc27_SBADH </td><td> sb pass-connects to adh (bi-directionally)
+</td></tr>
+<tr>
+<td> R3x5,0
+</td><td> 0/ADH0
+</td><td>dpc28_0ADH0 </td><td> zero to adh0 bit0 only
+</td></tr>
+<tr>
+<td> R3x5
+</td><td> 0/ADH(1-7)
+</td><td>dpc29_0ADH17 </td><td> zero to adh bits 7-1 only
+</td></tr>
+<tr>
+<td> R4x2
+</td><td> ADH/PCH
+</td><td>dpc30_ADHPCH </td><td> load pch from adh
+</td></tr>
+<tr>
+<td> R4x3
+</td><td> PCH/PCH
+</td><td>dpc31_PCHPCH </td><td> load pch from pch incremented
+</td></tr>
+<tr>
+<td> R4x4
+</td><td> PCH/ADH
+</td><td>dpc32_PCHADH </td><td> drive adh from pch incremented
+</td></tr>
+<tr>
+<td> R4x1
+</td><td> PCH/DB
+</td><td>dpc33_PCHDB </td><td> drive idb from pch incremented
+</td></tr>
+<tr>
+<td>&nbsp;!!
+</td><td> PCLC
+</td><td>dpc34_PCLC </td><td> pch carry in and pcl FF detect?
+</td></tr>
+<tr>
+<td> Carry
+</td><td> PCHC
+</td><td>dpc35_PCHC </td><td> pcl 0x?F detect - half-carry
+</td></tr>
+<tr>
+<td> notCarry
+</td><td> I/PC
+</td><td>dpc36_#IPC </td><td> pcl carry in (inverted)
+</td></tr>
+<tr>
+<td> R5x1
+</td><td> PCL/DB
+</td><td>dpc37_PCLDB </td><td> drive idb from pcl incremented
+</td></tr>
+<tr>
+<td> R5x4
+</td><td> PCL/ADL
+</td><td>dpc38_PCLADL </td><td> drive adl from pcl incremented
+</td></tr>
+<tr>
+<td> R5x3
+</td><td> PCL/PCL
+</td><td>dpc39_PCLPCL </td><td> load pcl from pcl incremented
+</td></tr>
+<tr>
+<td> R5x2
+</td><td> ADL/PCL
+</td><td>dpc40_ADLPCL </td><td> load pcl from adl
+</td></tr>
+<tr>
+<td> Dkx2
+</td><td> DL/ADL
+</td><td>dpc41_DL/ADL </td><td> pass-connect adl to mux node driven by idl
+</td></tr>
+<tr>
+<td> Dkx3
+</td><td> DL/ADH
+</td><td>dpc42_DL/ADH </td><td> pass-connect adh to mux node driven by idl
+</td></tr>
+<tr>
+<td> Dkx1
+</td><td> DL/DB
+</td><td>dpc43_DL/DB </td><td> pass-connect idb to mux node driven by idl
+</td></tr>
+</table>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 35/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:131-0!1!0!!en!2!edit=0 and timestamp 20210404233855 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071423/http://visual6502.org/wiki/index.php?title=6502_datapath">http://visual6502.org/wiki/index.php?title=6502_datapath</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+</body>
+</html>
+<!-- written by getter Wed Sep  6 23:21:09 PDT 2023 -->

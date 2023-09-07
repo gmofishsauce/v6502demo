@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<html lang="en" dir="ltr">
+<head>
+<title>The ChipSim Simulator - VisualChips</title>
+</head>
+<body>
+		<!-- start content -->
+<p>The visual6502 project offers an in-browser simulation of the 6502 and 6800 microprocessors. The engine for the simulation, written in JavaScript, is variously called JSSim and ChipSim. This page offers some background on how the simulator works and how it came to be written.
+</p><p>The source code is copyright with an open source license and <a href="https://web.archive.org/web/20210405071437/https://github.com/trebonian/visual6502" class="external text" rel="nofollow">available on github</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Algorithm"><span class="tocnumber">1</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Data_Files"><span class="tocnumber">2</span> <span class="toctext">Data Files</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#History"><span class="tocnumber">3</span> <span class="toctext">History</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Resources"><span class="tocnumber">4</span> <span class="toctext">Resources</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h3> <span class="mw-headline" id="Algorithm"> Algorithm </span></h3>
+<p>TBC
+</p>
+<h3> <span class="mw-headline" id="Data_Files"> Data Files </span></h3>
+<p>To simulate each chip's behaviour, ChipSim needs to know at least the list of transistors and the information as to how they are connected. To be useful it also needs the names of the pins and ideally the names of some internal nets (or nodes.) To display the chip layout and animate it as the logic values change it needs the geometric layout data. All this information is found in three files. Each file populates a single Javascript data structure.
+</p>
+<dl><dt> transdefs.js
+</dt><dd> defines an array transdefs[], with a typical element <code>['t1', 1608, 657, 349, [5424, 5629, 548, 922],[1007, 1079, 17, 5, 17477] ]</code>, defining the name, the gate node, the source and drain nodes, the bounding box, and some geometrical information. See <a href="https://web.archive.org/web/20210405071437/https://github.com/trebonian/visual6502/blob/master/chip-6800/transdefs.js" class="external text" rel="nofollow">this source file</a> for more detail.
+</dd><dt> nodenames.js
+</dt><dd> defines an object nodenames{}, with a typical element <code>nodenames['ab7']=1493</code>. This structure allows us to give several names to each node. We define a function <code>nodeName()</code>to provide an inverse mapping.
+</dd><dt> segdefs.js
+</dt><dd> defines an array segdefs[], with a typical element <code>[4,'+',1,4351,8360,4351,8334,4317,8334,4317,8360]</code>, giving the node number, the pullup status, the layer index and a list of coordinate pairs for a polygon. There is one element for each polygon on the chip, and therefore generally several elements for each node. The pullup status can be '+' or '-' and should be consistent for all of a node's entries - it's an historical anomaly that this information is in segdefs. Not all chip layers or polygons appear in segdefs, but enough layers appear for an appealing and educational display.
+</dd></dl>
+<p>(These formats are subject to revision, as we model new chips and find information which is worth capturing and modelling. For the 6800, we added a weak/strong indicator to transdefs, which was needed because this chip uses only enhancement mode transistors and had some circuit configurations we hadn't previously encountered.)
+</p><p>Note that the coordinates found in these files are transformed on the way to the JavaScript canvas, so the coordinates in the source files are not the same as those reported in the user interface or used in the URLs.
+</p>
+<h3> <span class="mw-headline" id="History"> History </span></h3>
+<p>TBC
+</p>
+<h3> <span class="mw-headline" id="Resources"> Resources </span></h3>
+<ul><li> <a href="https://web.archive.org/web/20210405071437/https://github.com/trebonian/visual6502" class="external text" rel="nofollow">source code</a> on github
+</li><li> <a href="https://web.archive.org/web/20210405071437/http://www.4004.com/" class="external text" rel="nofollow">Intel 4004 anniversary project</a> includes Lajos Kintli's simulator
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 15/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:155-0!1!0!!en!2!edit=0 and timestamp 20210404211652 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071437/http://visual6502.org/wiki/index.php?title=The_ChipSim_Simulator">http://visual6502.org/wiki/index.php?title=The_ChipSim_Simulator</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+</body>
+</html>
+<!-- written by getter Wed Sep  6 23:26:50 PDT 2023 -->

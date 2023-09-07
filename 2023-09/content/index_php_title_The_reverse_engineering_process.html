@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<html lang="en" dir="ltr">
+<head>
+<title>The reverse engineering process - VisualChips</title>
+</head>
+<body>
+		<!-- start content -->
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Microphotography"><span class="tocnumber">2</span> <span class="toctext">Microphotography</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#De-layering"><span class="tocnumber">3</span> <span class="toctext">De-layering</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Resources"><span class="tocnumber">4</span> <span class="toctext">Resources</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<p>To help explain which state each of our projects is at, here's a description of the steps we follow:
+</p>
+<ul><li> Get a chip, usually just one of a particular kind but sometimes more
+</li><li> Depackage the chip
+<ul><li> Chips with a metal lid or a ceramic sandwich <a href="https://web.archive.org/web/20210405071453/http://en.wikipedia.org/wiki/Dual_in-line_package" class="external text" rel="nofollow">package</a> are preferable since these have no plastic in contact with the die.
+</li><li> Chips packaged in plastic must be treated with very hot, very nasty acids which we do at a local laboratory with proper equipment
+</li></ul>
+</li><li> Photograph the exposed surface of the chip through a microscope
+<ul><li> Many separate photographs must be taken to cover the surface at high enough resolution
+</li></ul>
+</li><li> Stitch the photographs into a single large image
+<ul><li> Alignment data is used to correct individual photographs for optical distortions
+</li></ul>
+</li><li> Usually, de-layer the chip to reveal hidden or obscured lower features
+</li><li> Photograph and stitch each layer image
+</li><li> Align all layer images to each other
+</li><li> Create polygon models of each part of the chip based on the aligned images
+</li><li> Convert the polygon data into a description we can simulate
+</li><li> Investigate the behaviour of the chip by simulation
+</li><li> Investigate the layout and logic design
+</li><li> Write up our results on this wiki
+</li></ul>
+<h2> <span class="mw-headline" id="Microphotography"> Microphotography </span></h2>
+<p>Based on our own work and advice from several professionals in the field
+</p>
+<ul><li> A 20x objective is great, while 100x is overkill and difficult to work with
+<ul><li> 10x is sometimes adequate for chips with 4 um to 6 um feature sizes, but its better to shoot at higher magnification and downsample the result.
+</li></ul>
+</li><li> Useful whole-chip images are typically 6000 to 10000 pixels on a side
+</li><li> Use an X-Y table to ensure no rotation between the successive images
+<ul><li> A position readout is not needed, and position information from the microscope is not used to stitch images
+</li></ul>
+</li><li> Try to get the chip dead level so its entire surface is in the focal plane
+<ul><li> A tip-tilt stage with micrometer drive is essential for this, unless you are very patient
+</li></ul>
+</li><li> Use a manual fixed exposure, zoom, and white balance for all images
+<ul><li> Microscopes with a variable zoom are not helpful and could waste a lot of your time later on
+</li></ul>
+</li><li> Save images in RAW format if possible at the highest quality
+</li><li> Aim for at least 200 pixels of overlap between adjacent images
+</li></ul>
+<h2> <span class="mw-headline" id="De-layering"> De-layering </span></h2>
+<p>Stripping away individual layers of a chip to reveal the parts and features below can be one of the most difficult and even hazardous procedures owing to the chemicals involved and their byproducts.
+</p>
+<ul><li> Some labs may use repeated mechanical or chemical-mechanical polishing and photography to image successive layers
+<ul><li> This is more common for modern devices, especially those that have been planarized during manufacture
+</li><li> It may be riskier and costlier for the older chips we study which have only a single metal layer and whos surfaces are very irregular
+</li></ul>
+</li><li> Plasma etching and various chemicals can be used to remove all the material of a particular layer at once
+</li></ul>
+<h2> <span class="mw-headline" id="Resources"> Resources </span></h2>
+<p>Labs:
+</p>
+<ul><li> <a href="https://web.archive.org/web/20210405071453/https://www.rawscience.co.uk/reverse-enginering/decapsulation.aspx" class="external text" rel="nofollow">Raw Science</a> a lab in the UK who deprocessed and photographed the Spectrum ULA
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://www.3gforensics.co.uk/content.php/203" class="external text" rel="nofollow">3g forensics</a> a lab in the UK who deprocessed the Tube ULA
+</li><li> <a href="https://web.archive.org/web/20210405071453/https://www.eag.com/services/engineering/failure-analysis/" class="external text" rel="nofollow">EAG</a> formerly MEFAS, a failure analysis lab in Irvine California, mentioned in <a href="https://web.archive.org/web/20210405071453/http://www.atariage.com/forums/topic/136706-internal-antic-and-gtia-schematics/page__view__findpost__p__1651531?s=de4cd5a79909d3bcb06b0384e3039745" class="external text" rel="nofollow">this posting</a> by Henry of reactivemicro.com on AtariAge forums
+</li></ul>
+<p>Papers and websites:
+</p>
+<ul><li> <a href="https://web.archive.org/web/20210405071453/http://visual6502.org/downloads.html" class="external autonumber" rel="nofollow">[1]</a> Visual6502's PDFs relating to Greg James' presentation at SIGGRAPH 2010
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://www.degate.org/" class="external text" rel="nofollow">Degate</a>, GPL software to recover netlist from layout, especially of cell-based designs
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://www.usenix.org/events/sec08/tech/nohl.html" class="external text" rel="nofollow">Reverse-Engineering a Cryptographic RFID Tag</a> Usenix paper by Nohl, Evans, Starbug and Plötz
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://www.pmonta.com/calculators/hp-35/" class="external text" rel="nofollow">Reverse-engineering the HP-35</a> website by Peter Monta
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://guru.mameworld.info/decap/index.html" class="external text" rel="nofollow">The Decapping Project</a> website on ROM dumping for MAME
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://siliconpr0n.wikispaces.com/" class="external text" rel="nofollow">Silicon Pr0n</a> "A Reverse Engineering Wiki"
+</li></ul>
+<p>Mailing lists, blogs and forum postings:
+</p>
+<ul><li> <a href="https://web.archive.org/web/20210405071453/http://lists.cloud9.co.uk/pipermail/bbc-micro/2010-October/009437.html" class="external text" rel="nofollow">Reversing the Tube ULA (destructively)</a> post and thread on the BBC-Micro mailing list. Also found <a href="https://web.archive.org/web/20210405071453/http://mdfs.net/Archive/BBCMicro/2010/10/29/182154.htm" class="external text" rel="nofollow">here</a>
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://lists.cloud9.co.uk/pipermail/bbc-micro/2010-October/009443.html" class="external text" rel="nofollow">post</a> containing Christian Sattler's advice on photography
+</li><li> <a href="https://web.archive.org/web/20210405071453/http://decap.mameworld.info/" class="external text" rel="nofollow">The Decapping Project WIP Page: A Blog About Decapping For MAME</a>
+</li></ul>
+<p>See also our <a href="/web/20210405071453/http://visual6502.org/wiki/index.php?title=Educational_Resources" title="Educational Resources">Educational Resources</a> page
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 14/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:87-0!1!0!!en!2!edit=0 and timestamp 20210405071453 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071453/http://visual6502.org/wiki/index.php?title=The_reverse_engineering_process">http://visual6502.org/wiki/index.php?title=The_reverse_engineering_process</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+</body>
+</html>
+<!-- written by getter Wed Sep  6 23:26:53 PDT 2023 -->

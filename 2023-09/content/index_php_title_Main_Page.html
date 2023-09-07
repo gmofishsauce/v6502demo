@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<html lang="en" dir="ltr">
+<head>
+<title>Main Page - VisualChips</title>
+</head>
+<body>
+		<!-- start content -->
+<p>Welcome to the visualchips wiki.  Please see also <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/" class="external text" rel="nofollow">the visual6502.org site</a> which contains the backstory, <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/links.html" class="external text" rel="nofollow">useful links</a>, <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/faq.html" class="external text" rel="nofollow">a FAQ</a>, and a link to <a href="https://web.archive.org/web/20210405071425/http://blog.visual6502.org/" class="external text" rel="nofollow">the project blog</a>.
+</p><p>We're all about <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=The_reverse_engineering_process" title="The reverse engineering process">reverse-engineering</a> popular chips from the 70's and 80's - initially the 6502 but others too. This wiki is for documenting our findings and recording our sources, and is of course a work in progress.
+</p><p>The <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=JssimUserHelp" title="JssimUserHelp">online help for our JavaScript simulator</a> is also here, to help you get the most from that. (Note that it's only a switch-level simulator - our data also supports more accurate models. For most purposes, there's no difference.) For help on reading the layout, interpreting transistor circuits, and more about digital design, please see the <a href="https://web.archive.org/web/20210405071425/http://wiki.nesdev.com/w/index.php/Visual_circuit_tutorial" class="external text" rel="nofollow">Visual Circuit Tutorial</a> over at NESdev.
+</p><p><br/>
+To navigate this wiki, please see
+</p>
+<ul><li> the <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Special:AllPages" title="Special:AllPages">Full index</a>
+</li><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Special:RecentChanges" title="Special:RecentChanges">Recent changes</a>
+</li><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Special:PopularPages" title="Special:PopularPages">Popular pages</a>
+</li></ul>
+<h1> <span class="mw-headline" id="Projects_and_status"> Projects and status </span></h1>
+<p>Here's the state of play of the chips we're most actively working on. (See also the <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Special:AllPages" title="Special:AllPages">wiki index</a> for exploration.)
+</p>
+<ul><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Motorola_6800" title="Motorola 6800">Motorola 6800</a> CPU: Breaking news! The <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/JSSim/expert-6800.html" class="external text" rel="nofollow">Visual 6800 JavaScript simulator is now live</a>. See <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Motorola_6800" title="Motorola 6800">Motorola 6800</a> for notes on the implementation of this chip, and the relationship to 6502.
+</li></ul>
+<ul><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=MOS_6502" title="MOS 6502">MOS 6502</a> CPU: Our flagship project: we have several pages of findings and many pointers to other resources. We started from <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Photos_of_MOS_6502D" title="Photos of MOS 6502D">photos</a> and now have a full transistor level netlist with transistor sizes, and of course <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/JSSim/expert.html?nosim=t&amp;label=PLA,100,1169,2328,8393,934&amp;label=Datapath,100,2143,8820,7676,5689&amp;label=Control,100,3333,4083" class="external text" rel="nofollow">our in-browser simulator</a>.
+</li></ul>
+<ul><li> Atari 10444D TIA (Television Interface Adaptor): fully extracted and simulated, no data yet published.
+<ul><li> <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/images/pages/Atari_10444D_TIA.html" class="external text" rel="nofollow">Pictures and story</a> on our main site.
+</li></ul>
+</li></ul>
+<ul><li> Atari ANTIC: layout is in the process of polygon capture or netlist extraction.<br/>Primary data not yet published, but see <a href="https://web.archive.org/web/20210405071425/http://www.atariage.com/forums/topic/172580-antic-decap-and-reverse-engineering/" class="external text" rel="nofollow">these</a> <a href="https://web.archive.org/web/20210405071425/http://www.atariage.com/forums/topic/136706-internal-antic-and-gtia-schematics/" class="external text" rel="nofollow">threads</a>.
+</li></ul>
+<ul><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Z8400" title="Z8400">Zilog Z80 CPU</a>: We have photographs of the metal layer, and have started capturing the polygons.  No public information yet.
+</li></ul>
+<ul><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Motorola_68000" title="Motorola 68000">Motorola 68000</a>: We have <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/images/pages/Motorola_68000.html" class="external text" rel="nofollow">photographs</a> of the metal layer, and have started capturing the polygons.<br/>The project page contains die photo and shows areas being captured. This chip will need further deprocessing and photography for the lower layers.
+</li></ul>
+<ul><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=RCA_1802E" title="RCA 1802E">RCA 1802E</a> space-faring radiation-hard CPU: <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/images/pages/RCA_1802.html" class="external text" rel="nofollow">pictures and story</a> on our main site.
+</li></ul>
+<ul><li> MOS 6522 VIA: <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/images/pages/MOS_6522.html" class="external text" rel="nofollow">pictures and story</a> on our main site.
+</li></ul>
+<ul><li> Nintendo 3193A support chip <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/images/pages/Nintendo_3193A.html" class="external text" rel="nofollow">pictures and story</a> on our main site.
+</li></ul>
+<ul><li> Commodore 8580 SID: <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/images/pages/Commodore_8580_SID.html" class="external text" rel="nofollow">pictures and story</a> on our main site.
+<ul><li> Also being <a href="https://web.archive.org/web/20210405071425/http://oms.wmhost.com/misc/" class="external text" rel="nofollow">analysed</a> <a href="https://web.archive.org/web/20210405071425/http://oms.wmhost.com/misc/IMPORTANT!.htm" class="external text" rel="nofollow">elsewhere</a>
+</li></ul>
+</li></ul>
+<ul><li> Sinclair Spectrum ULA: photographed, circuit manually captured, original sources not presently public.<br/>See <a href="https://web.archive.org/web/20210405071425/http://www.zxdesign.info/book/" class="external text" rel="nofollow">Chris Smith's excellent book</a> for ULA background and lots of detail about the Spectrum ULA
+</li></ul>
+<ul><li> Acorn Electron ULA: photographed and stitched, nothing online yet
+</li></ul>
+<ul><li> Acorn Tube ULA: we have a 'spare' chip, decapsulated and ready for microphotography
+</li></ul>
+<h1> <span class="mw-headline" id="More_chips"> More chips </span></h1>
+<p>We have a number of other chips, including some generous donations, all in the queue to be reverse engineered:
+</p>
+<ul><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Chips_in_our_collection" title="Chips in our collection">Chips in our collection</a> tabulates the chips, indicates how far we've got with each, and links to images as appropriate.
+</li><li> <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=Other_Chip_Image_Sites" title="Other Chip Image Sites">Other Chip Image Sites</a> contains links to other similar projects. See also <a href="https://web.archive.org/web/20210405071425/https://siliconpr0n.org/archive/doku.php?id=digitized" class="external text" rel="nofollow">John McMaster's list</a>.
+</li><li> Original high-resolution stitches, as well as the original chip photos, can be found on our <a href="https://web.archive.org/web/20210405071425/http://uxul.org/~noname/visual6502/" class="external text" rel="nofollow">stitch repository</a>.
+</li></ul>
+<p>If you have other historic chips, we're interested in donations! Please also see the <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/donate_hw.html" class="external text" rel="nofollow">donations status page</a> on our <a href="https://web.archive.org/web/20210405071425/http://visual6502.org/" class="external text" rel="nofollow">main website</a>.
+</p>
+<h1> <span class="mw-headline" id="Contributing_to_this_wiki"> Contributing to this wiki </span></h1>
+<p>Please see our <a href="/web/20210405071425/http://visual6502.org/wiki/index.php?title=WikiContributionPolicy" title="WikiContributionPolicy">policy page</a> before making contributions
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 11/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:1-0!1!0!!en!2!edit=0 and timestamp 20210405020444 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071425/http://visual6502.org/wiki/index.php?title=Main_Page">http://visual6502.org/wiki/index.php?title=Main_Page</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+</body>
+</html>
+<!-- written by getter Wed Sep  6 23:24:16 PDT 2023 -->

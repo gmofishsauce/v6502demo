@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" dir="ltr">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=1WaXNDFE" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={"autoplay":"on","unmuteOverlay":"hidden"};</script>
+<script type="text/javascript" src="/_static/js/ruffle.js" defer="true"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://visual6502.org/wiki/index.php?title=6502_State_Machine","20210405071505","https://web.archive.org/","web","/_static/",
+	      "1617606905");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+<title>6502 State Machine - VisualChips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="generator" content="MediaWiki 1.16.0"/>
+<link rel="shortcut icon" href="/web/20210405071505im_/http://visual6502.org/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20210405071505/http://visual6502.org/wiki/opensearch_desc.php" title="VisualChips (en)"/>
+<link title="Creative Commons" type="application/rdf+xml" href="/wiki/index.php?title=6502_State_Machine&amp;action=creativecommons" rel="meta"/>
+<link rel="copyright" href="https://web.archive.org/web/20210405071505/http://creativecommons.org/licenses/by-nc-sa/3.0/"/>
+<link rel="alternate" type="application/atom+xml" title="VisualChips Atom feed" href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Special:RecentChanges&amp;feed=atom"/>
+<link rel="stylesheet" href="/web/20210405071505cs_/http://visual6502.org/wiki/skins/common/shared.css?270" media="screen"/>
+<link rel="stylesheet" href="/web/20210405071505cs_/http://visual6502.org/wiki/skins/common/commonPrint.css?270" media="print"/>
+<link rel="stylesheet" href="/web/20210405071505cs_/http://visual6502.org/wiki/skins/monobook/main.css?270" media="screen"/>
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?270" media="screen" /><![endif]-->
+<link rel="stylesheet" href="/web/20210405071505cs_/http://visual6502.org/wiki/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000"/>
+<link rel="stylesheet" href="/web/20210405071505cs_/http://visual6502.org/wiki/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" media="print"/>
+<link rel="stylesheet" href="/web/20210405071505cs_/http://visual6502.org/wiki/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000"/>
+<link rel="stylesheet" href="/web/20210405071505cs_/http://visual6502.org/wiki/index.php?title=-&amp;action=raw&amp;maxage=18000&amp;gen=css"/>
+<script>
+var skin="monobook",
+stylepath="/wiki/skins",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/",
+wgArticlePath="/wiki/index.php?title=$1",
+wgScriptPath="/wiki",
+wgScriptExtension=".php",
+wgScript="/wiki/index.php",
+wgVariantArticlePath=false,
+wgActionPaths={},
+wgServer="https://web.archive.org/web/20210405071505/http://visual6502.org",
+wgCanonicalNamespace="",
+wgCanonicalSpecialPageName=false,
+wgNamespaceNumber=0,
+wgPageName="6502_State_Machine",
+wgTitle="6502 State Machine",
+wgAction="view",
+wgArticleId=159,
+wgIsArticle=true,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="en",
+wgContentLanguage="en",
+wgBreakFrames=false,
+wgCurRevisionId=684,
+wgVersion="1.16.0",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Main Page",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "VisualChips", "5": "VisualChips talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "visualchips": 4, "visualchips_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "image": 6, "image_talk": 7},
+wgSiteName="VisualChips",
+wgCategories=[],
+wgRestrictionEdit=["autoconfirmed"],
+wgRestrictionMove=["autoconfirmed"];
+</script><script src="/web/20210405071505js_/http://visual6502.org/wiki/skins/common/wikibits.js?270"></script>
+<script src="/web/20210405071505js_/http://visual6502.org/wiki/skins/common/ajax.js?270"></script>
+<script src="/web/20210405071505js_/http://visual6502.org/wiki/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=monobook&amp;270"></script>
+
+</head>
+<body class="mediawiki ltr ns-0 ns-subject page-6502_State_Machine skin-monobook">
+<div id="globalWrapper">
+<div id="column-content"><div id="content">
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading">6502 State Machine</h1>
+	<div id="bodyContent">
+		<h3 id="siteSub">From VisualChips</h3>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+		<!-- start content -->
+<p>This article contributed by Segher Boessenkool
+</p><p>There are many timing bits/flags/states in the 6502.
+</p><p>The ones I will discuss here are all valid for whole cycles,
+i.e. a phi1 followed by a phi2.  There of course are others
+that are latched on phi2, to link everything together, but
+we'll ignore those.
+</p><p>One thing that complicates matters is the RDY input, with
+which you can stall the CPU for as many (non-write) cycles
+as you want.  RDY is not handled in a uniform way at all.
+</p><p>Another complication is the conditional branch instructions,
+which take only two cycles if not taken, three if no page
+crossing, and four otherwise; to get such efficiency for
+these important instructions, evil shortcuts are taken.
+</p><p>And there is an assortment of optimisations and implementation
+tricks that we'll see when we get there.
+</p>
+<hr/>
+<p>Okay, so what states are there?  The PLA has T0,T1,T2,T3,T4,T5
+as inputs.  There is another signal that is more like a "real"
+T1 as we'll see, which I'll call T1F.  This is output on the
+SYNC pin.  There is also what I call T01 (node 1357 / not node
+223 in jssim), but we can optimise that away as we'll see.
+</p><p>The BRK instruction needs a T6; it gets a VEC1 instead (and a
+VEC0).
+</p><p>Some load instructions have the last cycle skipped if there is
+no page crossing in its addressing; the corresponding store
+instructions don't do that.  And the read-modify-write (RMW)
+instructions have two extra cycles tucked on: SD1 and SD2
+(store instructions store in the last cycle; RMW instructions
+read in the last "normal" cycle, and store in both SD1 and SD2).
+</p><p>Every instructions starts with the fetching of its first two
+bytes (the PC isn't incremented for the second fetch for most
+one-byte opcodes; exceptions are BRK RTI RTS).  During this
+time, the PLA still decodes the previous instruction, and most
+of the datapath still handles that as well (even the cycle
+after this, the datapath is a bit behind).  So the T0 and T1
+inputs to the PLA actually come behind everything else; e.g.
+you have T2-T3-T0-T1 for a four cycle normal instruction, or
+T2-T3-T4-SD1-SD2-T0-T1 for a seven cycle RMW instruction.
+None of the decoding (except the predecode) sees the instruction
+during the two cycles that come before this; instead, T01 and
+T1F are used.
+</p><p>Here's a state diagram to scare you.  "T01,T0" means both
+T01 and T0 are active; horizontal arrows are transitions
+when not RDY; vertical arrows are transitions when RDY.
+If no arrow for not RDY is given, it means the state is kept.
+</p><p><br/>
+</p>
+<pre>          T01,T0  -------------------------&gt;  T0
+             |                                |
+             |                                |
+             v                                v
+        T01,T1F,T1  ----&gt;  T01,T1F  &lt;----  T1F,T1
+             |                |               |
+             +-------------+  |  +------------+
+                           |  |  |
+                           v  v  v
+                              T2
+     (or T01,T0 if the next insn is a twocycle insn)
+</pre>
+<p><br/>
+This does not show the various entries into this state diagram.
+The usual entry point is T01,T0.  The exceptions are non-taken
+branches (which do T2 - T01,T1F) and taken branches that do not
+cross page (T2 - T3 - T01,T1F).  RESET will behave quite oddly,
+but will end up at T01,T0 after a few cycles clocking (with RDY
+asserted).
+</p><p>Let's simplify this.  We know that this state diagram is always
+entered somewhere with T01 asserted.  T01 does two things: it
+clears T2,T3,T4,T5, and it asserts T0 if T1F isn't already
+asserted.  So we do not actually need to consider it, since we
+know it is always on when the state diagram is entered, it won't
+do anything more that we don't have in there already.  So we get:
+</p><p><br/>
+</p>
+<pre>            T0
+             |
+             |
+             v
+          T1F,T1  --------&gt;  T1F
+             |                |
+             +-------------+  |
+                           |  |
+                           v  v
+                            T2
+     (or T01,T0 if the next insn is a twocycle insn)
+</pre>
+<p><br/>
+This shows that T1F is more the "real" T1.  T1 is only asserted
+for one cycle, and then forgotten, with no successor, even when
+not RDY.  It is the last cycle for normal instructions, and it
+cannot do anything external anymore anyway (the bus is used to
+play fetch), and it doesn't do anything spectacularly interesting
+(only register writeback, in fact), so it can just as well do
+it at once and forget about it.
+</p>
+<hr/>
+<p>The instructions with bitpatterns xxx010x1, 1xx000x0 and
+xxxx10x0 except 0xx01000 are two cycle instructions: resp.
+A immediate, X/Y immediate, and all the rest (push/pull is
+the excluded pattern).  These instructions do not switch to
+T2 but immediately back to T0.
+</p><p>Push instructions (0x001000) switch to T0 after T2; pull
+instructions (0x101000) after T3; direct jump (01001100)
+after T2; indirect jump (01101100) after T4; jsr (00100000)
+after T5; rts and rti (01x00000) after T5; and brk (including
+all other interrupts) (00000000) after VEC1 ("T6").
+</p><p>Conditional branch instructions switch to T0 after T3.
+But they can be shortcut, we'll get to that in a minute.
+</p><p>Everything else is a "memory" instruction, which can have
+various addressing modes.  "Immediate" is already handled
+in the two cycle stuff.  For the rest we define a "Tmem"
+that is one of T2 to T5, depending on addressing mode:
+</p>
+<pre>-- T2 for xxx001xx, zero page
+-- T3 for xxx011xx, zero page indexed
+-- T3 for xxx101xx, absolute
+-- T4 for xxx11xxx, absolute indexed
+-- T5 for xxxx00xx, indirect indexed / indexed indirect
+</pre>
+<p>For an instruction that does not store to memory, Tmem is
+followed by T0.  Except, the absolute indexed and indexed
+indirect start T0 a cycle earlier if there was no page
+crossing.  In Tmem the CPU issued the read to the system
+bus; in T0 and T1 it will do whatever it needs to do with
+it for the current instruction.  So T2,T3,etc. are for the
+memory addressing part, and T0,T1 are for the actual operation.
+</p><p>For pure stores, it works the same, except there is never
+a shortcut.
+</p><p>For RMW instructions, after Tmem there are SD1 and SD2 cycles,
+and after that T0 and T1 as usual.  During Tmem the original
+value is read; during SD1 it is written back, and the modified
+result computed; during SD2 the result is written.
+</p><p>For the "brk" instruction, there is this extra VEC1 cycle.
+VEC0 is active when T5 and RDY and the current instruction
+is a brk instruction; during VEC0, the low byte of the address
+of the interrupt routine is read.  VEC0 is immediately followed
+by VEC1, and then (surprise!) the high byte is read.  The cycle
+after VEC1 various interrupt bookkeeping tasks are done (the
+IRQ/NMI/RES request flop is cleared, the I (interrupt prohibit)
+bit is set, that kind of thing).
+</p><p>All interrupts are implemented by forcing a brk instruction
+into the instruction stream.  This is done by clearing all bits
+in the predecode reg during T1F, if the previous cycle was T0,
+or it was T2 and the instruction is a branch (and of course an
+interrupt is pending).  (All bits in the predecode reg are
+cleared whenever T1F is deasserted: that way, neither the
+two-cycle or one-byte signals will trigger at the wrong time!)
+</p><p>So, branches.  Our journey is almost at an end!
+</p><p>We have seen a branch will take four cycles by the normal
+mechanism.  If the branch stays within the current page, this
+can be cut to three cycles; and if the branch is not taken,
+it can be cut to only two.
+</p><p>The timing diagram for branches in the MOS hardware manual
+is wrong (it's the last half page of this ~180 pages excellent
+manual).  The correct sequence is:
+</p>
+<pre>Tn  address bus     data bus         comments
+--------------------------------------------------------
+T0  PC              branch opcode    fetch opcode
+T1  PC + 1          offset           fetch offset
+T2  PC + 2          next opcode      fetch for branch not taken
+T3  PC + 2 + off    next opcode      fetch for branch taken, same page
+    (w/o carry)
+T0  PC + 2 + off    next opcode      fetch for branch taken, other page
+    (with carry)
+
+(T3/T4 or just T4 are left away if branch not taken or no
+page crossing).
+
+</pre>
+<p>But that's not quite the whole story: the next instruction
+will start at T1, not T0: it has its first (opcode) byte
+fetched already.  For either of the short versions, only T1F
+will be active; only the four-cycle branch has T1 as well.
+(In all cases T01 will be active, but you're supposed to
+have forgotten about that by now&nbsp;:-) )
+</p><p>So for the three cases, you get respectively:
+</p>
+<pre>[ fetch our two bytes, T0/T1, yadda yadda ]
+T2      PC + 2                                      next opcode
+T1F     PC + 3                                      2nd byte of next
+</pre>
+<pre>[ fetch our two bytes, T0/T1, yadda yadda ]
+T2      PC + 2                                      useless read
+T3      PC + 2 + off (w/o carry)                    next opcode
+T1F     PC + 3 + off                                2nd byte of next
+</pre>
+<pre>[ fetch our two bytes, T0/T1, yadda yadda ]
+T2      PC + 2                                      useless read
+T3      PC + 2 + off (w/o carry)                    useless read
+T0      PC + 2 + off (with carry)                   next opcode
+T1F,T1  PC + 2 + off                                2nd byte of next
+</pre>
+<p>For the "branch taken, same page" case there is an oddity
+with interrupts.  In this case, T1F is preceded by T3 (not
+T0 or T2), so no interrupt can happen on the next instruction!
+You can mask NMIs this way even (but not reset, it messes up
+the timing directly).
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 1/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:159-0!1!0!!en!2!edit=0 and timestamp 20210404225820 -->
+<div class="printfooter">
+Retrieved from "<a href="https://web.archive.org/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine">http://visual6502.org/wiki/index.php?title=6502_State_Machine</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				 <li id="ca-nstab-main" class="selected"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine" title="View the content page [c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Talk:6502_State_Machine&amp;action=edit&amp;redlink=1" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine&amp;action=edit" title="This page is protected.
+You can view its source [e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine&amp;action=history" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Special:UserLogin&amp;returnto=6502_State_Machine" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(/web/20210405071505im_/http://visual6502.org/images/6502/jssim_01_sm.png);" href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Main_Page" title="Visit the main page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=VisualChips:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=VisualChips:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/web/20210405071505/http://visual6502.org/wiki/index.php" id="searchform">
+				<input type="hidden" name="title" value="Special:Search"/>
+				<input id="searchInput" title="Search VisualChips" accesskey="f" type="search" name="search"/>
+				<input type="submit" name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists"/>&nbsp;
+				<input type="submit" name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text"/>
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Special:WhatLinksHere/6502_State_Machine" title="List of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Special:RecentChangesLinked/6502_State_Machine" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=Special:SpecialPages" title="List of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=6502_State_Machine&amp;oldid=684" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-poweredbyico"><a href="https://web.archive.org/web/20210405071505/http://www.mediawiki.org/"><img src="/web/20210405071505im_/http://visual6502.org/wiki/skins/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki"/></a></div>
+	<div id="f-copyrightico"><a href="https://web.archive.org/web/20210405071505/http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="https://web.archive.org/web/20210405071505im_/http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt="Attribution-NonCommercial-ShareAlike 3.0 Unported" width="88" height="31"/></a></div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 20 October 2011, at 10:21.</li>
+		<li id="viewcount">This page has been accessed 23,486 times.</li>
+		<li id="copyright">Content is available under <a href="https://web.archive.org/web/20210405071505/http://creativecommons.org/licenses/by-nc-sa/3.0/" class="external ">Attribution-NonCommercial-ShareAlike 3.0 Unported</a>.</li>
+		<li id="privacy"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=VisualChips:Privacy_policy" title="VisualChips:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=VisualChips:About" title="VisualChips:About">About VisualChips</a></li>
+		<li id="disclaimer"><a href="/web/20210405071505/http://visual6502.org/wiki/index.php?title=VisualChips:General_disclaimer" title="VisualChips:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.077 secs. --></body></html>
+<!--
+     FILE ARCHIVED ON 07:15:05 Apr 05, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 06:20:17 Sep 07, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 179.449
+  exclusion.robots: 0.18
+  exclusion.robots.policy: 0.165
+  cdx.remote: 0.079
+  esindex: 0.011
+  LoadShardBlock: 107.127 (3)
+  PetaboxLoader3.datanode: 63.754 (4)
+  load_resource: 451.614
+  PetaboxLoader3.resolve: 317.853
+-->
