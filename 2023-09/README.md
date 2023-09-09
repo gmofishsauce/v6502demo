@@ -65,6 +65,3 @@ Some notes about what was done at each step
 Scripts and related hackery
 
 
-
-
-

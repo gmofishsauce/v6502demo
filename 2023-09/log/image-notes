@@ -1,0 +1,72 @@
+I found that an image was represented like this in
+e.g. https://web.archive.org/web/20210405071400/http://visual6502.org/wiki/index.php?title=6502_Stack_Register_High_Bits
+
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:202px;">
+<a href="/web/20210405071400/http://visual6502.org/wiki/index.php?title=File:Stack_reg_high2_top.jpg" class="image">
+<img alt="" src="/web/20210405071400im_/http://visual6502.org/wiki/images/thumb/7/70/Stack_reg_high2_top.jpg/200px-Stack_reg_high2_top.jpg" width="200" height="183" class="thumbimage"/>
+</a>
+<div class="thumbcaption">
+<div class="magnify">
+<a href="/web/20210405071400/http://visual6502.org/wiki/index.php?title=File:Stack_reg_high2_top.jpg" class="internal" title="Enlarge">
+<img src="/web/20210405071400im_/http://visual6502.org/wiki/skins/common/images/magnify-clip.png" width="15" height="11" alt=""/>
+</a>
+</div>Chip surface</div>
+</div>
+</div>
+</td>
+
+This is a single td (following a table, tr of course) containing 4 nested divs. From outer to innermost, they are:
+
+thumb tright
+thumbinner
+thumbcaption
+magnify
+
+The outermost contains an a tag with an href that ends in .jpg but it's not an image file; it downloads html.
+Within the a tag is an img tag that points to the thumbnail.
+Then there's a div called thumbcaption containing a div called magnify.
+This has the SAME a tag (same link) and img tag that points to the little "magify" symbol image.
+The magnify div closes and the caption "Chip surface" is in the thumbcaption div,
+after which they all end.
+
+So the magnify option is kind of stupid because it does the same thing as just clicking on the image.
+
+Now, the HTML fetched by the a href ending with "File:Stack_reg_high2_top.jpg" looks like this:
+
+		<!-- start content -->
+(toolbar elided, then ...)
+
+<div class="fullImageLink" id="file">
+<a href="/web/20141224041439/http://visual6502.org/wiki/images/7/70/Stack_reg_high2_top.jpg">
+<img alt="File:Stack reg high2 top.jpg" src="/web/20141224041439im_/http://visual6502.org/wiki/images/thumb/7/70/Stack_reg_high2_top.jpg/655px-Stack_reg_high2_top.jpg" width="655" height="600"/>
+</a>
+<br/>
+<small>Size of this preview: 655 × 600 pixels
+</small>
+<br/>
+<a href="/web/20141224041439/http://visual6502.org/wiki/images/7/70/Stack_reg_high2_top.jpg">Full resolution
+</a>‎ (922 × 844 pixels, file size: 395 KB, MIME type: image/jpeg)
+</div>
+
+Again, note there are two links to the same file, which is an actual jpeg this time.
+So their Javascript code must be navigating this maze when you click on the thumbnail.
+The real image link is:
+/web/20141224041439im_/http://visual6502.org/wiki/images/thumb/7/70/Stack_reg_high2_top.jpg/655px-Stack_reg_high2_top.jpg
+which needs to have https://web.archive.org prepended like all the other links.
+
+Or not - maybe the Wayback Machine inserted the .jpg link to the wrapper page?
+
+
+In summary, this link (which ends in .jpg) points to a wrapper page for the image:
+
+https://web.archive.org/web/20210405071400/http://visual6502.org/wiki/index.php?title=File:Stack_reg_high2_top.jpg
+
+These are actual image links:
+
+https://web.archive.org/web/20210405071400im_/http://visual6502.org/wiki/images/thumb/0/0d/Stack_reg_high2_vec.jpg/200px-Stack_reg_high2_vec.jpg
+https://web.archive.org/web/20141224041439im_/http://visual6502.org/wiki/images/thumb/7/70/Stack_reg_high2_top.jpg/655px-Stack_reg_high2_top.jpg
+
+The image links have e.g. thumb/0/0d or thumb/7/70 in the paths ... note that the second one isn't a thumbnail,
+but for whatever reason it's still in "thumb/".
