@@ -42,3 +42,36 @@ The recursive descent parser (mkmd) should work on a page at a time and
 should pull down the images, at least optionally, in addition to obviously
 rewriting the links.
 
+This supposedly works; from
+https://stackoverflow.com/questions/56883209/thumbnails-of-images-in-github-markdown
+
+You can add a smaller version of the image with a link to the full resolution one.
+[![sample screenshot](https://i.imgur.com/Tkks00R.png)](https://i.imgur.com/Ob4qAwu.png)
+
+2023-09-10
+
+I figured out that you need to read at least an entire row of an HTML table before
+you know how many columns there are. Only then can you start emitting the markdown
+header for the table. This requires "infinite" lookahead, aka "two passes". Since
+I want this tool to work in a pipeline and I can't actually reread the standard
+input, I'll have to create a list of all the tokens that I can reread and hide
+the list behind a getToken() kind of call. This front end reader can make copies
+of every token so the rest of the tool can do whatever it wants with them.
+
+2023-09-11
+
+After significant revisions last night, I'm closer to a pure recurive descent
+parser that handles alternatives. Among other changes, I implemented one token
+of pushback. This allows each parsing function in the recursive descent to handle
+both its own end tag and its own start tag, because the parent pushes back the
+start tag before invoking the function for it. This is significant because the
+start tag may have attributes that are important to generated output.
+
+The next step is to generalize the notion of an expected set of tags. At the
+outer level of the body, the expected set would be large. Inside a table row,
+the expected set might be just "td". 
+
+
+
+
+
