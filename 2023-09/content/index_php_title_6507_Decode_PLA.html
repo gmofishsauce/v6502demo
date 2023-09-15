@@ -150,7 +150,7 @@ X0XXXXXX X X NI6P
 </li></ul>
 <pre>G1 = IR0
 G2 = IR1
-G3 =&nbsp;!IR0 &amp;&nbsp;!IR1
+G3 =&#160;!IR0 &amp;&#160;!IR1
 </pre>
 <ul><li> The third column is "T", which is the clock cycle in which the line fires (0..5).
 </li></ul>
@@ -211,14 +211,14 @@ if ($*.length &lt; 1)
 end
 
 opc = eval($*[0])
-b0 = (opc &amp; 1)&nbsp;!= 0
-b1 = (opc &amp; 2)&nbsp;!= 0
+b0 = (opc &amp; 1)&#160;!= 0
+b1 = (opc &amp; 2)&#160;!= 0
 gmatch = Array.new
 gmatch[1] = b0
 gmatch[2] = b1
-gmatch[3] =&nbsp;!b0 &amp;&amp;&nbsp;!b1
+gmatch[3] =&#160;!b0 &amp;&amp;&#160;!b1
 
-bin = (&quot;%08b&quot;&nbsp;% opc)
+bin = (&quot;%08b&quot;&#160;% opc)
 
 input = Array.new
 
@@ -238,7 +238,7 @@ end
 <p>It also needs to read a file 'pla.txt' which has a tabulation <a href="/web/20210405071413/http://visual6502.org/wiki/index.php?title=6502_all_256_Opcodes" title="6502 all 256 Opcodes">as found here</a>.
 </p>
 <h2> <span class="mw-headline" id="Notes">Notes</span></h2>
-<dl><dd> <span class="citation wikicite" id="endnote_1"><b><a href="#ref_1">^1</a></b>&nbsp;</span> The "Decode ROM" is named as a ROM in <a href="/web/20210405071413/http://visual6502.org/wiki/index.php?title=Hanson%27s_Block_Diagram" title="Hanson's Block Diagram">Hanson's block diagram</a>, although it has wordline inputs and no address decoder. It is sometimes described as a PLA although it also lacks an AND plane. It is a structured layout of NOR gates with many common inputs, as compared to the unstructured gates found in the central decode logic, sometimes known as the random logic (meaning not structured).
+<dl><dd> <span class="citation wikicite" id="endnote_1"><b><a href="#ref_1">^1</a></b>&#160;</span> The "Decode ROM" is named as a ROM in <a href="/web/20210405071413/http://visual6502.org/wiki/index.php?title=Hanson%27s_Block_Diagram" title="Hanson's Block Diagram">Hanson's block diagram</a>, although it has wordline inputs and no address decoder. It is sometimes described as a PLA although it also lacks an AND plane. It is a structured layout of NOR gates with many common inputs, as compared to the unstructured gates found in the central decode logic, sometimes known as the random logic (meaning not structured).
 </dd></dl>
 
 <!-- 
@@ -255,4 +255,4 @@ Retrieved from "<a href="https://web.archive.org/web/20210405071413/http://visua
 		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
 </body>
 </html>
-<!-- written by getter Thu Sep  7 14:36:13 PDT 2023 -->
+<!-- written by getter Fri Sep 15 10:08:14 PDT 2023 -->

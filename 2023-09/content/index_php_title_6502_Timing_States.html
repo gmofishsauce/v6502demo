@@ -33,30 +33,30 @@ for VEC1). The eighth field shows two states, due to two nodes, called SD1 and S
 </p><p>When T1 is displayed inside the seventh (bracketed) field, the external SYNC pin is also being driven high (by the node tested for T1) to indicate that the current memory read operation is for an instruction opcode.
 </p><p>Here are all the combinations of states (labelled, but otherwise without context).
 </p>
-<pre>T0 .. T2 .. .. .. [..] ...   &nbsp;; 1st cycle of 2 cycle opcodes
-.. .. T2 .. .. .. [..] ...   &nbsp;; 1st cycle of 3+ cycle opcodes
-.. .. .. T3 .. .. [..] ...   &nbsp;; 2nd cycle of 4+ cycle opcodes
-.. .. .. T3 .. .. [..] SD1   &nbsp;; 2nd cycle of RMW zp
-.. .. .. .. T4 .. [..] ...   &nbsp;; 3rd cycle of 5+ cycle opcodes
-.. .. .. .. T4 .. [..] SD1   &nbsp;; 3rd cycle of RMW zp,X &amp; abs
-.. .. .. .. T4 .. [..] SD2   &nbsp;; 3rd cycle of RMW zp
-.. .. .. .. .. T5 [..] ...   &nbsp;; 4th cycle of 6+ cycle opcodes
-.. .. .. .. .. T5 [..] SD1   &nbsp;; 4th cycle of RMW abs,X &amp; abs,Y (latter illegal)
-.. .. .. .. .. T5 [..] SD2   &nbsp;; 4th cycle of RMW zp,X &amp; abs
-.. .. .. .. .. T5 [V0] ...   &nbsp;; 4th cycle of BRK
-.. .. .. .. .. .. [T6] ...   &nbsp;; 5th cycle of BRK
-.. .. .. .. .. .. [..] SD1   &nbsp;; 5th cycle of RMW (zp,X) &amp; (zp),Y (illegal)
-.. .. .. .. .. .. [..] SD2   &nbsp;; 5th of RMW abs,X&amp;Y, 6th of RMW (zp,X) &amp; (zp),Y
-.. .. .. .. .. .. [..] ...   &nbsp;; Terminal state of opcodes that run forever
-T0 .. .. .. .. .. [..] ...   &nbsp;; 2nd-to-last cycle of all(*) opcodes
-.. T+ .. .. .. .. [T1] ...   &nbsp;; Last cycle of all(*) opcodes
-.. .. .. .. .. .. [T1] ...   &nbsp;; Last cycle of branches not taken &amp; no page cross
-T0 T+ .. .. .. .. [..] ...   &nbsp;; Clock long-term hold by RES
-T0 .. .. .. .. .. [T6] ...   &nbsp;; 1 cycle after RES of BRK during T5 [V0] cycle
-T0 .. .. .. .. .. [..] SD1   &nbsp;; 1 cycle after RES of RMW during SD cycle
-T0 .. .. .. .. .. [..] SD2   &nbsp;; 1 cycle after RES of RMW just after SD cycle
-T0 T+ .. .. .. .. [..] SD2   &nbsp;; 2 cycles after RES (still held) of RMW during SD cycle
-.. T+ .. .. .. .. [T1] SD2   &nbsp;; 2 cycles after RES (released) of RMW during SD cycle
+<pre>T0 .. T2 .. .. .. [..] ...   &#160;; 1st cycle of 2 cycle opcodes
+.. .. T2 .. .. .. [..] ...   &#160;; 1st cycle of 3+ cycle opcodes
+.. .. .. T3 .. .. [..] ...   &#160;; 2nd cycle of 4+ cycle opcodes
+.. .. .. T3 .. .. [..] SD1   &#160;; 2nd cycle of RMW zp
+.. .. .. .. T4 .. [..] ...   &#160;; 3rd cycle of 5+ cycle opcodes
+.. .. .. .. T4 .. [..] SD1   &#160;; 3rd cycle of RMW zp,X &amp; abs
+.. .. .. .. T4 .. [..] SD2   &#160;; 3rd cycle of RMW zp
+.. .. .. .. .. T5 [..] ...   &#160;; 4th cycle of 6+ cycle opcodes
+.. .. .. .. .. T5 [..] SD1   &#160;; 4th cycle of RMW abs,X &amp; abs,Y (latter illegal)
+.. .. .. .. .. T5 [..] SD2   &#160;; 4th cycle of RMW zp,X &amp; abs
+.. .. .. .. .. T5 [V0] ...   &#160;; 4th cycle of BRK
+.. .. .. .. .. .. [T6] ...   &#160;; 5th cycle of BRK
+.. .. .. .. .. .. [..] SD1   &#160;; 5th cycle of RMW (zp,X) &amp; (zp),Y (illegal)
+.. .. .. .. .. .. [..] SD2   &#160;; 5th of RMW abs,X&amp;Y, 6th of RMW (zp,X) &amp; (zp),Y
+.. .. .. .. .. .. [..] ...   &#160;; Terminal state of opcodes that run forever
+T0 .. .. .. .. .. [..] ...   &#160;; 2nd-to-last cycle of all(*) opcodes
+.. T+ .. .. .. .. [T1] ...   &#160;; Last cycle of all(*) opcodes
+.. .. .. .. .. .. [T1] ...   &#160;; Last cycle of branches not taken &amp; no page cross
+T0 T+ .. .. .. .. [..] ...   &#160;; Clock long-term hold by RES
+T0 .. .. .. .. .. [T6] ...   &#160;; 1 cycle after RES of BRK during T5 [V0] cycle
+T0 .. .. .. .. .. [..] SD1   &#160;; 1 cycle after RES of RMW during SD cycle
+T0 .. .. .. .. .. [..] SD2   &#160;; 1 cycle after RES of RMW just after SD cycle
+T0 T+ .. .. .. .. [..] SD2   &#160;; 2 cycles after RES (still held) of RMW during SD cycle
+.. T+ .. .. .. .. [T1] SD2   &#160;; 2 cycles after RES (released) of RMW during SD cycle
 
 * All opcodes except branches not taken &amp; branches taken with no page cross
 </pre>
@@ -181,12 +181,12 @@ T0 .. .. .. .. .. [..] ...
 <p>The above is from any of the twelve illegal opcodes that runs forever. The all blank time state shows that there is no signal in progress that will set the clock back to T0 to initiate the fetch of a new instruction.
 </p>
 <h2> <span class="mw-headline" id="Time_States_That_Do_Not_Occur_During_Normal_Instruction_Execution"> Time States That Do Not Occur During Normal Instruction Execution </span></h2>
-<pre>T0 .. .. .. .. .. [T6] ...   &nbsp;; 1 cycle after RES of BRK during T5 [V0] cycle
-T0 T+ .. .. .. .. [..] ...   &nbsp;; Clock long-term hold by RES
-T0 .. .. .. .. .. [..] SD1   &nbsp;; 1 cycle after RES of RMW during SD cycle
-.. T+ .. .. .. .. [T1] SD2   &nbsp;; 2 cycles after RES (released) of RMW during SD cycle
-T0 T+ .. .. .. .. [..] SD2   &nbsp;; 2 cycles after RES (still held) of RMW during SD cycle
-T0 .. .. .. .. .. [..] SD2   &nbsp;; 1 cycle after RES of RMW just after SD cycle
+<pre>T0 .. .. .. .. .. [T6] ...   &#160;; 1 cycle after RES of BRK during T5 [V0] cycle
+T0 T+ .. .. .. .. [..] ...   &#160;; Clock long-term hold by RES
+T0 .. .. .. .. .. [..] SD1   &#160;; 1 cycle after RES of RMW during SD cycle
+.. T+ .. .. .. .. [T1] SD2   &#160;; 2 cycles after RES (released) of RMW during SD cycle
+T0 T+ .. .. .. .. [..] SD2   &#160;; 2 cycles after RES (still held) of RMW during SD cycle
+T0 .. .. .. .. .. [..] SD2   &#160;; 1 cycle after RES of RMW just after SD cycle
 </pre>
 <p>These are all due to the RES interrupt aborting various instructions at specific times during their operation. Some background on when RES is sensed and its short term effects on the clock is necessary.
 </p><p>The RES interrupt line being down (asserted) is first sensed when clock phase 2 is changed to clock phase 1 (when phase 1 is "clocked in"). If RES is asserted after the processor is already in phase 1, it will not be sensed until the next time that phase 1 is clocked in.
@@ -261,63 +261,63 @@ The final time state to present,
 </p><p>The human readable coding of the program:
 </p>
 <pre>;                  Test 1
-02EC LDA #0B      &nbsp;; Change RES vector to 030B for test 2
+02EC LDA #0B      &#160;; Change RES vector to 030B for test 2
 02EE STA FFFC
 02F1 LDA #03
 02F3 STA FFFD
-02F6 LDA (00,X)   &nbsp;; Show all common T states (a 6 cycle instruction)
-02F8 CLC          &nbsp;; Show T0 T2 (a 2-cycle instruction)
-02F9 BCS 02FB     &nbsp;; Show [T1] at end (AKA next opcode fetch), after this one's T2 (no branch)
-02FB BCC 02FD     &nbsp;; Show [T1] at end (AKA next opcode fetch), after this one's T3 (branch, no page cross)
-02FD BCC 0300     &nbsp;; Show branch with page cross
-02FF FF           &nbsp;; FF padding
-0300 INC 00       &nbsp;; Show T3 SD1 and T4 SD2
-0302 INC 0000     &nbsp;; Show T4 SD1 and T5 SD2
-0305 INC 0000,X   &nbsp;; Show T5 SD1 and blank SD2
-0308 SLO (00),Y   &nbsp;; Show blank SD1 and blank SD2
-030A KIL          &nbsp;; Show all blank
-Phase 123, RES0   &nbsp;; RES down during second T blank Phase 2
-Phase 126, RES1   &nbsp;; RES up after clocking in T0 Phase 1
-                  &nbsp;; Shows T0 T+ state before invoking RES BRK
-                  &nbsp;; The RES invoked BRK shall also show the T5 [V0] and the [T6] states
+02F6 LDA (00,X)   &#160;; Show all common T states (a 6 cycle instruction)
+02F8 CLC          &#160;; Show T0 T2 (a 2-cycle instruction)
+02F9 BCS 02FB     &#160;; Show [T1] at end (AKA next opcode fetch), after this one's T2 (no branch)
+02FB BCC 02FD     &#160;; Show [T1] at end (AKA next opcode fetch), after this one's T3 (branch, no page cross)
+02FD BCC 0300     &#160;; Show branch with page cross
+02FF FF           &#160;; FF padding
+0300 INC 00       &#160;; Show T3 SD1 and T4 SD2
+0302 INC 0000     &#160;; Show T4 SD1 and T5 SD2
+0305 INC 0000,X   &#160;; Show T5 SD1 and blank SD2
+0308 SLO (00),Y   &#160;; Show blank SD1 and blank SD2
+030A KIL          &#160;; Show all blank
+Phase 123, RES0   &#160;; RES down during second T blank Phase 2
+Phase 126, RES1   &#160;; RES up after clocking in T0 Phase 1
+                  &#160;; Shows T0 T+ state before invoking RES BRK
+                  &#160;; The RES invoked BRK shall also show the T5 [V0] and the [T6] states
 ;
 ;                  Test 2
-030B LDA #12      &nbsp;; Change RES vector to 0312 for test 3
+030B LDA #12      &#160;; Change RES vector to 0312 for test 3
 030D STA FFFC
 0310 INC 00
-Phase 157, RES0   &nbsp;; RES down during T+ [T1] Phase 2
-Phase 158, RES1   &nbsp;; RES up after clocking in T2 Phase 1
-                  &nbsp;; Shows T0 SD1 and T+ [T1] SD2 states before RES BRK
-                  &nbsp;; Also hiccups a second T0 and T+ [T1] before RES BRK
+Phase 157, RES0   &#160;; RES down during T+ [T1] Phase 2
+Phase 158, RES1   &#160;; RES up after clocking in T2 Phase 1
+                  &#160;; Shows T0 SD1 and T+ [T1] SD2 states before RES BRK
+                  &#160;; Also hiccups a second T0 and T+ [T1] before RES BRK
 ;
 ;                  Test 3
-0312 LDA #19      &nbsp;; Change RES vector to 0319 for test 4
+0312 LDA #19      &#160;; Change RES vector to 0319 for test 4
 0314 STA FFFC
 0317 INC 00
-Phase 193, RES0   &nbsp;; RES down during T+ [T1] Phase 2
-Phase 196, RES1   &nbsp;; RES up after clocking in T0 Phase 1
-                  &nbsp;; Shows T0 T+ SD2 state before RES BRK
+Phase 193, RES0   &#160;; RES down during T+ [T1] Phase 2
+Phase 196, RES1   &#160;; RES up after clocking in T0 Phase 1
+                  &#160;; Shows T0 T+ SD2 state before RES BRK
 ;
 ;                  Test 4
-0319 LDA #20      &nbsp;; Change RES vector to 0320 for test 5
+0319 LDA #20      &#160;; Change RES vector to 0320 for test 5
 031B STA FFFC
 031E INC 00
-Phase 229, RES0   &nbsp;; RES down during T2 Phase 2
-Phase 230, RES1   &nbsp;; RES up after clocking in T3 Phase 1
-                  &nbsp;; Shows T0 SD2 before RES BRK
+Phase 229, RES0   &#160;; RES down during T2 Phase 2
+Phase 230, RES1   &#160;; RES up after clocking in T3 Phase 1
+                  &#160;; Shows T0 SD2 before RES BRK
 ;
 ;                  Test 5
-0320 LDA #27      &nbsp;; Change RES vector to 0327 for end (not absolutely necessary)
+0320 LDA #27      &#160;; Change RES vector to 0327 for end (not absolutely necessary)
 0322 STA FFFC
 0325 BRK #01
-Phase 267, RES0   &nbsp;; RES down during T4 Phase 2
-Phase 272, RES1   &nbsp;; RES up after clocking in first T0 T+ Phase 1
-                  &nbsp;; Shows T0 [T6] before RES BRK
-                  &nbsp;; Only needs RES down for one clock pulse to cause T0 [T6], but needs RES down for five clock pulses
-                  &nbsp;; to outlast the signal from T6 that turns off the interrupt state, allowing us to successfully
-                  &nbsp;; invoke a RES BRK
-                  &nbsp;; That's preferable to the unpredictable PC after a failed invocation of RES BRK (0000, 00FD seen)
-0327 NOP          &nbsp;; Confirm end
+Phase 267, RES0   &#160;; RES down during T4 Phase 2
+Phase 272, RES1   &#160;; RES up after clocking in first T0 T+ Phase 1
+                  &#160;; Shows T0 [T6] before RES BRK
+                  &#160;; Only needs RES down for one clock pulse to cause T0 [T6], but needs RES down for five clock pulses
+                  &#160;; to outlast the signal from T6 that turns off the interrupt state, allowing us to successfully
+                  &#160;; invoke a RES BRK
+                  &#160;; That's preferable to the unpredictable PC after a failed invocation of RES BRK (0000, 00FD seen)
+0327 NOP          &#160;; Confirm end
 </pre>
 <p><br/>
 Some extra effects are noticed from the interaction of RES and the interrupted instruction. The RMW instructions can "hiccup" an extra pair of T0 and T+ [T1] states after the T0 and T+ [T1] states caused directly by RES. This happens when the sense cycle for RES is the SD initiating cycle for the instruction's addressing mode, and RES is let back up before the T0 caused by RES is clocked in (before T0 phase 1). The second T0 is caused by the SD signal chain propagating back to the clock, re-setting it to T0 when it would have gone to the T2 state.
@@ -351,4 +351,4 @@ Retrieved from "<a href="https://web.archive.org/web/20210405071320/http://visua
 		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
 </body>
 </html>
-<!-- written by getter Thu Sep  7 14:36:05 PDT 2023 -->
+<!-- written by getter Fri Sep 15 10:08:14 PDT 2023 -->

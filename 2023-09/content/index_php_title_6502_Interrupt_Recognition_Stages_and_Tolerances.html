@@ -213,17 +213,17 @@ Halfcycle 18 RES1 during 1st T0 T+ phase 1 of soft BRK (or phase 2 at 19)
 Coding of the program used in all of the demonstrations:
 </p>
 <pre>;                User code
-0200 BRK +01    &nbsp;; Soft BRK interrupted by late RES
+0200 BRK +01    &#160;; Soft BRK interrupted by late RES
 ;
 ;                Intercept earliest-release RES jump result
-33FD JMP F933   &nbsp;; Redirect to RES handler from &lt;RES low&gt;FD
-                &nbsp;; JMP opcode of 4C used as high byte of next-earliest-release jump point
+33FD JMP F933   &#160;; Redirect to RES handler from &lt;RES low&gt;FD
+                &#160;; JMP opcode of 4C used as high byte of next-earliest-release jump point
 ;
 ;                Intercept next-earliest-release RES jump result
-4C33 JMP F933   &nbsp;; Redirect to RES handler from &lt;&lt;RES low&gt;FD&gt;&lt;RES low&gt;
+4C33 JMP F933   &#160;; Redirect to RES handler from &lt;&lt;RES low&gt;FD&gt;&lt;RES low&gt;
 ;
 ;                RES handler (where visual6502 starts running code when finished starting up)
-F933 JMP 0200   &nbsp;; Jump to user code
+F933 JMP 0200   &#160;; Jump to user code
 </pre>
 <h2> <span class="mw-headline" id="External_References"> External References </span></h2>
 <p>"lost NMI" in <a href="/web/20210405071501/http://visual6502.org/wiki/index.php?title=6502_Timing_of_Interrupt_Handling" title="6502 Timing of Interrupt Handling"> 6502 Timing of Interrupt Handling </a>
@@ -246,4 +246,4 @@ Retrieved from "<a href="https://web.archive.org/web/20210405071501/http://visua
 		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
 </body>
 </html>
-<!-- written by getter Thu Sep  7 14:35:57 PDT 2023 -->
+<!-- written by getter Fri Sep 15 10:08:13 PDT 2023 -->

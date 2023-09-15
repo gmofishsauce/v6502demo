@@ -71,6 +71,16 @@ The next step is to generalize the notion of an expected set of tags. At the
 outer level of the body, the expected set would be large. Inside a table row,
 the expected set might be just "td". 
 
+2023-09-15
+
+I've been intermittently working to improve the HTML parser in mkmd, not yet
+attempting to either build a tree or generate any output except a few samples.
+
+Today I discovered that HTML entities like &nbsp; are not legal XML, which puts
+the lie to the concept of "XHTML" being an XML language. I modified the "Fixer"
+to translate &nbsp; to &#160; which is legal XML.
+
+
 
 
 

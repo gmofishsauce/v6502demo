@@ -102,27 +102,27 @@ Coding of the program used in all of the demonstrations:
 </p>
 <pre>;                  Interrupted user code
 0200 NOP
-0201 NOP          &nbsp;; IRQ BRK or NMI BRK instead of running this instruction
+0201 NOP          &#160;; IRQ BRK or NMI BRK instead of running this instruction
 ;
 ;                  Intercept botched RES full-hijack of anything
-20FD JMP F920     &nbsp;; Jump to RES handler
+20FD JMP F920     &#160;; Jump to RES handler
 ;
 ;                  NMI handler
 F810 RTI
 ;
 ;                  Intercept RES half-hijack of NMI
-F910 JMP F920     &nbsp;; Jump to RES handler
+F910 JMP F920     &#160;; Jump to RES handler
 ;
 ;                  RES handler (where visual6502 starts running code when finished starting up)
-F920 CLI          &nbsp;; Enable IRQs
-F921 JMP 0200     &nbsp;; Jump to user code
+F920 CLI          &#160;; Enable IRQs
+F921 JMP 0200     &#160;; Jump to user code
 ;
 ;                  Intercept RES half-hijack of IRQ/BRK
-F930 JMP F920     &nbsp;; Jump to RES handler
+F930 JMP F920     &#160;; Jump to RES handler
 ;
 ;                  IRQ/BRK handler
-FA30 PHA          &nbsp;; Save accumulator (something different than NMI's handler)
-FA31 PLA          &nbsp;; Pull back
+FA30 PHA          &#160;; Save accumulator (something different than NMI's handler)
+FA31 PLA          &#160;; Pull back
 FA32 RTI
 </pre>
 <h2> <span class="mw-headline" id="External_References"> External References </span></h2>
@@ -144,4 +144,4 @@ Retrieved from "<a href="https://web.archive.org/web/20210405071346/http://visua
 		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
 </body>
 </html>
-<!-- written by getter Thu Sep  7 14:35:56 PDT 2023 -->
+<!-- written by getter Fri Sep 15 10:08:13 PDT 2023 -->

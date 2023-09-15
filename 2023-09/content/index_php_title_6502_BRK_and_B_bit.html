@@ -46,8 +46,8 @@ This node is the output of an inverter and is a doubly-inverted D1x1.)
 <p>This is a (necessary) feature: if an NMI occurs during the read of high and low vectors, it must not modify only the second read: modifying neither or both will determine whether the interrupt acts like an NMI or like the BRK/IRQ which is in progress.
 </p><p>We note it here because we can point out the mechanism: <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=t970&amp;panx=52.2&amp;pany=123.3&amp;zoom=12.4" class="external text" rel="nofollow">transistor t970</a>, where the logic is:
 </p>
-<pre> 1368&nbsp;:= NMIP and not NMIL and not &lt;VEC&gt;.phi2
- NMIG&nbsp;:= &lt;1368&gt;.phi1 or (&lt;NMIG&gt;.phi2 and not &lt;brk-done&gt;.phi1)
+<pre> 1368&#160;:= NMIP and not NMIL and not &lt;VEC&gt;.phi2
+ NMIG&#160;:= &lt;1368&gt;.phi1 or (&lt;NMIG&gt;.phi2 and not &lt;brk-done&gt;.phi1)
 </pre>
 <p>(Note that not all these signal names are presently known to the visual6502 netlist. Will be fixed.)
 </p>
@@ -69,13 +69,13 @@ This node is the output of an inverter and is a doubly-inverted D1x1.)
 </li></ul>
 <p>The logic which causes these writes to be suppressed is as follows:
 </p>
-<pre> WR&nbsp;:= op-T-mem-store
+<pre> WR&#160;:= op-T-mem-store
    or op-T2-php/pha
    or op-T4-brk
    or SD1 or SD2
    or (PCH/DB) or (PCL/DB)
- (R/#W)&nbsp;:= not (&lt;WR&gt;.phi2 and not RESG and RDY)
- R/#W&nbsp;:= &lt;(R/#W)&gt;.phi1
+ (R/#W)&#160;:= not (&lt;WR&gt;.phi2 and not RESG and RDY)
+ R/#W&#160;:= &lt;(R/#W)&gt;.phi1
 </pre>
 <p>with the writes during RESET suppressed by <a href="https://web.archive.org/web/20210405071302/http://visual6502.org/JSSim/expert.html?nosim=t&amp;find=t3455&amp;panx=392.1&amp;pany=199.6&amp;zoom=12.4" class="external text" rel="nofollow">transistor t3455</a>
 </p>
@@ -105,4 +105,4 @@ Retrieved from "<a href="https://web.archive.org/web/20210405071302/http://visua
 		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
 </body>
 </html>
-<!-- written by getter Thu Sep  7 14:35:21 PDT 2023 -->
+<!-- written by getter Fri Sep 15 10:08:13 PDT 2023 -->

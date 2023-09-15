@@ -36,7 +36,9 @@ while read url ; do
 	echo '</head>'                    >> $CONTENT/$name
 	echo '<body>'                     >> $CONTENT/$name
 
-	<$RAW/$name sed -n '/-- start content --/,/-- end content --/p' >> $CONTENT/$name
+	# output the body content and translate HTML entities to XML
+	<$RAW/$name sed -n '/-- start content --/,/-- end content --/p' |\
+	            sed -e "s/\&nbsp;/\&#160;/g" >> $CONTENT/$name
 
 	echo '</body>'                    >> $CONTENT/$name
 	echo '</html>'                    >> $CONTENT/$name
