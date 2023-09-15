@@ -42,7 +42,7 @@ func main() {
 func html(d *xml.Decoder) {
 	getStart(d, "html")
 	head(d)
-	bodyOrTableCell(d, "body")
+	body(d)
 	emit("\nWritten by mkmd %s\n", time.Now().String())
 	getEnd(d, "html")
 }
@@ -56,11 +56,11 @@ func head(d *xml.Decoder) {
 	getEnd(d, "head")
 }
 
-// Process the entry tag (either <body> or <td>) after which
-// we may encounter many types of tags. In the HTML 5 spec
-// the "in body" insertion mode is a little different than
-// the "in table cell" mode, but here we try and combine them.
-func bodyOrTableCell(d *xml.Decoder, expected string) {
+func body(d *xml.Decoder) {
+	bodyTag(d, "body")
+}
+
+func bodyTag(d *xml.Decoder, expected string) {
 	getStart(d, expected)
 	loop:
 	for {
@@ -72,27 +72,46 @@ func bodyOrTableCell(d *xml.Decoder, expected string) {
 			switch s {
 			case "a":
 				a(d)
+			case "br":
+				br(d)
 			case "div":
 				div(d)
+			case "form":
+				form(d)
 			case "h1":
 				h1(d)
+			case "h2":
+				h2(d)
+			case "h3":
+				h3(d)
+			case "h4":
+				h4(d)
 			case "img":
 				img(d)
+			case "li":
+				li(d)
 			case "p":
 				p(d)
+			case "pre":
+				pre(d)
+			case "script":
+				script(d)
 			case "span":
 				span(d)
+			case "sup":
+				sup(d)
 			case "table":
 				table(d)
+			case "td":
+				td(d)
+			case "tr":
+				tr(d)
+			case "ul":
+				ul(d)
 			default:
 				fail("tag not", t)
 			}
 		case xml.EndElement:
-			// Functions in the recursive descent
-			// all consume their end tags, so this
-			// had better be the end tag matching
-			// what we're here to parse. This is
-			// checked below.
 			unget(t)
 			break loop;
 		case xml.CharData:
@@ -107,50 +126,80 @@ func bodyOrTableCell(d *xml.Decoder, expected string) {
 	getEnd(d, expected)
 }
 
-// Null parser for any tag. Consumes and ignores to matching end tag.
-// Calls itself to consume the same tag nested within itself.
-func consume(d *xml.Decoder, tag string) {
-	getStart(d, tag)
-	for {
-		t := get(d)
-		if st, ok := t.(xml.StartElement); ok && st.Name.Local == tag {
-			unget(t)
-			consume(d, tag)
-		}
-		if en, ok := t.(xml.EndElement); ok && en.Name.Local == tag {
-			unget(t)
-			break
-		}
-	}
-	getEnd(d, tag)
+func a(d *xml.Decoder) {
+	bodyTag(d, "a")
 }
 
-func a(d *xml.Decoder) {
-	consume(d, "a") // TODO
+func br(d *xml.Decoder) {
+	bodyTag(d, "br")
 }
 
 func div(d *xml.Decoder) {
-	consume(d, "div") // TODO
+	bodyTag(d, "div")
+}
+
+func form(d *xml.Decoder) {
+	bodyTag(d, "form")
 }
 
 func h1(d *xml.Decoder) {
-	consume(d, "h1") // TODO
+	bodyTag(d, "h1")
+}
+
+func h2(d *xml.Decoder) {
+	bodyTag(d, "h2")
+}
+
+func h3(d *xml.Decoder) {
+	bodyTag(d, "h3")
+}
+
+func h4(d *xml.Decoder) {
+	bodyTag(d, "h4")
 }
 
 func img(d *xml.Decoder) {
-	consume(d, "img") // TODO
+	bodyTag(d, "img")
+}
+
+func li(d *xml.Decoder) {
+	bodyTag(d, "li")
 }
 
 func p(d *xml.Decoder) {
-	consume(d, "p") // TODO
+	bodyTag(d, "p")
+}
+
+func pre(d *xml.Decoder) {
+	bodyTag(d, "pre")
+}
+
+func script(d *xml.Decoder) {
+	bodyTag(d, "script")
 }
 
 func span(d *xml.Decoder) {
-	consume(d, "span") // TODO
+	bodyTag(d, "span")
+}
+
+func sup(d *xml.Decoder) {
+	bodyTag(d, "sup")
 }
 
 func table(d *xml.Decoder) {
-	consume(d, "table") // TODO
+	bodyTag(d, "table")
+}
+
+func td(d *xml.Decoder) {
+	bodyTag(d, "td")
+}
+
+func tr(d *xml.Decoder) {
+	bodyTag(d, "tr")
+}
+
+func ul(d *xml.Decoder) {
+	bodyTag(d, "ul")
 }
 
 func title(d *xml.Decoder) {
@@ -179,6 +228,7 @@ func get(d *xml.Decoder) xml.Token {
 	if pushback != nil {
 		result = pushback
 		pushback = nil
+		debugToken("get", result)
 		return result
 	}
 
@@ -193,9 +243,11 @@ func get(d *xml.Decoder) xml.Token {
 			break
 		}
 	}
+
 	// Tokens returned by d.Token()
-	// are ephemeral so we need this
+	// are ephemeral so we need CopyToken()
 	// to allow pushback
+	debugToken("get", result)
 	return xml.CopyToken(result)
 }
 
@@ -203,12 +255,12 @@ func unget(t xml.Token) {
 	if pushback != nil {
 		log.Fatalf("too many pushbacks")
 	}
+	debugToken("unget", t)
 	pushback = t
 }
 
 // Get (expect) a specific start tag
 func getStart(d *xml.Decoder, expected string) {
-	fmt.Printf("getStart %s\n", expected)
 	t := get(d)
 	start, ok := t.(xml.StartElement)
 	if !ok || start.Name.Local != expected {
@@ -217,7 +269,6 @@ func getStart(d *xml.Decoder, expected string) {
 }
 
 func getEnd(d *xml.Decoder, expected string) {
-	fmt.Printf("getEnd %s\n", expected)
 	t := get(d)
 	end, ok := t.(xml.EndElement)
 	if !ok || end.Name.Local != expected {
@@ -263,6 +314,9 @@ func anyToString(data any) string {
     return string(valueBytes.Bytes())
 }
 
+func debugToken(msg string, t xml.Token) {
+	fmt.Printf("  [%s [%T] %s]\n", msg, t, anyToString(t))
+}
 
 func fail(expected string, got any) {
 	log.Fatalf("%s expected, got (%T) %s", expected, got, anyToString(got))
