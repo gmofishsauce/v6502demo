@@ -8,6 +8,8 @@ import "reflect"
 import "strings"
 import "time"
 
+var debug bool = false
+
 func main() {
 	in := os.Stdin
 	name := "standard input"
@@ -35,33 +37,23 @@ func main() {
 		log.Fatalf("not an XHTML 1.0 Strict document")
 	}
 	
-	html(d)
+	result := parse(d, "html")
+	walk(result, 0)
+	emitString("\nWritten by mkmd %s\n", time.Now().String())
 }
 
-// HTML start and end tags surround head and body
-func html(d *xml.Decoder) {
-	getStart(d, "html")
-	head(d)
-	body(d)
-	emit("\nWritten by mkmd %s\n", time.Now().String())
-	getEnd(d, "html")
+// Node structures produced by the recursive descent parser
+type node struct {
+	name string
+	text string
+	attrs []xml.Attr
+	children []*node
+	processed bool   // development/debugging hack only
 }
 
-// I wrote the code that cleaned up the HTML files we're reading,
-// so I know the only thing that can be in the head section is
-// a single title tag.
-func head(d *xml.Decoder) {
-	getStart(d, "head")
-	title(d)
-	getEnd(d, "head")
-}
-
-func body(d *xml.Decoder) {
-	bodyTag(d, "body")
-}
-
-func bodyTag(d *xml.Decoder, expected string) {
-	getStart(d, expected)
+// The recursive descent parser. Just builds a tree of nodes.
+func parse(d *xml.Decoder, expected string) *node {
+	result := getStart(d, expected)
 	loop:
 	for {
 		t := get(d)
@@ -69,155 +61,106 @@ func bodyTag(d *xml.Decoder, expected string) {
 		case xml.StartElement:
 			s := inst.Name.Local
 			unget(t)
-			switch s {
-			case "a":
-				a(d)
-			case "br":
-				br(d)
-			case "div":
-				div(d)
-			case "form":
-				form(d)
-			case "h1":
-				h1(d)
-			case "h2":
-				h2(d)
-			case "h3":
-				h3(d)
-			case "h4":
-				h4(d)
-			case "img":
-				img(d)
-			case "li":
-				li(d)
-			case "p":
-				p(d)
-			case "pre":
-				pre(d)
-			case "script":
-				script(d)
-			case "span":
-				span(d)
-			case "sup":
-				sup(d)
-			case "table":
-				table(d)
-			case "td":
-				td(d)
-			case "tr":
-				tr(d)
-			case "ul":
-				ul(d)
-			default:
-				fail("tag not", t)
-			}
+			result.children = append(result.children, parse(d, s))
 		case xml.EndElement:
 			unget(t)
 			break loop;
 		case xml.CharData:
-			emit(string(inst))
+			result.children = append(result.children, &node{name: "CharData", text: string(inst)})
 		default:
-			// Directive or something
-			// "type not expected"
-			// Improve the parser
+			// Directive or something: "type not expected"
+			// Improve the parser if this ever occurs
 			fail("type not", inst)
 		}
 	}
 	getEnd(d, expected)
+	return result
 }
 
-func a(d *xml.Decoder) {
-	bodyTag(d, "a")
-}
-
-func br(d *xml.Decoder) {
-	bodyTag(d, "br")
-}
-
-func div(d *xml.Decoder) {
-	bodyTag(d, "div")
-}
-
-func form(d *xml.Decoder) {
-	bodyTag(d, "form")
-}
-
-func h1(d *xml.Decoder) {
-	bodyTag(d, "h1")
-}
-
-func h2(d *xml.Decoder) {
-	bodyTag(d, "h2")
-}
-
-func h3(d *xml.Decoder) {
-	bodyTag(d, "h3")
-}
-
-func h4(d *xml.Decoder) {
-	bodyTag(d, "h4")
-}
-
-func img(d *xml.Decoder) {
-	bodyTag(d, "img")
-}
-
-func li(d *xml.Decoder) {
-	bodyTag(d, "li")
-}
-
-func p(d *xml.Decoder) {
-	bodyTag(d, "p")
-}
-
-func pre(d *xml.Decoder) {
-	bodyTag(d, "pre")
-}
-
-func script(d *xml.Decoder) {
-	bodyTag(d, "script")
-}
-
-func span(d *xml.Decoder) {
-	bodyTag(d, "span")
-}
-
-func sup(d *xml.Decoder) {
-	bodyTag(d, "sup")
-}
-
-func table(d *xml.Decoder) {
-	bodyTag(d, "table")
-}
-
-func td(d *xml.Decoder) {
-	bodyTag(d, "td")
-}
-
-func tr(d *xml.Decoder) {
-	bodyTag(d, "tr")
-}
-
-func ul(d *xml.Decoder) {
-	bodyTag(d, "ul")
-}
-
-func title(d *xml.Decoder) {
-	getStart(d, "title")
-	t := get(d)
-	cd, ok := t.(xml.CharData)
-	if !ok {
-		fail("title text", t)
+// The second pass. Walks the tree calling start and end emit for each node
+func walk(np *node, indent int) {
+	startEmit(np)	
+	for _, c := range(np.children) {
+		walk(c, 1 + indent)
 	}
-	emit("# %s\n", string(cd))
-	getEnd(d, "title")
+	endEmit(np)
+	if !np.processed {
+		fmt.Printf("\nUNSUPPORTED: %s\n", np.name)
+	}
 }
 
-// Utility functions below
+// Markdown emitters
 
-func emit(format string, args ...any) {
+func startEmit(np *node) {
+	switch np.name {
+	case "CharData":
+		emitString(np.text)		
+		np.processed = true
+	case "a":
+		emitString("[")
+	case "body":
+		np.processed = true
+	case "div":
+		// For now we don't do anything with divs.
+		np.processed = true
+	case "h1", "h2", "h3", "h4", "h5", "h6":
+		nHashes := np.name[1] - '0'
+		emitString(strings.Repeat("#", int(1 + nHashes)))
+		np.processed = true
+	case "head":
+		np.processed = true
+	case "html":
+		np.processed = true
+	case "img":
+		//emitString("![%s](", getAttrValue(np, "src"))
+		emitString("image here")
+		np.processed = true
+	case "p":
+		emitString("\n")
+		np.processed = true
+	case "span":
+		np.processed = true
+	case "td":
+		emitString("|")
+		np.processed = true
+	case "title":
+		emitString("\n# ")
+		np.processed = true
+	case "tr":
+		emitString("\n")
+	}
+}
+
+func endEmit(np *node) {
+	switch np.name {
+	case "a":
+		emitString("](%s)", getAttrValue(np, "href"))
+		np.processed = true
+	case "table":
+		emitString(strings.Repeat("|:---:", len(np.children[0].children)))
+		emitString("|\n")
+		np.processed = true
+	case "tr":
+		emitString("|\n")
+		np.processed = true
+	}
+}
+
+func emitString(format string, args ...any) {
 	fmt.Printf(format, args...)
 }
+
+func getAttrValue(np *node, toFind string) string {
+	for _, attr := range(np.attrs) {
+		if attr.Name.Local == toFind {
+			return attr.Value
+		}
+	}
+	fail(fmt.Sprintf("attribute %s for node %s", toFind, np.name), "nothing")
+	return "internal error"
+}
+
+// Token getters
 
 var pushback xml.Token = nil
 
@@ -260,12 +203,13 @@ func unget(t xml.Token) {
 }
 
 // Get (expect) a specific start tag
-func getStart(d *xml.Decoder, expected string) {
+func getStart(d *xml.Decoder, expected string) *node {
 	t := get(d)
 	start, ok := t.(xml.StartElement)
 	if !ok || start.Name.Local != expected {
 		fail(expected, t)
 	}
+	return &node{name: start.Name.Local, attrs: start.Attr}
 }
 
 func getEnd(d *xml.Decoder, expected string) {
@@ -275,6 +219,8 @@ func getEnd(d *xml.Decoder, expected string) {
 		fail(expected, t)
 	}
 }
+
+// Utilities
 
 // Return true if the token is ignoreable
 // (whitespace or HTML comment)
@@ -295,6 +241,7 @@ func skip(t xml.Token) bool {
 	return false
 }
 
+// Slightly intelligent stringify
 func anyToString(data any) string {
 	switch inst := data.(type) {
 	case xml.StartElement:
@@ -315,7 +262,9 @@ func anyToString(data any) string {
 }
 
 func debugToken(msg string, t xml.Token) {
-	fmt.Printf("  [%s [%T] %s]\n", msg, t, anyToString(t))
+	if debug {
+		fmt.Printf("  [%s [%T] %s]\n", msg, t, anyToString(t))
+	}
 }
 
 func fail(expected string, got any) {
