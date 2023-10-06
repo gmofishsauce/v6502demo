@@ -80,4 +80,18 @@ Today I discovered that HTML entities like &nbsp; are not legal XML, which puts
 the lie to the concept of "XHTML" being an XML language. I modified the "Fixer"
 to translate &nbsp; to &#160; which is legal XML.
 
+2023-10-06
+
+Today I cleaned up the image getter tools/img_getter.sh and successfully
+downloaded all 35 images. The downoads in are rawimg/. The rawimg/ directory
+is symlinked as img/ from the new md/ directory where the results will end up,
+so images in md/ will only require "img/filename" as paths. The mkmd translator
+doesn't know about this yet, so it's still putting broken web links in the
+as-yet incomplete md-format output.
+
+It looks like what's required now is just incremental improvement of mkmd and
+then running it against all the files. I need to figure out how to bind Macdown
+to the .md extension so I can just "open foo.md" and have Macdown open instead
+of xcode.
+
 
