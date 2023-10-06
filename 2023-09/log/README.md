@@ -81,7 +81,3 @@ the lie to the concept of "XHTML" being an XML language. I modified the "Fixer"
 to translate &nbsp; to &#160; which is legal XML.
 
 
-
-
-
-
