@@ -94,7 +94,8 @@ func walk(np *node, indent int) {
 func startEmit(np *node) {
 	switch np.name {
 	case "CharData":
-		emitString(np.text)		
+		// emitString(np.text)		
+		emitString("text")
 		np.processed = true
 	case "a":
 		emitString("[")
@@ -112,8 +113,8 @@ func startEmit(np *node) {
 	case "html":
 		np.processed = true
 	case "img":
-		//emitString("![%s](", getAttrValue(np, "src"))
-		emitString("image here")
+		emitString("![an image](%s)", getAttrValue(np, "src"))
+		//emitString("image here")
 		np.processed = true
 	case "p":
 		emitString("\n")
@@ -127,14 +128,14 @@ func startEmit(np *node) {
 		emitString("\n# ")
 		np.processed = true
 	case "tr":
-		emitString("\n")
+		emitString("\n\n")
 	}
 }
 
 func endEmit(np *node) {
 	switch np.name {
 	case "a":
-		emitString("](%s)", getAttrValue(np, "href"))
+		emitString("](%s)", "href here") // getAttrValue(np, "href"))
 		np.processed = true
 	case "table":
 		emitString(strings.Repeat("|:---:", len(np.children[0].children)))

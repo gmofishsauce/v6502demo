@@ -92,6 +92,52 @@ as-yet incomplete md-format output.
 It looks like what's required now is just incremental improvement of mkmd and
 then running it against all the files. I need to figure out how to bind Macdown
 to the .md extension so I can just "open foo.md" and have Macdown open instead
-of xcode.
+of xcode. [Next day: done]
 
+2023-10-07
+
+Now that I understand these .jpg files that are actually HTML,the entire
+processing pipeline is going to get more complicated. I should update the
+Getter (tools/getter.sh) with the "&#160" fix in the Fixer (tools/fixer.sh)
+so I can rerun the entire pipeline from scratch. (The very first thing in
+the pipeline, the ALL_PAGES list, was made from the page
+raw/index_php_title_Special_AllPages.html which I learned about from Ed.)
+
+After the improved Getter runs and pulls all the pages in the ALL_PAGES
+list into raw/, I need to run the img_getter to pull all the linked files
+with .jpg and .png extensions into rawimg/.
+
+Unfortunately, I now know that some of the ".jpg" files are actually HTML
+documents with a bogus file extension. Handling for these is complicated.
+I need to reprocess these with a tool like fixer that trims out the header
+crap leaving just the title and the original body. Then rename them to
+basename.html rather than .jpg and rewrite all the references to the file.
+
+I probably need to leave them in the same directory because they contain
+image references, although I can always rewrite anything to anything else
+to fix that. Actually it might be easier to (1) move them to the content/
+directory, (2) fix links to them to just be "./" file names, and (3) rewrite
+their image links to "./img" (in the md/ directory). This makes the step of
+fetching the images more consistent.
+
+To do all this I should separate the loops over files from the processing
+of the files. I need a script that loops building URLs from the ALL_PAGES
+list and calls fix.sh on each one. The fixer 
+
+So it's like this:
+
+Pull all 75 pages named in ...Special_AllPages.html (Done)
+Fix them up, like remove the XML-illegal entities (Done)
+Fetch all the images referenced directly; some are really HTML (have tool)
+These go in rawimg/ which is symlinked as md/raw (have tool)
+
+For each .jpg that is really an HTML document:
+  move the jpg to content/ and change its name to an HTML file
+  Fix it up, strip out the header, fix entities, etc.
+  Find all links to it (under its old name!) in the original 75 files
+  And fix them
+
+When done:
+  Search all the N > 75 HTML files for any links to the original JPG names
+  and fix them if there are any, etc.
 
