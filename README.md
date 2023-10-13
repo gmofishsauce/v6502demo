@@ -1,10 +1,10 @@
-## Welcome to the v6502 Wiki Recovery Demo
+## Welcome to the v6502 Wiki Recovery Repo
 
-The directory 2023-09 contains the second effort at rescuing this site. The rest of this short note is about the other files, which come from the first investigation (late 2021).
+The work is in 2023-09. An earlier effort at recovery has been removed.
 
-This is a demo of a possible markdown-based recovery of the Visual6502.org wiki.  Changes committed to this repository
-will be processed through the Jekyll static site generator and published a few minutes later at https://gmofishsauce.github.io/v6502demo/
+The original Wiki states:
 
-Example of page converted with [Codepen](./codepen_md_conversion.md)
+Content is available under [Attribution-NonCommercial-ShareAlike 3.0 Unported](https://web.archive.org/web/20210405071423/http://creativecommons.org/licenses/by-nc-sa/3.0/) license.
 
-Example of a page converted with [Cloudconvert](cloudconvert_md_conversion.md)
+To honor this license, I am supposed to list the authors. The main page of the original Wiki doesn't seem to list authors. There is a list of names in one of the Wiki pages, but now I cannot find it. Please rest assured that when I do I will attempt to honor the license.
+ 

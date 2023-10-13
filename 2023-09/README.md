@@ -57,11 +57,8 @@ Versions of every file in raw with the Wayback Machine headers and footers remov
 CSS removed, scripts removed, etc.
 
 ### log
+Steps for recovering the Wiki from the Wayback Machine:
 
-Some notes about what was done at each step
-
-### tools
-
-Scripts and related hackery
-
+1. Run ./tools/getter.sh to fetch all the files. It goes very slowly, about 45 minutes for the 75 files.
+2. Run ./tools/fixer.sh to remove most of the Wayback Machine noise from the files.
 
