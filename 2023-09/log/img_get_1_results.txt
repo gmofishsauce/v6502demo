@@ -1,0 +1,469 @@
+========================= FIRST FRAGMENT =================================
+
+| Processing d_2_filtered/index_php_title_Photos_of_R6502.html
+| --2023-10-14 20:51:35--  https://web.archive.org/https://web.archive.org/web/20210405071447/http://impulzus.sch.bme.hu/6502/download/6502_full.png
+| Resolving web.archive.org (web.archive.org)... 207.241.237.3
+| Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+| HTTP request sent, awaiting response... 303 SEE OTHER
+| Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071447/http://impulzus.sch.bme.hu/6502/download/6502_full.png [following]
+| --2023-10-14 20:51:50--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071447/http://impulzus.sch.bme.hu/6502/download/6502_full.png
+| Reusing existing connection to web.archive.org:443.
+| HTTP request sent, awaiting response... 404 NOT FOUND
+| 2023-10-14 20:51:52 ERROR 404: NOT FOUND.
+
+| Pausing ...
+| Processing d_2_filtered/index_php_title_PolygonCaptureProgress.html
+| Processing d_2_filtered/index_php_title_RCA_1802E.html
+| --2023-10-14 20:52:03--  https://web.archive.org/https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/images/6/64/Rca1802-control-reversed.gif
+| Resolving web.archive.org (web.archive.org)... 207.241.237.3
+| Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+| HTTP request sent, awaiting response... 303 SEE OTHER
+| Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/images/6/64/Rca1802-control-reversed.gif [following]
+| --2023-10-14 20:52:21--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/images/6/64/Rca1802-control-reversed.gif
+| Reusing existing connection to web.archive.org:443.
+| HTTP request sent, awaiting response... 404 NOT FOUND
+| 2023-10-14 20:52:22 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:52:56--  https://web.archive.org/https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/images/6/62/1802_dpth.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/images/6/62/1802_dpth.png [following]
+--2023-10-14 20:53:11--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/images/6/62/1802_dpth.png
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:53:12 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:53:16--  https://web.archive.org/dpth-small.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://dpth-small.png [following]
+--2023-10-14 20:53:30--  https://web.archive.org/web/2/http://dpth-small.png
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:53:31 ERROR 404: NOT FOUND.
+
+========================= SECOND FRAGMENT =================================
+
+Processing d_2_filtered/index_php_title_Photos_of_MOS_6502D.html
+--2023-10-14 20:49:01--  https://web.archive.org//web/20210405071533/http://visual6502.org/wiki/index.php?title=File:6502_top.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041155/http://visual6502.org/wiki/index.php?title=File:6502_top.png [following]
+--2023-10-14 20:49:18--  https://web.archive.org//web/20141224041155/http://visual6502.org/wiki/index.php?title=File:6502_top.png
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 17518 (17K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6502_top.png’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  17.11K  --.-KB/s    in 0s
+
+2023-10-14 20:49:18 (57.6 MB/s) - ‘d_3_img/index.php?title=File:6502_top.png’ saved [17518/17518]
+
+Pausing ...
+--2023-10-14 20:49:26--  https://web.archive.org/top.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://top.png [following]
+--2023-10-14 20:49:40--  https://web.archive.org/web/2/http://top.png
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:49:41 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:49:53--  https://web.archive.org//web/20210405071533im_/http://visual6502.org/wiki/images/thumb/6/60/6502_top.png/180px-6502_top.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 85398 (83K) [image/png]
+Saving to: ‘d_3_img/180px-6502_top.png’
+
+d_3_img/180px-6502_top.png     100%[==================================================>]  83.40K  --.-KB/s    in 0.04s
+
+2023-10-14 20:50:07 (1.99 MB/s) - ‘d_3_img/180px-6502_top.png’ saved [85398/85398]
+
+Pausing ...
+File exists: d_3_img/index.php?title=File:6502_top.png
+File exists: d_3_img/magnify-clip.png
+--2023-10-14 20:50:16--  https://web.archive.org//web/20210405071533/http://visual6502.org/wiki/index.php?title=File:6502_sub.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041156/http://visual6502.org/wiki/index.php?title=File:6502_sub.png [following]
+--2023-10-14 20:50:31--  https://web.archive.org//web/20141224041156/http://visual6502.org/wiki/index.php?title=File:6502_sub.png
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 17550 (17K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6502_sub.png’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  17.14K  --.-KB/s    in 0s
+
+2023-10-14 20:50:31 (79.7 MB/s) - ‘d_3_img/index.php?title=File:6502_sub.png’ saved [17550/17550]
+
+Pausing ...
+--2023-10-14 20:50:39--  https://web.archive.org/sub.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://sub.png [following]
+--2023-10-14 20:50:56--  https://web.archive.org/web/2/http://sub.png
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:50:57 ERROR 404: NOT FOUND.
+
+============================== THIRD FRAGMENT ================================
+
+Processing d_2_filtered/index_php_title_Motorola_68000.html
+--2023-10-14 20:47:44--  https://web.archive.org//web/20210405071341/http://visual6502.org/wiki/index.php?title=File:68000_vec_annot.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20160801150926/http://visual6502.org/wiki/index.php?title=File:68000_vec_annot.jpg [following]
+--2023-10-14 20:47:59--  https://web.archive.org//web/20160801150926/http://visual6502.org/wiki/index.php?title=File:68000_vec_annot.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 17259 (17K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:68000_vec_annot.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  16.85K  --.-KB/s    in 0s      
+
+2023-10-14 20:48:00 (99.8 MB/s) - ‘d_3_img/index.php?title=File:68000_vec_annot.jpg’ saved [17259/17259]
+
+Pausing ...
+--2023-10-14 20:48:11--  https://web.archive.org/annot.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://annot.jpg [following]
+--2023-10-14 20:48:25--  https://web.archive.org/web/2/http://annot.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:48:26 ERROR 404: NOT FOUND.
+
+================================= FOURTH FRAGMENT ==================================
+
+Processing d_2_filtered/index_php_title_Motorola_6800.html
+--2023-10-14 20:45:37--  https://web.archive.org/https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-1200w.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-1200w.jpg [following]
+--2023-10-14 20:45:53--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-1200w.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:46:01 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:46:10--  https://web.archive.org//web/20210405071405im_/http://visual6502.org/wiki/images/7/77/Mc6800a-Layout-svg-150h.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20210405071406im_/http://visual6502.org/wiki/images/7/77/Mc6800a-Layout-svg-150h.jpg [following]
+--2023-10-14 20:46:24--  https://web.archive.org//web/20210405071406im_/http://visual6502.org/wiki/images/7/77/Mc6800a-Layout-svg-150h.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 7666 (7.5K) [image/jpeg]
+Saving to: ‘d_3_img/Mc6800a-Layout-svg-150h.jpg’
+
+d_3_img/Mc6800a-Layout-svg-150 100%[==================================================>]   7.49K  --.-KB/s    in 0s
+
+2023-10-14 20:46:25 (1.43 GB/s) - ‘d_3_img/Mc6800a-Layout-svg-150h.jpg’ saved [7666/7666]
+
+Pausing ...
+--2023-10-14 20:46:37--  https://web.archive.org/https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-8980w.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-8980w.jpg [following]
+--2023-10-14 20:46:49--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071405/http://www.visual6502.org/images/6800/mc6800a-Layout-svg-8980w.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:46:50 ERROR 404: NOT FOUND.
+
+================================= FIFTH FRAGMENT ===================================
+
+Processing d_2_filtered/index_php_title_Hanson_s_Block_Diagram.html
+--2023-10-14 20:45:17--  https://web.archive.org/https://web.archive.org/web/20210405071451/http://homepage.mac.com/jorgechamorro/a2things/6502.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071451/http://homepage.mac.com/jorgechamorro/a2things/6502.jpg [following]
+--2023-10-14 20:45:31--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071451/http://homepage.mac.com/jorgechamorro/a2things/6502.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:45:32 ERROR 404: NOT FOUND.
+
+================================== SIXTH FRAGMENT ===============================
+
+Processing d_2_filtered/index_php_title_Acorn.html
+--2023-10-14 20:27:50--  https://web.archive.org/https://web.archive.org/web/20210405071517/http://www.retroclinic.com/misc/tubechips.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071517/http://www.retroclinic.com/misc/tubechips.jpg [following]
+--2023-10-14 20:28:06--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071517/http://www.retroclinic.com/misc/tubechips.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:28:07 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:28:14--  https://web.archive.org/https://web.archive.org/web/20210405071517/http://retroclinic.com/misc/12c021.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071517/http://retroclinic.com/misc/12c021.jpg [following]
+--2023-10-14 20:28:28--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071517/http://retroclinic.com/misc/12c021.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:28:29 ERROR 404: NOT FOUND.
+
+=================================== SEVENTH FRAGMENT =============================
+
+Processing d_2_filtered/index_php_title_6502_datapath_control_timing_fix.html
+--2023-10-14 20:19:03--  https://web.archive.org//web/20210405071304/http://visual6502.org/wiki/index.php?title=File:6502_photo_wrong-clock-annot.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20160810125548/http://visual6502.org/wiki/index.php?title=File:6502_photo_wrong-clock-annot.jpg [following]
+--2023-10-14 20:19:14--  https://web.archive.org//web/20160810125548/http://visual6502.org/wiki/index.php?title=File:6502_photo_wrong-clock-annot.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 17888 (17K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6502_photo_wrong-clock-annot.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  17.47K  --.-KB/s    in 0s
+
+2023-10-14 20:19:15 (68.5 MB/s) - ‘d_3_img/index.php?title=File:6502_photo_wrong-clock-annot.jpg’ saved [17888/17888]
+
+Pausing ...
+--2023-10-14 20:19:19--  https://web.archive.org/wrong-clock-annot.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://wrong-clock-annot.jpg [following]
+--2023-10-14 20:19:33--  https://web.archive.org/web/2/http://wrong-clock-annot.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:19:34 ERROR 404: NOT FOUND.
+
+========================= EIGHTH FRAGMENT ===============================
+
+Processing d_2_filtered/index_php_title_6502___simulating_in_real_time_on_an_FPGA.html
+--2023-10-14 20:11:31--  https://web.archive.org//web/20210405071450/http://visual6502.org/wiki/index.php?title=File:6507-demo0.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041434/http://visual6502.org/wiki/index.php?title=File:6507-demo0.jpg [following]
+--2023-10-14 20:11:46--  https://web.archive.org//web/20141224041434/http://visual6502.org/wiki/index.php?title=File:6507-demo0.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 21221 (21K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6507-demo0.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  20.72K  --.-KB/s    in 0s
+
+2023-10-14 20:11:47 (52.7 MB/s) - ‘d_3_img/index.php?title=File:6507-demo0.jpg’ saved [21221/21221]
+
+Pausing ...
+--2023-10-14 20:11:52--  https://web.archive.org//web/20210405071450im_/http://visual6502.org/wiki/images/thumb/f/f6/6507-demo0.jpg/640px-6507-demo0.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 57551 (56K) [image/jpeg]
+Saving to: ‘d_3_img/640px-6507-demo0.jpg’
+
+d_3_img/640px-6507-demo0.jpg   100%[==================================================>]  56.20K  --.-KB/s    in 0.03s
+
+2023-10-14 20:12:08 (1.70 MB/s) - ‘d_3_img/640px-6507-demo0.jpg’ saved [57551/57551]
+
+Pausing ...
+--2023-10-14 20:12:15--  https://web.archive.org//web/20210405071450/http://visual6502.org/wiki/index.php?title=File:6507-demo1.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041432/http://visual6502.org/wiki/index.php?title=File:6507-demo1.jpg [following]
+--2023-10-14 20:12:31--  https://web.archive.org//web/20141224041432/http://visual6502.org/wiki/index.php?title=File:6507-demo1.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 21206 (21K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6507-demo1.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  20.71K  --.-KB/s    in 0.01s
+
+2023-10-14 20:12:31 (1.92 MB/s) - ‘d_3_img/index.php?title=File:6507-demo1.jpg’ saved [21206/21206]
+
+Pausing ...
+--2023-10-14 20:12:43--  https://web.archive.org//web/20210405071450im_/http://visual6502.org/wiki/images/thumb/c/c9/6507-demo1.jpg/640px-6507-demo1.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 60396 (59K) [image/jpeg]
+Saving to: ‘d_3_img/640px-6507-demo1.jpg’
+
+d_3_img/640px-6507-demo1.jpg   100%[==================================================>]  58.98K  --.-KB/s    in 0.04s
+
+2023-10-14 20:12:58 (1.64 MB/s) - ‘d_3_img/640px-6507-demo1.jpg’ saved [60396/60396]
+
+Pausing ...
+--2023-10-14 20:13:09--  https://web.archive.org//web/20210405071450/http://visual6502.org/wiki/index.php?title=File:6502-fpga-apple2-img_0040.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041435/http://visual6502.org/wiki/index.php?title=File:6502-fpga-apple2-img_0040.jpg [following]
+--2023-10-14 20:13:24--  https://web.archive.org//web/20141224041435/http://visual6502.org/wiki/index.php?title=File:6502-fpga-apple2-img_0040.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 21745 (21K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6502-fpga-apple2-img_0040.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  21.24K  --.-KB/s    in 0.001s
+
+2023-10-14 20:13:25 (19.1 MB/s) - ‘d_3_img/index.php?title=File:6502-fpga-apple2-img_0040.jpg’ saved [21745/21745]
+
+Pausing ...
+--2023-10-14 20:13:30--  https://web.archive.org/0040.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://0040.jpg [following]
+--2023-10-14 20:13:46--  https://web.archive.org/web/2/http://0040.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:13:48 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:13:58--  https://web.archive.org//web/20210405071450im_/http://visual6502.org/wiki/images/thumb/6/6e/6502-fpga-apple2-img_0040.jpg/640px-6502-fpga-apple2-img_0040.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 87158 (85K) [image/jpeg]
+Saving to: ‘d_3_img/640px-6502-fpga-apple2-img_0040.jpg’
+
+d_3_img/640px-6502-fpga-apple2 100%[==================================================>]  85.12K  --.-KB/s    in 0.05s
+
+2023-10-14 20:14:15 (1.75 MB/s) - ‘d_3_img/640px-6502-fpga-apple2-img_0040.jpg’ saved [87158/87158]
+
+Pausing ...
+--2023-10-14 20:14:23--  https://web.archive.org//web/20210405071450/http://visual6502.org/wiki/index.php?title=File:6502-fpga-vic20-img_0039.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041433/http://visual6502.org/wiki/index.php?title=File:6502-fpga-vic20-img_0039.jpg [following]
+--2023-10-14 20:14:38--  https://web.archive.org//web/20141224041433/http://visual6502.org/wiki/index.php?title=File:6502-fpga-vic20-img_0039.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 21701 (21K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6502-fpga-vic20-img_0039.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  21.19K  --.-KB/s    in 0s
+
+2023-10-14 20:14:39 (67.2 MB/s) - ‘d_3_img/index.php?title=File:6502-fpga-vic20-img_0039.jpg’ saved [21701/21701]
+
+Pausing ...
+--2023-10-14 20:14:49--  https://web.archive.org/0039.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://0039.jpg [following]
+--2023-10-14 20:15:05--  https://web.archive.org/web/2/http://0039.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:15:06 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:15:16--  https://web.archive.org//web/20210405071450im_/http://visual6502.org/wiki/images/thumb/7/70/6502-fpga-vic20-img_0039.jpg/640px-6502-fpga-vic20-img_0039.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 107436 (105K) [image/jpeg]
+Saving to: ‘d_3_img/640px-6502-fpga-vic20-img_0039.jpg’
+
+d_3_img/640px-6502-fpga-vic20- 100%[==================================================>] 104.92K  --.-KB/s    in 0.06s
+
+2023-10-14 20:15:33 (1.63 MB/s) - ‘d_3_img/640px-6502-fpga-vic20-img_0039.jpg’ saved [107436/107436]
+
+Pausing ...
+--2023-10-14 20:15:41--  https://web.archive.org//web/20210405071450/http://visual6502.org/wiki/index.php?title=File:6502-fpga-apple2-overview-IMG_1086.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041432/http://visual6502.org/wiki/index.php?title=File:6502-fpga-apple2-overview-IMG_1086.jpg [following]
+--2023-10-14 20:15:54--  https://web.archive.org//web/20141224041432/http://visual6502.org/wiki/index.php?title=File:6502-fpga-apple2-overview-IMG_1086.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 18508 (18K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6502-fpga-apple2-overview-IMG_1086.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  18.07K  --.-KB/s    in 0s
+
+2023-10-14 20:15:55 (72.6 MB/s) - ‘d_3_img/index.php?title=File:6502-fpga-apple2-overview-IMG_1086.jpg’ saved [18508/18508]
+
+Pausing ...
+--2023-10-14 20:16:03--  https://web.archive.org/1086.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://1086.jpg [following]
+--2023-10-14 20:16:19--  https://web.archive.org/web/2/http://1086.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:16:20 ERROR 404: NOT FOUND.
+
+Pausing ...
+--2023-10-14 20:16:25--  https://web.archive.org//web/20210405071450im_/http://visual6502.org/wiki/images/thumb/b/b2/6502-fpga-apple2-overview-IMG_1086.jpg/240px-6502-fpga-apple2-overview-IMG_1086.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 11932 (12K) [image/jpeg]
+Saving to: ‘d_3_img/240px-6502-fpga-apple2-overview-IMG_1086.jpg’
+
+d_3_img/240px-6502-fpga-apple2 100%[==================================================>]  11.65K  --.-KB/s    in 0s
+
+2023-10-14 20:16:39 (599 MB/s) - ‘d_3_img/240px-6502-fpga-apple2-overview-IMG_1086.jpg’ saved [11932/11932]
+
+Pausing ...
+--2023-10-14 20:16:49--  https://web.archive.org//web/20210405071450/http://visual6502.org/wiki/index.php?title=File:6502-fpga-vic20-overview-IMG_1081.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: https://web.archive.org//web/20141224041434/http://visual6502.org/wiki/index.php?title=File:6502-fpga-vic20-overview-IMG_1081.jpg [following]
+--2023-10-14 20:17:04--  https://web.archive.org//web/20141224041434/http://visual6502.org/wiki/index.php?title=File:6502-fpga-vic20-overview-IMG_1081.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 18483 (18K) [text/html]
+Saving to: ‘d_3_img/index.php?title=File:6502-fpga-vic20-overview-IMG_1081.jpg’
+
+d_3_img/index.php?title=File:6 100%[==================================================>]  18.05K  --.-KB/s    in 0s
+
+2023-10-14 20:17:05 (65.0 MB/s) - ‘d_3_img/index.php?title=File:6502-fpga-vic20-overview-IMG_1081.jpg’ saved [18483/18483]
+
+Pausing ...
+--2023-10-14 20:17:09--  https://web.archive.org/1081.jpg
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/http://1081.jpg [following]
+--2023-10-14 20:17:21--  https://web.archive.org/web/2/http://1081.jpg
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 20:17:23 ERROR 404: NOT FOUND.
+
+============================== NINTH FRAGMENT ================================
+
+Processing d_2_filtered/index_php_title_6502DecimalMode.html
+--2023-10-14 19:58:02--  https://web.archive.org/https://web.archive.org/web/20210405071434/http://uxul.org/~noname/chips/strange-via-1.png
+Resolving web.archive.org (web.archive.org)... 207.241.237.3
+Connecting to web.archive.org (web.archive.org)|207.241.237.3|:443... connected.
+HTTP request sent, awaiting response... 303 SEE OTHER
+Location: https://web.archive.org/web/2/https://web.archive.org/web/20210405071434/http://uxul.org/~noname/chips/strange-via-1.png [following]
+--2023-10-14 19:58:18--  https://web.archive.org/web/2/https://web.archive.org/web/20210405071434/http://uxul.org/~noname/chips/strange-via-1.png
+Reusing existing connection to web.archive.org:443.
+HTTP request sent, awaiting response... 404 NOT FOUND
+2023-10-14 19:58:19 ERROR 404: NOT FOUND.
+
+================== END ===================

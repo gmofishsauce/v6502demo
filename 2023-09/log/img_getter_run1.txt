@@ -1,0 +1,4 @@
+Processing d_2_filtered/index_php_title_6502DecimalMode.html
+
+Redirecting output to ‘wget-log’.
+Terminated: 15

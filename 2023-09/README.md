@@ -12,53 +12,46 @@ including the Wiki, the main site, and the images.
 - The main site. On the main site, the Wiki is not accessible. Example: http://visual6502.org
 - Wayback Machine backups of the Wiki. Example: https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Special%3AAllPages
 
-## Strategy
+## Steps
 
-### Download all the content
+### Make a list of the main HTML pages
 
-- Wiki: edit the All Pages page into script of wget commands
-- Main site: maybe search for a crawler. Otherwise, do by hand.
+This was done by hand, by processing the index_php_title_Special_AllPages.html page
+into a list of 75 HTML pages.
 
-### Clean up the HTML
+### Download the 75 pages
 
-All the HTML pages should be rewritten to contain bare HTML. This means nothing in the head section except the title tag. No headers or footers, particularly from the Wayback Machine.
+This was done with tools/getter.sh with the results stored in d_1_raw/
 
-This is straightforward for the Wiki pages. The other pages are TBD.
+### Remove all the Wayback Machine crap
 
-Need to think about links between pages. There are not a lot of these; the site structure is very simple.
+This was done by tools/fixer.sh which calls tools/fix_one.sh on each file.
+This strips all the javascript and CSS links out of the header (in fact,
+it strips out everything but the title tag) and strips the non-original
+content from the body. Note: the original content is nicely delimited by
+HTML comments in the Wayback Machine.
 
-Need to think about image links. TBD.
+The results are stored in d_2_filtered/
 
-### Translate all the pages to markdown
+### Get all the first-level images
 
-There are a couple of tools that should be rechecked for usefulness after the HTML is cleaned: Cloudconvert and Codepen. Could also search for additional tools.
+This is done by tools/img_getter.sh which calls tools/get_img_for_file.sh
+to get jpg, png, and gif extension files linked from the original 75 top
+level HTML files. The results are placed in d_3_img/
 
-Otherwise, create a tool specific to the task.
+Many of the results are HTML documents contained in files with one of the
+three image file extensions. These files in turn contain more image links,
+and they will need to be rewritten as markdown files for the eventual
+md-based site. So these need to be "hoisted" - moved to be peers with the
+original 75 files and any links to them rewritten to reference them.
 
-### Create a static site that renders markdown
+Once they are hoisted, the images they link to can be fetched by rerunning
+tools/img_getter.sh because it checks for the existence of a linked file
+before hitting the Wayback Machine with wget. So it can be run as many
+times as required after adding more HTML files.
 
-Needs a place to host the images. Mostly TBD.
+### Hoist the images that are really HTML pages
 
-### What's here
 
-ALL_PAGES is a list of the 75 or so Wayback Machine URLs that make up the entire wiki.
-The file was created by hand editing the file raw/index_php_title_Special_AllPages which
-is a copy of the "All Pages" page from the Wiki on the Wayback Machine.
 
-Directories:
-
-#### raw
-
-Download of the entire visual6502 wiki from the Wayback Machine
-
-### content
-
-Versions of every file in raw with the Wayback Machine headers and footers removed,
-CSS removed, scripts removed, etc.
-
-### log
-Steps for recovering the Wiki from the Wayback Machine:
-
-1. Run ./tools/getter.sh to fetch all the files. It goes very slowly, about 45 minutes for the 75 files.
-2. Run ./tools/fixer.sh to remove most of the Wayback Machine noise from the files.
 

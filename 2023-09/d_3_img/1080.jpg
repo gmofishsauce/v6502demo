@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=9drWlg0r" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={"autoplay":"on","unmuteOverlay":"hidden"};</script>
+<script type="text/javascript" src="/_static/js/ruffle.js"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://1080.jpg/inetstatus/index.php","20210316110528","https://web.archive.org/","web","/_static/",
+	      "1615892728");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+	<meta charset="utf-8"/>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+	<meta content="" name="description"/>
+	<meta content="" name="author"/>
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link href="/web/20210316110528cs_/http://1080.jpg/portals/resource/assets/css/pages/error.css" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL STYLES -->
+	<link rel="shortcut icon" href="/web/20210316110528im_/http://1080.jpg/inetstatus/favicon.ico"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-404-full-page">
+	<div class="row-fluid">
+		<div class="span12 page-404">
+			<div class="number">
+				<i class="icon-refresh"></i>
+			</div>
+			<br>
+			<div class="details">
+					<h3> You're connected to Internet, please refresh your page.</h3>
+			</div>
+		</div>
+	</div>
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+	<!-- BEGIN CORE PLUGINS -->   <script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+	<!--[if lt IE 9]>
+	<script src="../portals/resource//assets/plugins/excanvas.min.js"></script>
+	<script src="../portals/resource//assets/plugins/respond.min.js"></script>  
+	<![endif]-->   
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+	<!-- END CORE PLUGINS -->
+	<script src="/web/20210316110528js_/http://1080.jpg/portals/resource/assets/scripts/app.js"></script>  
+	<script>
+		jQuery(document).ready(function() {    
+		   App.init();
+		});
+	</script>
+	<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
+<!--
+     FILE ARCHIVED ON 11:05:28 Mar 16, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 03:18:35 Oct 15, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 115.094
+  exclusion.robots: 0.102
+  exclusion.robots.policy: 0.092
+  cdx.remote: 0.054
+  esindex: 0.008
+  LoadShardBlock: 80.476 (3)
+  PetaboxLoader3.datanode: 62.22 (5)
+  load_resource: 419.881
+  PetaboxLoader3.resolve: 392.263
+  loaddict: 13.525
+-->

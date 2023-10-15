@@ -1,44 +1,42 @@
 #!/bin/sh
 
-# Usage: ls content/* | ./tools/img_getter.sh
-# Run from root of repo
-# Places a list of image links in ALL_IMG_LINKS
-# Places downloaded files in $RAWIMG
+# img_getter.sh - get the images for all (HTML) files in a source directory
+#
+# ./tools/img_getter.sh srcdir targetdir
+#
+# This tools processes the files in srcdir on the assumption they are HTML.
+# It identifies all the image links (to .png, .jpg, or .gif) files and checks
+# for the existence of a name-matching file in the target directory. If no
+# file matching the name is in the target directory, the image is pulled with
+# wget. Note that the image file may not actually be an image; in the Wiki,
+# some aren't. This tool doesn't deal with that at all, it just pulls files
+# with extensions into the target directory.
 
-# Subdirectory for raw downloads
-RAWIMG="./rawimg"
+if test $# != 2 ; then
+	echo "Usage: img_getter srcHtmlDir targetImgDir"
+	exit 1
+fi
 
-# String to get the particular version of each URL from the Wayback Machine
-URLBASE="https://web.archive.org"
+if ! test -d ${1} ; then
+	echo "Not a directory: ${1}"
+	exit 1
+fi
+srcdir=${1}
 
-# File containing all the image links
-ALL_IMG_LINKS="./ALL_IMG_LINKS"
+if ! test -d ${2} ; then
+	echo "Not a directory: ${2}"
+	exit 1
+fi
+targetdir=${2}
 
-# File containing names of files that end with .jpg but are actually HTML
-ALL_HTML_FILES_NAMED_JPG="./ALL_HTML_FILES_NAMED_JPG"
-
-# First pass - get all the img src= links into ALL_IMG_LINKS
-cp /dev/null $ALL_IMG_LINKS
-cp /dev/null $ALL_HTML_FILES_NAMED_JPG
-
-while read filename ; do
-	<$filename grep -e '.*.png' -e '.*.jpg' |\
-	sed -e 's/^.*src="//' -e 's/^.*href="//' -e 's/".*$//' |\
-	sort | uniq >> $ALL_IMG_LINKS
-done
-
-for i in $(cat $ALL_IMG_LINKS) ; do
-	url="${URLBASE}/$i"
-	name=$(basename $i)
-
-	echo "Fetching $url to $name ..."
-	wget $url -O $RAWIMG/$name
-
-	if file $RAWIMG/$name | grep 'HTML document text' ; then
-		echo "HTML file: $RAWIMG/$name"
-		echo $RAWIMG/$name >> $ALL_HTML_FILES_NAMED_JPG
+for i in $(ls $srcdir) ; do
+	echo "Processing ${srcdir}/$i"
+	tools/get_img_for_file.sh "${srcdir}/$i" "${targetdir}"
+	if [ $? = 3 ] ; then
+		echo "Aborted."
+		exit 2
 	fi
-
-	echo "Pausing ..."
-	sleep $(jot -r 1 4 12)
 done
+
+echo "Done"
+exit 0
