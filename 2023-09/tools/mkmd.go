@@ -13,48 +13,6 @@ type context struct {
 	depth int
 }
 
-// Names for all the node types that are supposed to be returned by the HTML parser
-var typeNames = []string{"ErrorNode", "TextNode", "DocumentNode", "ElementNode", "CommentNode", "DoctypeNode"}
-
-// An opFunc knows how to operate on one type of Node in an HTML doc.
-// The Node may be e.g. "HTML comment" or "div tag".
-type opFunc func(n *html.Node, cx *context) error
-
-// We parse the document and make multiple passes over the resulting parse
-// tree.  We have different operations (opFuncs) for the types in the tree
-// per pass. The Golang HTML parser has Atoms to make lookups efficient,
-// but it returns no atom for DOCTYPE nodes, comments, text nodes - only for
-// HTML elements.  So an opTable needs to have operations for NodeTypes and
-// also operations for specific tags. There is also a default action. When
-// the action is nil, the processor will perform no operation.
-type opTable struct {
-	defaultAction opFunc
-	typeFuncs [html.RawNode]opFunc
-	elementPreFuncs map[atom.Atom]opFunc
-	elementPostFuncs map[atom.Atom]opFunc
-}
-
-// The currentOpTable is set before each pass over the parse tree
-var currentOpTable opTable
-
-// Return the operation.
-func nodeToOp(n *html.Node, isPre bool) opFunc {
-	var result opFunc
-	if n.DataAtom != 0 {
-		if isPre {
-			result = currentOpTable.elementPreFuncs[n.DataAtom]
-		} else {
-			result = currentOpTable.elementPostFuncs[n.DataAtom]
-		}
-	} else {
-		result = currentOpTable.typeFuncs[n.Type]
-	}
-	if result == nil {
-		result = currentOpTable.defaultAction // may also be nil
-	}
-	return result
-}
-
 // An opFunc that returns an internal error
 func internalError(n *html.Node, cx *context) error {
 	return fmt.Errorf("internal error: no operation for node %v (context %v)", n, cx)
@@ -73,7 +31,19 @@ func printNode(n *html.Node, cx *context) error {
 	return nil
 }
 
+func getRDF(n *html.Node, cx *context) error {
+	fmt.Printf("getRDF: attr=%v\n", n.Attr)
+	return nil
+}
+
 var printPass = opTable{ printNode, [6]opFunc{}, nil, nil }
+
+var rdfPass = opTable {
+	defaultAction: nil,
+	typeFuncs: [6]opFunc{},
+	elementPreFuncs: map[atom.Atom]opFunc{atom.Link: getRDF},
+	elementPostFuncs: nil,
+}
 
 func main() {
 	in := os.Stdin
@@ -96,7 +66,7 @@ func main() {
 		os.Exit(2)
 	}
 
-	currentOpTable = printPass
+	setOpTable(&rdfPass)
 	if err = process(doc, &context{0}); err != nil {
 		fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
 		os.Exit(2)
@@ -120,7 +90,7 @@ func process(n *html.Node, cx *context) error {
 	if err != nil {
 		return err
 	}
-	if post := nodeToOp(n, true); post != nil {
+	if post := nodeToOp(n, false); post != nil {
 		if err = post(n, cx); err != nil {
 			return err
 		}
