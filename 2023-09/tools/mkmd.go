@@ -1,55 +1,183 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"encoding/json"
+	"net/http"
+	"net/url"
 	"os"
-	"strings"
 
 	"golang.org/x/net/html"
-	"golang.org/x/net/html/atom"
 )
 
 type context struct {
 	depth int
 }
 
-// An opFunc that returns an internal error
-func internalError(n *html.Node, cx *context) error {
-	return fmt.Errorf("internal error: no operation for node %v (context %v)", n, cx)
-}
+// linkHandler is invoked for <link> tags only. It identifies tags
+// that link .rdf files containing authorship and license data and
+// downloads their latest version.
+func rdfGetter(n *html.Node, cx *context) error {
+	dbg("linkHandler: attrs=%v\n", n.Attr)
+	var isRDF bool
+	var href string
+	for _, a := range n.Attr {
+		if a.Key == "type" && a.Val == "application/rdf+xml" {
+			isRDF = true
+		}
+		if a.Key == "href" {
+			href = a.Val
+		}
+	}
+	// If we have the correct kind of link, fetch it.
+	if isRDF && len(href) > 0 {
+		link := makeRdfLink(href)
+		page, err := getLatest(link)
+		if err != nil {
+			return err
+		}
+		if err = save(page, "rdf", getTitle(link)); err != nil {
+			return err
+		}
+	}
 
-// An opFunc that prints "not handled: thing" for use as a default
-func notHandled(n *html.Node, cx *context) error {
-	fmt.Printf("not handled: node %v (context %v)\n", n, cx)
 	return nil
 }
 
-// A debugging opFunc that just prints the node with indent
-func printNode(n *html.Node, cx *context) error {
-	fmt.Printf("%*sType=%s DataAtom=%v Data=%v Attr=%v\n", cx.depth*2, "",
-		typeNames[n.Type], n.DataAtom, strings.TrimSpace(n.Data), n.Attr)
-	return nil
+// makeRdfLink() makes a Wayback Machine URL for the referenced RDF.
+//
+// The argument (href from the link tag) looks something like this:
+// /wiki/index.php?title=6502DecimalMode&action=creativecommons
+// This actually references a .rdf document with authorship information
+//
+// The Machine's API page for finding the most recent copy is:
+// https://archive.org/wayback/available?url=
+//
+// An example of an URL that can be successfully looked up is:
+// http://www.visual6502.org/wiki/index.php?title=6502DecimalMode&action=creativecommons
+// ^^^^^^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// (this part is hardwired)  (url from href)
+//
+// ...although this worked, I think it should be URL encoded; also,
+// the "action=creativecommons" is critical - that's what produces the RDF file.
+//
+// Sticking the two pieces together and visiting the API gives following result JSON:
+//
+//  {
+//     "archived_snapshots" : {
+//        "closest" : {
+//           "available" : true,
+//           "status" : "200",
+//           "timestamp" : "20210405071434",
+//           "url" : "http://web.archive.org/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502DecimalMode"
+//        }
+//     },
+//     "url" : "http://www.visual6502.org/wiki/index.php?title=6502DecimalMode"
+//  }
+//
+// Note that the url returned in the result JSON **DOES NOT** produce the RDF page.
+// It is necessary to MANUALLY re-append the `action=creativecommons` query string
+// to produce it:
+//
+// wget -o wget.log -O rdf "http://web.archive.org/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502DecimalMode&action=creativecommons"
+//
+// where the "action=" is manually attached ... finally produces the correct result in the local file "rdf".
+
+const waybackAPI = "https://archive.org/wayback/available?url="
+const wikiRoot =  "http://visual6502.org"
+
+func makeRdfLink(href string) string {
+	searchFor, err := url.JoinPath(wikiRoot, href)
+	if err != nil {
+		fatal("makeRdfLink: %v", err)
+	}
+	// We cannot use url.JoinPath here. It will join together the two URL fragments and
+	// place "?url=" at the end, because it doesn't know searchFor is supposed to be a
+	// query string value. I'm sure there's a right way to do this with the URL structure,
+	// but it's not documented, so ...
+	return waybackAPI + searchFor
 }
 
-func getRDF(n *html.Node, cx *context) error {
-	fmt.Printf("getRDF: attr=%v\n", n.Attr)
-	return nil
+/*
+{
+  "url": "http://visual6502.org/wiki/index.php?title=6502DecimalMode",
+  "archived_snapshots":
+  {
+    "closest":
+	{
+	  "status": "200", "available": true,
+	  "url": "http://web.archive.org/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502DecimalMode",
+	  "timestamp": "20210405071434"
+	}
+  }
+}
+*/
+
+// Get the Wayback Machine URL of the latest snapshot corresponding to
+// the href given by the link argument. Uses the WM's "available" API.
+func getLatest(link string) (string, error) {
+	dbg("getLatest(%s)\n", link)
+	resp, err := http.Get(link)
+	if err != nil {
+		fatal("getLatest(): http.Get(%s): %v", link, err)
+	}
+	dbg("WM json resp: %v\n", resp)
+
+	b := make([]byte, resp.ContentLength, resp.ContentLength)
+	_, err = resp.Body.Read(b)
+	if err != nil {
+		fatal("getLatest(): httpResponse.Body.Read(%s): %v", link, err)
+	}
+	dbg("WM json body: %v\n", string(b))
+
+	var data map[string]any
+	err = json.Unmarshal(b, &data)
+	if err != nil {
+		fatal("getLatest(): could not unmarshal json from %s: %v\n", link, err)
+	}
+	dbg("unmarshaled response: %v\n", data)
+	archived_snapshots, ok := data["archived_snapshots"].(map[string]any)
+	if !ok {
+		fatal("getLatest(): unexpected type in response (1): %v\n", data)
+	}
+	closest, ok := archived_snapshots["closest"].(map[string]any)
+	if !ok {
+		fatal("getLatest(): unexpected type in response (2): %v\n", data)
+	}
+	url, ok := closest["url"].(string)
+	if !ok {
+		fatal("getLatest(): unexpected type in response (3): %v\n", data)
+	}
+	return url, nil
 }
 
-var printPass = opTable{ printNode, [6]opFunc{}, nil, nil }
+func getTitle(link string) string {
+	TODO()
+	return ""
+}
 
-var rdfPass = opTable {
-	defaultAction: nil,
-	typeFuncs: [6]opFunc{},
-	elementPreFuncs: map[atom.Atom]opFunc{atom.Link: getRDF},
-	elementPostFuncs: nil,
+func save(page string, extension string, link string) error {
+	return TODO(page, extension, link)
+}
+
+func fatal(format string, args... any) {
+	msg := fmt.Sprintf(format, args)
+	fmt.Fprintf(os.Stderr, "mkmd: " + msg)
+	os.Exit(1)
 }
 
 func main() {
+	dflag := flag.Bool("d", false, "dump html")
+	rflag := flag.Bool("r", false, "get rdf content")
+	flag.Parse()
+
+	files := flag.Args()
+
 	in := os.Stdin
 	name := "standard input"
-	if len(os.Args) > 1 {
-		name = os.Args[1]
+	if len(files) > 0 {
+		name = files[0]
 		f, err := os.Open(name)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "mkmd: %v\n", err)
@@ -66,13 +194,32 @@ func main() {
 		os.Exit(2)
 	}
 
-	setOpTable(&rdfPass)
-	if err = process(doc, &context{0}); err != nil {
-		fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
-		os.Exit(2)
+	processed := 0
+
+	if *dflag {
+		setOpTable(&printPass)
+		if err = process(doc, &context{0}); err != nil {
+			fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
+			os.Exit(2)
+		}
+		processed++
 	}
 
-	fmt.Fprintf(os.Stderr, "mkmd: success\n")
+	if *rflag {
+		setOpTable(&rdfPass)
+		if err = process(doc, &context{0}); err != nil {
+			fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
+			os.Exit(2)
+		}
+		processed++
+	}
+
+	if processed > 0 {
+		fmt.Fprintf(os.Stderr, "mkmd: success\n")
+	} else {
+		fmt.Fprintf(os.Stderr, "mkmd: no action requested\n")
+	}
+	os.Exit(0)
 }
 
 func process(n *html.Node, cx *context) error {
@@ -98,8 +245,6 @@ func process(n *html.Node, cx *context) error {
 	return nil
 }
 
-// Markdown emitters
-//
 //func startEmit(np *node) {
 //	switch np.name {
 //	case "CharData":
