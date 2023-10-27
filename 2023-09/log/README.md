@@ -1,3 +1,117 @@
+# Introduction
+
+I ended up with three README files that each contained bits and
+pieces of the history of the work here. On 2023/10/27, I combined
+the README from ".." into this file. The end of the incorporated
+README is marked.
+
+
+## Visual 6502 Capture and Save Project
+
+### Overview
+
+#### Goal
+
+Save as much of the original http://visual6502.org site as possible,
+including the Wiki, the main site, and the images.
+
+#### What we have 
+
+- The main site. On the main site, the Wiki is not accessible. Example: http://visual6502.org
+- Wayback Machine backups of the Wiki. Example: `https://web.archive.org/web/20210405071236/http://visual6502.org/wiki/index.php?title=Special%3AAllPages`
+
+### Steps
+
+#### Make a list of the main HTML pages
+
+This was done by hand, by processing the `index_php_title_Special_AllPages.html` page
+into a list of 75 HTML pages.
+
+#### Download the 75 pages
+
+This was done with `tools/getter.sh` with the results stored in `d_1_raw/`
+
+#### Remove all the Wayback Machine crap
+
+This was done by `tools/fixer.sh` which calls `tools/fix_one.sh` on each file.
+This strips all the javascript and CSS links out of the header (in fact,
+it strips out everything but the title tag) and strips the non-original
+content from the body. Note: the original content is nicely delimited by
+HTML comments in the Wayback Machine.
+
+The results are stored in `d_2_filtered/`
+
+#### Get all the first-level images
+
+This is done by `tools/img_getter.sh` which calls tools/`get_img_for_file.sh`
+to get jpg, png, and gif extension files linked from the original 75 top
+level HTML files. The results are placed in `d_3_img/`
+
+Many of the results are HTML documents contained in files with one of the
+three image file extensions. These files in turn contain more image links,
+and they will need to be rewritten as markdown files for the eventual
+md-based site. So these need to be "hoisted" - moved to be peers with the
+original 75 files and any links to them rewritten to reference them.
+
+Once they are hoisted, the images they link to can be fetched by rerunning
+`tools/img_getter.sh` because it checks for the existence of a linked file
+before hitting the Wayback Machine with wget. So it can be run as many
+times to download all the images as required after adding more HTML files.
+
+#### Hoist the images that are really HTML pages
+
+Hoisting requires link rewriting which requires an understanding of links
+in the wiki. I've identified the following types of links. This list isn't
+known to be complete but the great majority of the links fit one of these.
+
+1. Absolute links outside the wiki. In these links, the href starts with
+`https://web.archive.org` and don't contain the string `visual6502.org/wiki`.
+1. Absolute links within the wiki. These also start `https://web.archive.org`.
+but do contain `visual6502.org/wiki`. I don't understand exactly why there
+are such links because they somewhat defeat the purpose of having a Wiki.
+1. Wiki links. These don't start with `https://web.archive.org` - they start
+with the rest of link (`/web/...`) and contain `wiki/index.php?title=`
+The target may an image, like `File:Atari_6507_7D.jpg` or it may be a page,
+like `6502Observations`. I don't know if the title exactly corresponds to
+the content of a title tag or is processed (e.g. spaces removed).
+1. Anchor links. Here the href is e.g. `href="#Tests_for_ADC"`. These are
+of course in-page links.
+1. Certain `<link>` tags in the header. See below.
+
+I think the external absolute links should be left as is, pointing into
+the Wayback Machine for now, at last until we host the new Wiki somewhere
+else than Github. This avoids licensing questions about the external
+images.
+
+Wiki-internal absolute links will be rewritten to point to their corresponding `.md` files in the new Wiki. This includes image links within the Wiki. Anchors will be handled as best they can be in Markdown. Initial reading is encouraging.
+
+2023-10-16
+
+There's another kind of link: <link> tags in the header of the basic 75
+files point to .rdf files that contain authorship information. I wasn't
+aware because `fixer.sh` strips everything from the header except the
+`<title>` tag. The idea behind this was to get rid of the Javascript and
+CSS links. Correcting this oversight requires modifying the Fixer and
+regenerating all the files in `d_2_filtered`.
+
+Other interesting behaviors may be visible as a result of perusing the
+list of all the files captured by the Wayback Machine. The Wayback Machine
+considers every combination of query string arguments to be separate links.
+Unfortunately this means is captures thouands and thousands of copies of
+the "most recent updates" page for various numbers of days. But more
+generally it's useful in figuring out the behavior of the Wiki's Javascript.
+
+I'm considering giving up on most of the downloader scripts and writing a
+purpose-built crawler in Golang. More generally I need to design the layout
+of the eventual markdown site in order to figure out how to rewrite the
+links in the downloaded documents.
+
+## END
+
+That's the end of the old "../README.md" file, added here on 10/27.
+
+The rest of this document is more or less a log.
+
 # Log of actions and approaches
 
 2023-09-06
@@ -82,7 +196,7 @@ to translate &nbsp; to &#160; which is legal XML.
 
 2023-10-06
 
-Today I cleaned up the image getter tools/img_getter.sh and successfully
+Today I cleaned up the image getter `tools/img_getter.sh` and successfully
 downloaded all 35 images. The downoads in are rawimg/. The rawimg/ directory
 is symlinked as img/ from the new md/ directory where the results will end up,
 so images in md/ will only require "img/filename" as paths. The mkmd translator
@@ -100,12 +214,11 @@ Now that I understand these .jpg files that are actually HTML,the entire
 processing pipeline is going to get more complicated. I should update the
 Getter (tools/getter.sh) with the "&#160" fix in the Fixer (tools/fixer.sh)
 so I can rerun the entire pipeline from scratch. (The very first thing in
-the pipeline, the ALL_PAGES list, was made from the page
-raw/index_php_title_Special_AllPages.html which I learned about from Ed.)
+the pipeline, the `ALL_PAGES` list, was made from the page
+`raw/index_php_title_Special_AllPages.html` which I learned about from Ed.)
 
-After the improved Getter runs and pulls all the pages in the ALL_PAGES
-list into raw/, I need to run the img_getter to pull all the linked files
-with .jpg and .png extensions into rawimg/.
+After the improved Getter runs and pulls all the pages in the `ALL_PAGES`
+list into raw/, I need to run the `img_getter` to pull all the linked files with .jpg and .png extensions into rawimg/.
 
 Unfortunately, I now know that some of the ".jpg" files are actually HTML
 documents with a bogus file extension. Handling for these is complicated.
@@ -121,12 +234,12 @@ their image links to "./img" (in the md/ directory). This makes the step of
 fetching the images more consistent.
 
 To do all this I should separate the loops over files from the processing
-of the files. I need a script that loops building URLs from the ALL_PAGES
+of the files. I need a script that loops building URLs from the `ALL_PAGES`
 list and calls fix.sh on each one. The fixer 
 
 So it's like this:
 
-Pull all 75 pages named in ...Special_AllPages.html (Done)
+Pull all 75 pages named in `...Special_AllPages.html` (Done)
 Fix them up, like remove the XML-illegal entities (Done)
 Fetch all the images referenced directly; some are really HTML (have tool)
 These go in rawimg/ which is symlinked as md/raw (have tool)
@@ -140,4 +253,37 @@ For each .jpg that is really an HTML document:
 When done:
   Search all the N > 75 HTML files for any links to the original JPG names
   and fix them if there are any, etc.
+
+### 2023/10/27
+
+Todat I merged ../README.md into this file. I also located all the symbols with underscores and wrapped them in single back quotes so they'll render correctly.
+
+During the previous two weeks, I backed off almost completely from using scripts and decided to write a downloader and reformatter in Golang. The only thing I kept from the scripting days was `d_1_raw/`, the 75 or so top-level files that are helpful for debugging.
+
+Then I began working to download all the RDF files with the authorship information. Eventually I got stuck (on an issue that turned out to be simple and stupid; but in such an unfamiliar world technically, given my lack of web and Javascript experience, it was hard to troubleshoot.)
+
+I posed a question on the ex-New Relic Slack and got some interesting suggestions.
+One was a tool written in Ruby, a gem that can execute from the command line
+as [`wayback_machine_downloader`](https://github.com/hartator/wayback-machine-downloader).
+
+I did a bunch of experiments with it. Of course initially it wanted to download 28,000 files for the Wiki alone, because the WM has saved that many (one for every value of "most recent=N days" that appears anywhere in a link, etc.) I eventually ended up with
+
+```
+wayback_machine_downloader http://visual6502.org --only wiki \
+  --exclude "/\&[A-Za-z]+|Special:/" > all_files.wmd 2>stderr.wmd
+```
+
+Yes, the log files are WMDs.  ;-)
+
+You can apparently only have one `--exclude` option; they do not seem to accumulate. So the regex has get more and more complex instead, using pipe characters to separate alternatives.
+
+This seems to have downloaded maybe 750 or so files, which is possible; it's about 10 images and secondary files for each top-level page. I'm currently investigating what I've got and in what format.
+
+
+
+
+
+
+
+
 

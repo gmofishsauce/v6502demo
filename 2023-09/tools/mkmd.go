@@ -1,9 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
-	"encoding/json"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -32,12 +33,16 @@ func rdfGetter(n *html.Node, cx *context) error {
 	}
 	// If we have the correct kind of link, fetch it.
 	if isRDF && len(href) > 0 {
-		link := makeRdfLink(href)
-		page, err := getLatest(link)
+		url, err := getMostRecentUrl(makeWaybackApiQuery(href))
 		if err != nil {
 			return err
 		}
-		if err = save(page, "rdf", getTitle(link)); err != nil {
+		url = url + "&action=creativecommons"
+		page, err := getBody(url)
+		if err != nil {
+			return err
+		}
+		if err = os.WriteFile(getTitle(href) + ".rdf", page, 0600); err != nil {
 			return err
 		}
 	}
@@ -45,7 +50,10 @@ func rdfGetter(n *html.Node, cx *context) error {
 	return nil
 }
 
-// makeRdfLink() makes a Wayback Machine URL for the referenced RDF.
+// makeWaybackApiQuery(href string) makes a Wayback Machine query URL for the argument href
+//
+// TODO: this comment is specific to the first use of this function, which was for
+// links to .rdf files, but the function itself is not specific to this file type.
 //
 // The argument (href from the link tag) looks something like this:
 // /wiki/index.php?title=6502DecimalMode&action=creativecommons
@@ -87,7 +95,7 @@ func rdfGetter(n *html.Node, cx *context) error {
 const waybackAPI = "https://archive.org/wayback/available?url="
 const wikiRoot =  "http://visual6502.org"
 
-func makeRdfLink(href string) string {
+func makeWaybackApiQuery(href string) string {
 	searchFor, err := url.JoinPath(wikiRoot, href)
 	if err != nil {
 		fatal("makeRdfLink: %v", err)
@@ -114,51 +122,56 @@ func makeRdfLink(href string) string {
 }
 */
 
+// Get the response body for the argument url. Return as a byte slice.
+func getBody(url string) ([]byte, error) {
+	dbg("getBody(%s)\n", url)
+    resp, err := http.Get(url)
+    if err != nil {
+        return nil, fmt.Errorf("getBody(): http.Get(%s): %v", url, err)
+    }
+	defer resp.Body.Close()
+    dbg("getBody() resp: %v\n", resp)
+
+	b, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return nil, fmt.Errorf("getBody(): httpResponse.Read(%s): %v", url, err)
+    }
+	return b, nil
+}
+
 // Get the Wayback Machine URL of the latest snapshot corresponding to
 // the href given by the link argument. Uses the WM's "available" API.
-func getLatest(link string) (string, error) {
-	dbg("getLatest(%s)\n", link)
-	resp, err := http.Get(link)
+func getMostRecentUrl(url string) (string, error) {
+	b, err := getBody(url)
 	if err != nil {
-		fatal("getLatest(): http.Get(%s): %v", link, err)
+		return "", err
 	}
-	dbg("WM json resp: %v\n", resp)
-
-	b := make([]byte, resp.ContentLength, resp.ContentLength)
-	_, err = resp.Body.Read(b)
-	if err != nil {
-		fatal("getLatest(): httpResponse.Body.Read(%s): %v", link, err)
-	}
-	dbg("WM json body: %v\n", string(b))
 
 	var data map[string]any
 	err = json.Unmarshal(b, &data)
 	if err != nil {
-		fatal("getLatest(): could not unmarshal json from %s: %v\n", link, err)
+		return "", err
 	}
 	dbg("unmarshaled response: %v\n", data)
+
 	archived_snapshots, ok := data["archived_snapshots"].(map[string]any)
 	if !ok {
-		fatal("getLatest(): unexpected type in response (1): %v\n", data)
+		return "", fmt.Errorf("archived_snapshots not found in json response");
 	}
 	closest, ok := archived_snapshots["closest"].(map[string]any)
 	if !ok {
-		fatal("getLatest(): unexpected type in response (2): %v\n", data)
+		return "", fmt.Errorf("closest not found in json response");
 	}
-	url, ok := closest["url"].(string)
+	result, ok := closest["url"].(string)
 	if !ok {
-		fatal("getLatest(): unexpected type in response (3): %v\n", data)
+		return "", fmt.Errorf("url not found in json response");
 	}
-	return url, nil
+	return result, nil
 }
 
-func getTitle(link string) string {
+func getTitle(url string) string {
 	TODO()
-	return ""
-}
-
-func save(page string, extension string, link string) error {
-	return TODO(page, extension, link)
+	return "TODO"
 }
 
 func fatal(format string, args... any) {
