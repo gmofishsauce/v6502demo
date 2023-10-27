@@ -279,6 +279,8 @@ You can apparently only have one `--exclude` option; they do not seem to accumul
 
 This seems to have downloaded maybe 750 or so files, which is possible; it's about 10 images and secondary files for each top-level page. I'm currently investigating what I've got and in what format.
 
+I moved the downloaded `websites/` directory to 2023-09, got rid of the `d_N...` directories (actually saved in `~/Fuss/V6502WikiOldDownloads`) and dumped the log files, which were mostly lists of the files that did not match the patterns.
+
 
 
 
