@@ -281,6 +281,39 @@ This seems to have downloaded maybe 750 or so files, which is possible; it's abo
 
 I moved the downloaded `websites/` directory to 2023-09, got rid of the `d_N...` directories (actually saved in `~/Fuss/V6502WikiOldDownloads`) and dumped the log files, which were mostly lists of the files that did not match the patterns.
 
+I found that some of the downloaded files were gzipped and then I found that gzip requires the .gz file extension, which wasn't present. I renamed the top level gzipped files:
+
+```
+file * | grep 'gzip compressed data, from Unix' | while read i ; do name=$(echo "$i" | sed 's/ .*$//' | sed 's/:$//') ; mv "$name" "${name}.gz" ; done
+```
+
+2023/10/28
+
+I committed the changes above. Now it turns out that the WMD doesn't seem to know anything about the .rdf documents which contain the authorship information.
+These are referenced only from `<link>` tags so it's not surprising. But it means my Golang downloader code was **not** a waste of time.
+Going back to work on that.
+
+2023/10/29
+
+I got the RDF downloader working! But I need to decide where to put the RDF files,
+which is similar to thinking through the layout of the entire eventual markdown-based wiki.
+
+I found four more compressed files, using a complete search that handles the one filename
+that has a single quote in it:
+
+```
+Macbook-Pro-2019:2023-09 jeff$ find . -type f -print0 | xargs -0 file | grep gzip
+
+./websites/visual6502.org/wiki/skins/common/diff.css?270: gzip compressed data...
+./websites/visual6502.org/wiki/skins/common/diff.js?270:  gzip compressed data...
+./websites/visual6502.org/wiki/skins/common/feed.css?270: gzip compressed data...
+./websites/visual6502.org/wiki/index.php?title=Special:Contributions/EdS/index.html: gzip compressed data...
+```
+
+I decompressed these four files by hand. It looks like there are options you can give gunzip
+to have it decompress into the same filename as the argument, but I manually renamed them .gz
+files and then manually decompressed them.
+
 
 
 

@@ -8,10 +8,12 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 
 	"golang.org/x/net/html"
 )
 
+// Context passed into the tree walker functions
 type context struct {
 	depth int
 }
@@ -37,12 +39,19 @@ func rdfGetter(n *html.Node, cx *context) error {
 		if err != nil {
 			return err
 		}
-		url = url + "&action=creativecommons"
+		url, err = fixupForRdf(url)
+		if err != nil {
+			return err
+		}
 		page, err := getBody(url)
 		if err != nil {
 			return err
 		}
-		if err = os.WriteFile(getTitle(href) + ".rdf", page, 0600); err != nil {
+		rdfName, err := getTitle(href)
+		if err != nil {
+			return err
+		}
+		if err = os.WriteFile(rdfName + ".rdf", page, 0600); err != nil {
 			return err
 		}
 	}
@@ -85,15 +94,16 @@ func rdfGetter(n *html.Node, cx *context) error {
 //  }
 //
 // Note that the url returned in the result JSON **DOES NOT** produce the RDF page.
-// It is necessary to MANUALLY re-append the `action=creativecommons` query string
-// to produce it:
+// It is necessary to manually edit the link two ways. First the `action=creativecommons`
+// query string must be added, and then the magical `if_` must be added to the 14-character
+// datetime substring. This will produce the RDF:
 //
-// wget -o wget.log -O rdf "http://web.archive.org/web/20210405071434/http://visual6502.org/wiki/index.php?title=6502DecimalMode&action=creativecommons"
-//
-// where the "action=" is manually attached ... finally produces the correct result in the local file "rdf".
+// wget -o wget.log -O rdf "http://web.archive.org/web/20210405071434if_/http://visual6502.org/wiki/index.php?title=6502DecimalMode&action=creativecommons"
 
 const waybackAPI = "https://archive.org/wayback/available?url="
 const wikiRoot =  "http://visual6502.org"
+const ccQS = "&action=creativecommons"
+const magicIf = "if_"
 
 func makeWaybackApiQuery(href string) string {
 	searchFor, err := url.JoinPath(wikiRoot, href)
@@ -169,9 +179,23 @@ func getMostRecentUrl(url string) (string, error) {
 	return result, nil
 }
 
-func getTitle(url string) string {
-	TODO()
-	return "TODO"
+func fixupForRdf(url string) (string, error) {
+	re := regexp.MustCompile(`.*[\d]{14}`)
+	prefix := re.FindString(url)
+	suffix := url[len(prefix):]
+	if len(prefix) == 0 || len(suffix) == 0 {
+		return "", fmt.Errorf("fixupForRdf(): failed to match URL")
+	}
+	return prefix+magicIf+suffix+ccQS, nil
+}
+
+func getTitle(url string) (string, error) {
+	prefix := regexp.MustCompile(`.*title=`).FindString(url)
+	suffix := regexp.MustCompile(`&.*$`).FindString(url)
+	if len(prefix) == 0 {
+		return "", fmt.Errorf("getTitle(): failed to match URL")
+	}
+	return url[len(prefix):len(url)-len(suffix)], nil
 }
 
 func fatal(format string, args... any) {
