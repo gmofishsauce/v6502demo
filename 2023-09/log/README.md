@@ -314,6 +314,26 @@ I decompressed these four files by hand. It looks like there are options you can
 to have it decompress into the same filename as the argument, but I manually renamed them .gz
 files and then manually decompressed them.
 
+2023/10/31
+
+Yesterday I reorganized the code for mkmd and did a few other things.
+Today I renamed the three files that contained single quotes
+by replacing the single quotes with commercial @-signs.
+I then made a list of all the HTML files in downloads:
+```
+find downloads -type f  | xargs file | grep 'HTML document' | sed 's/:  *HTML doc.*$//' > ALL_HTML_FILES
+```
+This found 174 HTML files, many of which are named unexpectedly (.jpg, .png, etc.)
+
+I then put mkmd in my ~/bin as "md" and ran:
+```
+cat ALL_HTML_FILES | xargs -n 1 ~/bin/md -d  > /dev/null 2>foo
+```
+which produced 174 copies of `mkmd: success` in `foo`.
+So the Golang HTML parser successfully parses all downloaded HTML files,
+and the tree walker successfully prints them, or thinks it did.
+
+
 
 
 
