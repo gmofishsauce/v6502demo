@@ -17,7 +17,7 @@ The Wayback Machine Downloader (WMD) was used to download the Wiki.
 
 Additional processing was done a custom tool written in Golang, `mkmd`.
 The source code for this tool is found in the tools/ subdirectory.
-I am the sole author of the mkmd tools and its GPLv3 licensed.
+I am the sole author of the mkmd tool and it is GPLv3 licensed.
 
 ## High level recovery steps
 
