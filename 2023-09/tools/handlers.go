@@ -30,6 +30,48 @@ import (
 	"golang.org/x/net/html/atom"
 )
 
+// An optable for dumping the entire document for debugging purposes
+var printPass = opTable{
+	defaultAction: printNode,
+	typeFuncs: [6]opFunc{},
+	elementPreFuncs: nil,
+	elementPostFuncs: nil }
+
+// An optable for a pass that gets .rdf files found in specific <link> tags
+var rdfPass = opTable {
+	defaultAction: nil,
+	typeFuncs: [6]opFunc{},
+	elementPreFuncs: map[
+		atom.Atom]opFunc{atom.Link: rdfHandler},
+	elementPostFuncs: nil,
+}
+
+// An optable for generating .md files from the Wiki's HTML files
+var mdPass = opTable {
+	defaultAction: nil,
+	typeFuncs: [6]opFunc{nil, doText, nil, nil, nil, doDocType},
+	elementPreFuncs: map[atom.Atom]opFunc{
+	},
+	elementPostFuncs: map[atom.Atom] opFunc{
+	},
+}
+
+func proto(n *html.Node, cx *context) error {
+	return nil
+}
+
+func doDocType(n *html.Node, cx *context) error {
+	return nil
+}
+
+func doText(n *html.Node, cx *context) error {
+	return nil
+}
+
+// =============================================================
+// Operation functions
+// =============================================================
+
 // An opFunc that returns an internal error
 func internalError(n *html.Node, cx *context) error {
 	return fmt.Errorf("internal error: type %v not expected (context %v)", n, cx)
@@ -46,22 +88,6 @@ func printNode(n *html.Node, cx *context) error {
 	fmt.Printf("%*sType=%s DataAtom=%v Data=%v Attr=%v\n", cx.depth*2, "",
 		typeNames[n.Type], n.DataAtom, strings.TrimSpace(n.Data), n.Attr)
 	return nil
-}
-
-// An optable for dumping the entire document for debugging purposes
-var printPass = opTable{
-	defaultAction: printNode,
-	typeFuncs: [6]opFunc{},
-	elementPreFuncs: nil,
-	elementPostFuncs: nil }
-
-// An optable for a pass that gets .rdf files found in specific <link> tags
-var rdfPass = opTable {
-	defaultAction: nil,
-	typeFuncs: [6]opFunc{},
-	elementPreFuncs: map[
-		atom.Atom]opFunc{atom.Link: rdfHandler},
-	elementPostFuncs: nil,
 }
 
 // rdfHandler is invoked for <link> tags only. It identifies tags

@@ -61,20 +61,36 @@ func getOpTable() *opTable {
 	return currentOpTable
 }
 
-// Return the operation.
+// Return the operation or nil if no operation should be performed on this
+// Node at this time.
+//
+// There's a subtlety here: some Nodes can have a function attached to both
+// the open tag and the closing tag. These are called the prefunc and the
+// postfunc. But for nodes that don't have any kind of corresponding closing
+// tag, like Doctype nodes and Text nodes, we only want to call one processing
+// function on the Node (and we do it at prefunc time). At the same time, we
+// want the default function, if any, to apply to any one of these calls. So
+// the "if result == nil" clauses below cannot be factored out to the end of
+// this function.
 func nodeToOp(n *html.Node, isPre bool) opFunc {
 	var result opFunc
-	if n.DataAtom != 0 {
+	if n.Type == html.ElementNode || n.Type == html.DocumentNode {
 		if isPre {
 			result = currentOpTable.elementPreFuncs[n.DataAtom]
 		} else {
 			result = currentOpTable.elementPostFuncs[n.DataAtom]
 		}
-	} else {
-		result = currentOpTable.typeFuncs[n.Type]
-	}
-	if result == nil {
-		result = currentOpTable.defaultAction // may also be nil
+		if result == nil {
+			result = currentOpTable.defaultAction // may also be nil
+		}
+	} else { // DocType, TextNode, Comment (or Error)
+		if isPre {
+			result = currentOpTable.typeFuncs[n.Type]
+			if result == nil {
+				result = currentOpTable.defaultAction // may also be nil
+			}
+		}
 	}
 	return result
 }
+

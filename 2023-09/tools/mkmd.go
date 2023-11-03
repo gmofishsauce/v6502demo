@@ -13,14 +13,18 @@ The flags are:
 	-d
 		Dump the HTML parse tree of HTML documents to stdout
 	-o directory
-		If any downloads occur, then store the downloaded files in
-		`directory`, which is created if it does not exist. If no
-		downloads occur, this option does nothing.
+		If any downloads occur or markdown files are generated, store the
+		downloaded or generated file(s) in `directory`, which is created
+		if it does not exist. If no downloads or file generation occur,
+		this option does nothing. The default output directory is "."
     -r
-		Scan the document for a `<link>` tag with a `type` attribute
-		having value `application/rdf+xml`. If found, use the Wayback
-		Machine API to construct a URL that is likely to reference the
-		RDF file and attempt to download it.
+		Scan the document for a `<link>` tag with a `type` attribute having
+		value `application/rdf+xml`. If found, use the Wayback Machine API to
+		construct a URL that is likely to reference the RDF file and attempt
+		to download it.
+	-m
+		Write a markdown (".md") file corresponding to the path, which must
+		be an HTML file. The file is written in the directory given by -o.
 
 */
 package main
@@ -64,6 +68,7 @@ func main() {
 	dflag := flag.Bool("d", false, "dump html")
 	rflag := flag.Bool("r", false, "get rdf content")
 	oflag := flag.String("o", ".", "set output directory")
+	mflag := flag.Bool("m", false, "create markdown file")
 	flag.Parse()
 	files := flag.Args()
 
@@ -100,6 +105,15 @@ func main() {
 
 	if *rflag {
 		setOpTable(&rdfPass)
+		if err = process(doc, &context{0, *oflag}); err != nil {
+			fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
+			os.Exit(2)
+		}
+		processed++
+	}
+
+	if *mflag {
+		setOpTable(&mdPass)
 		if err = process(doc, &context{0, *oflag}); err != nil {
 			fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
 			os.Exit(2)
