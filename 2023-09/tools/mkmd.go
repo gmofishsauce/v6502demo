@@ -57,13 +57,6 @@ import (
 	"golang.org/x/net/html"
 )
 
-
-// Context passed into the tree walker functions
-type context struct {
-	depth int
-	outputDirectory string
-}
-
 func main() {
 	dflag := flag.Bool("d", false, "dump html")
 	rflag := flag.Bool("r", false, "get rdf content")

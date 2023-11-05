@@ -51,12 +51,29 @@ var mdPass = opTable {
 	defaultAction: nil,
 	typeFuncs: [6]opFunc{nil, doText, nil, nil, nil, doDocType},
 	elementPreFuncs: map[atom.Atom]opFunc{
+		atom.Img: doImg,
 	},
 	elementPostFuncs: map[atom.Atom] opFunc{
 	},
 }
 
-func proto(n *html.Node, cx *context) error {
+// =============================================================
+// Operation functions
+// =============================================================
+
+func prototype(n *html.Node, cx *context) error {
+	return nil
+}
+
+func emitString(format string, args ...any) {
+	fmt.Printf(format, args...)
+}
+
+func doImg(n *html.Node, cx *context) error {
+	imgLink := getAttrVal(n, "src")
+	if len(imgLink) > 0 {
+		emitString("![an image](%s)\n", imgLink)
+	}
 	return nil
 }
 
@@ -67,10 +84,6 @@ func doDocType(n *html.Node, cx *context) error {
 func doText(n *html.Node, cx *context) error {
 	return nil
 }
-
-// =============================================================
-// Operation functions
-// =============================================================
 
 // An opFunc that returns an internal error
 func internalError(n *html.Node, cx *context) error {
@@ -132,3 +145,64 @@ func rdfHandler(n *html.Node, cx *context) error {
 	return nil
 }
 
+// Useful information about making markdown from HTML which is
+// the ultimate goal of this tooling. The functions themselves
+// are completely obsolete. Each case in the switches corresponds
+// to one pre- or post-element handler function.
+
+//func startEmit(np *node) {
+//	switch np.name {
+//	case "CharData":
+//		// emitString(np.text)		
+//		emitString("text")
+//		np.processed = true
+//	case "a":
+//		emitString("[")
+//	case "body":
+//		np.processed = true
+//	case "div":
+//		// For now we don't do anything with divs.
+//		np.processed = true
+//	case "h1", "h2", "h3", "h4", "h5", "h6":
+//		nHashes := np.name[1] - '0'
+//		emitString(strings.Repeat("#", int(1 + nHashes)))
+//		np.processed = true
+//	case "head":
+//		np.processed = true
+//	case "html":
+//		np.processed = true
+//	case "img":
+//		emitString("![an image](%s)", getAttrValue(np, "src"))
+//		//emitString("image here")
+//		np.processed = true
+//	case "p":
+//		emitString("\n")
+//		np.processed = true
+//	case "span":
+//		np.processed = true
+//	case "td":
+//		emitString("|")
+//		np.processed = true
+//	case "title":
+//		emitString("\n# ")
+//		np.processed = true
+//	case "tr":
+//		emitString("\n\n")
+//	}
+//}
+//
+//func endEmit(np *node) {
+//	switch np.name {
+//	case "a":
+//		emitString("](%s)", "href here") // getAttrValue(np, "href"))
+//		np.processed = true
+//	case "table":
+//		emitString(strings.Repeat("|:---:", len(np.children[0].children)))
+//		emitString("|\n")
+//		np.processed = true
+//	case "tr":
+//		emitString("|\n")
+//		np.processed = true
+//	}
+//}
+//

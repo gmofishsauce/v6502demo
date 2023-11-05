@@ -29,7 +29,15 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+
+    "golang.org/x/net/html"
 )
+
+// Context passed into the tree walker functions
+type context struct {
+	depth int
+	outputDirectory string
+}
 
 func makeOutputDir(outputDirectory string) {
 	err := os.MkdirAll(outputDirectory, 0700)	
@@ -100,6 +108,26 @@ func getTitle(url string) (string, error) {
 		return "", fmt.Errorf("getTitle(): failed to match URL")
 	}
 	return url[len(prefix):len(url)-len(suffix)], nil
+}
+
+// Return the value of the named attribute or ""
+func getAttrVal(node *html.Node, name string) string {
+	for _, v := range node.Attr {
+		if v.Key == name {
+			return v.Val
+		}
+	}
+	return ""
+}
+
+// Return true if an attribute is present.
+func hasAttr(node *html.Node, name string) bool {
+	for _, v := range node.Attr {
+		if v.Key == name {
+			return true
+		}
+	}
+	return false
 }
 
 func fatal(format string, args... any) {

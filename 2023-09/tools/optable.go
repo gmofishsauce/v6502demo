@@ -41,7 +41,10 @@ type opFunc func(n *html.Node, cx *context) error
 // HTML elements.  So an opTable needs to have operations for NodeTypes and
 // also operations for specific tags. There is also a default action. When
 // any action or its entire containing table is nil, the processor for that
-// pass will perform no operation.
+// pass will perform no operation. The defaultAction and typeFuncs, if any,
+// are called when the node is first encountered - they apply to node types
+// that don't have closing tags. PreFuncs are called for opening tags of
+// elements, and postFuncs for closing tags.
 type opTable struct {
 	defaultAction opFunc
 	typeFuncs [html.RawNode]opFunc
