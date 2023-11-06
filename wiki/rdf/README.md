@@ -1,3 +1,7 @@
+# Authorship information
+
+Each linked document contains the authorship for the page of the same name.
+
 [`6502DecimalMode.rdf`](./6502DecimalMode.rdf.md)
 [`6502Observations.rdf`](./6502Observations.rdf.md)
 [`6502TestPrograms.rdf`](./6502TestPrograms.rdf.md)
