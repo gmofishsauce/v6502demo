@@ -159,4 +159,4 @@
 [`VisualChips:Current_events.rdf`](./VisualChips:Current_events.rdf)
 [`WikiContributionPolicy.rdf`](./WikiContributionPolicy.rdf)
 [`Z8400.rdf`](./Z8400.rdf)
-[`Zilog.rdf`](./Zilog.rdf)
+[`Zilog.rdf`](./Zilog.rdf.md)

@@ -37,5 +37,18 @@ wayback_machine_downloader http://visual6502.org --only wiki \
 
 The mkmd tool was used to identify and download the most recent version
 of each Resource Description (`.rdf`) file in the Wiki.
-These files are found in [`./wiki/rdf`](wiki/rdf).
+These files are found in [`./wiki/rdf`](wiki/rdf). In Chrome, at least,
+the `.rdf` pages download, rather than displaying in a tab.
+
+### Set up Github Pages and create some README files
+
+I reenabled GH Pages for the entire repo. Much of the repo is not accessible through the Pages
+site, because it only renders markdown. I created some README.md files, which become index.html
+files in effect; these READMEs may be temporary.
+
+### Move the images
+
+The site will end up in `v6502demo/wiki`, so the images need to be there. Rather than copy the
+ones I downloaded which would double the size of the repo, I moved the downloadeded `images/`
+directory from `downloads/visual6502.org/wiki/images` to `wiki/images`.
 
