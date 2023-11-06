@@ -3,16 +3,15 @@
 <rdf:RDF xmlns:cc="http://web.resource.org/cc/"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-	<cc:Work rdf:about="http://visual6502.org/wiki/index.php?title=Zilog">
-		<dc:title>Zilog</dc:title>
+	<cc:Work rdf:about="http://visual6502.org/wiki/index.php?title=File:6502_rb_sheet1-11-74.id.jpeg">
+		<dc:title>6502 rb sheet1-11-74.id.jpeg</dc:title>
 		<dc:publisher rdf:resource="http://visual6502.org/wiki/index.php?title=VisualChips:About" />
 		<dc:language>en</dc:language>
 		<dc:type>Text</dc:type>
 		<dc:format>text/html</dc:format>
-		<dc:identifier>http://visual6502.org/wiki/index.php?title=Zilog</dc:identifier>
-		<dc:date>2011-01-28</dc:date>
-		<dc:creator rdf:resource="http://visual6502.org/wiki/index.php?title=User:Keith" />
-		<dc:contributor>Ed Spittles</dc:contributor>
+		<dc:identifier>http://visual6502.org/wiki/index.php?title=File:6502_rb_sheet1-11-74.id.jpeg</dc:identifier>
+		<dc:date>2014-12-24</dc:date>
+		<dc:creator>VisualChips user 192.99.32.115</dc:creator>
 		<dc:rights rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
 		<cc:license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
 	</cc:Work>

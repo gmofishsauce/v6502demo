@@ -3,13 +3,13 @@
 <rdf:RDF xmlns:cc="http://web.resource.org/cc/"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-	<cc:Work rdf:about="http://visual6502.org/wiki/index.php?title=Zilog">
-		<dc:title>Zilog</dc:title>
+	<cc:Work rdf:about="http://visual6502.org/wiki/index.php?title=Motorola">
+		<dc:title>Motorola</dc:title>
 		<dc:publisher rdf:resource="http://visual6502.org/wiki/index.php?title=VisualChips:About" />
 		<dc:language>en</dc:language>
 		<dc:type>Text</dc:type>
 		<dc:format>text/html</dc:format>
-		<dc:identifier>http://visual6502.org/wiki/index.php?title=Zilog</dc:identifier>
+		<dc:identifier>http://visual6502.org/wiki/index.php?title=Motorola</dc:identifier>
 		<dc:date>2011-01-28</dc:date>
 		<dc:creator rdf:resource="http://visual6502.org/wiki/index.php?title=User:Keith" />
 		<dc:contributor>Ed Spittles</dc:contributor>
