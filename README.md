@@ -10,7 +10,7 @@ The original Wiki states:
 Content is available under [Attribution-NonCommercial-ShareAlike 3.0 Unported](https://web.archive.org/web/20210405071423/http://creativecommons.org/licenses/by-nc-sa/3.0/) license.
 
 To honor this license, I must list the authors.
-This information is found in `./wiki/rdf`.
+This information is found in [`./wiki/rdf`](wiki/rdf).
 
 ## Tooling
 
@@ -36,6 +36,6 @@ wayback_machine_downloader http://visual6502.org --only wiki \
 ### Obtain the authorship information
 
 The mkmd tool was used to identify and download the most recent version
-of each Resource Description (".rdf") file in the Wiki.
-These files are found in [`./wiki/rdf`](./wiki/rdf).
+of each Resource Description (`.rdf`) file in the Wiki.
+These files are found in [`./wiki/rdf`](wiki/rdf).
 
