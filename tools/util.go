@@ -37,6 +37,7 @@ import (
 type context struct {
 	depth int
 	outputDirectory string
+	fileName string
 }
 
 func makeOutputDir(outputDirectory string) {
@@ -130,10 +131,15 @@ func hasAttr(node *html.Node, name string) bool {
 	return false
 }
 
+// Emit a string to the standard output. For intended results (output)
+// of this program. Avoid random fmt.PrintX to avoid random output.
+func emitString(format string, args ...any) {
+	fmt.Printf(format, args...)
+}
+
 func fatal(format string, args... any) {
 	msg := fmt.Sprintf(format, args)
 	fmt.Fprintf(os.Stderr, "mkmd: " + msg)
 	os.Exit(1)
 }
-
 

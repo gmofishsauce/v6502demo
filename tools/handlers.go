@@ -57,6 +57,19 @@ var mdPass = opTable {
 	},
 }
 
+// An optable for fixing filenames having inconvenient characters
+var urlPass = opTable {
+	defaultAction: nil,
+	typeFuncs: [6]opFunc{nil, nil, nil, nil, nil, urlDocType},
+	elementPreFuncs: map[atom.Atom]opFunc{
+		atom.A: urlA,
+		atom.Link: urlLink,
+		atom.Img: urlImg,
+	},
+	elementPostFuncs: map[atom.Atom] opFunc{
+	},
+}
+
 // =============================================================
 // Operation functions
 // =============================================================
@@ -65,9 +78,82 @@ func prototype(n *html.Node, cx *context) error {
 	return nil
 }
 
-func emitString(format string, args ...any) {
-	fmt.Printf(format, args...)
+// The urlTag functions implement -u. This pass is intended to clean up
+// shell metacharacters and non-URL characters that appear in the names
+// of Wiki pages. These are a problem because the Jekyll markdown to HTML
+// processor cannot successfully process these. (To be clear, I don't fully
+// understand the issue - rather I just observe that removing files with
+// these characters causes Github Pages builds to succeed. I don't know
+// exactly who or what is at fault.)
+//
+// These functions don't work like other functions in this tool: instead of
+// actually taking an action, they emit shell commands that will take the
+// action when invoked. There are only a few of these files (for example,
+// three top-level HTML files have single quotes in their file name). It's
+// much safer to emit the commands for perusal than to do the work. Most of
+// the work is fixing URLs that point to files with names that have changed.
+//
+// To fix all the relevant URLs, the code needs to find the root of the entire
+// wiki. It does this by seeking a file with a specific name that should be
+// present in the root of the wiki: "index.php?title=Special:AllPages" and
+// using the directory holding that file as the wiki root.
+
+const pageExpectedInRoot = "index.php?title=Special:AllPages"
+var rootDirName string // XXX should go in context
+
+func getWikiRoot(filePath string, rootIndicator string) string {
+	return "TODO"
 }
+
+func urlDocType(n *html.Node, cx *context) error {
+	dbg("Processing rename for %s\n", cx.fileName)
+	rootDirName := getWikiRoot(cx.fileName, pageExpectedInRoot)
+	if len(rootDirName) == 0 {
+		fatal("Cannot find root of wiki: no directory in path \"%s\" contains \"%s\"\n",
+			cx.fileName, pageExpectedInRoot)
+	}
+	return nil
+}
+
+func urlA(n *html.Node, cx *context) error {
+	return nil
+}
+
+func urlImg(n *html.Node, cx *context) error {
+	return nil
+}
+
+func urlLink(n *html.Node, cx *context) error {
+	return nil
+}
+
+/*
+
+This was how I decided that the only HTML tags with attributes
+containing URLs I had to worry about were <a>, <img>, and <link>.
+The code is no longer needed but kept for now in case I want to
+run something like it again.
+
+var nodesHavingURLs = make(map [string]bool, 10)
+
+func findURLs(n *html.Node, cx *context) error {
+    for _, a := range n.Attr {
+		if strings.Contains(a.Val, "wiki") {
+			kind := fmt.Sprintf("%s-%d-%s", typeNames[n.Type], n.DataAtom, n.Data)
+			nodesHavingURLs[kind] = true
+		}
+    }
+	if n.Type == html.DocumentNode {
+		for k, v := range nodesHavingURLs {
+			fmt.Printf("%s, %v\n", k, v)
+		}
+	}
+	return nil
+}
+
+*/
+
+// End of support for -u. Begin support for -m.
 
 func doImg(n *html.Node, cx *context) error {
 	imgLink := getAttrVal(n, "src")
@@ -85,23 +171,7 @@ func doText(n *html.Node, cx *context) error {
 	return nil
 }
 
-// An opFunc that returns an internal error
-func internalError(n *html.Node, cx *context) error {
-	return fmt.Errorf("internal error: type %v not expected (context %v)", n, cx)
-}
-
-// An opFunc that prints "not handled: thing" for use as a default
-func notHandled(n *html.Node, cx *context) error {
-	fmt.Printf("not handled: node %v (context %v)\n", n, cx)
-	return nil
-}
-
-// A debugging opFunc that just prints the node with indent
-func printNode(n *html.Node, cx *context) error {
-	fmt.Printf("%*sType=%s DataAtom=%v Data=%v Attr=%v\n", cx.depth*2, "",
-		typeNames[n.Type], n.DataAtom, strings.TrimSpace(n.Data), n.Attr)
-	return nil
-}
+// End of support for -m. Begin support for -r.
 
 // rdfHandler is invoked for <link> tags only. It identifies tags
 // that link .rdf files containing authorship and license data and
@@ -142,6 +212,26 @@ func rdfHandler(n *html.Node, cx *context) error {
 		}
 	}
 
+	return nil
+}
+
+// End of support for -r. Begin general handlers.
+
+// An opFunc that returns an internal error
+func internalError(n *html.Node, cx *context) error {
+	return fmt.Errorf("internal error: type %v not expected (context %v)", n, cx)
+}
+
+// An opFunc that prints "not handled: thing" for use as a default
+func notHandled(n *html.Node, cx *context) error {
+	dbg("not handled: node %v (context %v)\n", n, cx)
+	return nil
+}
+
+// A debugging opFunc that just prints the node with indent
+func printNode(n *html.Node, cx *context) error {
+	fmt.Printf("%*sType=%s DataAtom=%v Data=%v Attr=%v\n", cx.depth*2, "",
+		typeNames[n.Type], n.DataAtom, strings.TrimSpace(n.Data), n.Attr)
 	return nil
 }
 

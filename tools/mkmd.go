@@ -25,6 +25,10 @@ The flags are:
 	-m
 		Write a markdown (".md") file corresponding to the path, which must
 		be an HTML file. The file is written in the directory given by -o.
+	-u
+		Update the filename of the argument file to contain no shell metacharacters
+		or reserved URL characters. Details are TBD.
+
 
 */
 package main
@@ -57,61 +61,60 @@ import (
 	"golang.org/x/net/html"
 )
 
+type flagOp struct {
+	flagVal bool
+	ops *opTable
+	name string
+}
+
 func main() {
 	dflag := flag.Bool("d", false, "dump html")
 	rflag := flag.Bool("r", false, "get rdf content")
 	oflag := flag.String("o", ".", "set output directory")
 	mflag := flag.Bool("m", false, "create markdown file")
+	uflag := flag.Bool("u", false, "rewrite URLs")
 	flag.Parse()
-	files := flag.Args()
 
+	// Now make a table that maps the value of an operation flag,
+	// true or false, to the operation table that implements it.
+	flagOpTable := []flagOp{
+		{*dflag, &printPass, "-d"},
+		{*rflag, &rdfPass, "-r"},
+		{*mflag, &mdPass, "-m"},
+		{*uflag, &urlPass, "-u"},
+	}
+
+	files := flag.Args()
 	in := os.Stdin
 	name := "standard input"
 	if len(files) > 0 {
 		name = files[0]
 		f, err := os.Open(name)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "mkmd: %v\n", err)
-			os.Exit(1)
+			fatal(err.Error())
 		}
 		defer f.Close()
 		in = f
 	}
 
-	fmt.Printf("Parsing %s\n", name)
+	dbg("Parsing %s\n", name)
 	doc, err := html.Parse(in)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "mkmd: parse: %v\n", err)
-		os.Exit(2)
+		fatal(err.Error())
 	}
 
 	processed := 0
 
-	if *dflag {
-		setOpTable(&printPass)
-		if err = process(doc, &context{0, *oflag}); err != nil {
-			fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
-			os.Exit(2)
+	for _, flop := range flagOpTable {
+		if flop.flagVal {
+			dbg("Processing %s\n", flop.name)
+			setOpTable(flop.ops)
+			cx := &context{0, *oflag, name}
+			if err = process(doc, cx); err != nil {
+				fatal(err.Error())
+			}
+			processed++
 		}
-		processed++
-	}
-
-	if *rflag {
-		setOpTable(&rdfPass)
-		if err = process(doc, &context{0, *oflag}); err != nil {
-			fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
-			os.Exit(2)
-		}
-		processed++
-	}
-
-	if *mflag {
-		setOpTable(&mdPass)
-		if err = process(doc, &context{0, *oflag}); err != nil {
-			fmt.Fprintf(os.Stderr, "mkmd: process: %v\n", err)
-			os.Exit(2)
-		}
-		processed++
 	}
 
 	if processed > 0 {

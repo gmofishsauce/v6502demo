@@ -41,7 +41,7 @@ func TODO(args... any) error {
 	pc, _, _, ok := runtime.Caller(1)
     details := runtime.FuncForPC(pc)
     if ok && details != nil && !todoDone[details.Name()] {
-        fmt.Printf("TODO called from %s\n", details.Name())
+        dbg("TODO called from %s\n", details.Name())
 		todoDone[details.Name()] = true
     }
 	return nil
