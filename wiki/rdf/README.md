@@ -145,7 +145,6 @@ Each linked document contains the authorship for the page of the same name.
 [`Signetics.rdf`](./Signetics.rdf.md)
 [`Sinclair.rdf`](./Sinclair.rdf.md)
 [`Synertek.rdf`](./Synertek.rdf.md)
-[`Talk:JssimUserHelp.rdf`](./Talk:JssimUserHelp.rdf.md)
 [`Tektronix.rdf`](./Tektronix.rdf.md)
 [`Texas_Instruments.rdf`](./Texas_Instruments.rdf.md)
 [`The_ChipSim_Simulator.rdf`](./The_ChipSim_Simulator.rdf.md)
