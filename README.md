@@ -93,3 +93,26 @@ The site will end up in `v6502demo/wiki`, so the images need to be there. Rather
 ones I downloaded which would double the size of the repo, I moved the downloadeded `images/`
 directory from `downloads/visual6502.org/wiki/images` to `wiki/images`.
 
+### Write the .md files
+
+This is the point of the whole exercise: writing a static markdown file that captures all the
+valuable content of the original MediaWiki page. This step includes updating all the URLs that
+may have pointed to renamed files. All the hrefs in the wiki fall into one of the catagories
+described by the following sequence of `grep -v` commands:
+```
+grep href * |\
+	grep -v 'href="/wiki' |\
+	grep -v "api.php" |\
+	grep -v 'href="#[A-Za-z]' |\
+	grep -v 'http://visual6502' |\
+	grep -v "http://[A-Za-z]" |\
+	grep -v "https://[A-Za-z]" |\
+	grep -v 'href="/favicon.ico"' |\
+	grep -v 'href="#[0-9]'
+```
+The first line alone produces over 8500 lines of output, of which the `grep -v` commands
+filter all but one line, an FTP link. The markdown generator will have to deal with all
+the filtered URL types when they are encountered (they may not be, because the hrefs may
+be found in HTML tags that the markdown processor ignores; note for example the "api.php"
+links to the MediaWiki API).
+

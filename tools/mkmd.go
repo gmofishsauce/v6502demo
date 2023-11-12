@@ -6,12 +6,12 @@ a single document on each execution.
 
 Usage:
 
-    mkmd [flags] path
+    mkmd [flags] document-path
 
 The flags are:
 
 	-d
-		Dump the HTML parse tree of HTML documents to stdout
+		Dump the HTML parse tree of the HTML document to stdout
 	-o directory
 		If any downloads occur or markdown files are generated, store the
 		downloaded or generated file(s) in `directory`, which is created
@@ -23,7 +23,7 @@ The flags are:
 		construct a URL that is likely to reference the RDF file and attempt
 		to download it.
 	-m
-		Write a markdown (".md") file corresponding to the path, which must
+		Write a markdown (".md") file corresponding to the document, which must
 		be an HTML file. The file is written in the directory given by -o.
 	-u
 		Update the filename of the argument file to contain no shell metacharacters
@@ -72,7 +72,7 @@ func main() {
 	rflag := flag.Bool("r", false, "get rdf content")
 	oflag := flag.String("o", ".", "set output directory")
 	mflag := flag.Bool("m", false, "create markdown file")
-	uflag := flag.Bool("u", false, "rewrite URLs")
+	uflag := flag.Bool("u", false, "replace non-URL characters in file name")
 	flag.Parse()
 
 	// Now make a table that maps the value of an operation flag,
@@ -81,24 +81,32 @@ func main() {
 		{*dflag, &printPass, "-d"},
 		{*rflag, &rdfPass, "-r"},
 		{*mflag, &mdPass, "-m"},
-		{*uflag, &urlPass, "-u"},
 	}
 
-	files := flag.Args()
-	in := os.Stdin
-	name := "standard input"
-	if len(files) > 0 {
-		name = files[0]
-		f, err := os.Open(name)
-		if err != nil {
+	file := flag.Args()
+	if len(file) != 1 {
+		fmt.Fprintln(os.Stderr, "Usage: mkmd flags file")
+		flag.PrintDefaults();
+		os.Exit(1)
+	}
+
+	if *uflag {
+		if err := makeUrlSafeFileName(file[0]); err != nil {
 			fatal(err.Error())
 		}
-		defer f.Close()
-		in = f
+		fmt.Fprintf(os.Stderr, "mkmd: success\n")
+		os.Exit(0)
 	}
 
+	name := file[0]
+	f, err := os.Open(name)
+	if err != nil {
+		fatal(err.Error())
+	}
+	defer f.Close()
+
 	dbg("Parsing %s\n", name)
-	doc, err := html.Parse(in)
+	doc, err := html.Parse(f)
 	if err != nil {
 		fatal(err.Error())
 	}

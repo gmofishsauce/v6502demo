@@ -28,7 +28,9 @@ import (
 	"io/fs"
 	"net/http"
 	"os"
+	"path"
 	"regexp"
+	"strings"
 
     "golang.org/x/net/html"
 )
@@ -137,9 +139,64 @@ func emitString(format string, args ...any) {
 	fmt.Printf(format, args...)
 }
 
+// Implement -u. Fix names so they don't result in illegal URLs.
+
+// This function is used to remap the name of a file to an URL-safe name.
+// It must not be applied to a whole URL, because it will remap colons and
+// slashes. The rule from RFC3986 is: ASCII letters and digits are legal,
+// along with -_~. (dot). Everything else is not legal in a name (the last
+// component of a path). Many characters not legal in names are legal in
+// query strings, i.e. encoding them is optional. The Wayback Machine
+// Downloader makes query strings from the original MediaWiki into file
+// names in the download, which is what causes the issue we're fixing.
+func urlSafeName(origName string) string {
+	var result strings.Builder
+	for _, c := range origName {
+		switch {
+		case c >= 'a' && c <= 'z' || c >= '0' && c <= '9' || c >= 'A' && c <= 'Z':
+			result.WriteRune(c)
+		case c == '-' || c == '_' || c == '.' || c == '~':
+			result.WriteRune(c)
+		case c == '?' || c == '=' || c == ':':
+			result.WriteByte('-')
+		case c == '/':
+			fatal("urlSafeName(): found '/' character: not a name: %s", origName)
+		default:
+			result.WriteByte('~')
+		}
+	}
+	return result.String()
+}
+
+// Make a safe URL from an URL that may contain illegal characters in
+// the filename component only. Parse the URL, isolate the name from the
+// path, unescape just the name, fix the name to contain no escapable
+// characters, and put the URL back together - escaping it has been made
+// unnecessary. This should only be applied to wiki URLs or else that
+// last assumption may be incorrect.
+func urlSafeURL(origUrl string) string {
+	return ""
+}
+
+func makeUrlSafeFileName(name string) error {
+	dir := path.Dir(name)
+	base := path.Base(name)
+	safePath := path.Join(dir, urlSafeName(base))
+	dbg("Rename %s => %s\n", name, safePath)
+	if err := os.Rename(name, safePath); err != nil {
+		return err
+	}
+	return nil
+}
+
 func fatal(format string, args... any) {
-	msg := fmt.Sprintf(format, args)
-	fmt.Fprintf(os.Stderr, "mkmd: " + msg)
+	var msg string
+	if len(args) == 0 {
+		msg = format
+	} else {
+		msg = fmt.Sprintf(format, args)
+	}
+	fmt.Fprintf(os.Stderr, "mkmd: " + msg + "\n")
 	os.Exit(1)
 }
 
