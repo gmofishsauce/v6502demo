@@ -98,7 +98,23 @@ func rdfHandler(n *html.Node, cx *context) error {
 			href = a.Val
 		}
 	}
-	// If we have the correct kind of link, fetch it.
+
+	// If we have the correct kind of link, fetch it. Note: We want to
+	// maintain certain correspondences between file names. But the Jekyll
+	// processor (or some part of the Gitlab Pages pipeline) is not happy
+	// with filenames having illegal URL characters like single quotes or
+	// parens, and three of the top level files (and their corresponding
+	// .rdf files) contain single quotes. Yet all we have here is the href
+	// to the file, which does not contain a single quote - it contains an
+	// URL-encoded single quote, %27. Eventually I made the decision to
+	// create a substitution rule and rename all the files. This means I
+	// need to make the same substitutions in the URLs that refer to them.
+	// So I need to get the filename component of the URL with the %27
+	// expanded to a single quote, then run the substitution rule on the
+	// the resulting string, then write the file under that name, and then
+	// finally (later, not here) fix the href to match. The substitution
+	// rule for characters produces only URL-safe characters, so there is
+	// never any need to URL encode after running the rule.
 	if isRDF && len(href) > 0 {
 		url, err := getMostRecentUrl(makeWaybackApiQuery(href))
 		if err != nil {
@@ -116,6 +132,7 @@ func rdfHandler(n *html.Node, cx *context) error {
 		if err != nil {
 			return err
 		}
+		rdfName = urlSafeName(rdfName)
 		makeOutputDir(cx.outputDirectory)
 		if err = os.WriteFile(path.Join(cx.outputDirectory, rdfName + ".rdf"), page, 0600); err != nil {
 			return err

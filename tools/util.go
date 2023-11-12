@@ -27,9 +27,9 @@ import (
 	"io"
 	"io/fs"
 	"net/http"
+	"net/url"
 	"os"
 	"path"
-	"regexp"
 	"strings"
 
     "golang.org/x/net/html"
@@ -104,13 +104,28 @@ func getMostRecentUrl(url string) (string, error) {
 	return result, nil
 }
 
-func getTitle(url string) (string, error) {
-	prefix := regexp.MustCompile(`.*title=`).FindString(url)
-	suffix := regexp.MustCompile(`&.*$`).FindString(url)
-	if len(prefix) == 0 {
-		return "", fmt.Errorf("getTitle(): failed to match URL")
+// Return the title from the "title=" QS of the argument URL string.
+// The result may be used as a filename, and we want to preserve the
+// correspondence between filenames within the directory hierarchy.
+// So we URL expand the string, converting e.g. %27 back to single
+// quote, after which the caller can choose to run the URL-safe name
+// corrector on the string.
+func getTitle(rawUrl string) (string, error) {
+	parsedUrl, err := url.Parse(rawUrl)
+	if err != nil {
+		return "", err
 	}
-	return url[len(prefix):len(url)-len(suffix)], nil
+	parsedQuery, err := url.ParseQuery(parsedUrl.RawQuery)
+	if err != nil {
+		return "", err
+	}
+	titleString, ok := parsedQuery["title"]
+	if !ok || len(titleString) != 1 {
+		return "", fmt.Errorf("getTitle(%s): no title= query string", rawUrl)
+	}
+	result := titleString[0]
+	dbg("getTitle(): %s\n", result)
+	return result, nil
 }
 
 // Return the value of the named attribute or ""
