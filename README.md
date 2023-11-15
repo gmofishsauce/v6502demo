@@ -46,6 +46,22 @@ The command above can be checked without doing an actual download by adding the 
 option `--list` to the wayback_machine_downloader command line. The list of files to be
 downloads is written to the standard output (e.g. `all_files.wmd` in the example above).
 
+### Really download the files using the Wayback Machine Downloader
+
+After my initial download, I found that I could never download the entire site again (which
+turned out to be required because I did not treat the download as pristine). It seems like
+a throttline issues, and the Wayback Machine Downloader does not have any options for
+adding delays between the individual file downloads.
+
+In response I wrote a shell script, `./tools/dl.sh`. To use it, run the WMD command given
+above with the `--list` options. This produces a JSON file which I checked in as ALL_FILES.json.
+Make a copy of the file and remove the first line '[' and the last line ']'; this leaves a file
+in "JSON lines" format (see jsonlines.org). Run `./tools/dl.sh jsonlines` to download all the
+files. The script will incrementally remove lines from the file as it successfully downloads
+each file; this allows the script to be killed and restarted. The script delays 5 to 15 seconds
+between each pair of file downloads. I found this to be sufficient and did not investigate
+further.
+
 ### Download the authorship information
 
 The license on the wiki requires listing the authors. I found that all authorship information

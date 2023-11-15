@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" dir="ltr">
+<head>
+<title>Special pages - VisualChips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="MediaWiki 1.16.0" />
+<meta name="robots" content="noindex,nofollow" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="VisualChips (en)" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
+<link rel="alternate" type="application/atom+xml" title="VisualChips Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="/wiki/skins/common/shared.css?270" media="screen" />
+<link rel="stylesheet" href="/wiki/skins/common/commonPrint.css?270" media="print" />
+<link rel="stylesheet" href="/wiki/skins/monobook/main.css?270" media="screen" />
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?270" media="screen" /><![endif]-->
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" media="print" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=-&amp;action=raw&amp;maxage=18000&amp;gen=css" />
+<script>
+var skin="monobook",
+stylepath="/wiki/skins",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/",
+wgArticlePath="/wiki/index.php?title=$1",
+wgScriptPath="/wiki",
+wgScriptExtension=".php",
+wgScript="/wiki/index.php",
+wgVariantArticlePath=false,
+wgActionPaths={},
+wgServer="http://visual6502.org",
+wgCanonicalNamespace="Special",
+wgCanonicalSpecialPageName="Specialpages",
+wgNamespaceNumber=-1,
+wgPageName="Special:SpecialPages",
+wgTitle="SpecialPages",
+wgAction="view",
+wgArticleId=0,
+wgIsArticle=false,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="en",
+wgContentLanguage="en",
+wgBreakFrames=false,
+wgCurRevisionId=0,
+wgVersion="1.16.0",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Main Page",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "VisualChips", "5": "VisualChips talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "visualchips": 4, "visualchips_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "image": 6, "image_talk": 7},
+wgSiteName="VisualChips",
+wgCategories=[],
+wgRestrictionEdit=[],
+wgRestrictionMove=[];
+</script><script src="/wiki/skins/common/wikibits.js?270"></script>
+<script src="/wiki/skins/common/ajax.js?270"></script>
+<script src="/wiki/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=monobook&amp;270"></script>
+
+</head>
+<body class="mediawiki ltr ns--1 ns-special page-Special_SpecialPages skin-monobook">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" >
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading">Special pages</h1>
+	<div id="bodyContent">
+		<h3 id="siteSub">From VisualChips</h3>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+		<!-- start content -->
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-maintenance"> <span class="mw-headline" id="Maintenance_reports">Maintenance reports</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:BrokenRedirects" title="Special:BrokenRedirects">Broken redirects</a></li>
+<li><a href="/wiki/index.php?title=Special:DeadendPages" title="Special:DeadendPages">Dead-end pages</a></li>
+<li><a href="/wiki/index.php?title=Special:DoubleRedirects" title="Special:DoubleRedirects">Double redirects</a></li>
+<li><a href="/wiki/index.php?title=Special:LongPages" title="Special:LongPages">Long pages</a></li>
+<li><a href="/wiki/index.php?title=Special:AncientPages" title="Special:AncientPages">Oldest pages</a></li>
+<li><a href="/wiki/index.php?title=Special:LonelyPages" title="Special:LonelyPages">Orphaned pages</a></li>
+<li><a href="/wiki/index.php?title=Special:FewestRevisions" title="Special:FewestRevisions">Pages with the fewest revisions</a></li>
+<li><a href="/wiki/index.php?title=Special:WithoutInterwiki" title="Special:WithoutInterwiki">Pages without language links</a></li>
+<li><a href="/wiki/index.php?title=Special:ProtectedPages" title="Special:ProtectedPages">Protected pages</a></li>
+<li><a href="/wiki/index.php?title=Special:ProtectedTitles" title="Special:ProtectedTitles">Protected titles</a></li>
+<li><a href="/wiki/index.php?title=Special:ShortPages" title="Special:ShortPages">Short pages</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:UncategorizedCategories" title="Special:UncategorizedCategories">Uncategorized categories</a></li>
+<li><a href="/wiki/index.php?title=Special:UncategorizedFiles" title="Special:UncategorizedFiles">Uncategorized files</a></li>
+<li><a href="/wiki/index.php?title=Special:UncategorizedPages" title="Special:UncategorizedPages">Uncategorized pages</a></li>
+<li><a href="/wiki/index.php?title=Special:UncategorizedTemplates" title="Special:UncategorizedTemplates">Uncategorized templates</a></li>
+<li><a href="/wiki/index.php?title=Special:UnusedCategories" title="Special:UnusedCategories">Unused categories</a></li>
+<li><a href="/wiki/index.php?title=Special:UnusedFiles" title="Special:UnusedFiles">Unused files</a></li>
+<li><a href="/wiki/index.php?title=Special:UnusedTemplates" title="Special:UnusedTemplates">Unused templates</a></li>
+<li><a href="/wiki/index.php?title=Special:WantedCategories" title="Special:WantedCategories">Wanted categories</a></li>
+<li><a href="/wiki/index.php?title=Special:WantedFiles" title="Special:WantedFiles">Wanted files</a></li>
+<li><a href="/wiki/index.php?title=Special:WantedPages" title="Special:WantedPages">Wanted pages</a></li>
+<li><a href="/wiki/index.php?title=Special:WantedTemplates" title="Special:WantedTemplates">Wanted templates</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-pages"> <span class="mw-headline" id="Lists_of_pages">Lists of pages</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:AllPages" title="Special:AllPages">All pages</a></li>
+<li><a href="/wiki/index.php?title=Special:PrefixIndex" title="Special:PrefixIndex">All pages with prefix</a></li>
+<li><a href="/wiki/index.php?title=Special:Categories" title="Special:Categories">Categories</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:Disambiguations" title="Special:Disambiguations">Disambiguation pages</a></li>
+<li><a href="/wiki/index.php?title=Special:ListRedirects" title="Special:ListRedirects">List of redirects</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-login"> <span class="mw-headline" id="Login_.2F_sign_up">Login / sign up</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:UserLogin" title="Special:UserLogin">Log in / create account</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-users"> <span class="mw-headline" id="Users_and_rights">Users and rights</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:ActiveUsers" title="Special:ActiveUsers">Active users list</a></li>
+<li><a href="/wiki/index.php?title=Special:BlockList" title="Special:BlockList">Blocked IP addresses and usernames</a></li>
+<li><a href="/wiki/index.php?title=Special:ChangePassword" title="Special:ChangePassword">Change password</a></li>
+<li><a href="/wiki/index.php?title=Special:Preferences" title="Special:Preferences">Preferences</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:Contributions" title="Special:Contributions">User contributions</a></li>
+<li><a href="/wiki/index.php?title=Special:ListGroupRights" title="Special:ListGroupRights">User group rights</a></li>
+<li><a href="/wiki/index.php?title=Special:ListUsers" title="Special:ListUsers">User list</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-changes"> <span class="mw-headline" id="Recent_changes_and_logs">Recent changes and logs</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:NewFiles" title="Special:NewFiles">Gallery of new files</a></li>
+<li><a href="/wiki/index.php?title=Special:Log" title="Special:Log">Logs</a></li>
+<li><a href="/wiki/index.php?title=Special:Watchlist" title="Special:Watchlist">My watchlist</a></li>
+<li><a href="/wiki/index.php?title=Special:NewPages" title="Special:NewPages">New pages</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:RecentChanges" title="Special:RecentChanges">Recent changes</a></li>
+<li><a href="/wiki/index.php?title=Special:RecentChangesLinked" title="Special:RecentChangesLinked">Related changes</a></li>
+<li><a href="/wiki/index.php?title=Special:Tags" title="Special:Tags">Valid change tags</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-media"> <span class="mw-headline" id="Media_reports_and_uploads">Media reports and uploads</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:ListFiles" title="Special:ListFiles">File list</a></li>
+<li><a href="/wiki/index.php?title=Special:FilePath" title="Special:FilePath">File path</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:MIMESearch" title="Special:MIMESearch">MIME search</a></li>
+<li><a href="/wiki/index.php?title=Special:FileDuplicateSearch" title="Special:FileDuplicateSearch">Search for duplicate files</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-wiki"> <span class="mw-headline" id="Wiki_data_and_tools">Wiki data and tools</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:PopularPages" title="Special:PopularPages">Popular pages</a></li>
+<li><a href="/wiki/index.php?title=Special:Statistics" title="Special:Statistics">Statistics</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:AllMessages" title="Special:AllMessages">System messages</a></li>
+<li><a href="/wiki/index.php?title=Special:Version" title="Special:Version">Version</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-redirects"> <span class="mw-headline" id="Redirecting_special_pages">Redirecting special pages</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:LinkSearch" title="Special:LinkSearch">External links</a></li>
+<li><a href="/wiki/index.php?title=Special:Random" title="Special:Random">Random page</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:RandomRedirect" title="Special:RandomRedirect">Random redirect</a></li>
+<li><a href="/wiki/index.php?title=Special:Search" title="Special:Search">Search</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-highuse"> <span class="mw-headline" id="High_use_pages">High use pages</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:MostLinkedCategories" title="Special:MostLinkedCategories">Most linked-to categories</a></li>
+<li><a href="/wiki/index.php?title=Special:MostLinkedFiles" title="Special:MostLinkedFiles">Most linked-to files</a></li>
+<li><a href="/wiki/index.php?title=Special:MostLinkedPages" title="Special:MostLinkedPages">Most linked-to pages</a></li>
+</ul></td><td width='10%'></td><td width='30%' valign='top'><ul><li><a href="/wiki/index.php?title=Special:MostLinkedTemplates" title="Special:MostLinkedTemplates">Most linked-to templates</a></li>
+<li><a href="/wiki/index.php?title=Special:MostCategories" title="Special:MostCategories">Pages with the most categories</a></li>
+<li><a href="/wiki/index.php?title=Special:MostRevisions" title="Special:MostRevisions">Pages with the most revisions</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-pagetools"> <span class="mw-headline" id="Page_tools">Page tools</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:Export" title="Special:Export">Export pages</a></li>
+<li><a href="/wiki/index.php?title=Special:WhatLinksHere" title="Special:WhatLinksHere">What links here</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<h4 class="mw-specialpagesgroup" id="mw-specialpagesgroup-other"> <span class="mw-headline" id="Other_special_pages">Other special pages</span></h4>
+<table style='width: 100%;' class='mw-specialpages-table'><tr><td width='30%' valign='top'><ul>
+<li><a href="/wiki/index.php?title=Special:BookSources" title="Special:BookSources">Book sources</a></li>
+</ul></td><td width='30%' valign='top'></td></tr></table>
+<div class="printfooter">
+Retrieved from "<a href="http://visual6502.org/wiki/index.php?title=Special:SpecialPages">http://visual6502.org/wiki/index.php?title=Special:SpecialPages</a>"</div>
+		<div id='catlinks' class='catlinks catlinks-allhidden'></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				 <li id="ca-nstab-special" class="selected"><a href="/wiki/index.php?title=Special:SpecialPages" title="This is a special page, you cannot edit the page itself">Special page</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=Special:SpecialPages" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(../images/6502/jssim_01_sm.png);" href="/wiki/index.php?title=Main_Page" title="Visit the main page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5>Navigation</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/index.php?title=Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="/wiki/index.php?title=VisualChips:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="/wiki/index.php?title=VisualChips:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="/wiki/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/wiki/index.php?title=Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="/wiki/index.php?title=Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input id="searchInput" title="Search VisualChips" accesskey="f" type="search" name="search" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Go" title="Go to a page with this exact name if exists" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" />
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+<li id="t-specialpages"><a href="/wiki/index.php?title=Special:SpecialPages" title="List of all special pages [q]" accesskey="q">Special pages</a></li>
+			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/wiki/skins/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki" /></a></div>
+	<div id="f-copyrightico"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt="Attribution-NonCommercial-ShareAlike 3.0 Unported" width="88" height="31" /></a></div>
+	<ul id="f-list">
+		<li id="privacy"><a href="/wiki/index.php?title=VisualChips:Privacy_policy" title="VisualChips:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/wiki/index.php?title=VisualChips:About" title="VisualChips:About">About VisualChips</a></li>
+		<li id="disclaimer"><a href="/wiki/index.php?title=VisualChips:General_disclaimer" title="VisualChips:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.392 secs. --></body></html>
