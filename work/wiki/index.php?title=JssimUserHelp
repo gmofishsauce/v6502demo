@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" dir="ltr">
+<head>
+<title>JssimUserHelp - VisualChips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="MediaWiki 1.16.0" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="VisualChips (en)" />
+<link title="Creative Commons" type="application/rdf+xml" href="/wiki/index.php?title=JssimUserHelp&amp;action=creativecommons" rel="meta" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
+<link rel="alternate" type="application/atom+xml" title="VisualChips Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="/wiki/skins/common/shared.css?270" media="screen" />
+<link rel="stylesheet" href="/wiki/skins/common/commonPrint.css?270" media="print" />
+<link rel="stylesheet" href="/wiki/skins/monobook/main.css?270" media="screen" />
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?270" media="screen" /><![endif]-->
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" media="print" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=-&amp;action=raw&amp;maxage=18000&amp;gen=css" />
+<script>
+var skin="monobook",
+stylepath="/wiki/skins",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/",
+wgArticlePath="/wiki/index.php?title=$1",
+wgScriptPath="/wiki",
+wgScriptExtension=".php",
+wgScript="/wiki/index.php",
+wgVariantArticlePath=false,
+wgActionPaths={},
+wgServer="http://visual6502.org",
+wgCanonicalNamespace="",
+wgCanonicalSpecialPageName=false,
+wgNamespaceNumber=0,
+wgPageName="JssimUserHelp",
+wgTitle="JssimUserHelp",
+wgAction="view",
+wgArticleId=49,
+wgIsArticle=true,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="en",
+wgContentLanguage="en",
+wgBreakFrames=false,
+wgCurRevisionId=811,
+wgVersion="1.16.0",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Main Page",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "VisualChips", "5": "VisualChips talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "visualchips": 4, "visualchips_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "image": 6, "image_talk": 7},
+wgSiteName="VisualChips",
+wgCategories=[],
+wgRestrictionEdit=["autoconfirmed"],
+wgRestrictionMove=["autoconfirmed"];
+</script><script src="/wiki/skins/common/wikibits.js?270"></script>
+<script src="/wiki/skins/common/ajax.js?270"></script>
+<script src="/wiki/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=monobook&amp;270"></script>
+
+</head>
+<body class="mediawiki ltr ns-0 ns-subject page-JssimUserHelp skin-monobook">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" >
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading">JssimUserHelp</h1>
+	<div id="bodyContent">
+		<h3 id="siteSub">From VisualChips</h3>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+		<!-- start content -->
+<p>Welcome to the JSSim javascript simulator which powers the Visual6502 and Visual6800.
+</p><p>Please have a look around this wiki for <a href="/wiki/index.php?title=Main_Page" title="Main Page">more information</a> about our reverse engineering of various chips and the <a href="/wiki/index.php?title=6502Observations" title="6502Observations">things we've found out</a> about them.
+</p><p>For a quick selection of examples of 6502 behaviour and layout, have a look at the links in the <a href="#URL_interface">URL interface section</a> on this page. Sorry, we don't yet have specific help on 6800 features.
+</p><p>The visual6502 simulator has two entry pages:
+</p>
+<ul><li> The <a href="http://visual6502.org/JSSim/" class="external text" rel="nofollow">simple mode</a>, also known as kiosk mode, which is the default
+</li><li> The <a href="http://visual6502.org/JSSim/expert.html" class="external text" rel="nofollow">advanced mode</a>
+</li></ul>
+<p>and this page starts with the basics and works up. There's also
+</p>
+<ul><li> The <a href="http://visual6502.org/JSSim/expert-6800.html" class="external text" rel="nofollow">visual6800</a> (advanced mode only)
+</li></ul>
+<p>For help on reading the layout, interpreting transistor circuits, and more about digital design, please see <a href="http://wiki.nesdev.com/w/index.php/Visual_circuit_tutorial" class="external text" rel="nofollow">the Visual Circuit Tutorial</a> over at NESdev.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Help_for_simple_mode"><span class="tocnumber">1</span> <span class="toctext">Help for simple mode</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Graphics_help_.28basic.29"><span class="tocnumber">1.1</span> <span class="toctext">Graphics help (basic)</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Running_the_program"><span class="tocnumber">1.2</span> <span class="toctext">Running the program</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Modifying_the_program"><span class="tocnumber">1.3</span> <span class="toctext">Modifying the program</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="#Help_for_advanced_mode"><span class="tocnumber">2</span> <span class="toctext">Help for advanced mode</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="#Graphics_help_.28advanced.29"><span class="tocnumber">2.1</span> <span class="toctext">Graphics help (advanced)</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Running_the_program_2"><span class="tocnumber">2.2</span> <span class="toctext">Running the program</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Interacting_with_the_program"><span class="tocnumber">2.3</span> <span class="toctext">Interacting with the program</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Modifying_the_program_2"><span class="tocnumber">2.4</span> <span class="toctext">Modifying the program</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Tracing_machine_state"><span class="tocnumber">2.5</span> <span class="toctext">Tracing machine state</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Busses_and_signals_of_interest"><span class="tocnumber">2.6</span> <span class="toctext">Busses and signals of interest</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#URL_interface"><span class="tocnumber">2.7</span> <span class="toctext">URL interface</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="#See_also"><span class="tocnumber">3</span> <span class="toctext">See also</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h2> <span class="mw-headline" id="Help_for_simple_mode"> Help for simple mode </span></h2>
+<p>In simple mode, you see the chip graphics on the left, the control buttons and chip status at top right, and the memory table below that. There's a link to the advanced page, and the overall layout is fixed: there are no draggable bars between the sections.
+</p>
+<h4> <span class="mw-headline" id="Graphics_help_.28basic.29"> Graphics help (basic) </span></h4>
+<p>You can pan and zoom the chip graphics using
+</p>
+<ul><li> '&gt;' on the keyboard to zoom in
+</li><li> '&lt;' on the keyboard to zoom out
+</li><li> click and drag to pan
+</li></ul>
+<p>Click in the graphics area to highlight any shape on the chip: all the connected shapes will be highlighted and the name of the node, if any, will be displayed in the chip status area at top right.
+</p><p>For example, if you click on the square shape at top left of the chip, you'll see text like
+</p>
+<pre>node: 1297 nmi
+</pre>
+<p>which tells you that this is the NMI pad - in a real chip, it would be connected to the NMI pin of the package with a gold wire.
+</p><p>The node number is useful only as a unique reference number. If you're interested in the workings of the simulator you'll read the source files and see these numbers used to label all the polygons and transistors which are electrically connected and which therefore are at the same voltage - and therefore represent the same logical signal.
+</p>
+<h4> <span class="mw-headline" id="Running_the_program"> Running the program </span></h4>
+<p>Towards the top right you see a set of buttons:
+</p>
+<ul><li> run (or stop) - start the simulation, run for as long as you like, then stop it.
+</li><li> reset
+</li><li> back
+</li><li> forward
+</li></ul>
+<p>As the simulation runs you can see the yellow box in the memory area (bottom right) indicating which memory location is being read or written.  You may also see the contents of memory changing: perhaps the location just to the right of {{{0040:}}} will count up.
+</p>
+<h4> <span class="mw-headline" id="Modifying_the_program"> Modifying the program </span></h4>
+<p>You can't presently modify the program in the simple page: you need the Advanced page for that.
+</p>
+<h2> <span class="mw-headline" id="Help_for_advanced_mode"> Help for advanced mode </span></h2>
+<p>In advanced mode, there's an additional area at bottom right which can tabulate the state of the machine, and any signals of interest, phase by phase or instruction by instruction.  There's also a console for programs which perform I/O: it's possible to interact with a BASIC interpreter for example.
+</p><p>The layout in advanced mode has a couple of draggable boundaries so you can adjust according to what you're doing.
+</p><p>The chip graphics area has some additional controls, and can be hidden altogether.
+</p><p>Finally, in expert mode you can control the simulator and the graphics using additional URL parameters.
+</p>
+<h4> <span class="mw-headline" id="Graphics_help_.28advanced.29"> Graphics help (advanced) </span></h4>
+<p>All the graphics controls are immediately below the chip graphics area.
+</p><p>Use the keyboard to zoom in and out (z and x or &lt; and &gt;) and once you've zoomed in you can use the mouse to pan around, by clicking and dragging.
+</p><p>If you click on any shape in the chip, the status display (top right) will give you the coordinates and the node number, and the node name if it has one. If you click on a transistor gate, it'll give you the transistor number.  If you shift-click on a node, it'll highlight all the channel-connected nodes - so you can see which busses are connected by pass gates in the present clock cycle, which gates are writing a bus and which latches are reading it.
+</p><p>The second line of graphics controls allow you to select layer visibility. Chips are designed and fabricated as a series of thin layers in and on the silicon. With these controls you can get a clearer idea of the geometry in each layer.  For example, most of the long-distance connections are in metal, with some polysilicon. The logic gates themselves use diffusion and polysilicon only, in general.
+</p><p>The next line of graphics controls allow you to find the geometry corresponding to a node name, or number, or a collection of them.  The Clear Highlighting button also clears the logic level indication: all the diffusion becomes yellow, all the polysilicon purple, and the metal translucent.
+</p><p>The 'Animate during simulation' checkbox allows you to run the simulation faster, by skipping the logic level highlighting of the chip graphics.
+</p><p>'Hide Chip Layout' rearranges the page layout so you can concentrate on the right hand side panels - if you're looking at the logical behaviour and not the chip layout.
+</p><p>Finally, 'Link to this location' provides an URL which you can share, corresponding to the current pan and zoom, so you can discuss whichever interesting layout features you find. For example
+</p>
+<ul><li> <a href="http://visual6502.org/JSSim/expert.html?panx=528.8&amp;pany=182.8&amp;zoom=7.4" class="external text" rel="nofollow">instruction predecode</a>
+</li><li> <a href="http://visual6502.org/JSSim/expert.html?panx=233.5&amp;pany=387.7&amp;zoom=6.2" class="external text" rel="nofollow">lower nibble of the ALU</a>
+</li><li> <a href="http://visual6502.org/JSSim/expert.html?panx=486.7&amp;pany=101.5&amp;zoom=6.2" class="external text" rel="nofollow">instruction register and part of the PLA</a>
+</li></ul>
+<h4> <span class="mw-headline" id="Running_the_program_2"> Running the program </span></h4>
+<p>At the top of the right hand pane there is a series of buttons:
+</p>
+<ul><li> Run/Stop will free-run the simulation. It runs faster if the chip layout is not presently visible.
+</li><li> Reset will reset the chip and set time to zero.
+</li><li> Back and Forward step by a single clock phase.  Note the tabulation of machine state in the lower right pane.  When switching direction, you may wish to use the Clear Log button to avoid confusion.
+</li><li> Step will advance to the next write or the next instruction fetch.
+</li><li> Fast Forward will run for a configurable number of clock phases without updating the display or the internal trace buffer.  (The URL parameter headlesssteps defaults to 1000.)  This is useful for benchmarking.  Also, if headlesssteps is negative, the machine will free run but poll for input at that interval, which is useful for running interactive programs.
+</li></ul>
+<h4> <span class="mw-headline" id="Interacting_with_the_program"> Interacting with the program </span></h4>
+<p>Any write to location $000f will cause output to the text box at the top of the lower right pane.
+</p><p>Location $D010 acts as a status port and $D011 acts as a data port for reading keyboard input. The status port reads 0 until a character is available.
+</p>
+<h4> <span class="mw-headline" id="Modifying_the_program_2"> Modifying the program </span></h4>
+<ul><li> interactively, you can click on the memory map and change the content of each location. The memory map is in the top right-hand pane, below the table showing the machine state and the buttons controlling the simulator.
+</li><li> in the URL, you can use a= and d= to patch any addresses with data. So ...&amp;a=400&amp;d=eaea&amp;... would put a couple of NOPs at $0400. Use the same technique if you wish to adjust the vectors at the top of memory. You can load quite long programs this way (in several sections, usually.)
+</li></ul>
+<h4> <span class="mw-headline" id="Tracing_machine_state"> Tracing machine state </span></h4>
+<p>The lower right pane offers some means of tracing signals of interest:
+</p>
+<ul><li> Trace More will add some pre-defined sets of signals to the tabulation
+</li><li> Trace Less removes those sets in the same order
+<ul><li> Both the above can also be accessed using the loglevel URL parameter
+</li></ul>
+</li><li> Trace these too: allows for a list of signals to be added to the tabulation
+<ul><li> You may wish to Trace Less and then add back a different subset, or use a different order
+</li><li> You may with to explore the chip layout and find other signals to probe
+</li></ul>
+</li><li> Log Up/Down allows for the tabulation to act in reverse order if you prefer not to keep scrolling to the bottom.
+</li><li> Clear Log acts in the obvious way
+<ul><li> It can be useful to use the single-step forward and backward in combination with log up/down to explore a few cycles of interest, because adding more signals will clear the tabulation but does not reset the cycle counter and does not clear the trace buffer: all signal activity is still stored.
+</li></ul>
+</li></ul>
+<h4> <span class="mw-headline" id="Busses_and_signals_of_interest"> Busses and signals of interest </span></h4>
+<p>You can use the 'Trace these too' box to list more signals which you're interested in - you might even use 'Trace less' several times to make this the exact list of signals to tabulate.
+</p><p>Some names are handled specially and are not individual signals or busses:
+</p>
+<ul><li> cycle is the count of cycles since reset
+</li><li> pc is the program counter, combining pcl and pch
+</li><li> p is the status register, combining p0 to p7 (there is no p5, and p1 and p2 are probed away from the other P signals)
+</li><li> tcstate collects the timing control bits, which are labelled 'clock1','clock2','t2','t3','t4','t5'
+</li><li> State is a more readable version of tcstate, which names the low bits, from T0 to T5. Note that T0 and T1 are not what they seem (link needed)
+</li><li> Fetch is blank unless the 'sync' pin is active, in which case it is a description of the 6502 opcode on the data bus (db).
+</li><li> Execute is a description of the 6502 opcode in the ir (Instruction Register)
+</li><li> plaOutputs is a list of all the active outputs from the instruction decode PLA
+</li><li> DPControl is a list of all the active control signals into the datapath
+</li></ul>
+<p>If you need to tabulate a signal which is in negative sense, use a leading minus. For example, '-pd' is the instruction predecode register.
+</p><p>The signal names are mostly taken from <a href="http://www.pagetable.com/?p=39" class="external text" rel="nofollow">Donald Hanson's block diagram</a>
+</p>
+<h4> <span class="mw-headline" id="URL_interface"> URL interface </span></h4>
+<p>There's a variety of parameters which can be passed on the URL, to make it easy to share examples and discoveries as direct links into the simulator. In all cases these are passed like this:
+</p>
+<pre> <a href="http://www.visual6502.org/JSSim/expert.html?panx=239.4&amp;pany=352.7&amp;zoom=10.7&amp;steps=10" class="external text" rel="nofollow">http://www.visual6502.org/JSSim?name1=value1&amp;name2=value2</a>
+</pre>
+<dl><dt> positioning the graphics window
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?panx=240&amp;pany=350&amp;zoom=10" class="external text" rel="nofollow">panx=240&amp;pany=350&amp;zoom=10</a>
+</dd></dl>
+<dl><dt> select a larger canvas for improved graphical detail (uses more RAM)
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?panx=240&amp;pany=350&amp;zoom=10&amp;canvas=2000" class="external text" rel="nofollow">canvas=2000</a>
+</dd></dl>
+<dl><dt> suppress the simulation, for faster startup of a purely graphical session
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?panx=480&amp;pany=100&amp;zoom=6&amp;nosim=t" class="external text" rel="nofollow">nosim=true</a>
+</dd></dl>
+<dl><dt> suppressing graphics (same as the Hide Chip Layout button)
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f" class="external text" rel="nofollow">graphics=false</a>
+</dd></dl>
+<dl><dt> running for a fixed number of clock phases
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f&amp;steps=10" class="external text" rel="nofollow">steps=10</a>
+</dd></dl>
+<dl><dt> see more groups of interesting signals in the tabulation
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f&amp;steps=10&amp;loglevel=4" class="external text" rel="nofollow">loglevel=4</a>
+</dd></dl>
+<dl><dt> add specific signals to the tabulation
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f&amp;steps=10&amp;logmore=Execute,State,plaOutputs" class="external text" rel="nofollow">logmore=Execute,State,plaOutputs</a>
+</dd></dl>
+<dl><dt> set the fastforward step count (for benchmarking, or interactive programs)
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f&amp;steps=10&amp;headlesssteps=250" class="external text" rel="nofollow">headlesssteps=250</a>
+</dd></dl>
+<dl><dt> load a test program, or patch memory contents
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f&amp;loglevel=2&amp;steps=50&amp;a=0000&amp;d=a2d0de2143de34236cff20eaea" class="external text" rel="nofollow">a=0000&amp;d=a2d0de2143</a>
+</dd></dl>
+<dl><dt> adjust the reset vector
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f&amp;steps=10&amp;r=0002" class="external text" rel="nofollow">r=0002</a>
+</dd></dl>
+<dl><dt> set up some input pin transitions (Reset, IRQ, NMI, RDY)
+</dt><dd> <a href="http://www.visual6502.org/JSSim/expert.html?graphics=f&amp;loglevel=2&amp;a=0000&amp;d=a2559ae8e8e8&amp;logmore=res,plaOutputs,DPControl&amp;reset0=12&amp;reset1=13&amp;steps=40" class="external text" rel="nofollow">reset0=12&amp;reset1=13</a>
+</dd><dd> <a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;loglevel=2&amp;steps=50&amp;a=fffa&amp;d=2000&amp;a=0020&amp;d=e840&amp;r=0010&amp;nmi0=4&amp;nmi1=8&amp;logmore=nmi" class="external text" rel="nofollow">nmi0=4&amp;nmi1=8</a>
+</dd><dd> <a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;loglevel=2&amp;steps=50&amp;a=0011&amp;d=58&amp;a=fffe&amp;d=2000&amp;a=0020&amp;d=e840&amp;r=0010&amp;irq0=3&amp;irq1=20&amp;logmore=irq" class="external text" rel="nofollow">irq0=3&amp;irq1=20</a>
+</dd><dd> <a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;a=0&amp;d=a955a2338b0feaea&amp;steps=17&amp;loglevel=2&amp;logmore=ir,rdy,idl,idb,dasb,sb,dpc2_XSB,dpc23_SBAC,dpc24_ACSB,dpc25_SBDB,dpc43_DL/DB&amp;rdy0=10&amp;rdy1=14&amp;time=12&amp;databus=c4" class="external autonumber" rel="nofollow">[1]</a> (RDY not yet in the released version)
+</dd></dl>
+<dl><dt> Note on timings of input transitions
+</dt><dd> Since 2013-06-27, the displayed data for input transitions is shown one phase earlier than previously. This fixes a bug. When re-using a URL with the new version, all the chip behaviour is unchanged, but shifting the display of the input signals has made everything appear correct too.
+</dd></dl>
+<dl><dt> check every signal value against a golden checksum (for checking simulator code changes)
+</dt><dd> <a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;loglevel=-1&amp;steps=99&amp;checksum=0fa98aab" class="external text" rel="nofollow">steps=99&amp;checksum=0fa98aab</a>
+</dd></dl>
+<dl><dt> label some points of interest
+</dt><dd> <a href="http://visual6502.org/JSSim/expert.html?nosim=t&amp;label=PLA,100,1169,2328,8393,934&amp;label=Datapath,100,2143,8820,7676,5689&amp;label=Control,100,3333,4083" class="external text" rel="nofollow">Annotated floorplan</a> of the <a href="/wiki/index.php?title=MOS_6502" title="MOS 6502">6502</a>
+</dd><dd> <a href="http://visual6502.org/JSSim/expert.html?nosim=t&amp;label=A,50,5040,8820,5328,5689&amp;label=ALU,50,2814,8820,4525,5689&amp;label=DAdj,40,4525,8820,5040,5689&amp;label=ID,50,7365,8820,7676,5689&amp;label=IR,50,8432,2332,9124,984&amp;label=PC,50,5559,8820,6819,5689&amp;label=PD,50,8424,3536,9256,2464&amp;label=PLA,100,1169,2328,8393,934&amp;label=S,50,2490,8820,2814,5689&amp;label=TimC,40,600,1926,1174,604&amp;label=X,50,2317,8820,2490,5689&amp;label=Y,50,2143,8820,2317,5689" class="external text" rel="nofollow">Some functional blocks</a> of the <a href="/wiki/index.php?title=MOS_6502" title="MOS 6502">6502</a>
+</dd></dl>
+<p>The final reference on the URL capabilities is <a href="https://github.com/trebonian/visual6502/blob/master/expertWires.js#LC134" class="external text" rel="nofollow">the source code</a>.
+</p>
+<h2> <span class="mw-headline" id="See_also"> See also </span></h2>
+<p>See also the <a href="/wiki/index.php?title=The_ChipSim_Simulator" title="The ChipSim Simulator">ChipSim Simulator</a> page which goes into some detail on the implementation and history of the simulator, and have a look at <a href="https://github.com/trebonian/visual6502" class="external text" rel="nofollow">the source code</a>.
+</p><p>See also the guide to interpreting NMOS layout at the <a href="http://wiki.nesdev.com/w/index.php/Visual_circuit_tutorial" class="external text" rel="nofollow">Visual circuit tutorial</a> on the NesDev wiki.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 54/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:49-0!1!0!!en!2!edit=0 and timestamp 20210607232839 -->
+<div class="printfooter">
+Retrieved from "<a href="http://visual6502.org/wiki/index.php?title=JssimUserHelp">http://visual6502.org/wiki/index.php?title=JssimUserHelp</a>"</div>
+		<div id='catlinks' class='catlinks catlinks-allhidden'></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/index.php?title=JssimUserHelp" title="View the content page [c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk"><a href="/wiki/index.php?title=Talk:JssimUserHelp" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="/wiki/index.php?title=JssimUserHelp&amp;action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="/wiki/index.php?title=JssimUserHelp&amp;action=history" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=JssimUserHelp" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(../images/6502/jssim_01_sm.png);" href="/wiki/index.php?title=Main_Page" title="Visit the main page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5>Navigation</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/index.php?title=Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="/wiki/index.php?title=VisualChips:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="/wiki/index.php?title=VisualChips:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="/wiki/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/wiki/index.php?title=Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="/wiki/index.php?title=Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input id="searchInput" title="Search VisualChips" accesskey="f" type="search" name="search" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Go" title="Go to a page with this exact name if exists" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" />
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/index.php?title=Special:WhatLinksHere/JssimUserHelp" title="List of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/index.php?title=Special:RecentChangesLinked/JssimUserHelp" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="/wiki/index.php?title=Special:SpecialPages" title="List of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="/wiki/index.php?title=JssimUserHelp&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="/wiki/index.php?title=JssimUserHelp&amp;oldid=811" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/wiki/skins/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki" /></a></div>
+	<div id="f-copyrightico"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt="Attribution-NonCommercial-ShareAlike 3.0 Unported" width="88" height="31" /></a></div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 4 March 2017, at 20:02.</li>
+		<li id="viewcount">This page has been accessed 475,819 times.</li>
+		<li id="copyright">Content is available under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" class="external ">Attribution-NonCommercial-ShareAlike 3.0 Unported</a>.</li>
+		<li id="privacy"><a href="/wiki/index.php?title=VisualChips:Privacy_policy" title="VisualChips:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/wiki/index.php?title=VisualChips:About" title="VisualChips:About">About VisualChips</a></li>
+		<li id="disclaimer"><a href="/wiki/index.php?title=VisualChips:General_disclaimer" title="VisualChips:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.053 secs. --></body></html>

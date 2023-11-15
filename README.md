@@ -46,21 +46,46 @@ The command above can be checked without doing an actual download by adding the 
 option `--list` to the wayback_machine_downloader command line. The list of files to be
 downloads is written to the standard output (e.g. `all_files.wmd` in the example above).
 
-### Really download the files using the Wayback Machine Downloader
+### (No, really) download the files using the Wayback Machine Downloader
 
 After my initial download, I found that I could never download the entire site again (which
-turned out to be required because I did not treat the download as pristine). It seems like
-a throttline issues, and the Wayback Machine Downloader does not have any options for
-adding delays between the individual file downloads.
+turned out to be required because I did not treat the download as pristine). It seemed like
+a throttling issues. The Wayback Machine Downloader does not have any options for adding
+delays between the individual file downloads.
 
 In response I wrote a shell script, `./tools/dl.sh`. To use it, run the WMD command given
-above with the `--list` options. This produces a JSON file which I checked in as ALL_FILES.json.
+above with the `--list` option. This produces a JSON file which I committed as ALL_FILES.json.
 Make a copy of the file and remove the first line '[' and the last line ']'; this leaves a file
-in "JSON lines" format (see jsonlines.org). Run `./tools/dl.sh jsonlines` to download all the
+in "JSON lines" format (see jsonlines.org). Run `./tools/dl.sh lines.json` to download all the
 files. The script will incrementally remove lines from the file as it successfully downloads
 each file; this allows the script to be killed and restarted. The script delays 5 to 15 seconds
 between each pair of file downloads. I found this to be sufficient and did not investigate
 further.
+
+I found that this second download pulled two variations on the name "visual6502.org", each
+containing a couple of files. These can be seen in `websites/`. These fake names complicate
+processing. I decided to defer dealing with these. I created a directory `work/` and copied
+`./websites/visual6502.org` recursively to `work`.  From here until the cleanup at the end
+of this process, "the files" (or "all the files") refers to the content of `./work` only,
+not to these two side directories.
+
+### A note about file naming
+
+All processing in this part of the "pipeline" must be done with extreme care because of the
+file naming. The downloaded files were named from their wiki page titles, which can include
+any character. Three of the pages in this wiki contain single quotes in their titles which
+become single quotes in their downloader filenames, and a few other files contain other shell
+metacharacters in their names. Fixing these is not trivial, because links to these files
+contain URL-encoded representations of these metacharacters, which must also be fixed. This
+is done later and details are given there.
+
+### Decompress the working files
+
+On my first pass at downloading, I did not document the fact that many non-image files in the
+wiki are gzipped. Image files are sensibly not gzipped as they don't compress much. I wrote
+another shell script, `./tools/gunz.sh`, to find all the gzipped files and unzip them. The
+script is idempotent (it can be safely rerun if gzipped files are ever added to the repo).
+The script uses tricks like `find -print0 ... | xargs -0 ...` because of the file naming issue.
 
 ### Download the authorship information
 
@@ -70,17 +95,18 @@ files are referenced by `<link>` tags in each HTML document.
 
 Code in the mkmd tool can be used to identify and download the most recent version of each RDF
 file in the Wiki. These files were downloaded to [`./wiki/rdf`](wiki/rdf). This is done a single
-file at a time, using multiple invocations of the command the command
+file at a time, using multiple invocations of the command
 
 ```
 mkmd -r -o wiki/rdf html_file.ext
 ```
 
 I used `find` to locate all the HTML documents in the base wiki and a one-line shell loop
-to run mkmd per file. I found 174 HTML files, many of which have file extensions like `.jpg`
-or `.png`. From this list I was able to download 161 RDF files.
+to run `mkmd` once per file. I found 174 HTML files, many of which have file extensions like
+`.jpg` or `.png`. From this list I was able to download 161 RDF files.
 
-I build `mkmd` in the `./tools` directory like this: `go build -o mkmd`.
+I build `mkmd` in the `./tools` directory like this: `go build -o mkmd`. The actual WM URL of
+each of these `.rdf` files is peculiar; the Go code knows the rule for constructing it.
 
 ### Rename all the files
 

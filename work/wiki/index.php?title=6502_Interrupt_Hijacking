@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" dir="ltr">
+<head>
+<title>6502 Interrupt Hijacking - VisualChips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="MediaWiki 1.16.0" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="VisualChips (en)" />
+<link title="Creative Commons" type="application/rdf+xml" href="/wiki/index.php?title=6502_Interrupt_Hijacking&amp;action=creativecommons" rel="meta" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
+<link rel="alternate" type="application/atom+xml" title="VisualChips Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="/wiki/skins/common/shared.css?270" media="screen" />
+<link rel="stylesheet" href="/wiki/skins/common/commonPrint.css?270" media="print" />
+<link rel="stylesheet" href="/wiki/skins/monobook/main.css?270" media="screen" />
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?270" media="screen" /><![endif]-->
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" media="print" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=-&amp;action=raw&amp;maxage=18000&amp;gen=css" />
+<script>
+var skin="monobook",
+stylepath="/wiki/skins",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/",
+wgArticlePath="/wiki/index.php?title=$1",
+wgScriptPath="/wiki",
+wgScriptExtension=".php",
+wgScript="/wiki/index.php",
+wgVariantArticlePath=false,
+wgActionPaths={},
+wgServer="http://visual6502.org",
+wgCanonicalNamespace="",
+wgCanonicalSpecialPageName=false,
+wgNamespaceNumber=0,
+wgPageName="6502_Interrupt_Hijacking",
+wgTitle="6502 Interrupt Hijacking",
+wgAction="view",
+wgArticleId=186,
+wgIsArticle=true,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="en",
+wgContentLanguage="en",
+wgBreakFrames=false,
+wgCurRevisionId=833,
+wgVersion="1.16.0",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Main Page",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "VisualChips", "5": "VisualChips talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "visualchips": 4, "visualchips_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "image": 6, "image_talk": 7},
+wgSiteName="VisualChips",
+wgCategories=[],
+wgRestrictionEdit=[],
+wgRestrictionMove=[];
+</script><script src="/wiki/skins/common/wikibits.js?270"></script>
+<script src="/wiki/skins/common/ajax.js?270"></script>
+<script src="/wiki/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=monobook&amp;270"></script>
+
+</head>
+<body class="mediawiki ltr ns-0 ns-subject page-6502_Interrupt_Hijacking skin-monobook">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" >
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading">6502 Interrupt Hijacking</h1>
+	<div id="bodyContent">
+		<h3 id="siteSub">From VisualChips</h3>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+		<!-- start content -->
+<p>6502 Interrupt Hijacking
+</p><p>The following is based upon drawing the node and transistor networks out on paper from visual6502 data, and conducting experiments with the simulator. In explaining the various behaviors, references are made to 6502 clock states and stages of interrupt recognition that are described in <a href="/wiki/index.php?title=6502_Timing_States" title="6502 Timing States"> 6502 Timing States </a> and <a href="/wiki/index.php?title=6502_Interrupt_Recognition_Stages_and_Tolerances" title="6502 Interrupt Recognition Stages and Tolerances"> 6502 Interrupt Recognition Stages and Tolerances </a>, which may be used as primers for this exposition.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#NMI_Hijacking_IRQ.2FBRK"><span class="tocnumber">2</span> <span class="toctext">NMI Hijacking IRQ/BRK</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#RES_Hijacking_NMI_and_IRQ.2FBRK"><span class="tocnumber">3</span> <span class="toctext">RES Hijacking NMI and IRQ/BRK</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#BRK_Protected_from_NMI_vs._Unprotected_from_RES"><span class="tocnumber">4</span> <span class="toctext">BRK Protected from NMI vs. Unprotected from RES</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Demonstrations"><span class="tocnumber">5</span> <span class="toctext">Demonstrations</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#External_References"><span class="tocnumber">6</span> <span class="toctext">External References</span></a></li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>Systems typically engineered around the 6502 generate interrupt signals that stay low for very appreciable lengths of time in terms of the applied clock rate. Manual resets may keep the RES line down at least a few tenths of a second when a reset button is quickly struck and released, and resets invoked by hardware when power is first applied may last for 0.1 to 0.3 seconds. Devices invoking NMI and IRQ will keep the respective lines down until the 6502 programmatically answers the interrupt with a finishing access to the device, which may be in the hundreds of microseconds to the 1+ milliseconds level. All of the above durations range from hundreds to hundreds of thousands of clock transitions.
+</p><p>Some obscure niches of behavior may be observed instead when the interrupt lines are held low for only a handful of clock transitions or less.
+</p>
+<h2> <span class="mw-headline" id="NMI_Hijacking_IRQ.2FBRK"> NMI Hijacking IRQ/BRK </span></h2>
+<p>First introduced to this wiki by the link, "late NMI", in <a href="/wiki/index.php?title=6502_Timing_of_Interrupt_Handling" title="6502 Timing of Interrupt Handling"> 6502 Timing of Interrupt Handling </a>, it is possible for higher-priority interrupts to hijack lower priority interrupts during the BRK instruction that is serving them.
+</p><p>The "late NMI" is an example of a full hijack, where a higher priority interrupt arrives after the BRK instruction for a lower priority interrupt has already started. The higher priority interrupt changes the addresses used when the BRK instruction actually fetches the vector during clock states T5 and T6: the vector selection is not fixed and "remembered" when the BRK instruction starts, or at any time before. Vector selection is independently parameterized by the NMI and RES interrupts, instead.
+</p><p>For NMI to hijack an IRQ (or a soft BRK instruction), stage 1 of its recognition may appear as late as T5 phase 1 during the BRK instruction's execution. This requires the NMI line to go down no later than the end of clock cycle T4 (up to just before clocking in T5 phase 1). With the node ~NMIG low during T5 and T6, the low and high bytes of the vector for indirect jump to the NMI handler are fetched together.
+</p><p>This is perfectly allowable if an IRQ caused the hijacked BRK, as NMI is higher priority than IRQ, and is serviced first. The IRQ will get its chance for attention after the RTI from the NMI handler has finished.
+</p><p>To recover from hijacking a soft BRK, the NMI handler must check the Break bit in the processor status register written to the stack. If it is true, then the handler must finish by performing a JMP ($FFFE) instead of an RTI. If it does an RTI for a soft BRK, then the soft BRK ends up being ignored: execution will resume with code after the BRK instruction instead of being processed by the system's soft BRK handler. The jump indirect to the IRQ/BRK handler will cause the soft BRK to be processed instead of missed. <i>This special end for NMI would not have been necessary without a hijacking phenomenon.</i>
+</p><p><b>Back to the subject of actual hijackings:</b> If NMI could appear one cycle later, it would affect only the fetch of the high byte of the vector, while the low byte would have already been fetched for IRQ/BRK: it would be a half-hijack.
+</p><p>Unfortunately for this scenario (or fortunately, from the designer's P.O.V.), the 6502 has some explicit engineering to prevent an NMI half-hijacking IRQ and BRK. The node chain ~VEC, pipe~VEC, 1578, 1368 is the secret sauce. ~VEC is low during T5 and T6 of a BRK instruction, which are the cycles that internally command the low and high byte fetches, respectively, of the jump vector (each internal command takes one cycle to appear at the address pins and Read/Write pin externally). The node pipe~VEC is connected to ~VEC only during phase 2. pipe~VEC grounds 1578 and it grounds 1368 in turn. The therapeutic effect is that node 1368 is kept grounded from T5 phase 2 through T0 phase 1. That prevents NMI low from being passed through to cause the NMI to be recognized at stage 1 and affect the vector fetches. NMI stage 1 is not allowed to be recognized through all of T6 and T0 at the tail end of BRK execution. As long as the NMI line stays down, the NMI will finally be stage-1-recognized at T1 phase 1. That will allow the first instruction of the IRQ/BRK handler to run before the BRK for the NMI is started.
+</p><p>If NMI is released under the above circumstances before T1 phase 1 is clocked in, then the NMI is entirely missed. See also the "lost NMI" condition noted in <a href="/wiki/index.php?title=6502_Timing_of_Interrupt_Handling" title="6502 Timing of Interrupt Handling"> 6502 Timing of Interrupt Handling </a>.
+</p>
+<h2> <span class="mw-headline" id="RES_Hijacking_NMI_and_IRQ.2FBRK"> RES Hijacking NMI and IRQ/BRK </span></h2>
+<p>How about RES hijacking NMI and IRQ/BRK? It turns out that full hijack can't quite happen, but half-hijack can.
+</p><p>To (attempt to) invoke a RES full hijack, the RES line must be brought low strictly during clock cycle T4 of the running BRK instruction (that's from just after clocking in T4 phase 1 to just before clocking in T5 phase 1). It must be released strictly during T5 (apply analogous boundaries).
+</p><p>The RES interrupt's effect upon the 6502 clock ends up getting in the way of the full hijack situation. RES stage 2 recognition is in control of selecting the vector at T5, so it fetches the low byte correctly in the next cycle. Things start to go awry on that next cycle (T6) because RES recognition stage 1 is also affecting the clock by that time, forcing it to also reset to T0. T6 still also remains in effect, though, because the BRK instruction uses an extension of the clock that RES reset cannot affect, and T6 is a part of that extension. The combined T0 T6 clock state causes actions in the same cycle that normally happen in separate cycles, and the T0 part also advances the schedule to the opcode fetch cycle (T1) by one cycle too early for fetching the vector high byte. Instead of having the full intact RES vector to address the next instruction with, it has the low byte of the RES vector used as the <i>high</i> byte of the opcode address, and the low byte of the address of the high byte of the RES vector appears as the low byte of the opcode address.
+</p><p>Restated: &lt;RES low&gt;FD is fetched instead of &lt;RES high&gt;&lt;RES low&gt; for the jumped-to opcode. The 'FD' comes from FFFD addressing the high byte of the RES vector. Due to being both T0 and T6, the T6 phase 2 part of the state was still controlling the low byte of the address at fetch phase 1, and the T0 phase 2 part of the state was controlling the high byte of the address at fetch phase 1. Normally, the high byte of the vector is what was just read and is used for the high byte of the fetch address, but the low byte was what was just read and available instead.
+</p><p>The foiled full hijack behavior is actually a subset of what happens when RES is released too early after having been put down during T4 of a BRK instruction. Releasing RES one cycle later than for this full hijack case results in a different nonsensical address for the jumped-to opcode. Tipping the hat, the effective address is &lt;&lt;RES low&gt;FD&gt;&lt;RES low&gt;. In this case, the 6502 has had the extra cycle needed to separately fetch the high byte of the jump vector (the cycle it was starved of in the other case), but fetched from &lt;RES low&gt;FD (like the opcode in the other case) instead of FFFD. The extra cycle also allows the low byte of the RES vector to appear in its proper position as the low byte of the opcode address.
+</p><p>Releasing RES <i>two</i> cycles later results in starting a new BRK instruction that jumps normally to the RES handler. This is because RES is held down long enough to prevent RES recognition stage 2 from being shut off by the already-running BRK instruction, and stage 2 still being alive will cause the next fetch cycle to start a new BRK instruction. The full description of what happens is covered by the worst-case RES invocation section under "Tolerances" in <a href="/wiki/index.php?title=6502_Interrupt_Recognition_Stages_and_Tolerances" title="6502 Interrupt Recognition Stages and Tolerances"> 6502 Interrupt Recognition Stages and Tolerances </a>. Demonstrations of all cases are present there.
+</p><p>For RES half-hijacking, the RES line must be put down a full cycle later than for the full hijack case, strictly during T5. It must also be released a cycle later than for full, strictly during T6.
+</p><p>RES stage 2 will be recognized when T6 phase 2 is clocked in and control the fetch of the high byte of the RES vector after the lower-priority interrupt has already controlled the fetch of the low byte of its vector in T5. T0 will arrive separately (when it normally does) and the combined vector of &lt;RES high&gt;&lt;NMI or IRQ/BRK low&gt; will send execution to a likely nonsensical location for code (but not as nonsensical as the results of the 2 failed full hijacks).
+</p><p>If RES is released later than strictly during T6, the same behavior happens as for the case of releasing two cycles later than T5 on full hijack: a new BRK instruction runs and jumps normally to the RES handler.
+</p>
+<h2> <span class="mw-headline" id="BRK_Protected_from_NMI_vs._Unprotected_from_RES"> BRK Protected from NMI vs. Unprotected from RES </span></h2>
+<p>So why is BRK protected against NMI half-hijack and not from RES? In the case of NMI, why is it left vulnerable to missing NMI entirely?
+</p><p>Hijacks (both successful half and failed full) by RES depend only upon RES coming up one to four transitions after recognition. In a healthy real system, it will not come up so soon, so real systems are safe from all RES hijacks. As a secondary matter, protecting BRK from RES hijack goes against the purpose of RES. It needs to be all-powerful to reliably redirect the processor to abandon its work in progress. Protection denies it the necessary power. Instead of complicating the design for a tiny niche of execution whose issue is already resolved another way, it is left simpler by being unprotected. Protection from RES is neither advisable nor necessary.
+</p><p>In contrast with RES, NMI half hijack is not dependent upon the NMI line coming up at all. A hijack will happen whether the surrounding system's NMI line comes up quickly or not, and the latter is normal hardware behavior. That demands protection. Without it, half-hijacks would inevitably occur during normal operation, making the system built around 6502s unreliable. The work-around of putting a JMP to NMI handling at the mixed address in ROM is just not acceptable. It would be like a fourth interrupt and would have to be documented.
+</p><p>The issue of potentially missing NMI (the side effect of protection) is prevented by the same real system behavior that prevents RES hijacking. A device exerting NMI will let the line up only after being answered by software action (a long time later).
+</p><p>It is only us hackers that can drive the simulator with transient interrupt signals that act like flaky hardware.
+</p>
+<h2> <span class="mw-headline" id="Demonstrations"> Demonstrations </span></h2>
+<p>In all demonstrations, the NMI handler is set to F810, RES handler set to F920, and IRQ/BRK handler set to FA30.
+</p><p><a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=42&amp;logmore=Execute,nmi,res,irq,~NMIG,RESP,IRQP,p2,INTG,RESG,State,tcstate,TState,Phi&amp;a=0200&amp;d=EAEA&amp;a=20FD&amp;d=4C20F9&amp;a=F810&amp;d=40&amp;a=F910&amp;d=4C20F9&amp;a=F920&amp;d=584C0002&amp;a=F930&amp;d=4C20F9&amp;a=FA30&amp;d=486840&amp;a=FFFA&amp;d=10F820F930FA&amp;irq0=11&amp;irq1=12&amp;nmi0=21&amp;nmi1=22" class="external text" rel="nofollow">Just in time full hijack of an IRQ by NMI.</a>
+</p><p>The BRK instruction started by an IRQ is co-opted by an NMI and runs the NMI handler instead of the IRQ handler.
+</p><p>Schedule of the interrupts (Halfcycle numbers are 0-based):
+</p>
+<pre>Halfcycle 11 IRQ0 during T1 phase 2 of 1st NOP
+Halfcycle 12 IRQ1 during T0 T2 phase 1 of 1st NOP
+Halfcycle 21 NMI0 during T4 phase 2 of IRQ BRK
+Halfcycle 22 NMI1 during T5 phase 1 of IRQ BRK
+</pre>
+<p><a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=50&amp;logmore=Execute,nmi,res,irq,~NMIG,RESP,IRQP,p2,INTG,RESG,State,tcstate,TState,Phi&amp;a=0200&amp;d=EAEA&amp;a=20FD&amp;d=4C20F9&amp;a=F810&amp;d=40&amp;a=F910&amp;d=4C20F9&amp;a=F920&amp;d=584C0002&amp;a=F930&amp;d=4C20F9&amp;a=FA30&amp;d=486840&amp;a=FFFA&amp;d=10F820F930FA&amp;irq0=11&amp;irq1=12&amp;nmi0=23&amp;nmi1=28" class="external text" rel="nofollow">Thwarted half-hijack of an IRQ by NMI</a> (and NMI line held long enough for the NMI to not be missed. See also "lost NMI" in <a href="/wiki/index.php?title=6502_Timing_of_Interrupt_Handling" title="6502 Timing of Interrupt Handling"> 6502 Timing of Interrupt Handling </a>).
+</p><p>The BRK instruction started by an IRQ is not successfully co-opted by a late NMI and runs the first instruction of the IRQ handler, then interrupted by the NMI and runs the NMI handler.
+</p><p>Schedule of the interrupts (Halfcycle numbers are 0-based):
+</p>
+<pre>Halfcycle 11 IRQ0 during T1 phase 2 of 1st NOP
+Halfcycle 12 IRQ1 during T0 T2 phase 1 of 1st NOP
+Halfcycle 23 NMI0 during T5 phase 2 of IRQ BRK
+Halfcycle 28 NMI1 during T1 phase 1 of PHA (IRQ handler)
+</pre>
+<p><a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=34&amp;logmore=Execute,nmi,res,irq,~NMIG,RESP,IRQP,p2,INTG,RESG,State,tcstate,TState,Phi&amp;a=0200&amp;d=EAEA&amp;a=20FD&amp;d=4C20F9&amp;a=F810&amp;d=40&amp;a=F910&amp;d=4C20F9&amp;a=F920&amp;d=584C0002&amp;a=F930&amp;d=4C20F9&amp;a=FA30&amp;d=486840&amp;a=FFFA&amp;d=10F820F930FA&amp;irq0=11&amp;irq1=12&amp;reset0=21&amp;reset1=22" class="external text" rel="nofollow">Thwarted full hijack of an IRQ by RES.</a>
+</p><p>The BRK instruction started by an IRQ is co-opted by a RES that then ties its own shoes together and stumbles to an address of 20FD in the middle of nowhere. A JMP instruction placed there redirects to the RES handler anyway.
+</p><p>Schedule of the interrupts (Halfcycle numbers are 0-based):
+</p>
+<pre>Halfcycle 11 IRQ0 during T1 phase 2 of 1st NOP
+Halfcycle 12 IRQ1 during T0 T2 phase 1 of 1st NOP
+Halfcycle 21 RES0 during T4 phase 2 of IRQ BRK
+Halfcycle 22 RES1 during T5 phase 1 of IRQ BRK
+</pre>
+<p><a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=36&amp;logmore=Execute,nmi,res,irq,~NMIG,RESP,IRQP,p2,INTG,RESG,State,tcstate,TState,Phi&amp;a=0200&amp;d=EAEA&amp;a=20FD&amp;d=4C20F9&amp;a=F810&amp;d=40&amp;a=F910&amp;d=4C20F9&amp;a=F920&amp;d=584C0002&amp;a=F930&amp;d=4C20F9&amp;a=FA30&amp;d=486840&amp;a=FFFA&amp;d=10F820F930FA&amp;irq0=11&amp;irq1=12&amp;reset0=23&amp;reset1=24" class="external text" rel="nofollow">Successful half-hijack of an IRQ by RES.</a>
+</p><p>The BRK instruction started by an IRQ is co-opted late by RES, mixing high and low bytes of the different vectors to a hybrid nonsense address of F930 (F9 of RES and 30 of IRQ). A JMP instruction placed there redirects to the RES handler.
+</p><p>Schedule of the interrupts (Halfcycle numbers are 0-based):
+</p>
+<pre>Halfcycle 11 IRQ0 during T1 phase 2 of 1st NOP
+Halfcycle 12 IRQ1 during T0 T2 phase 1 of 1st NOP
+Halfcycle 23 RES0 during T5 phase 2 of IRQ BRK
+Halfcycle 24 RES1 during T6 phase 1 of IRQ BRK
+</pre>
+<p><a href="http://visual6502.org/JSSim/expert.html?graphics=f&amp;steps=36&amp;logmore=Execute,nmi,res,irq,~NMIG,RESP,IRQP,p2,INTG,RESG,State,tcstate,TState,Phi&amp;a=0200&amp;d=EAEA&amp;a=20FD&amp;d=4C20F9&amp;a=F810&amp;d=40&amp;a=F910&amp;d=4C20F9&amp;a=F920&amp;d=584C0002&amp;a=F930&amp;d=4C20F9&amp;a=FA30&amp;d=486840&amp;a=FFFA&amp;d=10F820F930FA&amp;nmi0=11&amp;nmi1=12&amp;reset0=23&amp;reset1=24" class="external text" rel="nofollow">Successful half-hijack of an NMI by RES.</a>
+</p><p>The BRK instruction started by an NMI is co-opted late by RES, mixing high and low bytes of the different vectors to a hybrid nonsense address of F910 (F9 of RES and 10 of NMI). A JMP instruction placed there redirects to the RES handler.
+</p><p>Schedule of the interrupts (Halfcycle numbers are 0-based):
+</p>
+<pre>Halfcycle 11 NMI0 during T1 phase 2 of 1st NOP
+Halfcycle 12 NMI1 during T0 T2 phase 1 of 1st NOP
+Halfcycle 23 RES0 during T5 phase 2 of NMI BRK
+Halfcycle 24 RES1 during T6 phase 1 of NMI BRK
+</pre>
+<p><br />
+Coding of the program used in all of the demonstrations:
+</p>
+<pre>;                  Interrupted user code
+0200 NOP
+0201 NOP          &nbsp;; IRQ BRK or NMI BRK instead of running this instruction
+;
+;                  Intercept botched RES full-hijack of anything
+20FD JMP F920     &nbsp;; Jump to RES handler
+;
+;                  NMI handler
+F810 RTI
+;
+;                  Intercept RES half-hijack of NMI
+F910 JMP F920     &nbsp;; Jump to RES handler
+;
+;                  RES handler (where visual6502 starts running code when finished starting up)
+F920 CLI          &nbsp;; Enable IRQs
+F921 JMP 0200     &nbsp;; Jump to user code
+;
+;                  Intercept RES half-hijack of IRQ/BRK
+F930 JMP F920     &nbsp;; Jump to RES handler
+;
+;                  IRQ/BRK handler
+FA30 PHA          &nbsp;; Save accumulator (something different than NMI's handler)
+FA31 PLA          &nbsp;; Pull back
+FA32 RTI
+</pre>
+<h2> <span class="mw-headline" id="External_References"> External References </span></h2>
+<p>"late NMI" and "lost NMI" in <a href="/wiki/index.php?title=6502_Timing_of_Interrupt_Handling" title="6502 Timing of Interrupt Handling"> 6502 Timing of Interrupt Handling </a>
+</p><p><a href="/wiki/index.php?title=6502_Timing_States" title="6502 Timing States"> 6502 Timing States </a>
+</p><p><a href="/wiki/index.php?title=6502_Interrupt_Recognition_Stages_and_Tolerances" title="6502 Interrupt Recognition Stages and Tolerances"> 6502 Interrupt Recognition Stages and Tolerances </a>
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 23/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:186-0!1!0!!en!2!edit=0 and timestamp 20210404155440 -->
+<div class="printfooter">
+Retrieved from "<a href="http://visual6502.org/wiki/index.php?title=6502_Interrupt_Hijacking">http://visual6502.org/wiki/index.php?title=6502_Interrupt_Hijacking</a>"</div>
+		<div id='catlinks' class='catlinks catlinks-allhidden'></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/index.php?title=6502_Interrupt_Hijacking" title="View the content page [c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="/wiki/index.php?title=Talk:6502_Interrupt_Hijacking&amp;action=edit&amp;redlink=1" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="/wiki/index.php?title=6502_Interrupt_Hijacking&amp;action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="/wiki/index.php?title=6502_Interrupt_Hijacking&amp;action=history" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=6502_Interrupt_Hijacking" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(../images/6502/jssim_01_sm.png);" href="/wiki/index.php?title=Main_Page" title="Visit the main page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5>Navigation</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/index.php?title=Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="/wiki/index.php?title=VisualChips:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="/wiki/index.php?title=VisualChips:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="/wiki/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/wiki/index.php?title=Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="/wiki/index.php?title=Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input id="searchInput" title="Search VisualChips" accesskey="f" type="search" name="search" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Go" title="Go to a page with this exact name if exists" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" />
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/index.php?title=Special:WhatLinksHere/6502_Interrupt_Hijacking" title="List of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/index.php?title=Special:RecentChangesLinked/6502_Interrupt_Hijacking" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="/wiki/index.php?title=Special:SpecialPages" title="List of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="/wiki/index.php?title=6502_Interrupt_Hijacking&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="/wiki/index.php?title=6502_Interrupt_Hijacking&amp;oldid=833" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/wiki/skins/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki" /></a></div>
+	<div id="f-copyrightico"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt="Attribution-NonCommercial-ShareAlike 3.0 Unported" width="88" height="31" /></a></div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 15 March 2018, at 00:27.</li>
+		<li id="viewcount">This page has been accessed 11,932 times.</li>
+		<li id="copyright">Content is available under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" class="external ">Attribution-NonCommercial-ShareAlike 3.0 Unported</a>.</li>
+		<li id="privacy"><a href="/wiki/index.php?title=VisualChips:Privacy_policy" title="VisualChips:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/wiki/index.php?title=VisualChips:About" title="VisualChips:About">About VisualChips</a></li>
+		<li id="disclaimer"><a href="/wiki/index.php?title=VisualChips:General_disclaimer" title="VisualChips:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.058 secs. --></body></html>

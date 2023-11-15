@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" dir="ltr">
+<head>
+<title>6507 Decode ROM - VisualChips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="MediaWiki 1.16.0" />
+<link rel="canonical" href="/wiki/index.php?title=6507_Decode_ROM" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="VisualChips (en)" />
+<link title="Creative Commons" type="application/rdf+xml" href="/wiki/index.php?title=6507_Decode_ROM&amp;action=creativecommons" rel="meta" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
+<link rel="alternate" type="application/atom+xml" title="VisualChips Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="/wiki/skins/common/shared.css?270" media="screen" />
+<link rel="stylesheet" href="/wiki/skins/common/commonPrint.css?270" media="print" />
+<link rel="stylesheet" href="/wiki/skins/monobook/main.css?270" media="screen" />
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?270" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?270" media="screen" /><![endif]-->
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" media="print" />
+<link rel="stylesheet" href="/wiki/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=18000&amp;action=raw&amp;maxage=18000" />
+<link rel="stylesheet" href="/wiki/index.php?title=-&amp;action=raw&amp;maxage=18000&amp;gen=css" />
+<script>
+var skin="monobook",
+stylepath="/wiki/skins",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/",
+wgArticlePath="/wiki/index.php?title=$1",
+wgScriptPath="/wiki",
+wgScriptExtension=".php",
+wgScript="/wiki/index.php",
+wgVariantArticlePath=false,
+wgActionPaths={},
+wgServer="http://visual6502.org",
+wgCanonicalNamespace="",
+wgCanonicalSpecialPageName=false,
+wgNamespaceNumber=0,
+wgPageName="6507_Decode_ROM",
+wgTitle="6507 Decode ROM",
+wgAction="view",
+wgArticleId=2,
+wgIsArticle=true,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="en",
+wgContentLanguage="en",
+wgBreakFrames=false,
+wgCurRevisionId=203,
+wgVersion="1.16.0",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Main Page",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "VisualChips", "5": "VisualChips talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "visualchips": 4, "visualchips_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "image": 6, "image_talk": 7},
+wgSiteName="VisualChips",
+wgCategories=[],
+wgRestrictionEdit=["autoconfirmed"],
+wgRestrictionMove=["autoconfirmed"];
+</script><script src="/wiki/skins/common/wikibits.js?270"></script>
+<script src="/wiki/skins/common/ajax.js?270"></script>
+<script src="/wiki/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=monobook&amp;270"></script>
+
+</head>
+<body class="mediawiki ltr ns-0 ns-subject page-6507_Decode_ROM skin-monobook">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" >
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading">6507 Decode ROM</h1>
+	<div id="bodyContent">
+		<h3 id="siteSub">From VisualChips</h3>
+		<div id="contentSub">(Redirected from <a href="/wiki/index.php?title=6507_Decode_PLA&amp;redirect=no" title="6507 Decode PLA">6507 Decode PLA</a>)</div>
+		<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+		<!-- start content -->
+<p>The Decode ROM<sup class="reference plainlinks nourlexpansion"><a href="#endnote_1">1</a></sup> is a 130x21 bits ROM in the 6502 that is used to decode the instruction and to control various units of the CPU.
+</p><p>Some basic (maybe partially incorrect) information: <a href="http://www.pagetable.com/?p=39" class="external free" rel="nofollow">http://www.pagetable.com/?p=39</a>
+</p><p>This is a verified correct transcription of the ROM, taken from the Atari 6507 diagram sheets (this ROM differs from the one in the NMOS 6502, as simulated by the [<a href="http://visual6502.org/JSSim" class="external text" rel="nofollow">visual6502 simulator</a>]):
+</p>
+<pre>
+100XX1XX 3 X STY
+XXX100XX 1 3 T3INDYA
+XXX110XX 1 2 T2ABSY
+1100XXXX 3 0 T0CPYINY
+100110XX 3 0 T0TYAA
+1X0010XX 3 0 T0DEYINY
+000000XX 3 5 T5INT
+10XXXXXX 2 X LDXSDX
+XXX1X1XX X 2 T2ANYX
+XXX000XX 1 2 T2XIND
+100010XX 2 0 T0TXAA
+110010XX 2 0 T0DEX
+1110XXXX 3 0 T0CPXINX
+100110XX 2 0 T0TXS
+100XXXXX 2 X SDX
+101XXXXX 2 0 T0TALDTSX
+110010XX 2 1 T1DEX
+111010XX 3 1 T1INX
+101110XX 2 0 T0TSX
+1X0010XX 3 1 T1DEYINY
+101XX1XX 3 0 T0LDY1
+1010XXXX 3 0 T0LDY2TAY
+0XX0X0XX 3 2 CCC
+001000XX 3 0 T0JSR
+0X0010XX 3 0 T0PSHASHP
+011000XX 3 4 T4RTS
+0X1010XX 3 3 T3PLAPLPA
+010000XX 3 5 T5RTI
+011XXXXX 2 X RORRORA
+001000XX 3 2 T2JSR
+01X011XX 3 X JMPA
+XXXXXXXX X 2 T2
+XXX011XX X 2 T2EXT
+01X000XX 3 X RTIRTS
+XXX000XX 1 4 T4XIND
+XXXXXXXX X 0 T0A
+XXXX0XXX X 2 T2NANYABS
+010000XX 3 4 T4RTIA
+00X000XX 3 4 T4JSRINT
+0XX0XXXX 3 3 NAME1:T3_RTI_RTS_JSR_JMP_INT_PULA_PUPL
+XXX100XX 1 3 T3INDYB
+XXX000XX 1 3 T3XIND
+XXX100XX 1 4 T4INDYA
+XXX100XX 1 2 T2INDY
+XXX11XXX X 3 T3ABSXYA
+0X1010XX 3 X PULAPULP
+111XXXXX 2 X INC
+010XXXXX 1 0 T0EOR
+110XXXXX 1 0 T0CMP
+11X0XXXX 3 0 NAME2:T0_CPX_CPY_INX_INY
+X11XXXXX 1 0 T0ADCSBC
+111XXXXX 1 0 T0SBC
+001XXXXX 2 X ROLROLA
+01X011XX 3 3 T3JMP
+000XXXXX 1 0 T0ORA
+00XXXXXX 2 X NAME8:ROL_ROLA_ASL_ASLA
+100110XX 3 0 T0TYAB
+100010XX 2 0 T0TXAB
+X11XXXXX 1 1 T1ADCSBCA
+0XXXXXXX 1 1 NAME7:T1_AND_EOR_OR_ADC
+0XX010XX 2 1 NAME4:T1_ASLA_ROLA_LSRA
+011010XX 3 0 T0PULA
+XXX11XXX X 4 T4ABSXYA
+XXX100XX 1 5 T5INDY
+101XXXXX 1 0 T0LDA
+XXXXXXXX 1 0 T0G1
+001XXXXX 1 0 T0AND
+0010X1XX 3 0 T0BITA
+0XX010XX 2 0 NAME6:T0_ASLA_ROLA_LSRA
+101010XX 2 0 T0TAX
+101010XX 3 0 T0TAY
+01X010XX 2 0 T0LSRA
+01XXXXXX 2 X LSRLSRA
+001000XX 3 5 T5JSRA
+XXX100XX 3 2 T2BR
+000000XX 3 2 T2INT
+001000XX 3 3 T3JSR
+XXXX01XX X 2 T2ANYZP
+XXXX00XX 1 2 T2ANYIND
+XXXXXXXX X 4 T4
+XXXXXXXX X 3 T3
+0X0000XX 3 0 T0RTIINT
+01X011XX 3 0 T0JMP
+0XX0X0XX 3 2 NAME3:T2_RTI_RTS_JSR_INT_PULA_PUPLP_PSHA_PSHP
+011000XX 3 5 T5RTS
+XXXX1XXX X 2 T2ANYABS
+100XXXXX 1 X STA
+010010XX 3 2 T2PSHA
+XXX100XX 3 0 T0BR
+0XX010XX 3 X PSHPULA
+XXX000XX 1 5 T5XIND
+XXXX1XXX X 3 T3ANYABS
+XXX100XX 1 4 T4INDYB
+XXX11XXX X 3 T3ABSXYB
+0X0000XX 3 X RTIINT
+001000XX 3 X JSR
+01X011XX 3 X JMPB
+11X00XXX 3 1 T1CPX2CY2
+00X010XX 2 1 T1ASLARLA
+11X011XX 3 1 T1CPX1CY1
+110XXXXX 1 1 T1CMP
+X11XXXXX 1 1 T1ADCSBCB
+00XXXXXX 2 X NAME5:ROL_ROLA_ASL_ASLA
+X1XXXXXX 2 X LSRRADCIC
+0010X1XX 3 1 T1BIT
+000010XX 3 2 T2PSHP
+000000XX 3 4 T4INT
+100XXXXX X X STASTYSTX
+XXX11XXX X 4 T4ABSXYB
+XXXX00XX 1 5 T5ANYIND
+XXX001XX X 2 T2ZP
+XXX011XX X 3 T3ABS
+XXX101XX X 3 T3ZPX
+0X0010XX 3 2 T2PSHASHP
+01X000XX 3 5 T5RTIRTS
+001000XX 3 5 T5JSRB
+01X011XX 3 5 T4JMP
+010011XX 3 2 T2JMPABS
+0X1010XX 3 3 T3PLAPLPB
+XXX100XX 3 3 T3BR
+0010X1XX 3 0 T0BITB
+010000XX 3 4 T4RTIB
+001010XX 3 0 T0PULP
+0XX010XX 3 X PSHPULB
+101110XX 3 X CLV
+00X110XX 3 0 T0CLCSEC
+01X110XX 3 0 T0CLISEI
+11X110XX 3 0 T0CLDSED
+0XXXXXXX X X NI7P
+X0XXXXXX X X NI6P
+</pre>
+<p>The format is:
+</p>
+<pre>76543210 G T NAME
+</pre>
+<ul><li> The first column represents the 8 bits of the IR. 1 means the bit has to be 1 for the line to fire, 0 means the bit has to be 0, X is a don't care. Note that the lower two bits are always XX - the decode ROM doesn't actually check these, but check a cooked version of these bits instead.
+</li><li> The second column is the "G" input, it must match 1, 2, 3 or it's a don't care. G is derived from the lower two bits of the IR:
+</li></ul>
+<pre>G1 = IR0
+G2 = IR1
+G3 =&nbsp;!IR0 &amp;&nbsp;!IR1
+</pre>
+<ul><li> The third column is "T", which is the clock cycle in which the line fires (0..5).
+</li></ul>
+<p>Some observations:
+</p><p>1. There are 15 duplicates in the decode ROM:
+</p>
+<pre>$ for i in `sort pla.txt | cut -c -12 | uniq -c | sort -n | grep "^   2" | cut -c 6-17 | sed -e "s/ /./g"`; do grep $i pla.txt; done
+</pre>
+<p>We assume this has been done because they had no way of routing the output of some line where they wanted, so they put the same line at a different location again.
+</p><p>2. As an example, ADC # is 2 cycles, but there are lines that match T=[2..4]. In practice, these will never fire; they are meant for other instructions that have a similar encoding and do have T&gt;2.
+</p><p>3. About G, and how it explains many illegal opcodes:
+Orlando and I reverse engineered this by dumping operation lists with decode.rb and filtering which Gs made sense. The funny thing here is that this leads to the table:
+</p>
+<pre>00 -&gt; G3
+01 -&gt; G1
+10 -&gt; G2
+11 -&gt; G1/2
+</pre>
+<p>11 is the don't care case, there are no opcodes XXXXXX11 that are documented. So in order to simplify the G encoding, 11 has both G1 and G2 turned on, so all G=1 and G=2 lines fire. And this explains A LOT of things, like how LDA (0xAD, G=1) and LDX (0xAE, G=2) become LAX (0xAF, G=1 and G=2):
+</p>
+<pre>
+LDA T=0
+XXXXXXXX X 0 T0A
+101XXXXX 1 0 T0LDA
+XXXXXXXX 1 0 T0G1
+X0XXXXXX X X NI6P
+
+LDX T=0
+10XXXXXX 2 X LDXSDX
+101XXXXX 2 0 T0TALDTSX
+XXXXXXXX X 0 T0A
+X0XXXXXX X X NI6P
+
+LAX T0
+10XXXXXX 2 X LDXSDX
+101XXXXX 2 0 T0TALDTSX
+XXXXXXXX X 0 T0A
+101XXXXX 1 0 T0LDA
+XXXXXXXX 1 0 T0G1
+X0XXXXXX X X NI6P
+</pre>
+<p>...which is pretty much LDA and LDX joined!
+</p><p>If you look at <a href="http://www.oxyron.de/html/opcodes02.html" class="external free" rel="nofollow">http://www.oxyron.de/html/opcodes02.html</a> , you can see that columns 3, 7, B and F are illegal; this is the G=1+G=3 case. These columns basically execute all operations of the two preceding columns at the same time. Note that (as far as I checked) the cycle count (number in the table) is always the MAX() of the two opcodes it consists of.
+</p><p>This was known:
+</p><p><a href="http://www.viceteam.org/plain/64doc.txt" class="external free" rel="nofollow">http://www.viceteam.org/plain/64doc.txt</a>
+</p><p>Other undocumented instructions usually cause two preceding opcodes being executed.
+</p><p>But now we have more of a clue what's happening there...
+</p><p>Column 2 is KIL, column 3 has mostly *8* cycle instructions, which is weird. There are no regular 8 cycles ones. Not sure this is accurate in the docs. I see a correlation between the KIL and the 8 cycles. My theory is that KIL overflows the cycle counter. Not sure why column 3 doesn't inherit that feature.
+</p><p>The MAX() property and the KIL/Column 3 thing might explain how the cycle counter gets reset to 0... what triggers that. Orlando is also looking into this, comparing neighbor opcodes that terminate differently.
+</p><p>Here is the ruby program that accepts an opcode at the command line and prints the sequence of clocks:
+</p>
+<pre>
+#! /usr/bin/env ruby
+
+if ($*.length &lt; 1)
+    print &quot;usage: #{$0} &lt;value&gt;\n&quot;
+    exit
+end
+
+opc = eval($*[0])
+b0 = (opc &amp; 1)&nbsp;!= 0
+b1 = (opc &amp; 2)&nbsp;!= 0
+gmatch = Array.new
+gmatch[1] = b0
+gmatch[2] = b1
+gmatch[3] =&nbsp;!b0 &amp;&amp;&nbsp;!b1
+
+bin = (&quot;%08b&quot;&nbsp;% opc)
+
+input = Array.new
+
+File.open('pla.txt').each_line do |s|
+  next if s =~ /^#.*/ # skip lines starting with '#'
+  input += [ s.chop.split(/ /) ]
+end
+
+6.times do |time|
+  print &quot;T=#{time}\n&quot;
+  input.each do |ni, g, t, name|
+    print &quot;#{ni} #{g} #{t} #{name}\n&quot; if (bin.match(ni.gsub(/X/, &quot;.&quot;)) &amp;&amp; (t == &quot;X&quot; || time == t.to_i) &amp;&amp; (g == &quot;X&quot; || gmatch[g.to_i]))
+  end
+  print &quot;\n&quot;
+end
+</pre>
+<p>It also needs to read a file 'pla.txt' which has a tabulation <a href="/wiki/index.php?title=6502_all_256_Opcodes" title="6502 all 256 Opcodes">as found here</a>.
+</p>
+<h2> <span class="mw-headline" id="Notes">Notes</span></h2>
+<dl><dd> <span class="citation wikicite" id="endnote_1"><b><a href="#ref_1">^1</a></b>&nbsp;</span> The "Decode ROM" is named as a ROM in <a href="/wiki/index.php?title=Hanson%27s_Block_Diagram" title="Hanson's Block Diagram">Hanson's block diagram</a>, although it has wordline inputs and no address decoder. It is sometimes described as a PLA although it also lacks an AND plane. It is a structured layout of NOR gates with many common inputs, as compared to the unstructured gates found in the central decode logic, sometimes known as the random logic (meaning not structured).
+</dd></dl>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 47/1000000
+Post-expand include size: 205/2097152 bytes
+Template argument size: 6/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki6502:pcache:idhash:2-0!1!0!!en!2!edit=0 and timestamp 20210405054031 -->
+<div class="printfooter">
+Retrieved from "<a href="http://visual6502.org/wiki/index.php?title=6507_Decode_ROM">http://visual6502.org/wiki/index.php?title=6507_Decode_ROM</a>"</div>
+		<div id='catlinks' class='catlinks catlinks-allhidden'></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/index.php?title=6507_Decode_ROM" title="View the content page [c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="/wiki/index.php?title=Talk:6507_Decode_ROM&amp;action=edit&amp;redlink=1" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="/wiki/index.php?title=6507_Decode_ROM&amp;action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="/wiki/index.php?title=6507_Decode_ROM&amp;action=history" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=6507_Decode_ROM" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(../images/6502/jssim_01_sm.png);" href="/wiki/index.php?title=Main_Page" title="Visit the main page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5>Navigation</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/index.php?title=Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="/wiki/index.php?title=VisualChips:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="/wiki/index.php?title=VisualChips:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="/wiki/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/wiki/index.php?title=Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="/wiki/index.php?title=Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input id="searchInput" title="Search VisualChips" accesskey="f" type="search" name="search" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Go" title="Go to a page with this exact name if exists" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" />
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/index.php?title=Special:WhatLinksHere/6507_Decode_ROM" title="List of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/index.php?title=Special:RecentChangesLinked/6507_Decode_ROM" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="/wiki/index.php?title=Special:SpecialPages" title="List of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="/wiki/index.php?title=6507_Decode_ROM&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="/wiki/index.php?title=6507_Decode_ROM&amp;oldid=203" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/wiki/skins/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki" /></a></div>
+	<div id="f-copyrightico"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt="Attribution-NonCommercial-ShareAlike 3.0 Unported" width="88" height="31" /></a></div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 6 January 2011, at 13:11.</li>
+		<li id="viewcount">This page has been accessed 104,431 times.</li>
+		<li id="copyright">Content is available under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" class="external ">Attribution-NonCommercial-ShareAlike 3.0 Unported</a>.</li>
+		<li id="privacy"><a href="/wiki/index.php?title=VisualChips:Privacy_policy" title="VisualChips:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/wiki/index.php?title=VisualChips:About" title="VisualChips:About">About VisualChips</a></li>
+		<li id="disclaimer"><a href="/wiki/index.php?title=VisualChips:General_disclaimer" title="VisualChips:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.073 secs. --></body></html>
