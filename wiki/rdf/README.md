@@ -2,8 +2,6 @@
 
 Each linked document contains the authorship for the page of the same name.
 
-```
-
 [6502DecimalMode.rdf ](./6502DecimalMode.rdf)
 
 [6502Observations.rdf ](./6502Observations.rdf)
@@ -325,6 +323,4 @@ Each linked document contains the authorship for the page of the same name.
 [Z8400.rdf ](./Z8400.rdf)
 
 [Zilog.rdf ](./Zilog.rdf)
-
-```
 
