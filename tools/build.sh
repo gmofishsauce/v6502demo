@@ -36,25 +36,16 @@ if [ ! -d $DSTDIR ] ; then
 fi
 cat $SRCDIR/README.md.prototype | grep -v 'this line is replaced' > $DSTDIR/README.md
 
-echo '```' >> $DSTDIR/README.md
-echo ''    >> $DSTDIR/README.md
-
 ls $SRCDIR | while read rdffile ; do
 	# first the file...
 	srcname=$SRCDIR/${rdffile}
 	dstname=$DSTDIR/${rdffile}.md
-	echo '```'        >> $dstname
-	echo ''           >> $dstname
 	cat $srcname	  >> $dstname
-	echo ''           >> $dstname
-	echo '```'        >> $dstname
-	# ...and then the link to it.
-	echo "[${rdffile} ](./${rdffile})" >> $DSTDIR/README.md
-	echo >> $DSTDIR/README.md
+	# ...and then the link to it. We need to escape underscores
+	# in the visible [ ] part of the text of the link.
+	displayname=$( echo "${rdffile}" | sed 's/_/\\_/g' )
+	echo "[${displayname} ](./${rdffile})" >> $DSTDIR/README.md
 done
-
-echo '```' >> $DSTDIR/README.md
-echo ''    >> $DSTDIR/README.md
 
 echo "done"
 echo "Building source files in wiki..."
