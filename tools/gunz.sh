@@ -30,22 +30,6 @@ if [ ! -d "$1" ] ; then
 fi
 SRCDIR="$1"
 
-# The target directory for the downloads. Since the original site was a
-# MediaWiki, we can't know anything about the actual layout of content in
-# files, or even whether there were files, versus e.g. a database holding
-# the content. The general approach I'm now taking for recovery is to
-# download the original files into a directory websites/ which I then
-# keep pristine. This download doesn't include the authorship information
-# because the Wayback Machine Downloader doesn't find it. I then build up
-# a second copy of the site in work/ which includes various processing
-# including decompression, downloading of the authorship information, 
-# renaming files to avoid illegal URLs, and hand fixes to clean up one
-# of a kind data issues. Finally the work/ directory is processed into
-# wiki/site as markdown plus images, which is then rendered back to a
-# static HTML site by the Jekyll processor in Github Pages. As with many
-# of the tools used to do all this, the TARGET assumes you are running
-# from the root of the repo.
-
 ALL_FILES=$( find "$SRCDIR"  -print0 | xargs -0 file |\
 			grep 'gzip compressed data' | sed 's/: .*$//' )
 for filename in $ALL_FILES ; do

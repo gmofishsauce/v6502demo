@@ -55,19 +55,21 @@ delays between the individual file downloads.
 
 In response I wrote a shell script, `./tools/dl.sh`. To use it, run the WMD command given
 above with the `--list` option. This produces a JSON file which I committed as ALL_FILES.json.
-Make a copy of the file and remove the first line '[' and the last line ']'; this leaves a file
-in "JSON lines" format (see jsonlines.org). Run `./tools/dl.sh lines.json` to download all the
-files. The script will incrementally remove lines from the file as it successfully downloads
-each file; this allows the script to be killed and restarted. The script delays 5 to 15 seconds
-between each pair of file downloads. I found this to be sufficient and did not investigate
-further.
+Make a copy of the file (e.g. `lines.json`) and remove the first line '[' and the last line ']'
+from the file; this leaves a file n "JSON lines" format (see jsonlines.org). Run
+`./tools/dl.sh lines.json` to download all the files. The script will incrementally remove lines
+from the file as it successfully downloads each file; this allows the script to be killed and
+restarted if issues occur. The script delays 5 to 15 seconds between each pair of file downloads.
+I found this to be sufficient and did not investigate further.
 
-I found that this second download pulled two variations on the name "visual6502.org", each
+The WMD downloads into `websites/hostname`, `websites/visual6502.org` in this case. But I
+found that this second download pulled two variations on the name "visual6502.org", each
 containing a couple of files. These can be seen in `websites/`. These fake names complicate
 processing. I decided to defer dealing with these. I created a directory `work/` and copied
 `./websites/visual6502.org` recursively to `work`.  From here until the cleanup at the end
-of this process, "the files" (or "all the files") refers to the content of `./work` only,
-not to these two side directories.
+of this process, "the files" (or "all the files") refers to the content of `./work` only.
+The `websites` directory is kept pristine and the two side directories are addressed at the
+end of the process.
 
 ### A note about file naming
 
@@ -81,7 +83,7 @@ is done later and details are given there.
 
 ### Decompress the working files
 
-On my first pass at downloading, I did not document the fact that many non-image files in the
+On my first pass at downloading, I did not document the fact that some non-image files in the
 wiki are gzipped. Image files are sensibly not gzipped as they don't compress much. I wrote
 another shell script, `./tools/gunz.sh`, to find all the gzipped files and unzip them. The
 script is idempotent (it can be safely rerun if gzipped files are ever added to the repo).
@@ -101,12 +103,13 @@ file at a time, using multiple invocations of the command
 mkmd -r -o wiki/rdf html_file.ext
 ```
 
-I used `find` to locate all the HTML documents in the base wiki and a one-line shell loop
-to run `mkmd` once per file. I found 174 HTML files, many of which have file extensions like
-`.jpg` or `.png`. From this list I was able to download 161 RDF files.
+I wrote `tools/dl_auth.sh` to download all authorship information. This script runs `mkmd -r`
+for each file. Note that many of the HTML files have file extensions `.png` or `.jpg` and
+that some of these have authorship information.
 
-I build `mkmd` in the `./tools` directory like this: `go build -o mkmd`. The actual WM URL of
-each of these `.rdf` files is peculiar; the Go code knows the rule for constructing it.
+I build `mkmd` in the `./tools` directory like this: `go build -o mkmd`. The actual URL of
+each of these `.rdf` files within the Wayback Machine is peculiar; the Go code knows the rule
+for constructing it.
 
 ### Rename all the files
 

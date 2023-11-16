@@ -21,14 +21,28 @@ The flags are:
 		Scan the document for a `<link>` tag with a `type` attribute having
 		value `application/rdf+xml`. If found, use the Wayback Machine API to
 		construct a URL that is likely to reference the RDF file and attempt
-		to download it.
+		to download it. The downloaded XML (RDF) file is given a safe name.
 	-m
-		Write a markdown (".md") file corresponding to the document, which must
-		be an HTML file. The file is written in the directory given by -o.
+		Write a markdown (".md") file corresponding to the document, which
+		must be an HTML file. The file is written in the directory given by
+		the -o argument, if suppied, default "."
 	-u
-		Update the filename of the argument file to contain no shell metacharacters
-		or reserved URL characters. Details are TBD.
+		Update the filename of the argument file to a safe name.
 
+Files downloaded by the Wayback Machine Downloader from the visual6502.org
+MediaWiki in the Wayback Machine have filenames derived from the titles of
+the MediaWiki pages. These titles may contain any character: they are not URL
+safe. The Gitlab Pages pipeline uses the Jekyll tool to create a static site,
+and the pipeline does not tolerate URL-unsafe characters. Therefore, it's
+necessary to rename the downloaded files. The renaming process must not break
+links between pages, and the links are (as far as I know) URL encoded. So a
+file with a single quote in the name will have a %27 in an URL that links to
+it. Since the single quote in the filename must be changed to an URL safe
+character, it becomes unnecessary (but I hope harmless) to URL encode links 
+to the file. The solution I use is to replace URL-unsafe characters in file
+names with URL safe characters (dash and tilde). When reprocessing URLs, the
+URL is decoded to regenerate the URL-unsafe characters and the URL (really
+just the name component) is subjected to the same replacement rule.
 
 */
 package main

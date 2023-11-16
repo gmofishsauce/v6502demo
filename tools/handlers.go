@@ -87,7 +87,6 @@ func doText(n *html.Node, cx *context) error {
 // that link .rdf files containing authorship and license data and
 // downloads their latest version.
 func rdfHandler(n *html.Node, cx *context) error {
-	dbg("rdfHandler: attrs=%v\n", n.Attr)
 	var isRDF bool
 	var href string
 	for _, a := range n.Attr {
@@ -116,6 +115,8 @@ func rdfHandler(n *html.Node, cx *context) error {
 	// rule for characters produces only URL-safe characters, so there is
 	// never any need to URL encode after running the rule.
 	if isRDF && len(href) > 0 {
+		dbg("rdfHandler: attrs=%v\n", n.Attr)
+
 		url, err := getMostRecentUrl(makeWaybackApiQuery(href))
 		if err != nil {
 			return err

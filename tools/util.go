@@ -59,13 +59,13 @@ func makeWaybackApiQuery(href string) string {
 
 // Get the response body for the argument url. Return as a byte slice.
 func getBody(url string) ([]byte, error) {
-	dbg("getBody(%s)\n", url)
+	//dbg("getBody(%s)\n", url)
     resp, err := http.Get(url)
     if err != nil {
         return nil, fmt.Errorf("getBody(): http.Get(%s): %v", url, err)
     }
 	defer resp.Body.Close()
-    dbg("getBody() resp: %v\n", resp)
+    //dbg("getBody() resp: %v\n", resp)
 
 	b, err := io.ReadAll(resp.Body)
     if err != nil {
@@ -87,7 +87,7 @@ func getMostRecentUrl(url string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	dbg("unmarshaled response: %v\n", data)
+	//dbg("unmarshaled response: %v\n", data)
 
 	archived_snapshots, ok := data["archived_snapshots"].(map[string]any)
 	if !ok {
