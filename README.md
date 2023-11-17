@@ -5,14 +5,14 @@ reverse engineering work on several early microprocessors, particularly the
 venerable 6502. Their work can be found at [visual6502.org](http://visual6502.org).
 
 The team maintained a wiki that used MediaWiki technology. The wiki is no longer
-functional [as you can see](http://visual6502.org/wiki).
+functional, [as you can see](http://visual6502.org/wiki).  This repository
+represents my personal effort to restore this content to easy availability on
+the internet.
 
-This repository represents my personal effort to restore this content to easy
-availability on the internet.
-
-This site, however, is historical documentation; it is not a wiki. The recovered
-site exists as a [static, markdown-base website](https://gmofishsauce.github.io/v6502demo/)
-in Github Pages. The process used to build the site is described below.
+This site, however, is not a wiki; it is historical documentation. It is a
+[static, markdown-base website](https://gmofishsauce.github.io/v6502demo/wiki)
+in Github Pages. It is still under construction. The process used to build the
+site is described below.
 
 The original Wiki states:
 
@@ -20,26 +20,21 @@ Content is available under [Attribution-NonCommercial-ShareAlike 3.0 Unported](h
 
 To honor this license, I must list the authors.
 This information is found in [`./wiki/rdf`](wiki/rdf).
-Note that the links at the bottom of the README file for that directory
-are functional only in the rendred Github Pages site, not on Github proper.
 
 ## Process
 
-- The original content was downloaded from the Wayback Machine.
+- The original content was downloaded from the Wayback Machine. This copy
+is never modified. It is located in [websites](./websites).
 
-This copy never modified. It is located in [websites](./websites).
+- Additions are made and various cleanup changes are made. This copy is
+located in [work](./work).
 
-- Additions are made and various cleanup changes are made.
+- A static markdown representation is built. This copy is located in [wiki](./wiki).
 
-This copy is located in [work](./work).
+- Github Pages uses Jekyll to render the markdown content as a static HTML site.
 
-- A static markdown representation is built. It is located in [wiki](./wiki).
-
-This copy is located in [wiki](./wiki).
-
-- Github Pages uses Jekull to render the markdown content as a static HTML site.
-
-The rendered site is at [https://gmofishsauce.github.io/v6502demo/](https://gmofishsauce.github.io/v6502demo/).
+The rendered site
+is at [https://gmofishsauce.github.io/v6502demo/wiki](https://gmofishsauce.github.io/v6502demo/wiki).
 
 ## Tooling
 
@@ -131,34 +126,35 @@ I build `mkmd` in the `./tools` directory like this: `go build -o mkmd`. The act
 each of these `.rdf` files within the Wayback Machine is peculiar; the Go code knows the rule
 for constructing it.
 
-### Rename all the files
-
-Every downloaded file name will end up in the URL of a file rendered into the Gibhub Pages site
-by the Jekyll processor. Due to the structure of the wiki, essentially all the files (including
-some of the RDF files) have names that cannot be used in URLs. Many of them are handled correctly
-in practice even though they form technically illegal URLs; others causes problems when the Github
-Pages pipeline runs Jekyll to render the markdown I generate as static HTML.
-
-I renamed all the offending files (i.e. most of the files) according to standard rules. This is
-done using another command line option to mkmd (description TBD). The renaming of course breaks
-all the links to the renamed documents. All URLs are rewritten in later steps by applying the
-same character remapping rules. Unlike the file names, the URLs that reference them are usually
-URL encoded. The URLs must be URL decoded, then fixed, and then URL encode (although the last
-step is likely unnecessary with all the special characters substituted for legal URL characters).
-
-### Set up Github Pages and create some README files
-
-I enabled Github Pages for the entire repo. Much of the repo is not accessible through the Pages
-site, because it only renders markdown. I created some README.md files, which become index.html
-files in effect.
-
 ### Move the images
 
 The site will end up in `v6502demo/wiki`, so the images need to be there. Rather than copy the
 ones I downloaded which would double the size of the repo, I moved the downloadeded `images/`
-directory from `downloads/visual6502.org/wiki/images` to `wiki/images`.
+directory from `websites` to `work` and then from `work` to `images`. There is shell script,
+`tools/bld_img.sh`, that does this. It's a one liner that runs rsync.
+
+### Rename all the files
+
+I renamed all files according to a rule. This is done using `./tools/mkmd -u` on each file.
+The [work](./work) directory contains the renamed files. This breaks all the links to the
+renamed documents. All URLs are rewritten in later steps by applying the
+same character remapping rule. Unlike the file names, the URLs that reference them are usually
+URL encoded. The URLs must be URL decoded to restore the original illegal URL characters, then
+fixed by applying the rule.
+
+Interestingly, none of the image files seems to have any illegal URL characters in their names.
+This suggests that MediaWiki has similar set of remapping rules that it applies to uploaded
+images.
+
+### Set up Github Pages and create some README files
+
+I enabled Github Pages for the entire repo. Much of the repo is not accessible through the Pages
+site, because Pages only renders markdown. I created some README.md files, which become index.html
+files in effect.
 
 ### Write the .md files
+
+TBD:
 
 This is the point of the whole exercise: writing a static markdown file that captures all the
 valuable content of the original MediaWiki page. This step includes updating all the URLs that
