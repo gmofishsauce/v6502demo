@@ -1,9 +1,18 @@
-## Welcome to the v6502 Wiki Recovery Repo
+# Welcome to the visual6502.org Wiki Recovery Repo
 
-The recovered Visual6502.org wiki is being built in [`wiki`](./wiki).
-The "recovered wiki" will not be a wiki but rather a static, markdown-base website
-that will be rendered to HTML with Jekyll. The initial, demo-only deployment will
-be on Github Pages.
+Between about 2007 and 2015, a team of dedicated hobbyists did significant
+reverse engineering work on several early microprocessors, particularly the
+venerable 6502. Their work can be found at [visual6502.org](http://visual6502.org).
+
+The team maintained a wiki that used MediaWiki technology. The wiki is no longer
+functional [as you can see](http://visual6502.org/wiki).
+
+This repository represents my personal effort to restore this content to easy
+availability on the internet.
+
+This site, however, is historical documentation; it is not a wiki. The recovered
+site exists as a [static, markdown-base website](https://gmofishsauce.github.io/v6502demo/)
+in Github Pages. The process used to build the site is described below.
 
 The original Wiki states:
 
@@ -11,15 +20,26 @@ Content is available under [Attribution-NonCommercial-ShareAlike 3.0 Unported](h
 
 To honor this license, I must list the authors.
 This information is found in [`./wiki/rdf`](wiki/rdf).
+Note that the links at the bottom of the README file for that directory
+are functional only in the rendred Github Pages site, not on Github proper.
 
 ## Process
 
-- The original content is downloaded from the Wayback Machine
-- The files are renamed to avoid illegal characters in URLs.
-- A markdown-based equivalent of the entire wiki is generated
-- Github Pages renders the markdown content as a static HTML site
+- The original content was downloaded from the Wayback Machine.
 
-Each of these steps is described in more detail below.
+This copy never modified. It is located in [websites](./websites).
+
+- Additions are made and various cleanup changes are made.
+
+This copy is located in [work](./work).
+
+- A static markdown representation is built. It is located in [wiki](./wiki).
+
+This copy is located in [wiki](./wiki).
+
+- Github Pages uses Jekull to render the markdown content as a static HTML site.
+
+The rendered site is at [https://gmofishsauce.github.io/v6502demo/](https://gmofishsauce.github.io/v6502demo/).
 
 ## Tooling
 
@@ -83,11 +103,11 @@ is done later and details are given there.
 
 ### Decompress the working files
 
-On my first pass at downloading, I did not document the fact that some non-image files in the
-wiki are gzipped. Image files are sensibly not gzipped as they don't compress much. I wrote
-another shell script, `./tools/gunz.sh`, to find all the gzipped files and unzip them. The
-script is idempotent (it can be safely rerun if gzipped files are ever added to the repo).
-The script uses tricks like `find -print0 ... | xargs -0 ...` because of the file naming issue.
+Some non-image files in the wiki are gzipped. Image files are sensibly not gzipped as they
+don't compress much. I wrote another shell script, `./tools/gunz.sh`, to find all the gzipped
+files and unzip them. The script is idempotent (it can be safely rerun if gzipped files are
+ever added to the repo).  The script uses tricks like `find -print0 ... | xargs -0 ...` because
+of the file naming issue, which is resolved in a later step.
 
 ### Download the authorship information
 
@@ -103,9 +123,9 @@ file at a time, using multiple invocations of the command
 mkmd -r -o wiki/rdf html_file.ext
 ```
 
-I wrote `tools/dl_auth.sh` to download all authorship information. This script runs `mkmd -r`
-for each file. Note that many of the HTML files have file extensions `.png` or `.jpg` and
-that some of these have authorship information.
+I wrote `tools/dl_auth.sh` to download all authorship information into the [work](./work)
+directory. This script runs `mkmd -r` for each file. Note that many of the HTML files have
+file extensions `.png` or `.jpg`.
 
 I build `mkmd` in the `./tools` directory like this: `go build -o mkmd`. The actual URL of
 each of these `.rdf` files within the Wayback Machine is peculiar; the Go code knows the rule
