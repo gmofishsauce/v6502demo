@@ -131,7 +131,7 @@ func main() {
 		if flop.flagVal {
 			dbg("Processing %s\n", flop.name)
 			setOpTable(flop.ops)
-			cx := &context{0, *oflag, name}
+			cx := NewContext(*oflag, name)
 			if err = process(doc, cx); err != nil {
 				fatal(err.Error())
 			}

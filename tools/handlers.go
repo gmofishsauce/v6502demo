@@ -49,11 +49,15 @@ var rdfPass = opTable {
 // An optable for generating .md files from the Wiki's HTML files
 var mdPass = opTable {
 	defaultAction: nil,
-	typeFuncs: [6]opFunc{nil, doText, nil, nil, nil, doDocType},
+	typeFuncs: [6]opFunc{nil, doText, nil, nil, doComment, doDocType},
 	elementPreFuncs: map[atom.Atom]opFunc{
-		atom.Img: doImg,
+		atom.Img: doImgOpen,
+		atom.Script: doScriptOpen,
 	},
 	elementPostFuncs: map[atom.Atom] opFunc{
+		atom.Body: doHtmlClose,
+		atom.Html: doHtmlClose,
+		atom.Script: doScriptClose,
 	},
 }
 
@@ -62,22 +66,62 @@ var mdPass = opTable {
 // =============================================================
 
 func prototype(n *html.Node, cx *context) error {
+	return nil // copy this to make new handlers
+}
+
+// </html> endtag. Write the output file.
+func doHtmlClose(n *html.Node, cx *context) error {
+	outDir := cx.outputDirectory
+	if len(outDir) == 0 {
+		outDir = "."
+	}
+	inFileName := path.Base(cx.inputFilePath)
+	outPath := path.Join(outDir, inFileName) + ".md"
+	err := os.WriteFile(outPath, []byte(cx.md.String()), 0644)
+	if err != nil {
+		fatal("write result to \"%s\" failed: %v", outPath, err)
+	}
 	return nil
 }
 
-func doImg(n *html.Node, cx *context) error {
+func doImgOpen(n *html.Node, cx *context) error {
 	imgLink := getAttrVal(n, "src")
 	if len(imgLink) > 0 {
-		emitString("![an image](%s)\n", imgLink)
+		cx.emitString("![an image](%s)\n", imgLink)
 	}
 	return nil
 }
 
 func doDocType(n *html.Node, cx *context) error {
+	cx.emitString("**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**\n")
 	return nil
 }
 
 func doText(n *html.Node, cx *context) error {
+	cx.emitString(n.Data)
+	return nil
+}
+
+func doComment(n *html.Node, cx *context) error {
+	// The Wayback Machine emits this content before its footer.
+	// The WM Downloader is documented as only downloading the
+	// page "as it was", but apparently this does not work because
+	// the downloaded pages have all this WM footer material.
+	// There is no matching enableOutput() for this - it continues
+	// to the end of the file, when we emit our footer instead.
+	if strings.HasPrefix(n.Data, " Saved in parser cache") {
+		cx.disableOutput() // all the way to the end
+	}
+	return nil
+}
+
+func doScriptOpen(n *html.Node, cx *context) error {
+	cx.disableOutput()
+	return nil
+}
+
+func doScriptClose(n *html.Node, cx *context) error {
+	cx.enableOutput()
 	return nil
 }
 
@@ -115,8 +159,6 @@ func rdfHandler(n *html.Node, cx *context) error {
 	// rule for characters produces only URL-safe characters, so there is
 	// never any need to URL encode after running the rule.
 	if isRDF && len(href) > 0 {
-		dbg("rdfHandler: attrs=%v\n", n.Attr)
-
 		url, err := getMostRecentUrl(makeWaybackApiQuery(href))
 		if err != nil {
 			return err

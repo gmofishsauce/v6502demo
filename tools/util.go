@@ -39,7 +39,34 @@ import (
 type context struct {
 	depth int
 	outputDirectory string
-	fileName string
+	inputFilePath string
+	md strings.Builder
+	outputDisabledCounter int
+}
+
+func NewContext(outdir string, inpath string) *context {
+	return &context{outputDirectory: outdir, inputFilePath: inpath}
+}
+
+// Emit a string to the standard output. For intended results (output)
+// of this program. Avoid random fmt.PrintX to avoid random output.
+func (cx *context) emitString(format string, args ...any) {
+	if cx.outputDisabledCounter < 0 {
+		panic("outputDisabledCounter negative")
+	}
+	if cx.outputDisabledCounter == 0 {
+		cx.md.WriteString(fmt.Sprintf(format, args...))
+	}
+}
+
+// Disable output generation, presumably until a matching end tag is found.
+// This prevents e.g. emitting inline scripts which appear as text nodes.
+func (cx *context) disableOutput() {
+	cx.outputDisabledCounter++
+}
+
+func (cx *context) enableOutput() {
+	cx.outputDisabledCounter--
 }
 
 func makeOutputDir(outputDirectory string) {
@@ -49,23 +76,19 @@ func makeOutputDir(outputDirectory string) {
 	}
 }
 
-// XXX this url has the query string on the end. See TODO below.
 const waybackAPI = "https://archive.org/wayback/available?url="
 
 func makeWaybackApiQuery(href string) string {
-	// TODO figure out how to use the url package to add a query string.
 	return waybackAPI + makeAbsolute(href)
 }
 
 // Get the response body for the argument url. Return as a byte slice.
 func getBody(url string) ([]byte, error) {
-	//dbg("getBody(%s)\n", url)
     resp, err := http.Get(url)
     if err != nil {
         return nil, fmt.Errorf("getBody(): http.Get(%s): %v", url, err)
     }
 	defer resp.Body.Close()
-    //dbg("getBody() resp: %v\n", resp)
 
 	b, err := io.ReadAll(resp.Body)
     if err != nil {
@@ -87,7 +110,6 @@ func getMostRecentUrl(url string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	//dbg("unmarshaled response: %v\n", data)
 
 	archived_snapshots, ok := data["archived_snapshots"].(map[string]any)
 	if !ok {
@@ -124,7 +146,6 @@ func getTitle(rawUrl string) (string, error) {
 		return "", fmt.Errorf("getTitle(%s): no title= query string", rawUrl)
 	}
 	result := titleString[0]
-	dbg("getTitle(): %s\n", result)
 	return result, nil
 }
 
@@ -146,12 +167,6 @@ func hasAttr(node *html.Node, name string) bool {
 		}
 	}
 	return false
-}
-
-// Emit a string to the standard output. For intended results (output)
-// of this program. Avoid random fmt.PrintX to avoid random output.
-func emitString(format string, args ...any) {
-	fmt.Printf(format, args...)
 }
 
 // Implement -u. Fix names so they don't result in illegal URLs.
@@ -190,7 +205,7 @@ func urlSafeName(origName string) string {
 // unnecessary. This should only be applied to wiki URLs or else that
 // last assumption may be incorrect.
 func urlSafeURL(origUrl string) string {
-	return ""
+	return "FIXME"
 }
 
 func makeUrlSafeFileName(name string) error {
