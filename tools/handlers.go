@@ -51,13 +51,33 @@ var mdPass = opTable {
 	defaultAction: nil,
 	typeFuncs: [6]opFunc{nil, doText, nil, nil, doComment, doDocType},
 	elementPreFuncs: map[atom.Atom]opFunc{
+		atom.H1: doHeaderOpen,
+		atom.H2: doHeaderOpen,
+		atom.H3: doHeaderOpen,
+		atom.H4: doHeaderOpen,
+		atom.H5: doHeaderOpen,
+		atom.H6: doHeaderOpen,
 		atom.Img: doImgOpen,
+		atom.Li: doLiOpen,
+		atom.Ol: doOlOpen,
 		atom.Script: doScriptOpen,
+		atom.Title: doTitleOpen,
+		atom.Ul: doUlOpen,
 	},
 	elementPostFuncs: map[atom.Atom] opFunc{
 		atom.Body: doHtmlClose,
+		atom.H1: doHeaderClose,
+		atom.H2: doHeaderClose,
+		atom.H3: doHeaderClose,
+		atom.H4: doHeaderClose,
+		atom.H5: doHeaderClose,
+		atom.H6: doHeaderClose,
 		atom.Html: doHtmlClose,
+		atom.Li: doLiClose,
+		atom.Ol: doOlClose,
 		atom.Script: doScriptClose,
+		atom.Title: doTitleClose,
+		atom.Ul: doUlClose,
 	},
 }
 
@@ -92,13 +112,66 @@ func doImgOpen(n *html.Node, cx *context) error {
 	return nil
 }
 
+func doHeaderOpen(n *html.Node, cx *context) error {
+	const hashes = "#######"
+	cx.emitString("\n" + hashes[0:1 + int(n.Data[1] - '0')] + " ")
+	return nil
+}
+
+func doHeaderClose(n *html.Node, cx *context) error {
+	cx.emitString("\n")
+	return nil
+}
+
+func doLiOpen(n *html.Node, cx *context) error {
+	cx.emitString("\n%s ", cx.liString)
+	return nil
+}
+
+func doLiClose(n *html.Node, cx *context) error {
+	return nil
+}
+
+func doTitleOpen(n *html.Node, cx *context) error {
+	cx.emitString("\n# ")
+	return nil
+}
+
+func doOlOpen(n *html.Node, cx *context) error {
+	cx.liString = "1."
+	return nil
+}
+
+func doOlClose(n *html.Node, cx *context) error {
+	cx.liString = ""
+	return nil
+}
+
+func doTitleClose(n *html.Node, cx *context) error {
+	cx.emitString("\n")
+	return nil
+}
+
 func doDocType(n *html.Node, cx *context) error {
 	cx.emitString("**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**\n")
 	return nil
 }
 
 func doText(n *html.Node, cx *context) error {
-	cx.emitString(n.Data)
+	s := strings.TrimSpace(n.Data)
+	if len(s) != 0 {
+		cx.emitString(n.Data)
+	}
+	return nil
+}
+
+func doUlOpen(n *html.Node, cx *context) error {
+	cx.liString = "-"
+	return nil
+}
+
+func doUlClose(n *html.Node, cx *context) error {
+	cx.liString = ""
 	return nil
 }
 

@@ -40,8 +40,10 @@ type context struct {
 	depth int
 	outputDirectory string
 	inputFilePath string
-	md strings.Builder
-	outputDisabledCounter int
+	md strings.Builder		  // entire content except...
+	footer strings.Builder	  // ...for the footer.
+	outputDisabledCounter int // > 0 means no output
+	liString string		      // "-" or "1." or "" for none
 }
 
 func NewContext(outdir string, inpath string) *context {
