@@ -44,6 +44,7 @@ type context struct {
 	footer strings.Builder	  // ...for the footer.
 	outputDisabledCounter int // > 0 means no output
 	liString string		      // "-" or "1." or "" for none
+	atagRemainder string      // stuff to emit after link text
 }
 
 func NewContext(outdir string, inpath string) *context {
@@ -206,16 +207,46 @@ func urlSafeName(origName string) string {
 // characters, and put the URL back together - escaping it has been made
 // unnecessary. This should only be applied to wiki URLs or else that
 // last assumption may be incorrect.
-func urlSafeURL(origUrl string) string {
-	return "FIXME"
+func urlSafeUrl(origUrl string) string {
+	if strings.HasPrefix(origUrl, "http") {
+		return origUrl
+	}
+
+	if strings.HasPrefix(origUrl, "#") {
+		// On Github anchors need to be #sym where sym is lower case
+		// and separated by hyphens. In this wiki it seems like most
+		// of them are mixed case, have no spaces and are separate by
+		// underscores. This will handle them but not more.
+		s := strings.ToLower(origUrl)
+		s = strings.ReplaceAll(s, "_", "-")
+		return s
+	}
+
+	u, err := url.Parse(origUrl)
+	if err != nil {
+		fatal("cannot parse URL %s: %v", origUrl, err)
+	}
+	s := makeUrlSafePath(u.Path)
+	// "If s doesn't start with prefix, s is returned unchanged."
+	s = strings.TrimPrefix(s, "/wiki/")
+	return (&url.URL{
+		Scheme: u.Scheme,
+		Host: u.Host,
+		Path: s,
+	}).String()
 }
 
-func makeUrlSafeFileName(name string) error {
-	dir := path.Dir(name)
-	base := path.Base(name)
-	safePath := path.Join(dir, urlSafeName(base))
-	dbg("Rename %s => %s\n", name, safePath)
-	if err := os.Rename(name, safePath); err != nil {
+func makeUrlSafePath(p string) string {
+	dir := path.Dir(p)
+	base := path.Base(p)
+	dbg("makeUrlSafePath: arg %s dir %s base %s\n", p, dir, base)
+	return path.Join(dir, urlSafeName(base))
+}
+
+func renameFileToUrlSafe(p string) error {
+	safePath := makeUrlSafePath(p)
+	dbg("Rename %s => %s\n", p, safePath)
+	if err := os.Rename(p, safePath); err != nil {
 		return err
 	}
 	return nil

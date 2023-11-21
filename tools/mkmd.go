@@ -105,7 +105,7 @@ func main() {
 	}
 
 	if *uflag {
-		if err := makeUrlSafeFileName(file[0]); err != nil {
+		if err := renameFileToUrlSafe(file[0]); err != nil {
 			fatal(err.Error())
 		}
 		fmt.Fprintf(os.Stderr, "mkmd: success\n")

@@ -51,6 +51,7 @@ var mdPass = opTable {
 	defaultAction: nil,
 	typeFuncs: [6]opFunc{nil, doText, nil, nil, doComment, doDocType},
 	elementPreFuncs: map[atom.Atom]opFunc{
+		atom.A:  doAtagOpen,
 		atom.H1: doHeaderOpen,
 		atom.H2: doHeaderOpen,
 		atom.H3: doHeaderOpen,
@@ -65,6 +66,7 @@ var mdPass = opTable {
 		atom.Ul: doUlOpen,
 	},
 	elementPostFuncs: map[atom.Atom] opFunc{
+		atom.A:  doAtagClose,
 		atom.Body: doHtmlClose,
 		atom.H1: doHeaderClose,
 		atom.H2: doHeaderClose,
@@ -89,6 +91,50 @@ func prototype(n *html.Node, cx *context) error {
 	return nil // copy this to make new handlers
 }
 
+/*
+
+This is an example of a reoccurring block that I need to learn how to treat.
+It's got three divs with recognizable classes containing an A tag that links
+to a description page (an HTML page despite the name that ends with .png).
+
+Then there's an img tag in the A tag with a link to a legitimate image.
+
+<div class="center">
+    <div class="thumb tnone">
+        <div class="thumbinner" style="width:280px;">
+            <a href="/wiki/index.php?title=File:NES-2A03-decimal-DAA-removed.png" class="image">
+                <img alt="" src="/wiki/images/8/89/NES-2A03-decimal-DAA-removed.png" width="278" height="200" class="thumbimage" />
+            </a>
+            <div class="thumbcaption">
+                Transistor t2556 in NES 2A03
+            </div>
+        </div>
+    </div>
+</div>
+
+There's a similar bunch of code distinguished by a link to the currently
+non-existent (in the wiki target directory) url skins/common/images/magnify-clip.png
+that also needs to be addressed.
+
+*/
+// According to the standard, A-tags don't nest
+func doAtagOpen(n *html.Node, cx *context) error {
+	href := getAttrVal(n, "href")
+	if len(href) == 0 {
+		fmt.Fprintln(os.Stderr, "A tag with no href")
+		return nil
+	}
+
+	cx.emitString("\n[")
+	cx.atagRemainder = "](" + urlSafeUrl(href) + ")"
+	return nil
+}
+
+func doAtagClose(n *html.Node, cx *context) error {
+	cx.emitString(cx.atagRemainder)
+	return nil
+}
+
 // </html> endtag. Write the output file.
 func doHtmlClose(n *html.Node, cx *context) error {
 	outDir := cx.outputDirectory
@@ -105,10 +151,20 @@ func doHtmlClose(n *html.Node, cx *context) error {
 }
 
 func doImgOpen(n *html.Node, cx *context) error {
-	imgLink := getAttrVal(n, "src")
-	if len(imgLink) > 0 {
-		cx.emitString("![an image](%s)\n", imgLink)
+	imgText := getAttrVal(n, "alt")
+	if len(imgText) == 0 {
+		imgText = "Image (no description given)"
 	}
+
+	imgLink := getAttrVal(n, "src")
+	if len(imgLink) == 0 {
+		fmt.Fprintln(os.Stderr, "Warning: img tag with no src")
+		return nil
+	}
+
+	// "If s doesn't start with prefix, s is returned unchanged."
+	imgLink = strings.TrimPrefix(imgLink, "/wiki/")
+	cx.emitString("\n![%s](%s)\n", imgText, imgLink)
 	return nil
 }
 
