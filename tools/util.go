@@ -229,17 +229,18 @@ func urlSafeUrl(origUrl string) string {
 	s := makeUrlSafePath(u.Path)
 	// "If s doesn't start with prefix, s is returned unchanged."
 	s = strings.TrimPrefix(s, "/wiki/")
-	return (&url.URL{
+	result := url.URL{
 		Scheme: u.Scheme,
 		Host: u.Host,
 		Path: s,
-	}).String()
+		RawQuery: u.RawQuery,
+	}
+	return result.String()
 }
 
 func makeUrlSafePath(p string) string {
 	dir := path.Dir(p)
 	base := path.Base(p)
-	dbg("makeUrlSafePath: arg %s dir %s base %s\n", p, dir, base)
 	return path.Join(dir, urlSafeName(base))
 }
 
@@ -250,6 +251,16 @@ func renameFileToUrlSafe(p string) error {
 		return err
 	}
 	return nil
+}
+
+func warn(format string, args... any) {
+	var msg string
+	if len(args) == 0 {
+		msg = format
+	} else {
+		msg = fmt.Sprintf(format, args)
+	}
+	fmt.Fprintf(os.Stderr, "mkmd: warning: " + msg + "\n")
 }
 
 func fatal(format string, args... any) {

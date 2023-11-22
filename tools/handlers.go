@@ -52,6 +52,7 @@ var mdPass = opTable {
 	typeFuncs: [6]opFunc{nil, doText, nil, nil, doComment, doDocType},
 	elementPreFuncs: map[atom.Atom]opFunc{
 		atom.A:  doAtagOpen,
+		atom.Div: doDivOpen,
 		atom.H1: doHeaderOpen,
 		atom.H2: doHeaderOpen,
 		atom.H3: doHeaderOpen,
@@ -61,6 +62,8 @@ var mdPass = opTable {
 		atom.Img: doImgOpen,
 		atom.Li: doLiOpen,
 		atom.Ol: doOlOpen,
+		atom.P:  doPtagOpen,
+		atom.Pre: doPreOpen,
 		atom.Script: doScriptOpen,
 		atom.Title: doTitleOpen,
 		atom.Ul: doUlOpen,
@@ -68,6 +71,7 @@ var mdPass = opTable {
 	elementPostFuncs: map[atom.Atom] opFunc{
 		atom.A:  doAtagClose,
 		atom.Body: doHtmlClose,
+		atom.Div: doDivClose,
 		atom.H1: doHeaderClose,
 		atom.H2: doHeaderClose,
 		atom.H3: doHeaderClose,
@@ -77,6 +81,8 @@ var mdPass = opTable {
 		atom.Html: doHtmlClose,
 		atom.Li: doLiClose,
 		atom.Ol: doOlClose,
+		atom.P:  doPtagClose,
+		atom.Pre: doPreClose,
 		atom.Script: doScriptClose,
 		atom.Title: doTitleClose,
 		atom.Ul: doUlClose,
@@ -119,19 +125,106 @@ that also needs to be addressed.
 */
 // According to the standard, A-tags don't nest
 func doAtagOpen(n *html.Node, cx *context) error {
+	if len(cx.atagRemainder) != 0 {
+		warn("A-tag remainder not empty")
+	}
+	// One effort to deal with the thumb image mess
+	cl := getAttrVal(n, "class")
+	if cl == "image" {
+		return nil
+	}
 	href := getAttrVal(n, "href")
 	if len(href) == 0 {
-		fmt.Fprintln(os.Stderr, "A tag with no href")
+		warn("A-tag with no href")
 		return nil
 	}
 
-	cx.emitString("\n[")
+	cx.emitString("[")
 	cx.atagRemainder = "](" + urlSafeUrl(href) + ")"
 	return nil
 }
 
 func doAtagClose(n *html.Node, cx *context) error {
+	// One effort to deal with the thumb image mess
+	cl := getAttrVal(n, "class")
+	if cl == "image" {
+		return nil
+	}
+	if len(cx.atagRemainder) == 0 {
+		warn("/A-tag with no remainder")
+		return nil
+	}
 	cx.emitString(cx.atagRemainder)
+	cx.atagRemainder = ""
+	return nil
+}
+
+/*
+
+Chop out some divs. Example: MediaWiki navigation links.
+
+Need to deal with this: we don't want the magnify-clip.png,
+but do want the caption, "Transistor t2556 in visual6502" in this case.
+I found 38 occurrences of this pattern in the wiki.
+We suppress class="thumbcaption" and instead emit a newline,
+which causes the caption to be left-justified.
+
+<div class="center">
+    <div class="thumb tnone">
+        <div class="thumbinner" style="width:280px;">
+            <a href="/wiki/index.php?title=File:6502-decimal-DAA-removed-visual6502.png" class="image">
+            <img alt="" src="/wiki/images/thumb/7/78/6502-decimal-DAA-removed-visual6502.png/278px-6502-decimal-DAA-removed-visual6502.png" width="278" height="194" class="thumbimage" />
+            </a>
+            <div class="thumbcaption">
+                <div class="magnify">
+                    <a href="/wiki/index.php?title=File:6502-decimal-DAA-removed-visual6502.png" class="internal" title="Enlarge">
+                        <img src="/wiki/skins/common/images/magnify-clip.png" width="15" height="11" alt="" />
+                    </a>
+                </div>
+                Transistor t2556 in visual6502
+            </div>
+        </div>
+    </div>
+</div>
+
+*/
+
+func doDivOpen(n *html.Node, cx *context) error {
+	// Each call to disableOutput must be matched by
+	// one call to enableOutput, so we are careful to
+	// return any time we disable output.
+	id := getAttrVal(n, "id")
+	if id == "jump-to-nav" {
+		cx.disableOutput()
+		return nil
+	}
+	cl := getAttrVal(n, "class")
+	if cl == "magnify" {
+		cx.disableOutput()
+		return nil
+	}
+	if cl == "thumbcaption" {
+		cx.emitString("\n") // left justify
+	}
+
+	return nil
+}
+
+func doDivClose(n *html.Node, cx *context) error {
+	id := getAttrVal(n, "id")
+	if id == "jump-to-nav" {
+		cx.enableOutput()
+		return nil
+	}
+	cl := getAttrVal(n, "class")
+	if cl == "magnify" {
+		cx.enableOutput()
+		return nil
+	}
+	if cl == "thumbcaption" {
+		cx.emitString("\n") // left justify
+	}
+
 	return nil
 }
 
@@ -158,19 +251,20 @@ func doImgOpen(n *html.Node, cx *context) error {
 
 	imgLink := getAttrVal(n, "src")
 	if len(imgLink) == 0 {
-		fmt.Fprintln(os.Stderr, "Warning: img tag with no src")
+		warn("img tag with no src")
 		return nil
 	}
 
+	// Make the image addressable. Note: comment from docs:
 	// "If s doesn't start with prefix, s is returned unchanged."
 	imgLink = strings.TrimPrefix(imgLink, "/wiki/")
-	cx.emitString("\n![%s](%s)\n", imgText, imgLink)
+	cx.emitString("![%s](%s)\n\n", imgText, imgLink)
 	return nil
 }
 
 func doHeaderOpen(n *html.Node, cx *context) error {
 	const hashes = "#######"
-	cx.emitString("\n" + hashes[0:1 + int(n.Data[1] - '0')] + " ")
+	cx.emitString("\n\n" + hashes[0:1 + int(n.Data[1] - '0')] + " ")
 	return nil
 }
 
@@ -188,11 +282,6 @@ func doLiClose(n *html.Node, cx *context) error {
 	return nil
 }
 
-func doTitleOpen(n *html.Node, cx *context) error {
-	cx.emitString("\n# ")
-	return nil
-}
-
 func doOlOpen(n *html.Node, cx *context) error {
 	cx.liString = "1."
 	return nil
@@ -200,6 +289,31 @@ func doOlOpen(n *html.Node, cx *context) error {
 
 func doOlClose(n *html.Node, cx *context) error {
 	cx.liString = ""
+	return nil
+}
+
+func doPtagOpen(n *html.Node, cx *context) error {
+	cx.emitString("\n")
+	return nil
+}
+
+func doPtagClose(n *html.Node, cx *context) error {
+	cx.emitString("\n")
+	return nil
+}
+
+func doPreOpen(n *html.Node, cx *context) error {
+	cx.emitString("\n```\n")
+	return nil
+}
+
+func doPreClose(n *html.Node, cx *context) error {
+	cx.emitString("\n```\n")
+	return nil
+}
+
+func doTitleOpen(n *html.Node, cx *context) error {
+	cx.emitString("\n# ")
 	return nil
 }
 
@@ -216,7 +330,9 @@ func doDocType(n *html.Node, cx *context) error {
 func doText(n *html.Node, cx *context) error {
 	s := strings.TrimSpace(n.Data)
 	if len(s) != 0 {
-		cx.emitString(n.Data)
+		s = strings.ReplaceAll(s, "_", "\\_")
+		s += "\n"
+		cx.emitString(s)
 	}
 	return nil
 }
