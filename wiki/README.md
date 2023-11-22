@@ -5,5 +5,5 @@ which is required by the license. The content is in progress.
 
 Authorship information is in [`rdf`](./rdf).
 
-Here is an [example page](./index.php-title-6502DecimalMode.md))
+Here is an [example page](./index.php-title-6502DecimalMode.md)
 
