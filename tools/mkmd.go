@@ -28,6 +28,9 @@ The flags are:
 		the -o argument, if suppied, default "."
 	-u
 		Update the filename of the argument file to a safe name.
+	
+	-x
+		This flag is a hack to enable temporary types of debugging.
 
 Files downloaded by the Wayback Machine Downloader from the visual6502.org
 MediaWiki in the Wayback Machine have filenames derived from the titles of
@@ -87,6 +90,7 @@ func main() {
 	oflag := flag.String("o", ".", "set output directory")
 	mflag := flag.Bool("m", false, "create markdown file")
 	uflag := flag.Bool("u", false, "replace non-URL characters in file name")
+	xflag := flag.Bool("x", false, "dump information about argument file")
 	flag.Parse()
 
 	// Now make a table that maps the value of an operation flag,
@@ -95,6 +99,7 @@ func main() {
 		{*dflag, &printPass, "-d"},
 		{*rflag, &rdfPass, "-r"},
 		{*mflag, &mdPass, "-m"},
+		{*xflag, &xPass, "-x"},
 	}
 
 	file := flag.Args()
@@ -157,10 +162,10 @@ func process(n *html.Node, cx *context) error {
 	for c := n.FirstChild; err == nil && c != nil; c = c.NextSibling {
 		cx.depth++
 		err = process(c, cx)
+		if err != nil {
+			return err
+		}
 		cx.depth--
-	}
-	if err != nil {
-		return err
 	}
 	if post := nodeToOp(n, false); post != nil {
 		if err = post(n, cx); err != nil {

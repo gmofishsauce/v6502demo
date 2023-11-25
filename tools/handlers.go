@@ -65,7 +65,11 @@ var mdPass = opTable {
 		atom.P:  doPtagOpen,
 		atom.Pre: doPreOpen,
 		atom.Script: doScriptOpen,
+		atom.Table: doTableOpen,
 		atom.Title: doTitleOpen,
+		atom.Td: doTdOpen,
+		atom.Th: doThOpen,
+		atom.Tr: doTrOpen,
 		atom.Ul: doUlOpen,
 	},
 	elementPostFuncs: map[atom.Atom] opFunc{
@@ -84,8 +88,24 @@ var mdPass = opTable {
 		atom.P:  doPtagClose,
 		atom.Pre: doPreClose,
 		atom.Script: doScriptClose,
+		atom.Table: doTableClose,
 		atom.Title: doTitleClose,
+		atom.Td: doTdClose,
+		atom.Th: doThClose,
+		atom.Tr: doTrClose,
 		atom.Ul: doUlClose,
+	},
+}
+
+// An optable for dumping the entire document for debugging purposes
+var xPass = opTable{
+	defaultAction: nil,
+	typeFuncs: [6]opFunc{},
+	elementPreFuncs: map[atom.Atom] opFunc{
+		atom.Table: xFuncOpen,
+	},
+	elementPostFuncs: map[atom.Atom] opFunc{
+		atom.Table: xFuncClose,
 	},
 }
 
@@ -95,6 +115,25 @@ var mdPass = opTable {
 
 func prototype(n *html.Node, cx *context) error {
 	return nil // copy this to make new handlers
+}
+
+var tableDepth int = 0
+
+func xFuncOpen(n *html.Node, cx *context) error {
+	if n.DataAtom == atom.Table {
+		tableDepth++
+		if tableDepth > 1 {
+			fmt.Printf("%s: found table depth > 1\n", cx.inputFilePath)
+		}
+	}
+    return nil
+}
+
+func xFuncClose(n *html.Node, cx *context) error {
+	if n.DataAtom == atom.Table {
+		tableDepth--
+	}
+    return nil
 }
 
 /*
@@ -312,6 +351,154 @@ func doPreClose(n *html.Node, cx *context) error {
 	return nil
 }
 
+/*
+
+This was seen in work/wiki/index.php-title-6502_Opcode_8B_~XAA~_ANE~
+It's possible we should just suppress this table.
+I think it exists to make the whole TOC accessible
+to a piece of Javascript that can disable it.
+
+<table id="toc" class="toc">
+    <tr>
+        <td>
+            <div id="toctitle">
+                <h2>Contents</h2>
+            </div>
+            <ul>
+                <li class="toclevel-1 tocsection-1"><a href="#Explanation">
+                    <span class="tocnumber">1</span> <span class="toctext">Explanation</span></a></li> <li class="toclevel-1 tocsection-2"><a href="#Circuit_Diagram">
+                    <span class="tocnumber">2</span> <span class="toctext">Circuit Diagram</span></a></li>
+                <li class="toclevel-1 tocsection-3"><a href="#Testing_this_opcode">
+                    <span class="tocnumber">3</span> <span class="toctext">Testing this opcode</span></a></li>
+                <li class="toclevel-1 tocsection-4"><a href="#Modelling_this_opcode">
+                    <span class="tocnumber">4</span> <span class="toctext">Modelling this opcode</span></a></li>
+                <li class="toclevel-1 tocsection-5"><a href="#Tested_CPUs">
+                    <span class="tocnumber">5</span> <span class="toctext">Tested CPUs</span></a></li>
+                <li class="toclevel-1 tocsection-6"><a href="#Resources">
+                    <span class="tocnumber">6</span> <span class="toctext">Resources</span></a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+Nested tables: properly handling nested tables would make this problem
+much harder. I scanned the entire wiki and found 5 files with nested tables.
+In 4 of the 5, the inner table was a control that issued an error message
+for a failed image conversion (to a thumbnail) as required under control of
+a script. These are identified by <table class="MediaTransformError" ...>
+and are ignored below. The other is <table class="mw-allpages-table-form" ...>
+from the Special:AllPages page, which also serves to place controls. I got
+rid of it too.
+*/
+
+func doTableOpen(n *html.Node, cx *context) error {
+	cl := getAttrVal(n, "class")
+	//dbg("table open class %s enabled %v output %d\n", cl, cx.isTableEnabled(), cx.outputDisabledCounter)
+	if cl == "MediaTransformError" || cl == "mw-allpages-table-form" || cl == "mw-allpages-nav" {
+		// These table classes position MediaWiki controls that can't
+		// be implemented in markdown. So I ignore them.
+		cx.disableTable()
+		return nil
+	}
+	if cx.inTable {
+		return fmt.Errorf("nested table")
+	}
+	cx.inTable = true
+	cx.inTableHeader = true
+	cx.tableColumnCount = 0
+	cx.emitString("\n")
+	return nil
+}
+
+func doTableClose(n *html.Node, cx *context) error {
+	//cl := getAttrVal(n, "class") // debug only
+	//dbg("table class %s enabled %v output %d\n", cl, cx.isTableEnabled(), cx.outputDisabledCounter)
+	if !cx.isTableEnabled() {
+		cx.enableTable()
+		return nil
+	}
+	if cx.inTableHeader {
+		warn("table ended while in the header")
+	}
+	cx.inTable = false
+	cx.emitString("\n")
+	return nil
+}
+
+func doTdOpen(n *html.Node, cx *context) error {
+	if !cx.isTableEnabled() {
+		return nil
+	}
+	if !cx.inTable {
+		fatal("<td> not in table")
+	}
+	if cx.inTableHeader {
+		cx.tableColumnCount++
+	}
+	cx.emitString("| ")
+	return nil
+}
+
+func doTdClose(n *html.Node, cx *context) error {
+	if !cx.isTableEnabled() {
+		return nil
+	}
+	if !cx.inTable {
+		fatal("</td> not in table")
+	}
+	cx.emitString(" ")
+	return nil
+}
+
+func doThOpen(n *html.Node, cx *context) error {
+	if !cx.isTableEnabled() {
+		return nil
+	}
+	if !cx.inTable {
+		fatal("<th> not in table")
+	}
+	if cx.inTableHeader {
+		cx.tableColumnCount++
+	}
+	cx.emitString("| ")
+	return nil
+}
+
+func doThClose(n *html.Node, cx *context) error {
+	if !cx.isTableEnabled() {
+		return nil
+	}
+	if !cx.inTable {
+		fatal("</th> not in table")
+	}
+	cx.emitString(" ")
+	return nil
+}
+
+func doTrOpen(n *html.Node, cx *context) error {
+	if !cx.isTableEnabled() {
+		return nil
+	}
+	cx.emitString("\n")
+	return nil
+}
+
+func doTrClose(n *html.Node, cx *context) error {
+	if !cx.isTableEnabled() {
+		return nil
+	}
+	cx.emitString("|\n")
+	if cx.inTableHeader {
+		cx.emitString("\n")
+		for i := 0; i < cx.tableColumnCount; i++ {
+			cx.emitString("|:---:")
+		}
+		cx.emitString("|\n")
+		cx.inTableHeader = false
+	}
+	return nil
+}
+
 func doTitleOpen(n *html.Node, cx *context) error {
 	cx.emitString("\n# ")
 	return nil
@@ -331,7 +518,10 @@ func doText(n *html.Node, cx *context) error {
 	s := strings.TrimSpace(n.Data)
 	if len(s) != 0 {
 		s = strings.ReplaceAll(s, "_", "\\_")
-		s += "\n"
+		if len(cx.atagRemainder) == 0 {
+			// don't do this inside <A> tags
+			s += "\n"
+		}
 		cx.emitString(s)
 	}
 	return nil

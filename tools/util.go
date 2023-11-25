@@ -45,10 +45,28 @@ type context struct {
 	outputDisabledCounter int // > 0 means no output
 	liString string		      // "-" or "1." or "" for none
 	atagRemainder string      // stuff to emit after link text
+	inTable bool
+	inTableHeader bool
+	tableColumnCount int
+	tableDisabled bool
 }
 
 func NewContext(outdir string, inpath string) *context {
 	return &context{outputDirectory: outdir, inputFilePath: inpath}
+}
+
+func (cx *context) disableTable() {
+	cx.tableDisabled = true
+	cx.disableOutput()
+}
+
+func (cx *context) enableTable() {
+	cx.tableDisabled = false
+	cx.enableOutput()
+}
+
+func (cx *context) isTableEnabled() bool {
+	return !cx.tableDisabled
 }
 
 // Emit a string to the standard output. For intended results (output)
@@ -270,7 +288,7 @@ func fatal(format string, args... any) {
 	} else {
 		msg = fmt.Sprintf(format, args)
 	}
-	fmt.Fprintf(os.Stderr, "mkmd: " + msg + "\n")
+	fmt.Fprintf(os.Stderr, "mkmd: " + msg + "\nmkmd failed\n")
 	os.Exit(1)
 }
 
