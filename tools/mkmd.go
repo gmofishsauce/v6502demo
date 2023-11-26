@@ -124,7 +124,7 @@ func main() {
 	}
 	defer f.Close()
 
-	dbg("Parsing %s\n", name)
+	dbg("Parsing %s", name)
 	doc, err := html.Parse(f)
 	if err != nil {
 		fatal(err.Error())
@@ -134,7 +134,7 @@ func main() {
 
 	for _, flop := range flagOpTable {
 		if flop.flagVal {
-			dbg("Processing %s\n", flop.name)
+			dbg("Processing %s", flop.name)
 			setOpTable(flop.ops)
 			cx := NewContext(*oflag, name)
 			if err = process(doc, cx); err != nil {

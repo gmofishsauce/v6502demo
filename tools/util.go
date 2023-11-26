@@ -48,7 +48,7 @@ type context struct {
 	inTable bool
 	inTableHeader bool
 	tableColumnCount int
-	tableDisabled bool
+	tableDisabled int
 }
 
 func NewContext(outdir string, inpath string) *context {
@@ -56,17 +56,15 @@ func NewContext(outdir string, inpath string) *context {
 }
 
 func (cx *context) disableTable() {
-	cx.tableDisabled = true
-	cx.disableOutput()
+	cx.tableDisabled++
 }
 
 func (cx *context) enableTable() {
-	cx.tableDisabled = false
-	cx.enableOutput()
+	cx.tableDisabled--
 }
 
 func (cx *context) isTableEnabled() bool {
-	return !cx.tableDisabled
+	return cx.tableDisabled == 0
 }
 
 // Emit a string to the standard output. For intended results (output)
@@ -83,10 +81,12 @@ func (cx *context) emitString(format string, args ...any) {
 // Disable output generation, presumably until a matching end tag is found.
 // This prevents e.g. emitting inline scripts which appear as text nodes.
 func (cx *context) disableOutput() {
+	dbg2("disabling output")
 	cx.outputDisabledCounter++
 }
 
 func (cx *context) enableOutput() {
+	dbg2("enabling output")
 	cx.outputDisabledCounter--
 }
 
@@ -264,7 +264,7 @@ func makeUrlSafePath(p string) string {
 
 func renameFileToUrlSafe(p string) error {
 	safePath := makeUrlSafePath(p)
-	dbg("Rename %s => %s\n", p, safePath)
+	dbg("Rename %s => %s", p, safePath)
 	if err := os.Rename(p, safePath); err != nil {
 		return err
 	}

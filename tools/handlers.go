@@ -393,10 +393,15 @@ rid of it too.
 
 func doTableOpen(n *html.Node, cx *context) error {
 	cl := getAttrVal(n, "class")
-	//dbg("table open class %s enabled %v output %d\n", cl, cx.isTableEnabled(), cx.outputDisabledCounter)
-	if cl == "MediaTransformError" || cl == "mw-allpages-table-form" || cl == "mw-allpages-nav" {
-		// These table classes position MediaWiki controls that can't
-		// be implemented in markdown. So I ignore them.
+	if !cx.isTableEnabled() {
+		cx.disableTable() // table nested in disabled table - increment count to track </table> tags
+		return nil
+	}
+	if cl == "MediaTransformError" || cl == "mw-allpages-table-form" || cl == "mw-allpages-nav" ||
+		cl == "toc" {
+		// These table classes position MediaWiki controls that can't be implemented in markdown
+		// or contain non-formatting tags resuting in unsupported markdown. So I ignore them.
+		warn("table class %s suppressed", cl)
 		cx.disableTable()
 		return nil
 	}
@@ -411,10 +416,8 @@ func doTableOpen(n *html.Node, cx *context) error {
 }
 
 func doTableClose(n *html.Node, cx *context) error {
-	//cl := getAttrVal(n, "class") // debug only
-	//dbg("table class %s enabled %v output %d\n", cl, cx.isTableEnabled(), cx.outputDisabledCounter)
 	if !cx.isTableEnabled() {
-		cx.enableTable()
+		cx.enableTable() // unnest disablements
 		return nil
 	}
 	if cx.inTableHeader {
@@ -487,13 +490,13 @@ func doTrClose(n *html.Node, cx *context) error {
 	if !cx.isTableEnabled() {
 		return nil
 	}
-	cx.emitString("|\n")
+	cx.emitString("|")
 	if cx.inTableHeader {
 		cx.emitString("\n")
 		for i := 0; i < cx.tableColumnCount; i++ {
 			cx.emitString("|:---:")
 		}
-		cx.emitString("|\n")
+		cx.emitString("|")
 		cx.inTableHeader = false
 	}
 	return nil
@@ -629,7 +632,7 @@ func internalError(n *html.Node, cx *context) error {
 
 // An opFunc that prints "not handled: thing" for use as a default
 func notHandled(n *html.Node, cx *context) error {
-	dbg("not handled: node %v (context %v)\n", n, cx)
+	dbg("not handled: node %v (context %v)", n, cx)
 	return nil
 }
 

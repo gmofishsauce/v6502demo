@@ -28,6 +28,25 @@ import (
 
 // Print debug output. This is just fprintf to stderr.
 func dbg(s string, args... any) {
+    pc, _, _, ok := runtime.Caller(1)
+    details := runtime.FuncForPC(pc)
+	where := "???"
+    if ok && details != nil {
+		where = details.Name()
+    }
+	s = "[at " + where + "]: " + s + "\n"
+	fmt.Fprintf(os.Stderr, s, args...)
+}
+
+// Print debug output. This is just fprintf to stderr.
+func dbg2(s string, args... any) {
+    pc, _, _, ok := runtime.Caller(2)
+    details := runtime.FuncForPC(pc)
+	where := "???"
+    if ok && details != nil {
+		where = details.Name()
+    }
+	s = "[at " + where + "]: " + s + "\n"
 	fmt.Fprintf(os.Stderr, s, args...)
 }
 
@@ -41,7 +60,7 @@ func TODO(args... any) error {
 	pc, _, _, ok := runtime.Caller(1)
     details := runtime.FuncForPC(pc)
     if ok && details != nil && !todoDone[details.Name()] {
-        dbg("TODO called from %s\n", details.Name())
+        dbg("TODO called from %s", details.Name())
 		todoDone[details.Name()] = true
     }
 	return nil
