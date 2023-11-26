@@ -78,15 +78,19 @@ func (cx *context) emitString(format string, args ...any) {
 	}
 }
 
+func (cx *context) emitStringUnconditionally(format string, args ...any) {
+	cx.md.WriteString(fmt.Sprintf(format, args...))
+}
+
 // Disable output generation, presumably until a matching end tag is found.
 // This prevents e.g. emitting inline scripts which appear as text nodes.
 func (cx *context) disableOutput() {
-	dbg2("disabling output")
+	//dbg2("disabling output")
 	cx.outputDisabledCounter++
 }
 
 func (cx *context) enableOutput() {
-	dbg2("enabling output")
+	//dbg2("enabling output")
 	cx.outputDisabledCounter--
 }
 

@@ -238,7 +238,7 @@ func doDivOpen(n *html.Node, cx *context) error {
 		return nil
 	}
 	cl := getAttrVal(n, "class")
-	if cl == "magnify" {
+	if cl == "magnify" || cl == "fullImageLink" {
 		cx.disableOutput()
 		return nil
 	}
@@ -256,7 +256,7 @@ func doDivClose(n *html.Node, cx *context) error {
 		return nil
 	}
 	cl := getAttrVal(n, "class")
-	if cl == "magnify" {
+	if cl == "magnify" || cl == "fullImageLink" {
 		cx.enableOutput()
 		return nil
 	}
@@ -293,11 +293,15 @@ func doImgOpen(n *html.Node, cx *context) error {
 		warn("img tag with no src")
 		return nil
 	}
+	if strings.Contains(imgLink, "skins/common") {
+		// "Powered by MediaWiki" image
+		return nil
+	}
 
 	// Make the image addressable. Note: comment from docs:
 	// "If s doesn't start with prefix, s is returned unchanged."
 	imgLink = strings.TrimPrefix(imgLink, "/wiki/")
-	cx.emitString("![%s](%s)\n\n", imgText, imgLink)
+	cx.emitStringUnconditionally("\n\n![%s](%s)\n\n", imgText, imgLink)
 	return nil
 }
 
@@ -518,7 +522,7 @@ func doDocType(n *html.Node, cx *context) error {
 }
 
 func doText(n *html.Node, cx *context) error {
-	s := strings.TrimSpace(n.Data)
+	s := strings.TrimRight(n.Data, "\n")
 	if len(s) != 0 {
 		s = strings.ReplaceAll(s, "_", "\\_")
 		if len(cx.atagRemainder) == 0 {
