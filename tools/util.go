@@ -47,6 +47,7 @@ type context struct {
 	InMagnify bool
 	InFullImageLink bool
 	InThumbCaption bool
+	InMediaWikiFooter bool
 	InWaybackMachineFooter bool
 	InOrderedList bool
 	InUnorderedList bool
@@ -120,16 +121,27 @@ func (cx *context) InSuppressedTable() bool {
 // Emit a string to the standard output. The string should
 // not contain any leading or trailing whitespace.
 func (cx *context) emitString(format string, args ...any) {
+	if cx.InMediaWikiFooter {
+		return
+	}
+	if cx.InJumpToNav || cx.InMagnify || cx.InFullImageLink || cx.InThumbCaption {
+		return
+	}
+	if cx.InNestedTable() || cx.InSuppressedTable() {
+		return
+	}
 	cx.Markdown.WriteString(fmt.Sprintf(format, args...))
 }
+
+// ======= White space handling =======
 
 // Newlines and spaces are absolutely critical in markdown; what's intuitive
 // for human users is not obvious to a computer. We try to emit everything
 // without any leading or trailing whitespace and instead insert these control
-// characters which are ASCII DC1 through DC4 and so on.
-const SingleSpace rune = 0x11
+// characters which are ASCII DC1 through DC3 and so on if we need more.
+const SingleSpace rune = 0x11 // DC1
 const SingleNewline rune = 0x12
-const DoubleNewline rune = 0x13
+const DoubleNewline rune = 0x13 // DC3
 
 func (cx *context) emitSingleSpaceNeeded() {
 	cx.Markdown.WriteRune(SingleSpace)
@@ -149,15 +161,16 @@ const nbsp = '\u00a0'
 // non-breaking space - but no newlines - return true.
 func startsWithSpacesOnly(s string) bool {
 	ok := false
+	loop: // double break required in loop
 	for _, c := range(s) {
 		switch c {
 		case ' ', '\t', nbsp:
 			ok = true
 		case '\n', '\r':
 			ok = false
-			break
+			break loop
 		default:
-			break
+			break loop
 		}
 	}
 	return ok
@@ -166,24 +179,46 @@ func startsWithSpacesOnly(s string) bool {
 func endsWithSpacesOnly(s string) bool {
 	rs := []rune(s)
 	ok := false
+	loop: // double break required in loop
 	for i := len(rs) - 1; i >= 0; i-- {
 		switch rs[i] {
 		case ' ', '\t', nbsp:
 			ok = true
 		case '\n', '\r':
 			ok = false
-			break
+			break loop
 		default:
-			break
+			break loop
 		}
 	}
 	return ok
 }
 
+// Answer true if the rune is one of our "white markers"
+// that represent white space.
 func isWhiteMarker(r rune) bool {
 	return r >= SingleSpace && r <= DoubleNewline
 }
 
+// Generate the final strings for a given white marker
+// White markers must be combined before calling here;
+// this function does not perform the combining.
+func writeWhite(maxWhite rune, sb *strings.Builder) {
+	switch maxWhite {
+	case SingleSpace:
+		sb.WriteRune(' ')
+	case SingleNewline:
+		sb.WriteRune('\n')
+	case DoubleNewline:
+		sb.WriteRune('\n')
+		sb.WriteRune('\n')
+	default:
+		fatal("maxWhite")
+	}
+}
+
+// Combine white markers in the argument string and
+// return a new string with spaces and/or newlines.
 func expandWhiteSpace(s string) string {
 	var sb strings.Builder
 	var inWhite bool
@@ -197,20 +232,11 @@ func expandWhiteSpace(s string) string {
 				// the string of whitemarkers.
 				if c > maxWhite {
 					maxWhite = c
-				} // else skip lower or equal whitemarkers
+				} // else: skip lower or equal whitemarkers
 			} else {
-				// End of a string of whitemarkers
-				switch maxWhite {
-				case SingleSpace:
-					sb.WriteRune(' ')
-				case SingleNewline:
-					sb.WriteRune('\n')
-				case DoubleNewline:
-					sb.WriteRune('\n')
-					sb.WriteRune('\n')
-				default:
-					fatal("maxWhite")
-				}
+				// c is the first non-whitespace character
+				// after substring of 1 or more whitemarkers
+				writeWhite(maxWhite, &sb)
 				sb.WriteRune(c)
 				inWhite = false
 			}
@@ -224,12 +250,16 @@ func expandWhiteSpace(s string) string {
 			}
 		}
 	}
+	if inWhite {
+		// the argument string s ended with whitemarkers
+		writeWhite(maxWhite, &sb)
+	}
 	return sb.String()
 }
 
 func isSuppressedTable(n *html.Node) bool {
 	cl := getAttrVal(n, "class")
-	return cl == "toc" // that's all for now
+	return cl == "toc" || cl == "mw-allpages-table-form"
 }
 
 func makeOutputDir(outputDirectory string) {

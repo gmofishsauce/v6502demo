@@ -520,13 +520,18 @@ func doTitleClose(n *html.Node, cx *context) error {
 
 func doUlOpen(n *html.Node, cx *context) error {
 	if cx.InOrderedList || cx.InUnorderedList {
+		// Nested lists are perfectly legal in HTML, and may work in
+		// markdown too, depending on the processor. But we don't
+		// currently handle them.
 		fatal("internal error: nested list: need to improve the code")
 	}
+	cx.emitParagraphBreakNeeded()
 	cx.InUnorderedList = true
 	return nil
 }
 
 func doUlClose(n *html.Node, cx *context) error {
+	cx.emitParagraphBreakNeeded()
 	cx.InUnorderedList = false
 	return nil
 }
@@ -554,13 +559,10 @@ func doText(n *html.Node, cx *context) error {
 }
 
 func doComment(n *html.Node, cx *context) error {
-	// The Wayback Machine emits this content before its footer.
-	// The WM Downloader is documented as only downloading the
-	// page "as it was", but apparently this does not work because
-	// the downloaded pages have all this WM footer material.
-	// There is no matching enableOutput() for this - it continues
-	// to the end of the file, when we emit our footer instead.
-	if strings.HasPrefix(n.Data, " Saved in parser cache") {
+	if strings.Contains(n.Data, "end content") {
+		cx.InMediaWikiFooter = true // continues to end
+	}
+	if strings.Contains(n.Data, "Saved in parser cache") {
 		cx.InWaybackMachineFooter = true // continues to end
 	}
 	return nil
