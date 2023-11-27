@@ -117,25 +117,6 @@ func prototype(n *html.Node, cx *context) error {
 	return nil // copy this to make new handlers
 }
 
-var tableDepth int = 0
-
-func xFuncOpen(n *html.Node, cx *context) error {
-	if n.DataAtom == atom.Table {
-		tableDepth++
-		if tableDepth > 1 {
-			fmt.Printf("%s: found table depth > 1\n", cx.inputFilePath)
-		}
-	}
-    return nil
-}
-
-func xFuncClose(n *html.Node, cx *context) error {
-	if n.DataAtom == atom.Table {
-		tableDepth--
-	}
-    return nil
-}
-
 /*
 
 This is an example of a reoccurring block that I need to learn how to treat.
@@ -164,10 +145,14 @@ that also needs to be addressed.
 */
 // According to the standard, A-tags don't nest
 func doAtagOpen(n *html.Node, cx *context) error {
-	if len(cx.atagRemainder) != 0 {
-		warn("A-tag remainder not empty")
+	if cx.InATag {
+		fatal("nested A-tag")
 	}
-	// One effort to deal with the thumb image mess
+
+	// MediaWikis have a bunch of HTML files with names like foo.png
+	// and bar.jpg that are actually HTML files which wrap a thumb
+	// and have a link to a larger version of the image. We don't
+	// output these.
 	cl := getAttrVal(n, "class")
 	if cl == "image" {
 		return nil
@@ -178,23 +163,25 @@ func doAtagOpen(n *html.Node, cx *context) error {
 		return nil
 	}
 
+	cx.InATag = true
 	cx.emitString("[")
-	cx.atagRemainder = "](" + urlSafeUrl(href) + ")"
+	cx.ATagRemainder = "](" + urlSafeUrl(href) + ")"
 	return nil
 }
 
 func doAtagClose(n *html.Node, cx *context) error {
-	// One effort to deal with the thumb image mess
+	// See comment above
 	cl := getAttrVal(n, "class")
 	if cl == "image" {
 		return nil
 	}
-	if len(cx.atagRemainder) == 0 {
+	if len(cx.ATagRemainder) == 0 {
 		warn("/A-tag with no remainder")
 		return nil
 	}
-	cx.emitString(cx.atagRemainder)
-	cx.atagRemainder = ""
+	cx.emitString(cx.ATagRemainder)
+	cx.InATag = false
+	cx.ATagRemainder = ""
 	return nil
 }
 
@@ -229,21 +216,23 @@ which causes the caption to be left-justified.
 */
 
 func doDivOpen(n *html.Node, cx *context) error {
-	// Each call to disableOutput must be matched by
-	// one call to enableOutput, so we are careful to
-	// return any time we disable output.
 	id := getAttrVal(n, "id")
 	if id == "jump-to-nav" {
-		cx.disableOutput()
+		cx.InJumpToNav = true
 		return nil
 	}
 	cl := getAttrVal(n, "class")
-	if cl == "magnify" || cl == "fullImageLink" {
-		cx.disableOutput()
+	if cl == "magnify" {
+		cx.InMagnify = true
+		return nil
+	}
+	if cl == "fullImageLink" {
+		cx.InFullImageLink = true
 		return nil
 	}
 	if cl == "thumbcaption" {
-		cx.emitString("\n") // left justify
+		cx.InThumbCaption = true
+		return nil
 	}
 
 	return nil
@@ -252,16 +241,21 @@ func doDivOpen(n *html.Node, cx *context) error {
 func doDivClose(n *html.Node, cx *context) error {
 	id := getAttrVal(n, "id")
 	if id == "jump-to-nav" {
-		cx.enableOutput()
+		cx.InJumpToNav = false
 		return nil
 	}
 	cl := getAttrVal(n, "class")
-	if cl == "magnify" || cl == "fullImageLink" {
-		cx.enableOutput()
+	if cl == "magnify" {
+		cx.InMagnify = false
+		return nil
+	}
+	if cl == "fullImageLink" {
+		cx.InFullImageLink = true
 		return nil
 	}
 	if cl == "thumbcaption" {
-		cx.emitString("\n") // left justify
+		cx.InThumbCaption = false
+		return nil
 	}
 
 	return nil
@@ -269,13 +263,14 @@ func doDivClose(n *html.Node, cx *context) error {
 
 // </html> endtag. Write the output file.
 func doHtmlClose(n *html.Node, cx *context) error {
-	outDir := cx.outputDirectory
+	outDir := cx.OutputDirectory
 	if len(outDir) == 0 {
 		outDir = "."
 	}
-	inFileName := path.Base(cx.inputFilePath)
+	inFileName := path.Base(cx.InputFilePath)
 	outPath := path.Join(outDir, inFileName) + ".md"
-	err := os.WriteFile(outPath, []byte(cx.md.String()), 0644)
+	s := expandWhiteSpace(cx.Markdown.String())
+	err := os.WriteFile(outPath, []byte(s), 0644)
 	if err != nil {
 		fatal("write result to \"%s\" failed: %v", outPath, err)
 	}
@@ -301,23 +296,36 @@ func doImgOpen(n *html.Node, cx *context) error {
 	// Make the image addressable. Note: comment from docs:
 	// "If s doesn't start with prefix, s is returned unchanged."
 	imgLink = strings.TrimPrefix(imgLink, "/wiki/")
-	cx.emitStringUnconditionally("\n\n![%s](%s)\n\n", imgText, imgLink)
+	cx.emitString("\n\n![%s](%s)\n\n", imgText, imgLink)
 	return nil
 }
 
 func doHeaderOpen(n *html.Node, cx *context) error {
 	const hashes = "#######"
-	cx.emitString("\n\n" + hashes[0:1 + int(n.Data[1] - '0')] + " ")
+	cx.emitParagraphBreakNeeded()
+	cx.emitString(hashes[0:1 + int(n.Data[1] - '0')])
+	cx.emitSingleSpaceNeeded()
 	return nil
 }
 
 func doHeaderClose(n *html.Node, cx *context) error {
-	cx.emitString("\n")
+	cx.emitSingleNewlineNeeded()
 	return nil
 }
 
+// This will need to be more complicated, because MediaWiki likes to
+// simulate ordered lists by using unordered lists with explicit numbers
+// on the items (and, I think, script support).
 func doLiOpen(n *html.Node, cx *context) error {
-	cx.emitString("\n%s ", cx.liString)
+	cx.emitSingleNewlineNeeded()
+	if cx.InOrderedList {
+		cx.emitString("1.")
+	} else if cx.InUnorderedList {
+		cx.emitString("-")
+	} else {
+		fatal("<LI> tag not in list")
+	}
+	cx.emitSingleSpaceNeeded()
 	return nil
 }
 
@@ -326,32 +334,39 @@ func doLiClose(n *html.Node, cx *context) error {
 }
 
 func doOlOpen(n *html.Node, cx *context) error {
-	cx.liString = "1."
+	if cx.InOrderedList || cx.InUnorderedList {
+		fatal("internal error: nested list: need to improve the code")
+	}
+	cx.InOrderedList = true
 	return nil
 }
 
 func doOlClose(n *html.Node, cx *context) error {
-	cx.liString = ""
+	cx.InOrderedList = false
 	return nil
 }
 
 func doPtagOpen(n *html.Node, cx *context) error {
-	cx.emitString("\n")
+	cx.emitParagraphBreakNeeded()
 	return nil
 }
 
 func doPtagClose(n *html.Node, cx *context) error {
-	cx.emitString("\n")
+	cx.emitParagraphBreakNeeded()
 	return nil
 }
 
 func doPreOpen(n *html.Node, cx *context) error {
-	cx.emitString("\n```\n")
+	cx.emitSingleNewlineNeeded()
+	cx.emitString("```")
+	cx.emitSingleNewlineNeeded()
 	return nil
 }
 
 func doPreClose(n *html.Node, cx *context) error {
-	cx.emitString("\n```\n")
+	cx.emitSingleNewlineNeeded()
+	cx.emitString("```")
+	cx.emitSingleNewlineNeeded()
 	return nil
 }
 
@@ -396,123 +411,123 @@ rid of it too.
 */
 
 func doTableOpen(n *html.Node, cx *context) error {
-	cl := getAttrVal(n, "class")
-	if !cx.isTableEnabled() {
-		cx.disableTable() // table nested in disabled table - increment count to track </table> tags
+	cx.EnterTable()
+	if cx.InNestedTable() || cx.InSuppressedTable() {
 		return nil
 	}
-	if cl == "MediaTransformError" || cl == "mw-allpages-table-form" || cl == "mw-allpages-nav" ||
-		cl == "toc" {
-		// These table classes position MediaWiki controls that can't be implemented in markdown
-		// or contain non-formatting tags resuting in unsupported markdown. So I ignore them.
-		warn("table class %s suppressed", cl)
-		cx.disableTable()
+	if isSuppressedTable(n) {
+		cx.SuppressTable()
 		return nil
 	}
-	if cx.inTable {
-		return fmt.Errorf("nested table")
-	}
-	cx.inTable = true
-	cx.inTableHeader = true
-	cx.tableColumnCount = 0
-	cx.emitString("\n")
+
+	cx.EnterTableHeader()
+	cx.emitParagraphBreakNeeded()
 	return nil
 }
 
 func doTableClose(n *html.Node, cx *context) error {
-	if !cx.isTableEnabled() {
-		cx.enableTable() // unnest disablements
+	cx.LeaveTable()
+	if cx.InNestedTable() {
+		// Still nested
 		return nil
 	}
-	if cx.inTableHeader {
-		warn("table ended while in the header")
+	if isSuppressedTable(n) {
+		cx.UnsuppressTable()
+		return nil
 	}
-	cx.inTable = false
-	cx.emitString("\n")
+
+	cx.emitParagraphBreakNeeded()
 	return nil
 }
 
 func doTdOpen(n *html.Node, cx *context) error {
-	if !cx.isTableEnabled() {
+	if cx.InNestedTable() || cx.InSuppressedTable() {
 		return nil
 	}
-	if !cx.inTable {
-		fatal("<td> not in table")
+	if cx.InTableHeader() {
+		cx.AddTableColumn()
 	}
-	if cx.inTableHeader {
-		cx.tableColumnCount++
-	}
-	cx.emitString("| ")
+	cx.emitString("|")
+	cx.emitSingleSpaceNeeded()
 	return nil
 }
 
 func doTdClose(n *html.Node, cx *context) error {
-	if !cx.isTableEnabled() {
+	if cx.InNestedTable() || cx.InSuppressedTable() {
 		return nil
 	}
-	if !cx.inTable {
-		fatal("</td> not in table")
-	}
-	cx.emitString(" ")
+	cx.emitSingleSpaceNeeded()
 	return nil
 }
 
 func doThOpen(n *html.Node, cx *context) error {
-	if !cx.isTableEnabled() {
+	if cx.InNestedTable() || cx.InSuppressedTable() {
 		return nil
 	}
-	if !cx.inTable {
-		fatal("<th> not in table")
+	if cx.InTableHeader() {
+		cx.AddTableColumn()
+		cx.emitString("|")
+		cx.emitSingleSpaceNeeded()
 	}
-	if cx.inTableHeader {
-		cx.tableColumnCount++
-	}
-	cx.emitString("| ")
 	return nil
 }
 
 func doThClose(n *html.Node, cx *context) error {
-	if !cx.isTableEnabled() {
+	if cx.InNestedTable() || cx.InSuppressedTable() {
 		return nil
 	}
-	if !cx.inTable {
-		fatal("</th> not in table")
-	}
-	cx.emitString(" ")
+	cx.emitSingleSpaceNeeded()
 	return nil
 }
 
 func doTrOpen(n *html.Node, cx *context) error {
-	if !cx.isTableEnabled() {
+	if cx.InNestedTable() || cx.InSuppressedTable() {
 		return nil
 	}
-	cx.emitString("\n")
+	cx.emitSingleNewlineNeeded()
 	return nil
 }
 
 func doTrClose(n *html.Node, cx *context) error {
-	if !cx.isTableEnabled() {
+	if cx.InNestedTable() || cx.InSuppressedTable() {
 		return nil
 	}
 	cx.emitString("|")
-	if cx.inTableHeader {
-		cx.emitString("\n")
-		for i := 0; i < cx.tableColumnCount; i++ {
+	cx.emitSingleNewlineNeeded()
+
+	if cx.InTableHeader() {
+		for i := 0; i < cx.GetTableColumns(); i++ {
 			cx.emitString("|:---:")
 		}
 		cx.emitString("|")
-		cx.inTableHeader = false
+		cx.emitSingleNewlineNeeded()
+		cx.LeaveTableHeader()
 	}
 	return nil
 }
 
 func doTitleOpen(n *html.Node, cx *context) error {
-	cx.emitString("\n# ")
+	cx.emitSingleNewlineNeeded()
+	cx.emitString("#")
+	cx.emitSingleSpaceNeeded()
 	return nil
 }
 
 func doTitleClose(n *html.Node, cx *context) error {
-	cx.emitString("\n")
+	cx.emitSingleNewlineNeeded()
+	return nil
+}
+
+func doUlOpen(n *html.Node, cx *context) error {
+	if cx.InOrderedList || cx.InUnorderedList {
+		fatal("internal error: nested list: need to improve the code")
+	}
+	cx.InUnorderedList = true
+	return nil
+}
+
+func doUlClose(n *html.Node, cx *context) error {
+	cx.InUnorderedList = false
 	return nil
 }
 
@@ -522,25 +537,19 @@ func doDocType(n *html.Node, cx *context) error {
 }
 
 func doText(n *html.Node, cx *context) error {
-	s := strings.TrimRight(n.Data, "\n")
-	if len(s) != 0 {
-		s = strings.ReplaceAll(s, "_", "\\_")
-		if len(cx.atagRemainder) == 0 {
-			// don't do this inside <A> tags
-			s += "\n"
-		}
-		cx.emitString(s)
+	if cx.InScript {
+		return nil
 	}
-	return nil
-}
-
-func doUlOpen(n *html.Node, cx *context) error {
-	cx.liString = "-"
-	return nil
-}
-
-func doUlClose(n *html.Node, cx *context) error {
-	cx.liString = ""
+	s := strings.TrimSpace(n.Data)
+	if len(s) != 0 {
+		if startsWithSpacesOnly(n.Data) {
+			cx.emitSingleSpaceNeeded()
+		}
+		cx.emitString(strings.ReplaceAll(s, "_", "\\_"))
+		if endsWithSpacesOnly(n.Data) {
+			cx.emitSingleSpaceNeeded()
+		}
+	}
 	return nil
 }
 
@@ -552,18 +561,18 @@ func doComment(n *html.Node, cx *context) error {
 	// There is no matching enableOutput() for this - it continues
 	// to the end of the file, when we emit our footer instead.
 	if strings.HasPrefix(n.Data, " Saved in parser cache") {
-		cx.disableOutput() // all the way to the end
+		cx.InWaybackMachineFooter = true // continues to end
 	}
 	return nil
 }
 
 func doScriptOpen(n *html.Node, cx *context) error {
-	cx.disableOutput()
+	cx.InScript = true
 	return nil
 }
 
 func doScriptClose(n *html.Node, cx *context) error {
-	cx.enableOutput()
+	cx.InScript = false
 	return nil
 }
 
@@ -618,8 +627,8 @@ func rdfHandler(n *html.Node, cx *context) error {
 			return err
 		}
 		rdfName = urlSafeName(rdfName)
-		makeOutputDir(cx.outputDirectory)
-		if err = os.WriteFile(path.Join(cx.outputDirectory, rdfName + ".rdf"), page, 0600); err != nil {
+		makeOutputDir(cx.OutputDirectory)
+		if err = os.WriteFile(path.Join(cx.OutputDirectory, rdfName + ".rdf"), page, 0600); err != nil {
 			return err
 		}
 	}
@@ -642,69 +651,26 @@ func notHandled(n *html.Node, cx *context) error {
 
 // A debugging opFunc that just prints the node with indent
 func printNode(n *html.Node, cx *context) error {
-	fmt.Printf("%*sType=%s DataAtom=%v Data=%v Attr=%v\n", cx.depth*2, "",
+	fmt.Printf("%*sType=%s DataAtom=%v Data=%v Attr=%v\n", cx.NestingDepth*2, "",
 		typeNames[n.Type], n.DataAtom, strings.TrimSpace(n.Data), n.Attr)
 	return nil
 }
 
-// Useful information about making markdown from HTML which is
-// the ultimate goal of this tooling. The functions themselves
-// are completely obsolete. Each case in the switches corresponds
-// to one pre- or post-element handler function.
+var tableDepth int = 0 // special purpose hack, don't put in context
 
-//func startEmit(np *node) {
-//	switch np.name {
-//	case "CharData":
-//		// emitString(np.text)		
-//		emitString("text")
-//		np.processed = true
-//	case "a":
-//		emitString("[")
-//	case "body":
-//		np.processed = true
-//	case "div":
-//		// For now we don't do anything with divs.
-//		np.processed = true
-//	case "h1", "h2", "h3", "h4", "h5", "h6":
-//		nHashes := np.name[1] - '0'
-//		emitString(strings.Repeat("#", int(1 + nHashes)))
-//		np.processed = true
-//	case "head":
-//		np.processed = true
-//	case "html":
-//		np.processed = true
-//	case "img":
-//		emitString("![an image](%s)", getAttrValue(np, "src"))
-//		//emitString("image here")
-//		np.processed = true
-//	case "p":
-//		emitString("\n")
-//		np.processed = true
-//	case "span":
-//		np.processed = true
-//	case "td":
-//		emitString("|")
-//		np.processed = true
-//	case "title":
-//		emitString("\n# ")
-//		np.processed = true
-//	case "tr":
-//		emitString("\n\n")
-//	}
-//}
-//
-//func endEmit(np *node) {
-//	switch np.name {
-//	case "a":
-//		emitString("](%s)", "href here") // getAttrValue(np, "href"))
-//		np.processed = true
-//	case "table":
-//		emitString(strings.Repeat("|:---:", len(np.children[0].children)))
-//		emitString("|\n")
-//		np.processed = true
-//	case "tr":
-//		emitString("|\n")
-//		np.processed = true
-//	}
-//}
-//
+func xFuncOpen(n *html.Node, cx *context) error {
+	if n.DataAtom == atom.Table {
+		tableDepth++
+		if tableDepth > 1 {
+			fmt.Printf("%s: found table depth > 1\n", cx.InputFilePath)
+		}
+	}
+    return nil
+}
+
+func xFuncClose(n *html.Node, cx *context) error {
+	if n.DataAtom == atom.Table {
+		tableDepth--
+	}
+    return nil
+}

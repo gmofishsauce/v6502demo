@@ -37,61 +37,199 @@ import (
 
 // Context passed into the tree walker functions
 type context struct {
-	depth int
-	outputDirectory string
-	inputFilePath string
-	md strings.Builder		  // entire content except...
-	footer strings.Builder	  // ...for the footer.
-	outputDisabledCounter int // > 0 means no output
-	liString string		      // "-" or "1." or "" for none
-	atagRemainder string      // stuff to emit after link text
-	inTable bool
-	inTableHeader bool
+	InputFilePath string
+	OutputDirectory string
+	NestingDepth int
+	Markdown strings.Builder
+	InATag bool
+	ATagRemainder string
+	InJumpToNav bool
+	InMagnify bool
+	InFullImageLink bool
+	InThumbCaption bool
+	InWaybackMachineFooter bool
+	InOrderedList bool
+	InUnorderedList bool
+	InScript bool
+
 	tableColumnCount int
-	tableDisabled int
+	tableNestingDepth int
+	inTableHeader bool
+	inSuppressedTable bool
 }
 
 func NewContext(outdir string, inpath string) *context {
-	return &context{outputDirectory: outdir, inputFilePath: inpath}
+	return &context{OutputDirectory: outdir, InputFilePath: inpath}
 }
 
-func (cx *context) disableTable() {
-	cx.tableDisabled++
+// Enter a table. We suppress all nested tables in the wiki, so we
+// we only to track one header state, that of the outermost table.
+// We also suppress some outer tables.
+func (cx *context) EnterTable() {
+	cx.tableNestingDepth++
 }
 
-func (cx *context) enableTable() {
-	cx.tableDisabled--
+func (cx *context) LeaveTable() {
+	cx.tableNestingDepth--
 }
 
-func (cx *context) isTableEnabled() bool {
-	return cx.tableDisabled == 0
+func (cx *context) SuppressTable() {
+	cx.inSuppressedTable = true
 }
 
-// Emit a string to the standard output. For intended results (output)
-// of this program. Avoid random fmt.PrintX to avoid random output.
+func (cx *context) UnsuppressTable() {
+	cx.inSuppressedTable = false
+}
+
+func (cx *context) EnterTableHeader() {
+	cx.tableColumnCount = 0
+	cx.inTableHeader = true
+}
+
+func (cx *context) AddTableColumn() {
+	cx.tableColumnCount++
+}
+
+func (cx *context) GetTableColumns() int {
+	return cx.tableColumnCount
+}
+
+func (cx *context) LeaveTableHeader() {
+	cx.inTableHeader = false
+}
+
+func (cx *context) InTable() bool {
+	return cx.tableNestingDepth > 0
+}
+
+func (cx *context) InTableHeader() bool {
+	return cx.inTableHeader
+}
+
+func (cx *context) InNestedTable() bool {
+	return cx.tableNestingDepth > 1
+}
+
+// Nested tables always act suppressed, but don't answer true
+// to this function. Suppression is for non-nested tables we
+// don't want.
+func (cx *context) InSuppressedTable() bool {
+	return cx.inSuppressedTable
+}
+
+// Emit a string to the standard output. The string should
+// not contain any leading or trailing whitespace.
 func (cx *context) emitString(format string, args ...any) {
-	if cx.outputDisabledCounter < 0 {
-		panic("outputDisabledCounter negative")
+	cx.Markdown.WriteString(fmt.Sprintf(format, args...))
+}
+
+// Newlines and spaces are absolutely critical in markdown; what's intuitive
+// for human users is not obvious to a computer. We try to emit everything
+// without any leading or trailing whitespace and instead insert these control
+// characters which are ASCII DC1 through DC4 and so on.
+const SingleSpace rune = 0x11
+const SingleNewline rune = 0x12
+const DoubleNewline rune = 0x13
+
+func (cx *context) emitSingleSpaceNeeded() {
+	cx.Markdown.WriteRune(SingleSpace)
+}
+
+func (cx *context) emitSingleNewlineNeeded() {
+	cx.Markdown.WriteRune(SingleNewline)
+}
+
+func (cx *context) emitParagraphBreakNeeded() {
+	cx.Markdown.WriteRune(DoubleNewline)
+}
+
+const nbsp = '\u00a0'
+
+// If the argument string has leading spaces, tabs, or
+// non-breaking space - but no newlines - return true.
+func startsWithSpacesOnly(s string) bool {
+	ok := false
+	for _, c := range(s) {
+		switch c {
+		case ' ', '\t', nbsp:
+			ok = true
+		case '\n', '\r':
+			ok = false
+			break
+		default:
+			break
+		}
 	}
-	if cx.outputDisabledCounter == 0 {
-		cx.md.WriteString(fmt.Sprintf(format, args...))
+	return ok
+}
+
+func endsWithSpacesOnly(s string) bool {
+	rs := []rune(s)
+	ok := false
+	for i := len(rs) - 1; i >= 0; i-- {
+		switch rs[i] {
+		case ' ', '\t', nbsp:
+			ok = true
+		case '\n', '\r':
+			ok = false
+			break
+		default:
+			break
+		}
 	}
+	return ok
 }
 
-func (cx *context) emitStringUnconditionally(format string, args ...any) {
-	cx.md.WriteString(fmt.Sprintf(format, args...))
+func isWhiteMarker(r rune) bool {
+	return r >= SingleSpace && r <= DoubleNewline
 }
 
-// Disable output generation, presumably until a matching end tag is found.
-// This prevents e.g. emitting inline scripts which appear as text nodes.
-func (cx *context) disableOutput() {
-	//dbg2("disabling output")
-	cx.outputDisabledCounter++
+func expandWhiteSpace(s string) string {
+	var sb strings.Builder
+	var inWhite bool
+	var maxWhite rune
+
+	for _, c := range s {
+		if inWhite {
+			// In a string of 1 or more whitemarker chars
+			if isWhiteMarker(c) {
+				// Keep the highest whitemarker in
+				// the string of whitemarkers.
+				if c > maxWhite {
+					maxWhite = c
+				} // else skip lower or equal whitemarkers
+			} else {
+				// End of a string of whitemarkers
+				switch maxWhite {
+				case SingleSpace:
+					sb.WriteRune(' ')
+				case SingleNewline:
+					sb.WriteRune('\n')
+				case DoubleNewline:
+					sb.WriteRune('\n')
+					sb.WriteRune('\n')
+				default:
+					fatal("maxWhite")
+				}
+				sb.WriteRune(c)
+				inWhite = false
+			}
+		} else {
+			// Not in a string of whitemarkers
+			if isWhiteMarker(c) {
+				maxWhite = c
+				inWhite = true
+			} else {
+				sb.WriteRune(c)
+			}
+		}
+	}
+	return sb.String()
 }
 
-func (cx *context) enableOutput() {
-	//dbg2("enabling output")
-	cx.outputDisabledCounter--
+func isSuppressedTable(n *html.Node) bool {
+	cl := getAttrVal(n, "class")
+	return cl == "toc" // that's all for now
 }
 
 func makeOutputDir(outputDirectory string) {

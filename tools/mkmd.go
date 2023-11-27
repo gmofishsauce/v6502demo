@@ -160,12 +160,12 @@ func process(n *html.Node, cx *context) error {
 		}
 	}
 	for c := n.FirstChild; err == nil && c != nil; c = c.NextSibling {
-		cx.depth++
+		cx.NestingDepth++
 		err = process(c, cx)
 		if err != nil {
 			return err
 		}
-		cx.depth--
+		cx.NestingDepth--
 	}
 	if post := nodeToOp(n, false); post != nil {
 		if err = post(n, cx); err != nil {
