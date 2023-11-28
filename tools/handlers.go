@@ -65,6 +65,7 @@ var mdPass = opTable {
 		atom.P:  doPtagOpen,
 		atom.Pre: doPreOpen,
 		atom.Script: doScriptOpen,
+		atom.Span: doSpanOpen,
 		atom.Table: doTableOpen,
 		atom.Title: doTitleOpen,
 		atom.Td: doTdOpen,
@@ -88,6 +89,7 @@ var mdPass = opTable {
 		atom.P:  doPtagClose,
 		atom.Pre: doPreClose,
 		atom.Script: doScriptClose,
+		atom.Span: doSpanClose,
 		atom.Table: doTableClose,
 		atom.Title: doTitleClose,
 		atom.Td: doTdClose,
@@ -162,6 +164,9 @@ func doAtagOpen(n *html.Node, cx *context) error {
 		warn("A-tag with no href")
 		return nil
 	}
+	if strings.HasSuffix(href, ".gif") {
+		return nil
+	}
 
 	cx.InATag = true
 	cx.emitString("[")
@@ -175,6 +180,11 @@ func doAtagClose(n *html.Node, cx *context) error {
 	if cl == "image" {
 		return nil
 	}
+	href := getAttrVal(n, "href")
+	if strings.HasSuffix(href, ".gif") {
+		return nil
+	}
+
 	if len(cx.ATagRemainder) == 0 {
 		warn("/A-tag with no remainder")
 		return nil
@@ -301,6 +311,13 @@ func doImgOpen(n *html.Node, cx *context) error {
 }
 
 func doHeaderOpen(n *html.Node, cx *context) error {
+	if cx.InTable() {
+		// Markdown can't put headers in table cells,
+		// we just turn the header into boldface text.
+		cx.emitSingleSpaceNeeded()
+		cx.emitString("**")
+		return nil
+	}
 	const hashes = "#######"
 	cx.emitParagraphBreakNeeded()
 	cx.emitString(hashes[0:1 + int(n.Data[1] - '0')])
@@ -309,6 +326,11 @@ func doHeaderOpen(n *html.Node, cx *context) error {
 }
 
 func doHeaderClose(n *html.Node, cx *context) error {
+	if cx.InTable() {
+		cx.emitString("**")
+		cx.emitSingleSpaceNeeded()
+		return nil
+	}
 	cx.emitSingleNewlineNeeded()
 	return nil
 }
@@ -318,6 +340,8 @@ func doHeaderClose(n *html.Node, cx *context) error {
 // on the items (and, I think, script support).
 func doLiOpen(n *html.Node, cx *context) error {
 	cx.emitSingleNewlineNeeded()
+	cx.emitString("-")
+	/* FIXME XXX
 	if cx.InOrderedList {
 		cx.emitString("1.")
 	} else if cx.InUnorderedList {
@@ -325,6 +349,7 @@ func doLiOpen(n *html.Node, cx *context) error {
 	} else {
 		fatal("<LI> tag not in list")
 	}
+	*/
 	cx.emitSingleSpaceNeeded()
 	return nil
 }
@@ -334,15 +359,23 @@ func doLiClose(n *html.Node, cx *context) error {
 }
 
 func doOlOpen(n *html.Node, cx *context) error {
-	if cx.InOrderedList || cx.InUnorderedList {
-		fatal("internal error: nested list: need to improve the code")
+	if cx.InList() {
+		// entering a nested list
+		cx.emitSingleNewlineNeeded()
+	} else {
+		cx.emitParagraphBreakNeeded()
 	}
-	cx.InOrderedList = true
+	cx.EnterList()
 	return nil
 }
 
 func doOlClose(n *html.Node, cx *context) error {
-	cx.InOrderedList = false
+	cx.LeaveList()
+	if cx.InList() {
+		cx.emitSingleNewlineNeeded()
+	} else {
+		cx.emitParagraphBreakNeeded()
+	}
 	return nil
 }
 
@@ -367,6 +400,22 @@ func doPreClose(n *html.Node, cx *context) error {
 	cx.emitSingleNewlineNeeded()
 	cx.emitString("```")
 	cx.emitSingleNewlineNeeded()
+	return nil
+}
+
+func doSpanOpen(n *html.Node, cx *context) error {
+	cl := getAttrVal(n, "class")
+	if cl == "tocnumber" {
+		cx.InTocNumber = true
+	}
+	return nil
+}
+
+func doSpanClose(n *html.Node, cx *context) error {
+	cl := getAttrVal(n, "class")
+	if cl == "tocnumber" {
+		cx.InTocNumber = false
+	}
 	return nil
 }
 
@@ -399,24 +448,31 @@ to a piece of Javascript that can disable it.
         </td>
     </tr>
 </table>
-
-Nested tables: properly handling nested tables would make this problem
-much harder. I scanned the entire wiki and found 5 files with nested tables.
-In 4 of the 5, the inner table was a control that issued an error message
-for a failed image conversion (to a thumbnail) as required under control of
-a script. These are identified by <table class="MediaTransformError" ...>
-and are ignored below. The other is <table class="mw-allpages-table-form" ...>
-from the Special:AllPages page, which also serves to place controls. I got
-rid of it too.
 */
 
+// Table processing - the trickiest part of the whole business.
+// Immediately enter the table, because we need to track nesting.
+// But if entering has put us in a nested table, we're done - we
+// completely suppress table output from all nested tables (this
+// turns out not to lose any content in this wiki, just controls
+// that wouldn't work anyway). Next grab the id and class from
+// this top-level table into the context. Now it's possible to
+// check if table-tag processing for this table type is suppressed.
+// This only means we don't generate table markdown: we may still
+// process and generate output for content in specific types of
+// "suppressed" tables on a case by case basis. Finally, if this
+// table isn't nested and isn't suppressed, begin generating the
+// markdown for a table, starting with a paragraph break. This
+// processing outline necessarily applies to all the table tags.
 func doTableOpen(n *html.Node, cx *context) error {
 	cx.EnterTable()
-	if cx.InNestedTable() || cx.InSuppressedTable() {
+	if cx.InNestedTable() {
 		return nil
 	}
-	if isSuppressedTable(n) {
-		cx.SuppressTable()
+
+	cx.TableID = getAttrVal(n, "id")
+	cx.TableClass = getAttrVal(n, "class")
+	if cx.InSuppressedTable() {
 		return nil
 	}
 
@@ -428,15 +484,14 @@ func doTableOpen(n *html.Node, cx *context) error {
 func doTableClose(n *html.Node, cx *context) error {
 	cx.LeaveTable()
 	if cx.InNestedTable() {
-		// Still nested
-		return nil
-	}
-	if isSuppressedTable(n) {
-		cx.UnsuppressTable()
 		return nil
 	}
 
-	cx.emitParagraphBreakNeeded()
+	if !cx.InSuppressedTable() { // ???
+		cx.emitParagraphBreakNeeded()
+	}
+	cx.TableID = ""
+	cx.TableClass = ""
 	return nil
 }
 
@@ -519,20 +574,26 @@ func doTitleClose(n *html.Node, cx *context) error {
 }
 
 func doUlOpen(n *html.Node, cx *context) error {
-	if cx.InOrderedList || cx.InUnorderedList {
-		// Nested lists are perfectly legal in HTML, and may work in
-		// markdown too, depending on the processor. But we don't
-		// currently handle them.
-		fatal("internal error: nested list: need to improve the code")
+	if cx.InList() {
+		// entering a nested list
+		cx.emitSingleNewlineNeeded()
+	} else {
+		// entering a first level list
+		cx.emitParagraphBreakNeeded()
 	}
-	cx.emitParagraphBreakNeeded()
-	cx.InUnorderedList = true
+	cx.EnterList()
 	return nil
 }
 
 func doUlClose(n *html.Node, cx *context) error {
-	cx.emitParagraphBreakNeeded()
-	cx.InUnorderedList = false
+	cx.LeaveList()
+	if cx.InList() {
+		// still in a first (n-1st) level list
+		cx.emitSingleNewlineNeeded()
+	} else {
+		// exited a first level list
+		cx.emitParagraphBreakNeeded()
+	}
 	return nil
 }
 

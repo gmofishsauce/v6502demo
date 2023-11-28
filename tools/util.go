@@ -41,26 +41,39 @@ type context struct {
 	OutputDirectory string
 	NestingDepth int
 	Markdown strings.Builder
-	InATag bool
-	ATagRemainder string
 	InJumpToNav bool
 	InMagnify bool
 	InFullImageLink bool
 	InThumbCaption bool
+	InATag bool
+	ATagRemainder string
 	InMediaWikiFooter bool
 	InWaybackMachineFooter bool
-	InOrderedList bool
-	InUnorderedList bool
 	InScript bool
+	InTocNumber bool
+	TableID string
+	TableClass string
 
+	listNestingDepth int
 	tableColumnCount int
 	tableNestingDepth int
 	inTableHeader bool
-	inSuppressedTable bool
 }
 
 func NewContext(outdir string, inpath string) *context {
 	return &context{OutputDirectory: outdir, InputFilePath: inpath}
+}
+
+func (cx *context) EnterList() {
+	cx.listNestingDepth++
+}
+
+func (cx *context) LeaveList() {
+	cx.listNestingDepth--
+}
+
+func (cx *context) InList() bool {
+	return cx.listNestingDepth > 0
 }
 
 // Enter a table. We suppress all nested tables in the wiki, so we
@@ -72,14 +85,6 @@ func (cx *context) EnterTable() {
 
 func (cx *context) LeaveTable() {
 	cx.tableNestingDepth--
-}
-
-func (cx *context) SuppressTable() {
-	cx.inSuppressedTable = true
-}
-
-func (cx *context) UnsuppressTable() {
-	cx.inSuppressedTable = false
 }
 
 func (cx *context) EnterTableHeader() {
@@ -95,6 +100,10 @@ func (cx *context) GetTableColumns() int {
 	return cx.tableColumnCount
 }
 
+func (cx *context) InTableHeader() bool {
+	return cx.inTableHeader
+}
+
 func (cx *context) LeaveTableHeader() {
 	cx.inTableHeader = false
 }
@@ -103,19 +112,22 @@ func (cx *context) InTable() bool {
 	return cx.tableNestingDepth > 0
 }
 
-func (cx *context) InTableHeader() bool {
-	return cx.inTableHeader
-}
-
+// Nested tables are unconditionally ignored,
+// meaning they generate no table markdown.
 func (cx *context) InNestedTable() bool {
 	return cx.tableNestingDepth > 1
 }
 
-// Nested tables always act suppressed, but don't answer true
-// to this function. Suppression is for non-nested tables we
-// don't want.
+// Suppressed tables generate no table markdown,
+// but may have their content processed, and it
+// may be processed specially (when compared to
+// the same tags or content not in a suppressed
+// table).
 func (cx *context) InSuppressedTable() bool {
-	return cx.inSuppressedTable
+	if cx.TableClass == "toc" {
+		return true
+	}
+	return false
 }
 
 // Emit a string to the standard output. The string should
@@ -127,7 +139,13 @@ func (cx *context) emitString(format string, args ...any) {
 	if cx.InJumpToNav || cx.InMagnify || cx.InFullImageLink || cx.InThumbCaption {
 		return
 	}
-	if cx.InNestedTable() || cx.InSuppressedTable() {
+	if cx.InNestedTable() {
+		return
+	}
+	if cx.TableClass == "mw-allpages-table-form" {
+		return
+	}
+	if cx.InTocNumber {
 		return
 	}
 	cx.Markdown.WriteString(fmt.Sprintf(format, args...))

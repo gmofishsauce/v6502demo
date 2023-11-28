@@ -124,7 +124,7 @@ func main() {
 	}
 	defer f.Close()
 
-	dbg("Parsing %s", name)
+	fmt.Fprintf(os.Stderr, "mkmd: parsing %s\n", name)
 	doc, err := html.Parse(f)
 	if err != nil {
 		fatal(err.Error())
@@ -134,7 +134,7 @@ func main() {
 
 	for _, flop := range flagOpTable {
 		if flop.flagVal {
-			dbg("Processing %s", flop.name)
+			fmt.Fprintf(os.Stderr, "mkmd: processing %s\n", flop.name)
 			setOpTable(flop.ops)
 			cx := NewContext(*oflag, name)
 			if err = process(doc, cx); err != nil {
