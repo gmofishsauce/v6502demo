@@ -164,7 +164,10 @@ func doAtagOpen(n *html.Node, cx *context) error {
 		warn("A-tag with no href")
 		return nil
 	}
-	if strings.HasSuffix(href, ".gif") {
+	if strings.HasSuffix(href, ".gif") || strings.HasSuffix(href, ".png") || strings.HasSuffix(href, ".jpg") {
+		// This is a link surrounding a thumbnail. We need to find
+		// a solution for the (few) cases where "larger image" is
+		// actually larger than the thumbnail.
 		return nil
 	}
 
@@ -335,21 +338,10 @@ func doHeaderClose(n *html.Node, cx *context) error {
 	return nil
 }
 
-// This will need to be more complicated, because MediaWiki likes to
-// simulate ordered lists by using unordered lists with explicit numbers
-// on the items (and, I think, script support).
+// See issue #006 and #007.
 func doLiOpen(n *html.Node, cx *context) error {
 	cx.emitSingleNewlineNeeded()
 	cx.emitString("-")
-	/* FIXME XXX
-	if cx.InOrderedList {
-		cx.emitString("1.")
-	} else if cx.InUnorderedList {
-		cx.emitString("-")
-	} else {
-		fatal("<LI> tag not in list")
-	}
-	*/
 	cx.emitSingleSpaceNeeded()
 	return nil
 }

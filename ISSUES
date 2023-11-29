@@ -5,7 +5,7 @@ Problems that are understood and may affect all pages:
 #001 Directly-linked thumbnails are treated as images. In most cases there are
 no larger images so this turns out to be fine. In a few cases there are thumbs
 so the larger image is currently not reachable. Page index.php-title-RCA_1802E
-is affected. This is relate to #003.
+is affected. This is relate to #003, #008, and #009. More thought it needed.
 
 #005 Broken external links to external pages. These could be fixed by pointing
 them at the Wayback Machine equivalents; this process could be automated.
@@ -15,6 +15,38 @@ it doesn't alwas work right; see the double numbering in the nested list on
 the index.php-title-RCA_1802E page). Currently, I'm rendering all the lists
 as unnumbered lists, which helps with the broken list in RCA_1802E but may
 be a bad answer for other lists in the wiki.
+
+#008 The following images contain "!" characters in their paths. URLs linking
+to these images have the "!" escaped as %21. The "!" is an aggressive Shell
+metacharacter, which may or may not be an issue. See also #009.
+
+$ find wiki/images | grep '[0-9]\!'
+wiki/images/archive/7/75/20110221102837!6502-ipc-circuit.png
+wiki/images/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
+wiki/images/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
+wiki/images/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
+wiki/images/archive/5/58/20110220170427!6502-ipc-logic.png
+wiki/images/archive/5/58/20110220140415!6502-ipc-logic.png
+wiki/images/archive/5/58/20110220181007!6502-ipc-logic.png
+wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png
+wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png/120px-6502-ipc-circuit.png
+wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
+wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png/120px-6502-decimal-DAA-removed-visual6502.png
+wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
+wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png/120px-Rca1802-detail2-nor4.png
+wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
+wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png/120px-6502-XAA-Idb-sb.png
+wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png/120px-6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png/120px-6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png/120px-6502-ipc-logic.png
+
+#009 URL paths are not fixed to URL-safe even though the file names are. This
+may be the cause of the broken image link in the RCA 1802 page. See #004.
+
+Problems that specific to certain pages
 
 Page: ./tools/mkmd -o ./wiki -m work/wiki/index.php-title-Special-AllPages
 
@@ -30,7 +62,8 @@ was fixed; this one can be fixed easily in the same way. But the easy fix is
 also the cause of issue #001.
 
 #004 In the paragraphs headed "Simple Logic Gates" and "NOR4 Layout" toward
-the bottom of the page, there are broken image links.
+the bottom of the page, there are broken image links. This may be a consequence
+of #008/#009.
 
 #006 Nested lists are currently flattened into a single list. Depending on
 the markdown layout engine, this may be fixable; it should be fixable on

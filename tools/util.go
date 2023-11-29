@@ -157,9 +157,9 @@ func (cx *context) emitString(format string, args ...any) {
 // for human users is not obvious to a computer. We try to emit everything
 // without any leading or trailing whitespace and instead insert these control
 // characters which are ASCII DC1 through DC3 and so on if we need more.
-const SingleSpace rune = 0x11 // DC1
+const SingleSpace rune = 0x11 // ASCII DC1
 const SingleNewline rune = 0x12
-const DoubleNewline rune = 0x13 // DC3
+const DoubleNewline rune = 0x13 // ASCII DC3
 
 func (cx *context) emitSingleSpaceNeeded() {
 	cx.Markdown.WriteRune(SingleSpace)
@@ -273,11 +273,6 @@ func expandWhiteSpace(s string) string {
 		writeWhite(maxWhite, &sb)
 	}
 	return sb.String()
-}
-
-func isSuppressedTable(n *html.Node) bool {
-	cl := getAttrVal(n, "class")
-	return cl == "toc" || cl == "mw-allpages-table-form"
 }
 
 func makeOutputDir(outputDirectory string) {
@@ -461,6 +456,16 @@ func renameFileToUrlSafe(p string) error {
 	return nil
 }
 
+func msg(format string, args... any) {
+	var msg string
+	if len(args) == 0 {
+		msg = format
+	} else {
+		msg = fmt.Sprintf(format, args)
+	}
+	fmt.Fprintf(os.Stderr, "mkmd: " + msg + "\n")
+}
+
 func warn(format string, args... any) {
 	var msg string
 	if len(args) == 0 {
@@ -478,7 +483,7 @@ func fatal(format string, args... any) {
 	} else {
 		msg = fmt.Sprintf(format, args)
 	}
-	fmt.Fprintf(os.Stderr, "mkmd: " + msg + "\nmkmd failed\n")
+	fmt.Fprintf(os.Stderr, "mkmd: error: " + msg + "\nmkmd failed\n")
 	os.Exit(1)
 }
 

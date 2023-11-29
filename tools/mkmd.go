@@ -72,7 +72,6 @@ along with this program. If not, see http://www.gnu.org/licenses/.
 
 import (
 	"flag"
-	"fmt"
 	"os"
 
 	"golang.org/x/net/html"
@@ -104,7 +103,7 @@ func main() {
 
 	file := flag.Args()
 	if len(file) != 1 {
-		fmt.Fprintln(os.Stderr, "Usage: mkmd flags file")
+		warn("usage: mkmd flags file")
 		flag.PrintDefaults();
 		os.Exit(1)
 	}
@@ -113,7 +112,7 @@ func main() {
 		if err := renameFileToUrlSafe(file[0]); err != nil {
 			fatal(err.Error())
 		}
-		fmt.Fprintf(os.Stderr, "mkmd: success\n")
+		msg("success")
 		os.Exit(0)
 	}
 
@@ -124,7 +123,7 @@ func main() {
 	}
 	defer f.Close()
 
-	fmt.Fprintf(os.Stderr, "mkmd: parsing %s\n", name)
+	msg("parsing %s", name)
 	doc, err := html.Parse(f)
 	if err != nil {
 		fatal(err.Error())
@@ -134,7 +133,7 @@ func main() {
 
 	for _, flop := range flagOpTable {
 		if flop.flagVal {
-			fmt.Fprintf(os.Stderr, "mkmd: processing %s\n", flop.name)
+			msg("processing %s", flop.name)
 			setOpTable(flop.ops)
 			cx := NewContext(*oflag, name)
 			if err = process(doc, cx); err != nil {
@@ -145,9 +144,9 @@ func main() {
 	}
 
 	if processed > 0 {
-		fmt.Fprintf(os.Stderr, "mkmd: success\n")
+		msg("success")
 	} else {
-		fmt.Fprintf(os.Stderr, "mkmd: no action requested\n")
+		msg("no action requested")
 	}
 	os.Exit(0)
 }
