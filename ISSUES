@@ -2,7 +2,7 @@ This is a list of remaining issues noticed after "mkmd" was partially working.
 
 Problems that are understood and may affect all pages:
 
-#001 Directly-linked thumbnails are treated as images. In most cases there are
+#001 (FIXED?) Directly-linked thumbnails are treated as images. In most cases there are
 no larger images so this turns out to be fine. In a few cases there are thumbs
 so the larger image is currently not reachable. Page index.php-title-RCA_1802E
 is affected. This is relate to #003, #008, and #009. More thought it needed.
@@ -16,9 +16,10 @@ the index.php-title-RCA_1802E page). Currently, I'm rendering all the lists
 as unnumbered lists, which helps with the broken list in RCA_1802E but may
 be a bad answer for other lists in the wiki.
 
-#008 The following images contain "!" characters in their paths. URLs linking
-to these images have the "!" escaped as %21. The "!" is an aggressive Shell
-metacharacter, which may or may not be an issue. See also #009.
+#008 (NON-ISSUE? DEFERRED) The following images contain "!" characters in
+their paths. URLs linking to these images have the "!" escaped as %21. The
+"!" is an aggressive Shell metacharacter, which may or may not be an issue.
+See also #009.
 
 $ find wiki/images | grep '[0-9]\!'
 wiki/images/archive/7/75/20110221102837!6502-ipc-circuit.png
@@ -44,7 +45,8 @@ wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png
 wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png/120px-6502-ipc-logic.png
 
 #009 URL paths are not fixed to URL-safe even though the file names are. This
-may be the cause of the broken image link in the RCA 1802 page. See #004.
+may be the cause of #004 the broken image link in the RCA 1802 page (FALSE, #004
+IS FIXED.)
 
 Problems that specific to certain pages
 
@@ -55,13 +57,13 @@ Page: ./tools/mkmd -o ./wiki -m work/wiki/index.php-title-Special-AllPages
 
 Page: ./tools/mkmd -o ./wiki -m work/wiki/index.php-title-RCA_1802E
 
-#003 Below the small heading Datapath, there is markdown for a link to the
+#003 FIXED Below the small heading Datapath, there is markdown for a link to the
 page http://visual6502.org/wiki/images/6/62/1802_dpth.png visible in the page.
 There was a similar issue for the "Control Logic" heading above that, but it
 was fixed; this one can be fixed easily in the same way. But the easy fix is
 also the cause of issue #001.
 
-#004 In the paragraphs headed "Simple Logic Gates" and "NOR4 Layout" toward
+#004 FIXED In the paragraphs headed "Simple Logic Gates" and "NOR4 Layout" toward
 the bottom of the page, there are broken image links. This may be a consequence
 of #008/#009.
 

@@ -41,12 +41,15 @@ type context struct {
 	OutputDirectory string
 	NestingDepth int
 	Markdown strings.Builder
+	InImgTag bool
 	InJumpToNav bool
 	InMagnify bool
 	InFullImageLink bool
 	InThumbCaption bool
 	InATag bool
-	ATagRemainder string
+	ATagLeader string
+	ATagContent string
+	ATagTrailer string
 	InMediaWikiFooter bool
 	InWaybackMachineFooter bool
 	InScript bool
@@ -133,6 +136,9 @@ func (cx *context) InSuppressedTable() bool {
 // Emit a string to the standard output. The string should
 // not contain any leading or trailing whitespace.
 func (cx *context) emitString(format string, args ...any) {
+	if len(format) == 0 {
+		return
+	}
 	if cx.InMediaWikiFooter {
 		return
 	}
@@ -148,7 +154,21 @@ func (cx *context) emitString(format string, args ...any) {
 	if cx.InTocNumber {
 		return
 	}
-	cx.Markdown.WriteString(fmt.Sprintf(format, args...))
+	// We always divert the entire contents of <A> tags EXCEPT for <IMG>
+	// tags, which we want to emit directly. We emit the entire A tag
+	// when we see the </A>. The effect is that when we have an IMG tag
+	// wrapped in an A tag, we emit the entire IMG tag followed by the
+	// entire A tag. Otherwise, we emit the A tag in-line. The caller,
+	// of course, must clear InATag before trying to emit it, and must
+	// set InImgTag before trying to emit that. I'm sure there's a better
+	// way to deal with this.
+	content := fmt.Sprintf(format, args...)
+	divert := cx.InATag && !cx.InImgTag 
+	if divert {
+		cx.ATagContent += content
+	} else {
+		cx.Markdown.WriteString(content)
+	}
 }
 
 // ======= White space handling =======

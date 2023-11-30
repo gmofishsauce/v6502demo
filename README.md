@@ -146,6 +146,35 @@ Interestingly, none of the image files seems to have any illegal URL characters 
 This suggests that MediaWiki has similar set of remapping rules that it applies to uploaded
 images.
 
+### Fix additional broken names
+
+Much later (Thanksgiving 2023) I found that there were a bunch of files with `!` characters
+in their names. I'm currently trying to understand the situation with these. There are broken
+links with similar but not identical names.
+
+$ find wiki/images | grep '[0-9]\!'
+wiki/images/archive/7/75/20110221102837!6502-ipc-circuit.png
+wiki/images/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
+wiki/images/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
+wiki/images/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
+wiki/images/archive/5/58/20110220170427!6502-ipc-logic.png
+wiki/images/archive/5/58/20110220140415!6502-ipc-logic.png
+wiki/images/archive/5/58/20110220181007!6502-ipc-logic.png
+wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png
+wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png/120px-6502-ipc-circuit.png
+wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
+wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png/120px-6502-decimal-DAA-removed-visual6502.png
+wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
+wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png/120px-Rca1802-detail2-nor4.png
+wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
+wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png/120px-6502-XAA-Idb-sb.png
+wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png/120px-6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png/120px-6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png
+wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png/120px-6502-ipc-logic.png
+
 ### Set up Github Pages and create some README files
 
 I enabled Github Pages for the entire repo. Much of the repo is not accessible through the Pages

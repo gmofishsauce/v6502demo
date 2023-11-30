@@ -83,6 +83,7 @@ var mdPass = opTable {
 		atom.H4: doHeaderClose,
 		atom.H5: doHeaderClose,
 		atom.H6: doHeaderClose,
+		atom.Img: doImgClose,
 		atom.Html: doHtmlClose,
 		atom.Li: doLiClose,
 		atom.Ol: doOlClose,
@@ -131,7 +132,8 @@ Then there's an img tag in the A tag with a link to a legitimate image.
     <div class="thumb tnone">
         <div class="thumbinner" style="width:280px;">
             <a href="/wiki/index.php?title=File:NES-2A03-decimal-DAA-removed.png" class="image">
-                <img alt="" src="/wiki/images/8/89/NES-2A03-decimal-DAA-removed.png" width="278" height="200" class="thumbimage" />
+                <img alt="" src="/wiki/images/8/89/NES-2A03-decimal-DAA-removed.png"
+							width="278" height="200" class="thumbimage" />
             </a>
             <div class="thumbcaption">
                 Transistor t2556 in NES 2A03
@@ -144,57 +146,68 @@ There's a similar bunch of code distinguished by a link to the currently
 non-existent (in the wiki target directory) url skins/common/images/magnify-clip.png
 that also needs to be addressed.
 
+UPDATE many days later: it's correct that _most_ of the images wrapped in "thumb DIVs"
+as shown above do not have any larger image. Unfortunately it's also true that some
+small images that _do_ have larger images completely lack the series of descriptive
+DIVs shown above. For example, there are small and large images of the 1802's control
+logic in the site, but the HTML consists of just this:
+
+<h3>
+	<span class="mw-headline" id="Control_Logic"> Control Logic </span>
+</h3>
+<p>
+    <a href="http://visual6502.org/wiki/images/6/64/Rca1802-control-reversed.gif">
+        <img alt="Rca1802-control-reversed-small.gif" src="/wiki/images/2/29/Rca1802-control-reversed-small.gif" width="280" height="593" />
+    </a>
+</p>
+
+No identifying DIVs, no class= tags, nothing. Yet the image linked by the enclosing
+A-tag is, in this one case, a 3600x1700 high-resolution image that must be preserved.
+To further complicate matters, the URL of the high-resolution image is absolute rather
+than relative, so it must be further modified by the processor.
+
+The only thing these two snippets of HTML have in common is that they have an A-tag
+enclosing an image tag. The only systematic processing I can think of is to change
+the code as follows: if we are in a A-tag, and we find an image tag, we need to end
+up emitting this markdown:
+
+![alt-text-of-image](url-of-image)
+paragraph-break
+[hardwired-text-possible-link-to-larger-image](url-from-a-tag)
+paragraph-break
+
+This would typically be followed by a paragraph that serves as the caption.
 */
+
 // According to the standard, A-tags don't nest
 func doAtagOpen(n *html.Node, cx *context) error {
 	if cx.InATag {
 		fatal("nested A-tag")
-	}
-
-	// MediaWikis have a bunch of HTML files with names like foo.png
-	// and bar.jpg that are actually HTML files which wrap a thumb
-	// and have a link to a larger version of the image. We don't
-	// output these.
-	cl := getAttrVal(n, "class")
-	if cl == "image" {
-		return nil
 	}
 	href := getAttrVal(n, "href")
 	if len(href) == 0 {
 		warn("A-tag with no href")
 		return nil
 	}
-	if strings.HasSuffix(href, ".gif") || strings.HasSuffix(href, ".png") || strings.HasSuffix(href, ".jpg") {
-		// This is a link surrounding a thumbnail. We need to find
-		// a solution for the (few) cases where "larger image" is
-		// actually larger than the thumbnail.
-		return nil
-	}
+	// This trim() call is critical at a few weird places in the wiki
+	// that contain absolute links into wiki/images for no obvious reason.
+	// "If s doesn't start with prefix, s is returned unchanged." (docs)
+	href = strings.TrimPrefix(href, "http://visual6502.org/wiki/")
 
 	cx.InATag = true
-	cx.emitString("[")
-	cx.ATagRemainder = "](" + urlSafeUrl(href) + ")"
+	cx.ATagLeader = "["
+	cx.ATagContent = ""
+	cx.ATagTrailer = "](" + urlSafeUrl(href) + ")"
 	return nil
 }
 
 func doAtagClose(n *html.Node, cx *context) error {
-	// See comment above
-	cl := getAttrVal(n, "class")
-	if cl == "image" {
-		return nil
-	}
-	href := getAttrVal(n, "href")
-	if strings.HasSuffix(href, ".gif") {
-		return nil
-	}
-
-	if len(cx.ATagRemainder) == 0 {
-		warn("/A-tag with no remainder")
-		return nil
-	}
-	cx.emitString(cx.ATagRemainder)
+	output := cx.ATagLeader+cx.ATagContent+cx.ATagTrailer;
 	cx.InATag = false
-	cx.ATagRemainder = ""
+	cx.ATagLeader = ""
+	cx.ATagContent = ""
+	cx.ATagTrailer = ""
+	cx.emitString(output)
 	return nil
 }
 
@@ -291,25 +304,44 @@ func doHtmlClose(n *html.Node, cx *context) error {
 }
 
 func doImgOpen(n *html.Node, cx *context) error {
-	imgText := getAttrVal(n, "alt")
-	if len(imgText) == 0 {
-		imgText = "Image (no description given)"
-	}
-
 	imgLink := getAttrVal(n, "src")
 	if len(imgLink) == 0 {
 		warn("img tag with no src")
 		return nil
 	}
 	if strings.Contains(imgLink, "skins/common") {
-		// "Powered by MediaWiki" image
+		// "Powered by MediaWiki" image, etc.
 		return nil
+	}
+
+	imgText := getAttrVal(n, "alt")
+	if len(imgText) == 0 {
+		imgText = "Image (no description given)"
+	}
+	// If we're inside an A tag, the image link is presumed
+	// to be a link to a larger image. In the visual6502 wiki,
+	// there are hardly ever actual larger images; but there
+	// are, in a few places, and they're important, so we
+	// special case this. (Should we only set the ATagContent
+	// here if it's empty? Not clear.)
+	if cx.InATag {
+		cx.ATagContent = "(Link to larger image)"
 	}
 
 	// Make the image addressable. Note: comment from docs:
 	// "If s doesn't start with prefix, s is returned unchanged."
 	imgLink = strings.TrimPrefix(imgLink, "/wiki/")
-	cx.emitString("\n\n![%s](%s)\n\n", imgText, imgLink)
+
+	// Now say we're in an image before calling emitString,
+	// which has a special case for this situation.
+	cx.InImgTag = true
+	result := fmt.Sprintf("\n\n![%s](%s)\n\n", imgText, imgLink)
+	cx.emitString(result)
+	return nil
+}
+
+func doImgClose(n *html.Node, cx *context) error {
+	cx.InImgTag = false
 	return nil
 }
 
