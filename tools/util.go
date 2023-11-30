@@ -449,6 +449,7 @@ func urlSafeUrl(origUrl string) string {
 	if err != nil {
 		fatal("cannot parse URL %s: %v", origUrl, err)
 	}
+
 	// The point here is that the Wayback Machine Downloader took Media
 	// Wiki pages like "index.php?File=foo!bar" and turned them into
 	// local files named that, exactly. These caused issues, so I renamed
@@ -457,7 +458,11 @@ func urlSafeUrl(origUrl string) string {
 	// characters that don't, so the resulting URL doesn't need to be
 	// escaped and does not have a query string. Note that the u.RawQuery
 	// value doesn't have the leading ? character, so we have to add it.
-	s := makeUrlSafePath(u.Path+"?"+u.RawQuery)
+	s := u.Path
+	if len(u.RawQuery) > 0 {
+		s += "?" + u.RawQuery
+	}
+	s = makeUrlSafePath(s)
 
 	// "If s doesn't start with prefix, s is returned unchanged."
 	s = strings.TrimPrefix(s, "/wiki/")
@@ -473,7 +478,6 @@ func makeUrlSafePath(p string) string {
 	dir := path.Dir(p)
 	base := path.Base(p)
 	result := path.Join(dir, urlSafeName(base))
-	dbg("in, out: %s %s", p, result)
 	return result
 }
 

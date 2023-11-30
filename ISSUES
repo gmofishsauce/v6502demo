@@ -29,6 +29,9 @@ the RCA 1802 page (FALSE, #004 IS FIXED.)
 #010 It looks like internal image links are not being passed through the
 urlSafeUrl() function the way internal page links are. Need to check this.
 
+#011 Many anchor links don't work correctly. Cause is handling of special
+characters in the conversion of the link.
+
 Problems that specific to certain pages
 
 Page: ./tools/mkmd -o ./wiki -m work/wiki/index.php-title-Special-AllPages

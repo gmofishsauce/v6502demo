@@ -6,9 +6,6 @@
 
 #### From VisualChips
 
-| [All pages](index.php-title-Special-AllPages) |
-|:---:|:---:|
-
 | [6502DecimalMode](index.php-title-6502DecimalMode) | [6502Observations](index.php-title-6502Observations) | [6502TestPrograms](index.php-title-6502TestPrograms) |
 |:---:|:---:|:---:|
 | [6502 - simulating in real time on an FPGA](index.php-title-6502_-_simulating_in_real_time_on_an_FPGA) | [6502 BRK and B bit](index.php-title-6502_BRK_and_B_bit) | [6502 Interrupt Hijacking](index.php-title-6502_Interrupt_Hijacking) |

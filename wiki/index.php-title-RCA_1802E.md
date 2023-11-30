@@ -41,7 +41,7 @@ As it happens, it's also a great process for us to photograph and analyse, becau
 
 ![Rca1802-control-reversed-small.gif](images/2/29/Rca1802-control-reversed-small.gif)
 
-[(Link to larger image)](images/6/64/Rca1802-control-reversed.gif-)
+[(Link to larger image)](images/6/64/Rca1802-control-reversed.gif)
 
 This schematic was derived by tracing the excellent die photo, so the arrangement of the gates pretty much follows the layout on die. There are an extensive
 use of transparent latches of various enable and output polarities, which are denoted with squares.
@@ -67,7 +67,7 @@ See [#Resources](#resources) for more.
 
 ![1802 dpth-small.png](images/c/c0/1802_dpth-small.png)
 
-[(Link to larger image)](images/6/62/1802_dpth.png-)
+[(Link to larger image)](images/6/62/1802_dpth.png)
 
 Note that the register bits are just represented as transparent 
 latches, in reality they are two inverters and NMOS transmission 

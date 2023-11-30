@@ -506,14 +506,16 @@ func doTableOpen(n *html.Node, cx *context) error {
 }
 
 func doTableClose(n *html.Node, cx *context) error {
-	cx.LeaveTable()
 	if cx.InNestedTable() {
+		cx.LeaveTable()
 		return nil
 	}
 
 	if !cx.InSuppressedTable() { // ???
 		cx.emitParagraphBreakNeeded()
 	}
+
+	cx.LeaveTable()
 	cx.TableID = ""
 	cx.TableClass = ""
 	return nil
