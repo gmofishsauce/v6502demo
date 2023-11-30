@@ -1,0 +1,12 @@
+**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**
+
+# File:Rca1802-control-reversed.gif - VisualChips
+
+## File:Rca1802-control-reversed.gif
+
+#### From VisualChips
+
+- [File](#file)
+- [File history](#filehistory)
+- [File links](#filelinks)
+
