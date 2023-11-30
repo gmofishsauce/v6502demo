@@ -19,34 +19,15 @@ be a bad answer for other lists in the wiki.
 #008 (NON-ISSUE? DEFERRED) The following images contain "!" characters in
 their paths. URLs linking to these images have the "!" escaped as %21. The
 "!" is an aggressive Shell metacharacter, which may or may not be an issue.
-See also #009.
+See also #009. (Note: since this may be a non-issue, I removed the list of
+files; the command to regenerate is: find wiki/images | grep '[0-9]\!'
 
-$ find wiki/images | grep '[0-9]\!'
-wiki/images/archive/7/75/20110221102837!6502-ipc-circuit.png
-wiki/images/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
-wiki/images/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
-wiki/images/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
-wiki/images/archive/5/58/20110220170427!6502-ipc-logic.png
-wiki/images/archive/5/58/20110220140415!6502-ipc-logic.png
-wiki/images/archive/5/58/20110220181007!6502-ipc-logic.png
-wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png
-wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png/120px-6502-ipc-circuit.png
-wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
-wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png/120px-6502-decimal-DAA-removed-visual6502.png
-wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
-wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png/120px-Rca1802-detail2-nor4.png
-wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
-wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png/120px-6502-XAA-Idb-sb.png
-wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png/120px-6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png/120px-6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png/120px-6502-ipc-logic.png
+#009 (NON-ISSUE? DEFERRED) URL paths are not fixed to URL-safe even though
+the file names are. This may be the cause of #004 the broken image link in
+the RCA 1802 page (FALSE, #004 IS FIXED.)
 
-#009 URL paths are not fixed to URL-safe even though the file names are. This
-may be the cause of #004 the broken image link in the RCA 1802 page (FALSE, #004
-IS FIXED.)
+#010 It looks like internal image links are not being passed through the
+urlSafeUrl() function the way internal page links are. Need to check this.
 
 Problems that specific to certain pages
 

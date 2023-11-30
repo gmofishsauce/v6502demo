@@ -41,7 +41,7 @@ As it happens, it's also a great process for us to photograph and analyse, becau
 
 ![Rca1802-control-reversed-small.gif](images/2/29/Rca1802-control-reversed-small.gif)
 
-[(Link to larger image)](images/6/64/Rca1802-control-reversed.gif)
+[(Link to larger image)](images/6/64/Rca1802-control-reversed.gif-)
 
 This schematic was derived by tracing the excellent die photo, so the arrangement of the gates pretty much follows the layout on die. There are an extensive
 use of transparent latches of various enable and output polarities, which are denoted with squares.
@@ -67,7 +67,7 @@ See [#Resources](#resources) for more.
 
 ![1802 dpth-small.png](images/c/c0/1802_dpth-small.png)
 
-[(Link to larger image)](images/6/62/1802_dpth.png)
+[(Link to larger image)](images/6/62/1802_dpth.png-)
 
 Note that the register bits are just represented as transparent 
 latches, in reality they are two inverters and NMOS transmission 
@@ -222,7 +222,7 @@ controlled buffer, while EXT\_DB\_OUT outputs the signal on the vertical databus
 
 ![Rca1802-detail-annotated.jpg](images/f/f4/Rca1802-detail-annotated.jpg)
 
-[(Link to larger image)](index.php?title=File:Rca1802-detail-annotated.jpg)
+[(Link to larger image)](index.php-title-File-Rca1802-detail-annotated.jpg)
 
 Above we see a detail of our high-resolution images, showing several logic gates laid out with their complementary pullup and pulldown trees in their respective areas (Orange on green is NMOS, purple on blue is PMOS.)  The power supply to each gate is the substrate (or well) so there are fewer contacts than in the usual technologies.
 
@@ -238,7 +238,7 @@ So here we see an alternative layout technique, where an isolated region is crea
 
 ![Rca1802-detail2-nor4.png](images/4/42/Rca1802-detail2-nor4.png)
 
-[(Link to larger image)](index.php?title=File:Rca1802-detail2-nor4.png)
+[(Link to larger image)](index.php-title-File-Rca1802-detail2-nor4.png)
 
 #### Resources
 
@@ -261,5 +261,5 @@ So here we see an alternative layout technique, where an isolated region is crea
 - [Chuck Bigham's](http://www.bramblyhill.com/post/2013/02/12/Simulating-the-RCA-1802-control-logic.aspx) simulation of the control logic
 - [One](http://groups.yahoo.com/group/cosmacelf/message/12418) of several discussion threads in Yahoo "cosmacelf" group
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=RCA\_1802E](index.php?title=RCA_1802E)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=RCA\_1802E](index.php-title-RCA_1802E)"
 
