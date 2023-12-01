@@ -52,6 +52,7 @@ var mdPass = opTable {
 	typeFuncs: [6]opFunc{nil, doText, nil, nil, doComment, doDocType},
 	elementPreFuncs: map[atom.Atom]opFunc{
 		atom.A:  doAtagOpen,
+		atom.Br: doBrOpen,
 		atom.Div: doDivOpen,
 		atom.H1: doHeaderOpen,
 		atom.H2: doHeaderOpen,
@@ -211,6 +212,16 @@ func doAtagClose(n *html.Node, cx *context) error {
 	return nil
 }
 
+func doBrOpen(n *html.Node, cx *context) error {
+	if cx.InTable() {
+		// In markdown, newlines screw up tables.
+		cx.emitSingleSpaceNeeded()
+	} else {
+		cx.emitSingleNewlineNeeded()
+	}
+	return nil
+}
+
 /*
 
 Chop out some divs. Example: MediaWiki navigation links.
@@ -276,7 +287,7 @@ func doDivClose(n *html.Node, cx *context) error {
 		return nil
 	}
 	if cl == "fullImageLink" {
-		cx.InFullImageLink = true
+		cx.InFullImageLink = false
 		return nil
 	}
 	if cl == "thumbcaption" {
@@ -335,8 +346,17 @@ func doImgOpen(n *html.Node, cx *context) error {
 	// Now say we're in an image before calling emitString,
 	// which has a special case for this situation.
 	cx.InImgTag = true
-	result := fmt.Sprintf("\n\n![%s](%s)\n\n", imgText, imgLink)
-	cx.emitString(result)
+	if cx.InTable() {
+		cx.emitSingleSpaceNeeded()
+	} else {
+		cx.emitParagraphBreakNeeded()
+	}
+	cx.emitString(fmt.Sprintf("![%s](%s)", imgText, imgLink))
+	if cx.InTable() {
+		cx.emitSingleSpaceNeeded()
+	} else {
+		cx.emitParagraphBreakNeeded()
+	}
 	return nil
 }
 
@@ -599,6 +619,14 @@ func doTitleClose(n *html.Node, cx *context) error {
 	return nil
 }
 
+const imageWrapperMessage = `
+Note: this is an image wrapper file. In the recovered wiki,
+secondary content like talk pages and file histories was
+not preserved. As a result, this file contains only a link
+to an image, which may be a larger version of the image shown
+in the page that linked here.`
+
+
 func doUlOpen(n *html.Node, cx *context) error {
 	if cx.InList() {
 		// entering a nested list
@@ -608,10 +636,18 @@ func doUlOpen(n *html.Node, cx *context) error {
 		cx.emitParagraphBreakNeeded()
 	}
 	cx.EnterList()
+	id := getAttrVal(n, "id")
+	if id == "filetoc" {
+		cx.emitParagraphBreakNeeded()
+		cx.emitString(imageWrapperMessage)
+		cx.emitParagraphBreakNeeded()
+		cx.InFileToc = true
+	}
 	return nil
 }
 
 func doUlClose(n *html.Node, cx *context) error {
+	cx.InFileToc = false
 	cx.LeaveList()
 	if cx.InList() {
 		// still in a first (n-1st) level list

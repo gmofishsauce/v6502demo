@@ -41,6 +41,7 @@ type context struct {
 	OutputDirectory string
 	NestingDepth int
 	Markdown strings.Builder
+	InFileToc bool
 	InImgTag bool
 	InJumpToNav bool
 	InMagnify bool
@@ -142,7 +143,7 @@ func (cx *context) emitString(format string, args ...any) {
 	if cx.InMediaWikiFooter {
 		return
 	}
-	if cx.InJumpToNav || cx.InMagnify || cx.InFullImageLink || cx.InThumbCaption {
+	if cx.InJumpToNav || cx.InMagnify || cx.InThumbCaption {
 		return
 	}
 	if cx.InNestedTable() {
@@ -152,6 +153,9 @@ func (cx *context) emitString(format string, args ...any) {
 		return
 	}
 	if cx.InTocNumber {
+		return
+	}
+	if cx.InFileToc {
 		return
 	}
 	// We always divert the entire contents of <A> tags EXCEPT for <IMG>
@@ -167,8 +171,15 @@ func (cx *context) emitString(format string, args ...any) {
 	if divert {
 		cx.ATagContent += content
 	} else {
-		cx.Markdown.WriteString(content)
+		cx.emitStringDirect(content)
 	}
+}
+
+// This function writes to the markdown stream unconditionally. It can
+// be used, with great care, to force  output when the surrounding tag
+// is disabled.
+func (cx *context) emitStringDirect(s string) {
+	cx.Markdown.WriteString(s)
 }
 
 // ======= White space handling =======
