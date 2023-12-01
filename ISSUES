@@ -1,20 +1,39 @@
-This is a list of remaining issues noticed after "mkmd" was partially working.
+#005 Broken links to external pages. These could be fixed by pointing them
+at the Wayback Machine equivalents. This process could be automated by
+probing the external URL at build time and probing the Wayback Machine
+for a link if the original link 404s.
 
-Problems that are understood and may affect all pages:
+#006 All lists are currently bulleted (unordered) lists. Nested lists are
+currently flattened into the first level list.
 
-#001 (FIXED?) Directly-linked thumbnails are treated as images. In most cases there are
-no larger images so this turns out to be fine. In a few cases there are thumbs
+#011 Many anchor links don't work correctly. Cause is handling of special
+characters in the conversion of the link. This is messy to fix.
+
+#012 The "image" pages that are actually HTML are mostly linked and working
+now, but they don't contain the link to the actual image because I suppress
+the DIV that contains it--this was part of an earlier fix to the "image links
+inside A tags" issue(s).
+
+#013 Image links with %NN escapes in the query string are not being made into
+safe URLs correctly. This is different from #011. The likely cause is ref to
+u.RawQuery in safe URL code--it probably needs to ref the decoded query.
+
+#014 Review the "functional" pages, like "Recent Changes". I didn't download
+most of these, but some of them are linked (broken links) from the main page.
+
+#015 Figure out what to put in each page for header and footer information.
+Something about the history in the header. Something about the licensing and
+authorship in the footer.
+
+#016 Figure out what to put on the two README pages to enable visitors to
+find the content.
+
+Issues that are fixed or not worth fixing
+
+#001 (FIXED?) Directly-linked thumbnails are treated as images. In most cases there
+are no larger images so this turns out to be fine. In a few cases there are thumbs
 so the larger image is currently not reachable. Page index.php-title-RCA_1802E
 is affected. This is relate to #003, #008, and #009. More thought it needed.
-
-#005 Broken external links to external pages. These could be fixed by pointing
-them at the Wayback Machine equivalents; this process could be automated.
-
-#007 List numbering is handled at runtime by a script in MediaWiki sites (and
-it doesn't alwas work right; see the double numbering in the nested list on
-the index.php-title-RCA_1802E page). Currently, I'm rendering all the lists
-as unnumbered lists, which helps with the broken list in RCA_1802E but may
-be a bad answer for other lists in the wiki.
 
 #008 (NON-ISSUE? DEFERRED) The following images contain "!" characters in
 their paths. URLs linking to these images have the "!" escaped as %21. The
@@ -26,17 +45,12 @@ files; the command to regenerate is: find wiki/images | grep '[0-9]\!'
 the file names are. This may be the cause of #004 the broken image link in
 the RCA 1802 page (FALSE, #004 IS FIXED.)
 
-#010 It looks like internal image links are not being passed through the
-urlSafeUrl() function the way internal page links are. Need to check this.
+#010 FIXED It looks like internal image links are not being passed through
+the urlSafeUrl() function the way internal page links are. Need to check this.
 
-#011 Many anchor links don't work correctly. Cause is handling of special
-characters in the conversion of the link.
+Page: ./tools/mkmd -o ./wiki -m work/wiki/index.php-title-Special-AllPages:
 
-Problems that specific to certain pages
-
-Page: ./tools/mkmd -o ./wiki -m work/wiki/index.php-title-Special-AllPages
-
-#002 There is a tiny bogus table near that top of the page, below the words
+#002 FIXED There is a tiny bogus table near that top of the page, below the words
 "From VisualChips" and before the main table.
 
 Page: ./tools/mkmd -o ./wiki -m work/wiki/index.php-title-RCA_1802E
@@ -51,7 +65,9 @@ also the cause of issue #001.
 the bottom of the page, there are broken image links. This may be a consequence
 of #008/#009.
 
-#006 Nested lists are currently flattened into a single list. Depending on
-the markdown layout engine, this may be fixable; it should be fixable on
-Github Pages.
+#007 Consolidated into #006: List numbering is handled at runtime by a script
+in MediaWiki sites (and it doesn't alwas work right; see the double numbering
+in the nested list on the index.php-title-RCA_1802E page). Currently, I'm
+rendering all the lists as unnumbered lists, which helps with the broken list
+in RCA_1802E but may be a bad answer for other lists in the wiki.
 
