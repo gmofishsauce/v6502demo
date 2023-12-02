@@ -1,10 +1,10 @@
 #005 Broken links to external pages. These could be fixed by pointing them
 at the Wayback Machine equivalents. This process could be automated by
 probing the external URL at build time and probing the Wayback Machine
-for a link if the original link 404s.
+for a link if the original link 404s. (DEFERRED)
 
 #006 All lists are currently bulleted (unordered) lists. Nested lists are
-currently flattened into the first level list.
+currently flattened into the first level list. (DEFERRED)
 
 #011 Many anchor links don't work correctly. Cause is handling of special
 characters in the conversion of the link. This is messy to fix.

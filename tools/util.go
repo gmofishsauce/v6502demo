@@ -136,8 +136,8 @@ func (cx *context) InSuppressedTable() bool {
 
 // Emit a string to the standard output. The string should
 // not contain any leading or trailing whitespace.
-func (cx *context) emitString(format string, args ...any) {
-	if len(format) == 0 {
+func (cx *context) emitString(content string) {
+	if len(content) == 0 {
 		return
 	}
 	if cx.InMediaWikiFooter {
@@ -158,6 +158,7 @@ func (cx *context) emitString(format string, args ...any) {
 	if cx.InFileToc {
 		return
 	}
+
 	// We always divert the entire contents of <A> tags EXCEPT for <IMG>
 	// tags, which we want to emit directly. We emit the entire A tag
 	// when we see the </A>. The effect is that when we have an IMG tag
@@ -166,7 +167,6 @@ func (cx *context) emitString(format string, args ...any) {
 	// of course, must clear InATag before trying to emit it, and must
 	// set InImgTag before trying to emit that. I'm sure there's a better
 	// way to deal with this.
-	content := fmt.Sprintf(format, args...)
 	divert := cx.InATag && !cx.InImgTag 
 	if divert {
 		cx.ATagContent += content
@@ -406,16 +406,125 @@ func hasAttr(node *html.Node, name string) bool {
 	return false
 }
 
-// Implement -u. Fix names so they don't result in illegal URLs.
+// Make a safe URL from an URL that may contain illegal characters in
+// the filename component only. Parse the URL, isolate the name from the
+// path, unescape just the name, fix the name to contain no escapable
+// characters, and put the URL back together - escaping it has been made
+// unnecessary. This should only be applied to wiki URLs or else that
+// last assumption may be incorrect.
+func urlSafeUrl(origUrl string) string {
+	// URLs external to the Wiki we don't want to mess with
+	if strings.HasPrefix(origUrl, "http") {
+		return origUrl
+	}
+
+	// Anchors we do a simple transformation on, which sometimes works.
+	// Issue #011 points out that other times, it doesn't; needs work.
+	if strings.HasPrefix(origUrl, "#") {
+		// On Github anchors need to be #sym where sym is lower case
+		// and separated by hyphens. In this wiki it seems like most
+		// of them are mixed case, have no spaces and are separate by
+		// underscores. This will handle them but not more.
+		s := strings.ToLower(origUrl)
+		s = strings.ReplaceAll(s, "_", "-")
+		return s
+	}
+
+	u, err := url.Parse(origUrl)
+	if err != nil {
+		fatal("cannot parse URL %s: %v", origUrl, err)
+	}
+
+	// We need to convert the (last component of path name) +
+	// (raw query string) to a combined filename with the invalid
+	// URL character rule applied. There's no functionality on
+	// the url package that does exactly what we need.
+	s := u.Path
+	m := u.Query()
+	t, ok := m["title"]
+	if ok {
+		// Not worried about multiple "title=" query strings
+		s += "?title=" + t[0] + ".md"
+		if !strings.HasPrefix(s, "wiki") {
+			s = "wiki/" + s
+		}
+	}
+	dbg("u.Path=%s u.RawQuery=%s combined=%s", u.Path, u.RawQuery, s)
+	s = makeUrlSafePath(expandEscapesInLine(s))
+
+	// "If s doesn't start with prefix, s is returned unchanged."
+	s = strings.TrimPrefix(s, "/wiki/")
+	result := url.URL{
+		Scheme: u.Scheme,
+		Host: u.Host,
+		Path: s,
+	}
+	dbg("urlSafeUrl %s => %s", origUrl, result.String())
+	return result.String()
+}
+
+func isAsciiHexDigit(b byte) bool {
+	if b >= '0' && b <= '9' {
+		return true
+	}
+	if b >= 'A' && b <= 'F' {
+		return true
+	}
+	// RFC recommends always using upper case
+	// letters in %-encodings, but who knows.
+	if b >= 'a' && b <= 'f' {
+		return true
+	}
+	return false
+}
+
+func twoDigitHexAsciiToAsciiByte(ms byte, ls byte) byte {
+	result := 16 * (ms - '0') // ms can't be > 7
+	if ls <= '9' {
+		result += ls - '0'
+	} else if ls <= 'F' {
+		result += ls - 'A'
+	} else {
+		result += ls - 'a'
+	}
+	return byte(result)
+}
+
+func expandEscapesInLine(s string) string {
+	n := len(s)
+	var sb strings.Builder
+	skip := 0
+
+	for i, c := range s {
+		if skip > 0 {
+			skip--
+		} else if c == '%' && i+2 < n && isAsciiHexDigit(s[i+1]) && isAsciiHexDigit(s[i+2]) {
+			sb.WriteByte(twoDigitHexAsciiToAsciiByte(s[i+1], s[i+2]))
+			skip = 2
+		} else {
+			sb.WriteRune(c)
+		}
+	}
+	return sb.String()
+}
+
+func makeUrlSafePath(p string) string {
+	dir := path.Dir(p)
+	base := path.Base(p)
+	result := path.Join(dir, urlSafeName(base))
+	dbg("makeUrlSafePath %s => %s", p, result)
+	return result
+}
 
 // This function is used to remap the name of a file to an URL-safe name.
 // It must not be applied to a whole URL, because it will remap colons and
 // slashes. The rule from RFC3986 is: ASCII letters and digits are legal,
-// along with -_~. (dot). Everything else is not legal in a name (the last
-// component of a path). Many characters not legal in names are legal in
-// query strings, i.e. encoding them is optional. The Wayback Machine
-// Downloader makes query strings from the original MediaWiki into file
-// names in the download, which is what causes the issue we're fixing.
+// along with -_~. (hyphen, underscore, tilde, dot). Everything else is
+// not legal in a name (the last component of a path). Many characters
+// not legal in names are legal in query strings, i.e. encoding them is
+// optional. The Wayback Machine Downloader makes query strings from the
+// original MediaWiki into file names in the download, which is what causes
+// the issue we're fixing.
 func urlSafeName(origName string) string {
 	var result strings.Builder
 	for _, c := range origName {
@@ -432,64 +541,8 @@ func urlSafeName(origName string) string {
 			result.WriteByte('~')
 		}
 	}
+	dbg("urlSafeName %s => %s", origName, result.String())
 	return result.String()
-}
-
-// Make a safe URL from an URL that may contain illegal characters in
-// the filename component only. Parse the URL, isolate the name from the
-// path, unescape just the name, fix the name to contain no escapable
-// characters, and put the URL back together - escaping it has been made
-// unnecessary. This should only be applied to wiki URLs or else that
-// last assumption may be incorrect.
-func urlSafeUrl(origUrl string) string {
-	if strings.HasPrefix(origUrl, "http") {
-		return origUrl
-	}
-
-	if strings.HasPrefix(origUrl, "#") {
-		// On Github anchors need to be #sym where sym is lower case
-		// and separated by hyphens. In this wiki it seems like most
-		// of them are mixed case, have no spaces and are separate by
-		// underscores. This will handle them but not more.
-		s := strings.ToLower(origUrl)
-		s = strings.ReplaceAll(s, "_", "-")
-		return s
-	}
-
-	u, err := url.Parse(origUrl)
-	if err != nil {
-		fatal("cannot parse URL %s: %v", origUrl, err)
-	}
-
-	// The point here is that the Wayback Machine Downloader took Media
-	// Wiki pages like "index.php?File=foo!bar" and turned them into
-	// local files named that, exactly. These caused issues, so I renamed
-	// all the files according to a rule. The rule converts all characters
-	// that require escaping or have any other URL significance into
-	// characters that don't, so the resulting URL doesn't need to be
-	// escaped and does not have a query string. Note that the u.RawQuery
-	// value doesn't have the leading ? character, so we have to add it.
-	s := u.Path
-	if len(u.RawQuery) > 0 {
-		s += "?" + u.RawQuery
-	}
-	s = makeUrlSafePath(s)
-
-	// "If s doesn't start with prefix, s is returned unchanged."
-	s = strings.TrimPrefix(s, "/wiki/")
-	result := url.URL{
-		Scheme: u.Scheme,
-		Host: u.Host,
-		Path: s,
-	}
-	return result.String()
-}
-
-func makeUrlSafePath(p string) string {
-	dir := path.Dir(p)
-	base := path.Base(p)
-	result := path.Join(dir, urlSafeName(base))
-	return result
 }
 
 func renameFileToUrlSafe(p string) error {

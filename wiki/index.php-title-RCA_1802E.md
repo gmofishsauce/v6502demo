@@ -37,8 +37,6 @@ As it happens, it's also a great process for us to photograph and analyse, becau
 
 #### Control Logic
 
-
-
 ![Rca1802-control-reversed-small.gif](images/2/29/Rca1802-control-reversed-small.gif)
 
 [(Link to larger image)](images/6/64/Rca1802-control-reversed.gif)
@@ -62,8 +60,6 @@ On the east, below the seq0-7 logic, is the main state machine with 4 latches fo
 See [#Resources](#resources) for more.
 
 #### Datapath
-
-
 
 ![1802 dpth-small.png](images/c/c0/1802_dpth-small.png)
 
@@ -218,11 +214,9 @@ controlled buffer, while EXT\_DB\_OUT outputs the signal on the vertical databus
 
 #### Simple logic gates
 
-
-
 ![Rca1802-detail-annotated.jpg](images/f/f4/Rca1802-detail-annotated.jpg)
 
-[(Link to larger image)](index.php-title-File-Rca1802-detail-annotated.jpg)
+[(Link to larger image)](wiki/wiki/index.php-title-File-Rca1802-detail-annotated.jpg.md)
 
 Above we see a detail of our high-resolution images, showing several logic gates laid out with their complementary pullup and pulldown trees in their respective areas (Orange on green is NMOS, purple on blue is PMOS.)  The power supply to each gate is the substrate (or well) so there are fewer contacts than in the usual technologies.
 
@@ -234,11 +228,9 @@ If a NOR4 were laid out like the NOR3 above, it would be rather large because of
 
 So here we see an alternative layout technique, where an isolated region is created in the lower right, containing two of the pullups, the upper one of which is operated inside-out.
 
-
-
 ![Rca1802-detail2-nor4.png](images/4/42/Rca1802-detail2-nor4.png)
 
-[(Link to larger image)](index.php-title-File-Rca1802-detail2-nor4.png)
+[(Link to larger image)](wiki/wiki/index.php-title-File-Rca1802-detail2-nor4.png.md)
 
 #### Resources
 
@@ -261,5 +253,5 @@ So here we see an alternative layout technique, where an isolated region is crea
 - [Chuck Bigham's](http://www.bramblyhill.com/post/2013/02/12/Simulating-the-RCA-1802-control-logic.aspx) simulation of the control logic
 - [One](http://groups.yahoo.com/group/cosmacelf/message/12418) of several discussion threads in Yahoo "cosmacelf" group
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=RCA\_1802E](index.php-title-RCA_1802E)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=RCA\_1802E](wiki/index.php-title-RCA_1802E.md)"
 
