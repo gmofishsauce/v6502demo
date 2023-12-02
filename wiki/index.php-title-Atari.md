@@ -29,5 +29,5 @@ We don't have Atari ST chips in our collection yet.
 
 Best Electronics in California still sell Atari components.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Atari](index.php-title-Atari)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Atari](index.php-title-Atari.md)"
 

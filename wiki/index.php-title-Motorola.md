@@ -7,7 +7,7 @@
 #### From VisualChips
 
 - MC6800
-- [MC68000](index.php-title-Motorola_68000)
+- [MC68000](index.php-title-Motorola_68000.md)
 - MC68008
 - MC68010
 - MC6808P
@@ -20,5 +20,5 @@
 - MC68B09EP
 - MC68B45SP
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Motorola](index.php-title-Motorola)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Motorola](index.php-title-Motorola.md)"
 

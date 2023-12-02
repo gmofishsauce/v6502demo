@@ -9,5 +9,5 @@
 - 8086
 - 8088
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Fujitsu](index.php-title-Fujitsu)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Fujitsu](index.php-title-Fujitsu.md)"
 

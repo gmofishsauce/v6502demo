@@ -14,5 +14,5 @@ We're aware of several other similar efforts to reverse engineer historic chips
 - John McMaster has several large images under [http://siliconpr0n.org/archive/doku.php](http://siliconpr0n.org/archive/doku.php) including slippy maps of several, under [http://siliconpr0n.org/map/](http://siliconpr0n.org/map/) Includes several TI calculator chips. See also [his list of other chip images](https://siliconpr0n.org/archive/doku.php?id=digitized).
 - [http://zeptobars.ru/en/](http://zeptobars.ru/en/) publish large images periodically, including PIC and soviet clones of Z80 and 8080.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Other\_Chip\_Image\_Sites](index.php-title-Other_Chip_Image_Sites)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Other\_Chip\_Image\_Sites](index.php-title-Other_Chip_Image_Sites.md)"
 

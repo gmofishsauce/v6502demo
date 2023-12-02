@@ -445,11 +445,8 @@ func urlSafeUrl(origUrl string) string {
 	if ok {
 		// Not worried about multiple "title=" query strings
 		s += "?title=" + t[0] + ".md"
-		if !strings.HasPrefix(s, "wiki") {
-			s = "wiki/" + s
-		}
 	}
-	dbg("u.Path=%s u.RawQuery=%s combined=%s", u.Path, u.RawQuery, s)
+	//dbg("u.Path=%s u.RawQuery=%s combined=%s", u.Path, u.RawQuery, s)
 	s = makeUrlSafePath(expandEscapesInLine(s))
 
 	// "If s doesn't start with prefix, s is returned unchanged."
@@ -512,7 +509,7 @@ func makeUrlSafePath(p string) string {
 	dir := path.Dir(p)
 	base := path.Base(p)
 	result := path.Join(dir, urlSafeName(base))
-	dbg("makeUrlSafePath %s => %s", p, result)
+	//dbg("makeUrlSafePath %s => %s", p, result)
 	return result
 }
 
@@ -541,7 +538,7 @@ func urlSafeName(origName string) string {
 			result.WriteByte('~')
 		}
 	}
-	dbg("urlSafeName %s => %s", origName, result.String())
+	//dbg("urlSafeName %s => %s", origName, result.String())
 	return result.String()
 }
 

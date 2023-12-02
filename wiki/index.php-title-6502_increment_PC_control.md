@@ -14,31 +14,25 @@ As it happens, some of the logic implementing that decision is absent from Balaz
 
 Here's the layout, as rendered by [visual6502's JSSim](http://visual6502.org/JSSim/expert.html?nosim=t&find=short-circuit-branch-add,379&panx=381.0&pany=284.0&zoom=8.0):
 
-
-
 ![6502-ipc-layout.png](images/b/b2/6502-ipc-layout.png)
 
-[(Link to larger image)](index.php-title-File-6502-ipc-layout.png)
+[(Link to larger image)](index.php-title-File-6502-ipc-layout.png.md)
 
 The highlighted signal bottom centre is the negative-sense signal "dpc36\_#IPC", and the highlighted signal near the middle is "short-circuit-branch-add"
 
 Here's a diagram of the final few logic stages, which react to page-crossing branches, taken branches, single-byte instructions, interrupt handing (D1x1) and stalled cycles (use of RDY):
 
-
-
 ![6502-ipc-logic.png](images/5/58/6502-ipc-logic.png)
 
-[(Link to larger image)](index.php-title-File-6502-ipc-logic.png)
+[(Link to larger image)](index.php-title-File-6502-ipc-logic.png.md)
 
 Note that the exclusive OR is implemented as a modified multiplexor which includes the subsequent AND function. The modification ensures that the AND's pulldown doesn't affect the signal notALUcout (node 206) which is used elsewhere, by pulling it down through the multiplexor's pass transistors.
 
 Here's a transistor level view covering most of the same circuit:
 
-
-
 ![6502-ipc-circuit.png](images/7/75/6502-ipc-circuit.png)
 
-[(Link to larger image)](index.php-title-File-6502-ipc-circuit.png)
+[(Link to larger image)](index.php-title-File-6502-ipc-circuit.png.md)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_increment\_PC\_control](index.php-title-6502_increment_PC_control)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_increment\_PC\_control](index.php-title-6502_increment_PC_control.md)"
 

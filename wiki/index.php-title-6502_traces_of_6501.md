@@ -6,7 +6,7 @@
 
 #### From VisualChips
 
-(Back to [6502 Observations](index.php-title-6502Observations))
+(Back to [6502 Observations](index.php-title-6502Observations.md))
 
 The 6501 was the original product from MOS Technology (who, as a team, had recently left Motorola where they worked on the 6800.) It was pin-compatible but not code-compatible, and was withdrawn in a deal which left MOS free to sell the 6502 (even though it has many resemblances to the 6800)
 
@@ -46,19 +46,19 @@ The JSSim view of this area:
 
 ![Rdy-sync-no-via-6502d-jssim.png](images/e/ef/Rdy-sync-no-via-6502d-jssim.png)
 
-[(Link to larger image)](index.php-title-File-Rdy-sync-no-via-6502d-jssim.png)
+[(Link to larger image)](index.php-title-File-Rdy-sync-no-via-6502d-jssim.png.md)
 
 This area on the Rockwell R6502:
 
 ![Rdy-sync-no-via-R6502-balazs.png](images/c/c6/Rdy-sync-no-via-R6502-balazs.png)
 
-[(Link to larger image)](index.php-title-File-Rdy-sync-no-via-R6502-balazs.png)
+[(Link to larger image)](index.php-title-File-Rdy-sync-no-via-R6502-balazs.png.md)
 
 This area on the 2A03:
 
 ![Rdy-sync-no-via-2A03.png](images/4/40/Rdy-sync-no-via-2A03.png)
 
-[(Link to larger image)](index.php-title-File-Rdy-sync-no-via-2A03.png)
+[(Link to larger image)](index.php-title-File-Rdy-sync-no-via-2A03.png.md)
 
 ### Pad assignment changes
 
@@ -82,7 +82,7 @@ Here's a location where the Rockwell version of the chip has an extra short, com
 
 ![Compare-r6502-balazs-2a03-dbe-short.png](images/4/4e/Compare-r6502-balazs-2a03-dbe-short.png)
 
-[(Link to larger image)](index.php-title-File-Compare-r6502-balazs-2a03-dbe-short.png)
+[(Link to larger image)](index.php-title-File-Compare-r6502-balazs-2a03-dbe-short.png.md)
 
 ### Resources
 
@@ -91,5 +91,5 @@ Here's a location where the Rockwell version of the chip has an extra short, com
 - [MOS Technology history](http://www.commodore.ca/history/company/mos/mos_technology.htm) mentioning $200k settlement with Motorola
 - [MOS Technology](http://en.wikipedia.org/wiki/MOS_Technology) article on wikipedia
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_traces\_of\_6501](index.php-title-6502_traces_of_6501)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_traces\_of\_6501](index.php-title-6502_traces_of_6501.md)"
 

@@ -232,5 +232,5 @@ T0 or T2), so no interrupt can happen on the next instruction!
 You can mask NMIs this way even (but not reset, it messes up
 the timing directly).
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_State\_Machine](index.php-title-6502_State_Machine)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_State\_Machine](index.php-title-6502_State_Machine.md)"
 

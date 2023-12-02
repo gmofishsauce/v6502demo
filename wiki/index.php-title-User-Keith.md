@@ -29,7 +29,7 @@ Progress is a bit tricky, as one needs an ascending alphanumeric code to sort.
 
 Date codes have been made ISO compliant, to avoid any month/day number order confusion.
 
-Note from Ed: table copied [elsewhere](index.php-title-Chips_in_our_collection): thanks!  (moved rather than copied, to avoid duplication)
+Note from Ed: table copied [elsewhere](index.php-title-Chips_in_our_collection.md): thanks!  (moved rather than copied, to avoid duplication)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=User:Keith](index.php-title-User-Keith)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=User:Keith](index.php-title-User-Keith.md)"
 

@@ -10,5 +10,5 @@
 - IMS T425 Transputer with 32-bit data bus
 - IMS C011 Transputer Link adapter
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Inmos](index.php-title-Inmos)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Inmos](index.php-title-Inmos.md)"
 

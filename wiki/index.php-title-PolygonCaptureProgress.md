@@ -31,5 +31,5 @@ This page is a proposal, until someone starts using it...
 
 - Greg finished this
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=PolygonCaptureProgress](index.php-title-PolygonCaptureProgress)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=PolygonCaptureProgress](index.php-title-PolygonCaptureProgress.md)"
 

@@ -31,8 +31,8 @@ Parameters:
   lgpassword     - Password
   lgdomain       - Domain (optional)
   lgtoken        - Login token obtained in first request
-Example:[api.php?action=login&lgname=user&lgpassword=password](api.php-action-login~lgname-user~lgpassword-password)* action=logout *This module is used to logout and clear session data
-Example:[api.php?action=logout](api.php-action-logout)* action=query *Query API module allows applications to get needed pieces of data from the MediaWiki databases,
+Example:[api.php?action=login&lgname=user&lgpassword=password](api.php)* action=logout *This module is used to logout and clear session data
+Example:[api.php?action=logout](api.php)* action=query *Query API module allows applications to get needed pieces of data from the MediaWiki databases,
   and is loosely based on the old query.php interface.
   All data modifications will first have to use query to acquire a token to prevent abuse from malicious sites.
 
@@ -54,7 +54,7 @@ Parameters:
   indexpageids   - Include an additional pageids section listing all returned page IDs.
   export         - Export the current revisions of all given or generated pages
   exportnowrap   - Return the export XML without wrapping it in an XML result (same format as Special:Export). Can only be used with export
-Examples:[api.php?action=query&prop=revisions&meta=siteinfo&titles=Main%!!(MISSING)P(MISSING)age&rvprop=user|comment](api.php-action-query~prop-revisions~meta-siteinfo~titles-Main~20Page~rvprop-user~comment)[api.php?action=query&generator=allpages&gapprefix=API/&prop=revisions](api.php%!F(MISSING)action=query&generator=allpages&gapprefix=API/~prop-revisions)--- --- --- --- --- --- --- ---  Query: Prop  --- --- --- --- --- --- --- ---* prop=info (in) *Get basic page information such as namespace, title, last touched date, ...
+Examples:[api.php?action=query&prop=revisions&meta=siteinfo&titles=Main%20Page&rvprop=user|comment](api.php)[api.php?action=query&generator=allpages&gapprefix=API/&prop=revisions](api.php)--- --- --- --- --- --- --- ---  Query: Prop  --- --- --- --- --- --- --- ---* prop=info (in) *Get basic page information such as namespace, title, last touched date, ...
 
 This module requires read rights.
 Parameters:
@@ -70,7 +70,7 @@ Parameters:
   intoken        - Request a token to perform a data-modifying action on a page
                    Values (separate with '|'): edit, delete, protect, move, block, unblock, email, import
   incontinue     - When more results are available, use this to continue
-Examples:[api.php?action=query&prop=info&titles=Main%!!(MISSING)P(MISSING)age](api.php-action-query~prop-info~titles-Main~20Page)[api.php?action=query&prop=info&inprop=protection&titles=Main%!!(MISSING)P(MISSING)age](api.php-action-query~prop-info~inprop-protection~titles-Main~20Page)* prop=revisions (rv) *Get revision information.
+Examples:[api.php?action=query&prop=info&titles=Main%20Page](api.php)[api.php?action=query&prop=info&inprop=protection&titles=Main%20Page](api.php)* prop=revisions (rv) *Get revision information.
   This module may be used in several ways:
    1) Get data about a set of pages (last revision), by setting titles or pageids parameter.
    2) Get revisions for one given page, by using titles/pageids with start/end/limit params.
@@ -105,7 +105,7 @@ Parameters:
   rvdifftotext   - Text to diff each revision to. Only diffs a limited number of revisions.
                    Overrides diffto. If rvsection is set, only that section will be diffed against this text.
 Examples:
-  Get data with content for the last revision of titles "API" and "Main Page":[api.php?action=query&prop=revisions&titles=API|Main%!!(MISSING)P(MISSING)age&rvprop=timestamp|user|comment|content](api.php-action-query~prop-revisions~titles-API~Main~20Page~rvprop-timestamp~user~comment~content)Get last 5 revisions of the "Main Page":[api.php?action=query&prop=revisions&titles=Main%!!(MISSING)P(MISSING)age&rvlimit=5&rvprop=timestamp|user|comment](api.php-action-query~prop-revisions~titles-Main~20Page~rvlimit-5~rvprop-timestamp~user~comment)Get first 5 revisions of the "Main Page":[api.php?action=query&prop=revisions&titles=Main%!!(MISSING)P(MISSING)age&rvlimit=5&rvprop=timestamp|user|comment&rvdir=newer](api.php-action-query~prop-revisions~titles-Main~20Page~rvlimit-5~rvprop-timestamp~user~comment~rvdir-newer)Get first 5 revisions of the "Main Page" made after 2006-05-01:[api.php?action=query&prop=revisions&titles=Main%!!(MISSING)P(MISSING)age&rvlimit=5&rvprop=timestamp|user|comment&rvdir=newer&rvstart=20060501000000](api.php-action-query~prop-revisions~titles-Main~20Page~rvlimit-5~rvprop-timestamp~user~comment~rvdir-newer~rvstart-20060501000000)Get first 5 revisions of the "Main Page" that were not made made by anonymous user "127.0.0.1"[api.php?action=query&prop=revisions&titles=Main%!!(MISSING)P(MISSING)age&rvlimit=5&rvprop=timestamp|user|comment&rvexcludeuser=127.0.0.1](api.php-action-query~prop-revisions~titles-Main~20Page~rvlimit-5~rvprop-timestamp~user~comment~rvexcludeuser-127.0.0.1)Get first 5 revisions of the "Main Page" that were made by the user "MediaWiki default"[api.php?action=query&prop=revisions&titles=Main%!!(MISSING)P(MISSING)age&rvlimit=5&rvprop=timestamp|user|comment&rvuser=MediaWiki%!!(MISSING)d(MISSING)efault](api.php-action-query~prop-revisions~titles-Main~20Page~rvlimit-5~rvprop-timestamp~user~comment~rvuser-MediaWiki~20default)* prop=links (pl) *Returns all links from the given page(s)
+  Get data with content for the last revision of titles "API" and "Main Page":[api.php?action=query&prop=revisions&titles=API|Main%20Page&rvprop=timestamp|user|comment|content](api.php)Get last 5 revisions of the "Main Page":[api.php?action=query&prop=revisions&titles=Main%20Page&rvlimit=5&rvprop=timestamp|user|comment](api.php)Get first 5 revisions of the "Main Page":[api.php?action=query&prop=revisions&titles=Main%20Page&rvlimit=5&rvprop=timestamp|user|comment&rvdir=newer](api.php)Get first 5 revisions of the "Main Page" made after 2006-05-01:[api.php?action=query&prop=revisions&titles=Main%20Page&rvlimit=5&rvprop=timestamp|user|comment&rvdir=newer&rvstart=20060501000000](api.php)Get first 5 revisions of the "Main Page" that were not made made by anonymous user "127.0.0.1"[api.php?action=query&prop=revisions&titles=Main%20Page&rvlimit=5&rvprop=timestamp|user|comment&rvexcludeuser=127.0.0.1](api.php)Get first 5 revisions of the "Main Page" that were made by the user "MediaWiki default"[api.php?action=query&prop=revisions&titles=Main%20Page&rvlimit=5&rvprop=timestamp|user|comment&rvuser=MediaWiki%20default](api.php)* prop=links (pl) *Returns all links from the given page(s)
 
 This module requires read rights.
 Parameters:
@@ -116,7 +116,7 @@ Parameters:
                    Default: 10
   plcontinue     - When more results are available, use this to continue
 Examples:
-  Get links from the [[Main Page]]:[api.php?action=query&prop=links&titles=Main%!!(MISSING)P(MISSING)age](api.php-action-query~prop-links~titles-Main~20Page)Get information about the link pages in the [[Main Page]]:[api.php?action=query&generator=links&titles=Main%!!(MISSING)P(MISSING)age&prop=info](api.php-action-query~generator-links~titles-Main~20Page~prop-info)Get links from the Main Page in the User and Template namespaces:[api.php?action=query&prop=links&titles=Main%!!(MISSING)P(MISSING)age&plnamespace=2|10](api.php-action-query~prop-links~titles-Main~20Page~plnamespace-2~10)Generator:
+  Get links from the [[Main Page]]:[api.php?action=query&prop=links&titles=Main%20Page](api.php)Get information about the link pages in the [[Main Page]]:[api.php?action=query&generator=links&titles=Main%20Page&prop=info](api.php)Get links from the Main Page in the User and Template namespaces:[api.php?action=query&prop=links&titles=Main%20Page&plnamespace=2|10](api.php)Generator:
   This module may be used as a generator* prop=langlinks (ll) *Returns all interlanguage links from the given page(s)
 
 This module requires read rights.
@@ -126,7 +126,7 @@ Parameters:
                    Default: 10
   llcontinue     - When more results are available, use this to continue
 Examples:
-  Get interlanguage links from the [[Main Page]]:[api.php?action=query&prop=langlinks&titles=Main%!!(MISSING)P(MISSING)age&redirects](api.php-action-query~prop-langlinks~titles-Main~20Page~redirects)* prop=images (im) *Returns all images contained on the given page(s)
+  Get interlanguage links from the [[Main Page]]:[api.php?action=query&prop=langlinks&titles=Main%20Page&redirects](api.php)* prop=images (im) *Returns all images contained on the given page(s)
 
 This module requires read rights.
 Parameters:
@@ -135,7 +135,7 @@ Parameters:
                    Default: 10
   imcontinue     - When more results are available, use this to continue
 Examples:
-  Get a list of images used in the [[Main Page]]:[api.php?action=query&prop=images&titles=Main%!!(MISSING)P(MISSING)age](api.php-action-query~prop-images~titles-Main~20Page)Get information about all images used in the [[Main Page]]:[api.php?action=query&generator=images&titles=Main%!!(MISSING)P(MISSING)age&prop=info](api.php-action-query~generator-images~titles-Main~20Page~prop-info)Generator:
+  Get a list of images used in the [[Main Page]]:[api.php?action=query&prop=images&titles=Main%20Page](api.php)Get information about all images used in the [[Main Page]]:[api.php?action=query&generator=images&titles=Main%20Page&prop=info](api.php)Generator:
   This module may be used as a generator* prop=imageinfo (ii) *Returns image information and upload history
 
 This module requires read rights.
@@ -154,7 +154,7 @@ Parameters:
   iiurlheight    - Similar to iiurlwidth. Cannot be used without iiurlwidth
                    Default: -1
   iicontinue     - When more results are available, use this to continue
-Examples:[api.php?action=query&titles=File:Albert%!!(MISSING)E(MISSING)instein%!!(MISSING)H(MISSING)ead.jpg&prop=imageinfo](api.php-action-query~titles-File-Albert~20Einstein~20Head.jpg~prop-imageinfo)[api.php?action=query&titles=File:Test.jpg&prop=imageinfo&iilimit=50&iiend=20071231235959&iiprop=timestamp|user|url](api.php-action-query~titles-File-Test.jpg~prop-imageinfo~iilimit-50~iiend-20071231235959~iiprop-timestamp~user~url)* prop=templates (tl) *Returns all templates from the given page(s)
+Examples:[api.php?action=query&titles=File:Albert%20Einstein%20Head.jpg&prop=imageinfo](api.php)[api.php?action=query&titles=File:Test.jpg&prop=imageinfo&iilimit=50&iiend=20071231235959&iiprop=timestamp|user|url](api.php)* prop=templates (tl) *Returns all templates from the given page(s)
 
 This module requires read rights.
 Parameters:
@@ -165,7 +165,7 @@ Parameters:
                    Default: 10
   tlcontinue     - When more results are available, use this to continue
 Examples:
-  Get templates from the [[Main Page]]:[api.php?action=query&prop=templates&titles=Main%!!(MISSING)P(MISSING)age](api.php-action-query~prop-templates~titles-Main~20Page)Get information about the template pages in the [[Main Page]]:[api.php?action=query&generator=templates&titles=Main%!!(MISSING)P(MISSING)age&prop=info](api.php-action-query~generator-templates~titles-Main~20Page~prop-info)Get templates from the Main Page in the User and Template namespaces:[api.php?action=query&prop=templates&titles=Main%!!(MISSING)P(MISSING)age&tlnamespace=2|10](api.php-action-query~prop-templates~titles-Main~20Page~tlnamespace-2~10)Generator:
+  Get templates from the [[Main Page]]:[api.php?action=query&prop=templates&titles=Main%20Page](api.php)Get information about the template pages in the [[Main Page]]:[api.php?action=query&generator=templates&titles=Main%20Page&prop=info](api.php)Get templates from the Main Page in the User and Template namespaces:[api.php?action=query&prop=templates&titles=Main%20Page&tlnamespace=2|10](api.php)Generator:
   This module may be used as a generator* prop=categories (cl) *List all categories the page(s) belong to
 
 This module requires read rights.
@@ -180,7 +180,7 @@ Parameters:
   clcontinue     - When more results are available, use this to continue
   clcategories   - Only list these categories. Useful for checking whether a certain page is in a certain category
 Examples:
-  Get a list of categories [[Albert Einstein]] belongs to:[api.php?action=query&prop=categories&titles=Albert%!!(MISSING)E(MISSING)instein](api.php-action-query~prop-categories~titles-Albert~20Einstein)Get information about all categories used in the [[Albert Einstein]]:[api.php?action=query&generator=categories&titles=Albert%!!(MISSING)E(MISSING)instein&prop=info](api.php-action-query~generator-categories~titles-Albert~20Einstein~prop-info)Generator:
+  Get a list of categories [[Albert Einstein]] belongs to:[api.php?action=query&prop=categories&titles=Albert%20Einstein](api.php)Get information about all categories used in the [[Albert Einstein]]:[api.php?action=query&generator=categories&titles=Albert%20Einstein&prop=info](api.php)Generator:
   This module may be used as a generator* prop=extlinks (el) *Returns all external urls (not interwikies) from the given page(s)
 
 This module requires read rights.
@@ -190,12 +190,12 @@ Parameters:
                    Default: 10
   eloffset       - When more results are available, use this to continue
 Examples:
-  Get a list of external links on the [[Main Page]]:[api.php?action=query&prop=extlinks&titles=Main%!!(MISSING)P(MISSING)age](api.php-action-query~prop-extlinks~titles-Main~20Page)* prop=categoryinfo (ci) *Returns information about the given categories
+  Get a list of external links on the [[Main Page]]:[api.php?action=query&prop=extlinks&titles=Main%20Page](api.php)* prop=categoryinfo (ci) *Returns information about the given categories
 
 This module requires read rights.
 Parameters:
   cicontinue     - When more results are available, use this to continue
-Example:[api.php?action=query&prop=categoryinfo&titles=Category:Foo|Category:Bar](api.php-action-query~prop-categoryinfo~titles-Category-Foo~Category-Bar)* prop=duplicatefiles (df) *List all files that are duplicates of the given file(s).
+Example:[api.php?action=query&prop=categoryinfo&titles=Category:Foo|Category:Bar](api.php)* prop=duplicatefiles (df) *List all files that are duplicates of the given file(s).
 
 This module requires read rights.
 Parameters:
@@ -203,7 +203,7 @@ Parameters:
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
   dfcontinue     - When more results are available, use this to continue
-Examples:[api.php?action=query&titles=File:Albert\_Einstein\_Head.jpg&prop=duplicatefiles](api.php-action-query~titles-File-Albert_Einstein_Head.jpg~prop-duplicatefiles)[api.php?action=query&generator=allimages&prop=duplicatefiles](api.php-action-query~generator-allimages~prop-duplicatefiles)Generator:
+Examples:[api.php?action=query&titles=File:Albert\_Einstein\_Head.jpg&prop=duplicatefiles](api.php)[api.php?action=query&generator=allimages&prop=duplicatefiles](api.php)Generator:
   This module may be used as a generator
 
 --- --- --- --- --- --- --- ---  Query: List  --- --- --- --- --- --- --- ---* list=allimages (ai) *Enumerate all images sequentially
@@ -227,8 +227,8 @@ Parameters:
                    Default: timestamp|url
 Examples:
   Simple Use
-   Show a list of images starting at the letter "B"[api.php?action=query&list=allimages&aifrom=B](api.php-action-query~list-allimages~aifrom-B)Using as Generator
-   Show info about 4 images starting at the letter "T"[api.php?action=query&generator=allimages&gailimit=4&gaifrom=T&prop=imageinfo](api.php-action-query~generator-allimages~gailimit-4~gaifrom-T~prop-imageinfo)Generator:
+   Show a list of images starting at the letter "B"[api.php?action=query&list=allimages&aifrom=B](api.php)Using as Generator
+   Show info about 4 images starting at the letter "T"[api.php?action=query&generator=allimages&gailimit=4&gaifrom=T&prop=imageinfo](api.php)Generator:
   This module may be used as a generator* list=allpages (ap) *Enumerate all pages sequentially in a given namespace
 
 This module requires read rights.
@@ -261,8 +261,8 @@ Parameters:
                    Default: all
 Examples:
   Simple Use
-   Show a list of pages starting at the letter "B"[api.php?action=query&list=allpages&apfrom=B](api.php-action-query~list-allpages~apfrom-B)Using as Generator
-   Show info about 4 pages starting at the letter "T"[api.php?action=query&generator=allpages&gaplimit=4&gapfrom=T&prop=info](api.php-action-query~generator-allpages~gaplimit-4~gapfrom-T~prop-info)Show content of first 2 non-redirect pages begining at "Re"[api.php?action=query&generator=allpages&gaplimit=2&gapfilterredir=nonredirects&gapfrom=Re&prop=revisions&rvprop=content](api.php-action-query~generator-allpages~gaplimit-2~gapfilterredir-nonredirects~gapfrom-Re~prop-revisions~rvprop-content)Generator:
+   Show a list of pages starting at the letter "B"[api.php?action=query&list=allpages&apfrom=B](api.php)Using as Generator
+   Show info about 4 pages starting at the letter "T"[api.php?action=query&generator=allpages&gaplimit=4&gapfrom=T&prop=info](api.php)Show content of first 2 non-redirect pages begining at "Re"[api.php?action=query&generator=allpages&gaplimit=2&gapfilterredir=nonredirects&gapfrom=Re&prop=revisions&rvprop=content](api.php)Generator:
   This module may be used as a generator* list=alllinks (al) *Enumerate all links that point to a given namespace
 
 This module requires read rights.
@@ -280,7 +280,7 @@ Parameters:
   allimit        - How many total links to return.
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
-Example:[api.php?action=query&list=alllinks&alunique&alfrom=B](api.php-action-query~list-alllinks~alunique~alfrom-B)Generator:
+Example:[api.php?action=query&list=alllinks&alunique&alfrom=B](api.php)Generator:
   This module may be used as a generator* list=allcategories (ac) *Enumerate all categories
 
 This module requires read rights.
@@ -296,7 +296,7 @@ Parameters:
   acprop         - Which properties to get
                    Values (separate with '|'): size, hidden
                    Default: 
-Examples:[api.php?action=query&list=allcategories&acprop=size](api.php-action-query~list-allcategories~acprop-size)[api.php?action=query&generator=allcategories&gacprefix=List&prop=info](api.php-action-query~generator-allcategories~gacprefix-List~prop-info)Generator:
+Examples:[api.php?action=query&list=allcategories&acprop=size](api.php)[api.php?action=query&generator=allcategories&gacprefix=List&prop=info](api.php)Generator:
   This module may be used as a generator* list=allusers (au) *Enumerate all registered users
 
 This module requires read rights.
@@ -312,7 +312,7 @@ Parameters:
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
   auwitheditsonly - Only list users who have made edits
-Example:[api.php?action=query&list=allusers&aufrom=Y](api.php-action-query~list-allusers~aufrom-Y)* list=backlinks (bl) *Find all pages that link to the given page
+Example:[api.php?action=query&list=allusers&aufrom=Y](api.php)* list=backlinks (bl) *Find all pages that link to the given page
 
 This module requires read rights.
 Parameters:
@@ -327,7 +327,7 @@ Parameters:
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
   blredirect     - If linking page is a redirect, find all pages that link to that redirect as well. Maximum limit is halved.
-Examples:[api.php?action=query&list=backlinks&bltitle=Main%!!(MISSING)P(MISSING)age](api.php-action-query~list-backlinks~bltitle-Main~20Page)[api.php?action=query&generator=backlinks&gbltitle=Main%!!(MISSING)P(MISSING)age&prop=info](api.php-action-query~generator-backlinks~gbltitle-Main~20Page~prop-info)Generator:
+Examples:[api.php?action=query&list=backlinks&bltitle=Main%20Page](api.php)[api.php?action=query&generator=backlinks&gbltitle=Main%20Page&prop=info](api.php)Generator:
   This module may be used as a generator* list=blocks (bk) *List all blocked users and IP addresses.
 
 This module requires read rights.
@@ -347,7 +347,7 @@ Parameters:
   bkprop         - Which properties to get
                    Values (separate with '|'): id, user, by, timestamp, expiry, reason, range, flags
                    Default: id|user|by|timestamp|expiry|reason|flags
-Examples:[api.php?action=query&list=blocks](api.php-action-query~list-blocks)[api.php?action=query&list=blocks&bkusers=Alice|Bob](api.php-action-query~list-blocks~bkusers-Alice~Bob)* list=categorymembers (cm) *List all pages in a given category
+Examples:[api.php?action=query&list=blocks](api.php)[api.php?action=query&list=blocks&bkusers=Alice|Bob](api.php)* list=categorymembers (cm) *List all pages in a given category
 
 This module requires read rights.
 Parameters:
@@ -372,7 +372,7 @@ Parameters:
   cmstartsortkey - Sortkey to start listing from. Can only be used with cmsort=sortkey
   cmendsortkey   - Sortkey to end listing at. Can only be used with cmsort=sortkey
 Examples:
-  Get first 10 pages in [[Category:Physics]]:[api.php?action=query&list=categorymembers&cmtitle=Category:Physics](api.php-action-query~list-categorymembers~cmtitle-Category-Physics)Get page info about first 10 pages in [[Category:Physics]]:[api.php?action=query&generator=categorymembers&gcmtitle=Category:Physics&prop=info](api.php-action-query~generator-categorymembers~gcmtitle-Category-Physics~prop-info)Generator:
+  Get first 10 pages in [[Category:Physics]]:[api.php?action=query&list=categorymembers&cmtitle=Category:Physics](api.php)Get page info about first 10 pages in [[Category:Physics]]:[api.php?action=query&generator=categorymembers&gcmtitle=Category:Physics&prop=info](api.php)Generator:
   This module may be used as a generator* list=deletedrevs (dr) *List deleted revisions.
   This module operates in three modes:
   1) List deleted revisions for the given title(s), sorted by timestamp
@@ -403,7 +403,7 @@ Parameters:
                    Values (separate with '|'): revid, user, comment, parsedcomment, minor, len, content, token
                    Default: user|comment
 Examples:
-  List the last deleted revisions of Main Page and Talk:Main Page, with content (mode 1):[api.php?action=query&list=deletedrevs&titles=Main%!!(MISSING)P(MISSING)age|Talk:Main%!!(MISSING)P(MISSING)age&drprop=user|comment|content](api.php-action-query~list-deletedrevs~titles-Main~20Page~Talk-Main~20Page~drprop-user~comment~content)List the last 50 deleted contributions by Bob (mode 2):[api.php?action=query&list=deletedrevs&druser=Bob&drlimit=50](api.php-action-query~list-deletedrevs~druser-Bob~drlimit-50)List the first 50 deleted revisions in the main namespace (mode 3):[api.php?action=query&list=deletedrevs&drdir=newer&drlimit=50](api.php-action-query~list-deletedrevs~drdir-newer~drlimit-50)List the first 50 deleted pages in the Talk namespace (mode 3):[api.php?action=query&list=deletedrevs&drdir=newer&drlimit=50&drnamespace=1&drunique](api.php-action-query~list-deletedrevs~drdir-newer~drlimit-50~drnamespace-1~drunique)* list=embeddedin (ei) *Find all pages that embed (transclude) the given title
+  List the last deleted revisions of Main Page and Talk:Main Page, with content (mode 1):[api.php?action=query&list=deletedrevs&titles=Main%20Page|Talk:Main%20Page&drprop=user|comment|content](api.php)List the last 50 deleted contributions by Bob (mode 2):[api.php?action=query&list=deletedrevs&druser=Bob&drlimit=50](api.php)List the first 50 deleted revisions in the main namespace (mode 3):[api.php?action=query&list=deletedrevs&drdir=newer&drlimit=50](api.php)List the first 50 deleted pages in the Talk namespace (mode 3):[api.php?action=query&list=deletedrevs&drdir=newer&drlimit=50&drnamespace=1&drunique](api.php)* list=embeddedin (ei) *Find all pages that embed (transclude) the given title
 
 This module requires read rights.
 Parameters:
@@ -417,7 +417,7 @@ Parameters:
   eilimit        - How many total pages to return.
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
-Examples:[api.php?action=query&list=embeddedin&eititle=Template:Stub](api.php-action-query~list-embeddedin~eititle-Template-Stub)[api.php?action=query&generator=embeddedin&geititle=Template:Stub&prop=info](api.php-action-query~generator-embeddedin~geititle-Template-Stub~prop-info)Generator:
+Examples:[api.php?action=query&list=embeddedin&eititle=Template:Stub](api.php)[api.php?action=query&generator=embeddedin&geititle=Template:Stub&prop=info](api.php)Generator:
   This module may be used as a generator* list=imageusage (iu) *Find all pages that use the given image title.
 
 This module requires read rights.
@@ -433,7 +433,7 @@ Parameters:
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
   iuredirect     - If linking page is a redirect, find all pages that link to that redirect as well. Maximum limit is halved.
-Examples:[api.php?action=query&list=imageusage&iutitle=File:Albert%!!(MISSING)E(MISSING)instein%!!(MISSING)H(MISSING)ead.jpg](api.php-action-query~list-imageusage~iutitle-File-Albert~20Einstein~20Head.jpg)[api.php?action=query&generator=imageusage&giutitle=File:Albert%!!(MISSING)E(MISSING)instein%!!(MISSING)H(MISSING)ead.jpg&prop=info](api.php-action-query~generator-imageusage~giutitle-File-Albert~20Einstein~20Head.jpg~prop-info)Generator:
+Examples:[api.php?action=query&list=imageusage&iutitle=File:Albert%20Einstein%20Head.jpg](api.php)[api.php?action=query&generator=imageusage&giutitle=File:Albert%20Einstein%20Head.jpg&prop=info](api.php)Generator:
   This module may be used as a generator* list=logevents (le) *Get events from logs.
 
 This module requires read rights.
@@ -454,7 +454,7 @@ Parameters:
   lelimit        - How many total event entries to return.
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
-Example:[api.php?action=query&list=logevents](api.php-action-query~list-logevents)* list=recentchanges (rc) *Enumerate recent changes
+Example:[api.php?action=query&list=logevents](api.php)* list=recentchanges (rc) *Enumerate recent changes
 
 This module requires read rights.
 Parameters:
@@ -481,7 +481,7 @@ Parameters:
                    Default: 10
   rctype         - Which types of changes to show.
                    Values (separate with '|'): edit, new, log
-Example:[api.php?action=query&list=recentchanges](api.php-action-query~list-recentchanges)* list=search (sr) *Perform a full text search
+Example:[api.php?action=query&list=recentchanges](api.php)* list=search (sr) *Perform a full text search
 
 This module requires read rights.
 Parameters:
@@ -503,7 +503,7 @@ Parameters:
   srlimit        - How many total pages to return.
                    No more than 50 (500 for bots) allowed.
                    Default: 10
-Examples:[api.php?action=query&list=search&srsearch=meaning](api.php-action-query~list-search~srsearch-meaning)[api.php?action=query&list=search&srwhat=text&srsearch=meaning](api.php-action-query~list-search~srwhat-text~srsearch-meaning)[api.php?action=query&generator=search&gsrsearch=meaning&prop=info](api.php-action-query~generator-search~gsrsearch-meaning~prop-info)Generator:
+Examples:[api.php?action=query&list=search&srsearch=meaning](api.php)[api.php?action=query&list=search&srwhat=text&srsearch=meaning](api.php)[api.php?action=query&generator=search&gsrsearch=meaning&prop=info](api.php)Generator:
   This module may be used as a generator* list=tags (tg) *List change tags.
 
 This module requires read rights.
@@ -515,7 +515,7 @@ Parameters:
   tgprop         - Which properties to get
                    Values (separate with '|'): name, displayname, description, hitcount
                    Default: name
-Example:[api.php?action=query&list=tags&tgprop=displayname|description|hitcount](api.php-action-query~list-tags~tgprop-displayname~description~hitcount)* list=usercontribs (uc) *Get all edits by a user
+Example:[api.php?action=query&list=tags&tgprop=displayname|description|hitcount](api.php)* list=usercontribs (uc) *Get all edits by a user
 
 This module requires read rights.
 Parameters:
@@ -539,7 +539,7 @@ Parameters:
                    NOTE: if show=patrolled or show=!patrolled is set, revisions older than $wgRCMaxAge won't be shown
                    Values (separate with '|'): minor, !minor, patrolled, !patrolled
   uctag          - Only list revisions tagged with this tag
-Examples:[api.php?action=query&list=usercontribs&ucuser=YurikBot](api.php-action-query~list-usercontribs~ucuser-YurikBot)[api.php?action=query&list=usercontribs&ucuserprefix=217.121.114.](api.php-action-query~list-usercontribs~ucuserprefix-217.121.114.)* list=watchlist (wl) *Get all recent changes to pages in the logged in user's watchlist
+Examples:[api.php?action=query&list=usercontribs&ucuser=YurikBot](api.php)[api.php?action=query&list=usercontribs&ucuserprefix=217.121.114.](api.php)* list=watchlist (wl) *Get all recent changes to pages in the logged in user's watchlist
 
 This module requires read rights.
 Parameters:
@@ -564,7 +564,7 @@ Parameters:
                    Values (separate with '|'): minor, !minor, bot, !bot, anon, !anon, patrolled, !patrolled
   wlowner        - The name of the user whose watchlist you'd like to access
   wltoken        - Give a security token (settable in preferences) to allow access to another user's watchlist
-Examples:[api.php?action=query&list=watchlist](api.php-action-query~list-watchlist)[api.php?action=query&list=watchlist&wlprop=ids|title|timestamp|user|comment](api.php-action-query~list-watchlist~wlprop-ids~title~timestamp~user~comment)[api.php?action=query&list=watchlist&wlallrev&wlprop=ids|title|timestamp|user|comment](api.php-action-query~list-watchlist~wlallrev~wlprop-ids~title~timestamp~user~comment)[api.php?action=query&generator=watchlist&prop=info](api.php-action-query~generator-watchlist~prop-info)[api.php?action=query&generator=watchlist&gwlallrev&prop=revisions&rvprop=timestamp|user](api.php-action-query~generator-watchlist~gwlallrev~prop-revisions~rvprop-timestamp~user)[api.php?action=query&list=watchlist&wlowner=Bob\_Smith&wltoken=d8d562e9725ea1512894cdab28e5ceebc7f20237](api.php-action-query~list-watchlist~wlowner-Bob_Smith~wltoken-d8d562e9725ea1512894cdab28e5ceebc7f20237)Generator:
+Examples:[api.php?action=query&list=watchlist](api.php)[api.php?action=query&list=watchlist&wlprop=ids|title|timestamp|user|comment](api.php)[api.php?action=query&list=watchlist&wlallrev&wlprop=ids|title|timestamp|user|comment](api.php)[api.php?action=query&generator=watchlist&prop=info](api.php)[api.php?action=query&generator=watchlist&gwlallrev&prop=revisions&rvprop=timestamp|user](api.php)[api.php?action=query&list=watchlist&wlowner=Bob\_Smith&wltoken=d8d562e9725ea1512894cdab28e5ceebc7f20237](api.php)Generator:
   This module may be used as a generator* list=watchlistraw (wr) *Get all pages on the logged in user's watchlist
 
 This module requires read rights.
@@ -579,7 +579,7 @@ Parameters:
                    Values (separate with '|'): changed
   wrshow         - Only list items that meet these criteria.
                    Values (separate with '|'): changed, !changed
-Examples:[api.php?action=query&list=watchlistraw](api.php-action-query~list-watchlistraw)[api.php?action=query&generator=watchlistraw&gwrshow=changed&prop=revisions](api.php-action-query~generator-watchlistraw~gwrshow-changed~prop-revisions)Generator:
+Examples:[api.php?action=query&list=watchlistraw](api.php)[api.php?action=query&generator=watchlistraw&gwrshow=changed&prop=revisions](api.php)Generator:
   This module may be used as a generator* list=exturlusage (eu) *Enumerate pages that contain a given URL
 
 This module requires read rights.
@@ -598,7 +598,7 @@ Parameters:
   eulimit        - How many pages to return.
                    No more than 500 (5000 for bots) allowed.
                    Default: 10
-Example:[api.php?action=query&list=exturlusage&euquery=www.mediawiki.org](api.php-action-query~list-exturlusage~euquery-www.mediawiki.org)Generator:
+Example:[api.php?action=query&list=exturlusage&euquery=www.mediawiki.org](api.php)Generator:
   This module may be used as a generator* list=users (us) *Get information about a list of users
 
 This module requires read rights.
@@ -614,7 +614,7 @@ Parameters:
   ususers        - A list of users to obtain the same information for
   ustoken        - Which tokens to obtain for each user
                    Values (separate with '|'): userrights
-Example:[api.php?action=query&list=users&ususers=brion|TimStarling&usprop=groups|editcount|gender](api.php-action-query~list-users~ususers-brion~TimStarling~usprop-groups~editcount~gender)* list=random (rn) *Get a set of random pages
+Example:[api.php?action=query&list=users&ususers=brion|TimStarling&usprop=groups|editcount|gender](api.php)* list=random (rn) *Get a set of random pages
   NOTE: Pages are listed in a fixed sequence, only the starting point is random. This means that if, for example, "Main Page" is the first 
         random page on your list, "List of fictional monkeys" will *always* be second, "List of people on stamps of Vanuatu" third, etc.
   NOTE: If the number of pages in the namespace is lower than rnlimit, you will get fewer pages. You will not get the same page twice.
@@ -627,7 +627,7 @@ Parameters:
                    No more than 10 (20 for bots) allowed.
                    Default: 1
   rnredirect     - Load a random redirect instead of a random page
-Example:[api.php?action=query&list=random&rnnamespace=0&rnlimit=2](api.php-action-query~list-random~rnnamespace-0~rnlimit-2)Generator:
+Example:[api.php?action=query&list=random&rnnamespace=0&rnlimit=2](api.php)Generator:
   This module may be used as a generator* list=protectedtitles (pt) *List all titles protected from creation
 
 This module requires read rights.
@@ -647,7 +647,7 @@ Parameters:
   ptprop         - Which properties to get
                    Values (separate with '|'): timestamp, user, comment, parsedcomment, expiry, level
                    Default: timestamp|level
-Example:[api.php?action=query&list=protectedtitles](api.php-action-query~list-protectedtitles)Generator:
+Example:[api.php?action=query&list=protectedtitles](api.php)Generator:
   This module may be used as a generator
 
 --- --- --- --- --- --- --- ---  Query: Meta  --- --- --- --- --- --- --- ---* meta=siteinfo (si) *Return general information about the site.
@@ -674,7 +674,7 @@ Parameters:
                    One value: local, !local
   sishowalldb    - List all database servers, not just the one lagging the most
   sinumberingroup - Lists the number of users in user groups
-Examples:[api.php?action=query&meta=siteinfo&siprop=general|namespaces|namespacealiases|statistics](api.php-action-query~meta-siteinfo~siprop-general~namespaces~namespacealiases~statistics)[api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local](api.php-action-query~meta-siteinfo~siprop-interwikimap~sifilteriw-local)[api.php?action=query&meta=siteinfo&siprop=dbrepllag&sishowalldb](api.php-action-query~meta-siteinfo~siprop-dbrepllag~sishowalldb)* meta=userinfo (ui) *Get information about the current user
+Examples:[api.php?action=query&meta=siteinfo&siprop=general|namespaces|namespacealiases|statistics](api.php)[api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local](api.php)[api.php?action=query&meta=siteinfo&siprop=dbrepllag&sishowalldb](api.php)* meta=userinfo (ui) *Get information about the current user
 
 This module requires read rights.
 Parameters:
@@ -688,7 +688,7 @@ Parameters:
                      editcount  - adds the current user's edit count
                      ratelimits - lists all rate limits applying to the current user
                    Values (separate with '|'): blockinfo, hasmsg, groups, rights, changeablegroups, options, preferencestoken, editcount, ratelimits, email
-Examples:[api.php?action=query&meta=userinfo](api.php-action-query~meta-userinfo)[api.php?action=query&meta=userinfo&uiprop=blockinfo|groups|rights|hasmsg](api.php-action-query~meta-userinfo~uiprop-blockinfo~groups~rights~hasmsg)* meta=allmessages (am) *Return messages from this site.
+Examples:[api.php?action=query&meta=userinfo](api.php)[api.php?action=query&meta=userinfo&uiprop=blockinfo|groups|rights|hasmsg](api.php)* meta=allmessages (am) *Return messages from this site.
 
 This module requires read rights.
 Parameters:
@@ -702,7 +702,7 @@ Parameters:
   amfilter       - Return only messages that contain this string
   amlang         - Return messages in this language
   amfrom         - Return messages starting at this message
-Examples:[api.php?action=query&meta=allmessages&amfilter=ipb-](api.php-action-query~meta-allmessages~amfilter-ipb-)[api.php?action=query&meta=allmessages&ammessages=august|mainpage&amlang=de](api.php-action-query~meta-allmessages~ammessages-august~mainpage~amlang-de)*** *** *** *** *** *** *** *** *** ***  Modules: continuation  *** *** *** *** *** *** *** *** *** **** action=expandtemplates *This module expand all templates in wikitext
+Examples:[api.php?action=query&meta=allmessages&amfilter=ipb-](api.php)[api.php?action=query&meta=allmessages&ammessages=august|mainpage&amlang=de](api.php)*** *** *** *** *** *** *** *** *** ***  Modules: continuation  *** *** *** *** *** *** *** *** *** **** action=expandtemplates *This module expand all templates in wikitext
 
 This module requires read rights.
 Parameters:
@@ -710,7 +710,7 @@ Parameters:
                    Default: API
   text           - Wikitext to convert
   generatexml    - Generate XML parse tree
-Example:[api.php?action=expandtemplates&text={{Project:Sandbox}}](api.php-action-expandtemplates~text-~~Project-Sandbox~~)* action=parse *This module parses wikitext and returns parser output
+Example:[api.php?action=expandtemplates&text={{Project:Sandbox}}](api.php)* action=parse *This module parses wikitext and returns parser output
 
 This module requires read rights.
 Parameters:
@@ -729,7 +729,7 @@ Parameters:
                    Ignored if page or oldid is used.
   onlypst        - Do a PST on the input, but don't parse it.
                    Returns PSTed wikitext. Ignored if page or oldid is used.
-Example:[api.php?action=parse&text={{Project:Sandbox}}](api.php-action-parse~text-~~Project-Sandbox~~)* action=opensearch *This module implements OpenSearch protocol
+Example:[api.php?action=parse&text={{Project:Sandbox}}](api.php)* action=opensearch *This module implements OpenSearch protocol
 
 This module requires read rights.
 Parameters:
@@ -741,7 +741,7 @@ Parameters:
                    Values (separate with '|'): 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
                    Default: 0
   suggest        - Do nothing if $wgEnableOpenSearchSuggest is false
-Example:[api.php?action=opensearch&search=Te](api.php-action-opensearch~search-Te)* action=feedwatchlist *This module returns a watchlist feed
+Example:[api.php?action=opensearch&search=Te](api.php)* action=feedwatchlist *This module returns a watchlist feed
 
 This module requires read rights.
 Parameters:
@@ -754,20 +754,20 @@ Parameters:
   allrev         - Include multiple revisions of the same page within given timeframe.
   wlowner        - The user whose watchlist you want (must be accompanied by wltoken if it's not you)
   wltoken        - Security token that requested user set in their preferences
-Example:[api.php?action=feedwatchlist](api.php-action-feedwatchlist)* action=help *Display this help screen.* action=paraminfo *Obtain information about certain API parameters
+Example:[api.php?action=feedwatchlist](api.php)* action=help *Display this help screen.* action=paraminfo *Obtain information about certain API parameters
 Parameters:
   modules        - List of module names (value of the action= parameter)
   querymodules   - List of query module names (value of prop=, meta= or list= parameter)
   mainmodule     - Get information about the main (top-level) module as well
   pagesetmodule  - Get information about the pageset module (providing titles= and friends) as well
-Example:[api.php?action=paraminfo&modules=parse&querymodules=allpages|siteinfo](api.php-action-paraminfo~modules-parse~querymodules-allpages~siteinfo)* action=purge *Purge the cache for the given titles.
+Example:[api.php?action=paraminfo&modules=parse&querymodules=allpages|siteinfo](api.php)* action=purge *Purge the cache for the given titles.
 
 This module requires read rights.
 This module requires write rights.
 This module only accepts POST requests.
 Parameters:
   titles         - A list of titles
-Example:[api.php?action=purge&titles=Main\_Page|API](api.php-action-purge~titles-Main_Page~API)* action=rollback *Undo the last edit to the page. If the last user who edited the page made multiple edits in a row,
+Example:[api.php?action=purge&titles=Main\_Page|API](api.php)* action=rollback *Undo the last edit to the page. If the last user who edited the page made multiple edits in a row,
   they will all be rolled back.
 
 This module requires read rights.
@@ -779,7 +779,7 @@ Parameters:
   token          - A rollback token previously retrieved through prop=revisions
   summary        - Custom edit summary. If not set, default summary will be used.
   markbot        - Mark the reverted edits and the revert as bot edits
-Examples:[api.php?action=rollback&title=Main%!!(MISSING)P(MISSING)age&user=Catrope&token=123ABC](api.php-action-rollback~title-Main~20Page~user-Catrope~token-123ABC)[api.php?action=rollback&title=Main%!!(MISSING)P(MISSING)age&user=217.121.114.116&token=123ABC&summary=Reverting%!!(MISSING)v(MISSING)andalism&markbot=1](api.php-action-rollback~title-Main~20Page~user-217.121.114.116~token-123ABC~summary-Reverting~20vandalism~markbot-1)* action=delete *Delete a page.
+Examples:[api.php?action=rollback&title=Main%20Page&user=Catrope&token=123ABC](api.php-title-Main~Page.md)[api.php?action=rollback&title=Main%20Page&user=217.121.114.116&token=123ABC&summary=Reverting%20vandalism&markbot=1](api.php-title-Main~Page.md)* action=delete *Delete a page.
 
 This module requires read rights.
 This module requires write rights.
@@ -792,7 +792,7 @@ Parameters:
   watch          - Add the page to your watchlist
   unwatch        - Remove the page from your watchlist
   oldimage       - The name of the old image to delete as provided by iiprop=archivename
-Examples:[api.php?action=delete&title=Main%!!(MISSING)P(MISSING)age&token=123ABC](api.php-action-delete~title-Main~20Page~token-123ABC)[api.php?action=delete&title=Main%!!(MISSING)P(MISSING)age&token=123ABC&reason=Preparing%!!(MISSING)f(MISSING)or%!!(MISSING)m(MISSING)ove](api.php-action-delete~title-Main~20Page~token-123ABC~reason-Preparing~20for~20move)* action=undelete *Restore certain revisions of a deleted page. A list of deleted revisions (including timestamps) can be
+Examples:[api.php?action=delete&title=Main%20Page&token=123ABC](api.php-title-Main~Page.md)[api.php?action=delete&title=Main%20Page&token=123ABC&reason=Preparing%20for%20move](api.php-title-Main~Page.md)* action=undelete *Restore certain revisions of a deleted page. A list of deleted revisions (including timestamps) can be
   retrieved through list=deletedrevs
 
 This module requires read rights.
@@ -804,7 +804,7 @@ Parameters:
   reason         - Reason for restoring (optional)
                    Default: 
   timestamps     - Timestamps of the revisions to restore. If not set, all revisions will be restored.
-Examples:[api.php?action=undelete&title=Main%!!(MISSING)P(MISSING)age&token=123ABC&reason=Restoring%!!(MISSING)m(MISSING)ain%!!(MISSING)p(MISSING)age](api.php-action-undelete~title-Main~20Page~token-123ABC~reason-Restoring~20main~20page)[api.php?action=undelete&title=Main%!!(MISSING)P(MISSING)age&token=123ABC&timestamps=20070703220045|20070702194856](api.php-action-undelete~title-Main~20Page~token-123ABC~timestamps-20070703220045~20070702194856)* action=protect *Change the protection level of a page.
+Examples:[api.php?action=undelete&title=Main%20Page&token=123ABC&reason=Restoring%20main%20page](api.php-title-Main~Page.md)[api.php?action=undelete&title=Main%20Page&token=123ABC&timestamps=20070703220045|20070702194856](api.php-title-Main~Page.md)* action=protect *Change the protection level of a page.
 
 This module requires read rights.
 This module requires write rights.
@@ -821,7 +821,7 @@ Parameters:
   cascade        - Enable cascading protection (i.e. protect pages included in this page)
                    Ignored if not all protection levels are 'sysop' or 'protect'
   watch          - If set, add the page being (un)protected to your watchlist
-Examples:[api.php?action=protect&title=Main%!!(MISSING)P(MISSING)age&token=123ABC&protections=edit=sysop|move=sysop&cascade&expiry=20070901163000|never](api.php-action-protect~title-Main~20Page~token-123ABC~protections-edit-sysop~move-sysop~cascade~expiry-20070901163000~never)[api.php?action=protect&title=Main%!!(MISSING)P(MISSING)age&token=123ABC&protections=edit=all|move=all&reason=Lifting%!!(MISSING)r(MISSING)estrictions](api.php-action-protect~title-Main~20Page~token-123ABC~protections-edit-all~move-all~reason-Lifting~20restrictions)* action=block *Block a user.
+Examples:[api.php?action=protect&title=Main%20Page&token=123ABC&protections=edit=sysop|move=sysop&cascade&expiry=20070901163000|never](api.php-title-Main~Page.md)[api.php?action=protect&title=Main%20Page&token=123ABC&protections=edit=all|move=all&reason=Lifting%20restrictions](api.php-title-Main~Page.md)* action=block *Block a user.
 
 This module requires read rights.
 This module requires write rights.
@@ -840,7 +840,7 @@ Parameters:
   hidename       - Hide the username from the block log. (Requires the "hideuser" right.)
   allowusertalk  - Allow the user to edit their own talk page (depends on $wgBlockAllowsUTEdit)
   reblock        - If the user is already blocked, overwrite the existing block
-Examples:[api.php?action=block&user=123.5.5.12&expiry=3%!!(MISSING)d(MISSING)ays&reason=First%!!(MISSING)s(MISSING)trike](api.php-action-block~user-123.5.5.12~expiry-3~20days~reason-First~20strike)[api.php?action=block&user=Vandal&expiry=never&reason=Vandalism&nocreate&autoblock&noemail](api.php-action-block~user-Vandal~expiry-never~reason-Vandalism~nocreate~autoblock~noemail)* action=unblock *Unblock a user.
+Examples:[api.php?action=block&user=123.5.5.12&expiry=3%20days&reason=First%20strike](api.php)[api.php?action=block&user=Vandal&expiry=never&reason=Vandalism&nocreate&autoblock&noemail](api.php)* action=unblock *Unblock a user.
 
 This module requires read rights.
 This module requires write rights.
@@ -851,7 +851,7 @@ Parameters:
   token          - An unblock token previously obtained through the gettoken parameter or prop=info
   gettoken       - If set, an unblock token will be returned, and no other action will be taken
   reason         - Reason for unblock (optional)
-Examples:[api.php?action=unblock&id=105](api.php-action-unblock~id-105)[api.php?action=unblock&user=Bob&reason=Sorry%!!(MISSING)B(MISSING)ob](api.php-action-unblock~user-Bob~reason-Sorry~20Bob)* action=move *Move a page.
+Examples:[api.php?action=unblock&id=105](api.php)[api.php?action=unblock&user=Bob&reason=Sorry%20Bob](api.php)* action=move *Move a page.
 
 This module requires read rights.
 This module requires write rights.
@@ -868,7 +868,7 @@ Parameters:
   watch          - Add the page and the redirect to your watchlist
   unwatch        - Remove the page and the redirect from your watchlist
   ignorewarnings - Ignore any warnings
-Example:[api.php?action=move&from=Exampel&to=Example&token=123ABC&reason=Misspelled%!!(MISSING)t(MISSING)itle&movetalk&noredirect](api.php-action-move~from-Exampel~to-Example~token-123ABC~reason-Misspelled~20title~movetalk~noredirect)* action=edit *Create and edit pages.
+Example:[api.php?action=move&from=Exampel&to=Example&token=123ABC&reason=Misspelled%20title&movetalk&noredirect](api.php)* action=edit *Create and edit pages.
 
 This module requires read rights.
 This module requires write rights.
@@ -903,7 +903,7 @@ Parameters:
   undo           - Undo this revision. Overrides text, prependtext and appendtext
   undoafter      - Undo all revisions from undo to this one. If not set, just undo one revision
 Examples:
-  Edit a page (anonymous user):[api.php?action=edit&title=Test&summary=test%!!(MISSING)s(MISSING)ummary&text=article%!!(MISSING)c(MISSING)ontent&basetimestamp=20070824123454&token=%!!(MISSING)B(MISSING)\](api.php-action-edit~title-Test~summary-test~20summary~text-article~20content~basetimestamp-20070824123454~token-~2B~)Prepend \_\_NOTOC\_\_ to a page (anonymous user):[api.php?action=edit&title=Test&summary=NOTOC&minor&prependtext=\_\_NOTOC\_\_%!!(MISSING)A(MISSING)&basetimestamp=20070824123454&token=%!!(MISSING)B(MISSING)\](api.php-action-edit~title-Test~summary-NOTOC~minor~prependtext-__NOTOC__~0A~basetimestamp-20070824123454~token-~2B~)Undo r13579 through r13585 with autosummary(anonymous user):[api.php?action=edit&title=Test&undo=13585&undoafter=13579&basetimestamp=20070824123454&token=%!!(MISSING)B(MISSING)\](api.php-action-edit~title-Test~undo-13585~undoafter-13579~basetimestamp-20070824123454~token-~2B~)* action=upload *Upload a file, or get the status of pending uploads. Several methods are available:
+  Edit a page (anonymous user):[api.php?action=edit&title=Test&summary=test%20summary&text=article%20content&basetimestamp=20070824123454&token=%2B\](api.php-title-Test.md)Prepend \_\_NOTOC\_\_ to a page (anonymous user):[api.php?action=edit&title=Test&summary=NOTOC&minor&prependtext=\_\_NOTOC\_\_%0A&basetimestamp=20070824123454&token=%2B\](api.php-title-Test.md)Undo r13579 through r13585 with autosummary(anonymous user):[api.php?action=edit&title=Test&undo=13585&undoafter=13579&basetimestamp=20070824123454&token=%2B\](api.php-title-Test.md)* action=upload *Upload a file, or get the status of pending uploads. Several methods are available:
    * Upload file contents directly, using the "file" parameter
    * Have the MediaWiki server fetch a file from a URL, using the "url" parameter
    * Complete an earlier upload that failed due to warnings, using the "sessionkey" parameter
@@ -927,7 +927,7 @@ Parameters:
   url            - Url to fetch the file from
   sessionkey     - Session key returned by a previous upload that failed due to warnings
 Examples:
-  Upload from a URL:[api.php?action=upload&filename=Wiki.png&url=http%!!(MISSING)A(MISSING)//upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png](api.php%!F(MISSING)action=upload&filename=Wiki.png&url=http%!A(MISSING)/upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png)Complete an upload that failed due to warnings:[api.php?action=upload&filename=Wiki.png&sessionkey=sessionkey&ignorewarnings=1](api.php-action-upload~filename-Wiki.png~sessionkey-sessionkey~ignorewarnings-1)* action=emailuser *Email a user.
+  Upload from a URL:[api.php?action=upload&filename=Wiki.png&url=http%3A//upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png](api.php)Complete an upload that failed due to warnings:[api.php?action=upload&filename=Wiki.png&sessionkey=sessionkey&ignorewarnings=1](api.php)* action=emailuser *Email a user.
 
 This module requires read rights.
 This module requires write rights.
@@ -938,21 +938,21 @@ Parameters:
   text           - Mail body
   token          - A token previously acquired via prop=info
   ccme           - Send a copy of this mail to me
-Example:[api.php?action=emailuser&target=WikiSysop&text=Content](api.php-action-emailuser~target-WikiSysop~text-Content)* action=watch *Add or remove a page from/to the current user's watchlist
+Example:[api.php?action=emailuser&target=WikiSysop&text=Content](api.php)* action=watch *Add or remove a page from/to the current user's watchlist
 
 This module requires read rights.
 This module requires write rights.
 Parameters:
   title          - The page to (un)watch
   unwatch        - If set the page will be unwatched rather than watched
-Examples:[api.php?action=watch&title=Main\_Page](api.php-action-watch~title-Main_Page)[api.php?action=watch&title=Main\_Page&unwatch](api.php-action-watch~title-Main_Page~unwatch)* action=patrol *Patrol a page or revision. 
+Examples:[api.php?action=watch&title=Main\_Page](api.php-title-Main_Page.md)[api.php?action=watch&title=Main\_Page&unwatch](api.php-title-Main_Page.md)* action=patrol *Patrol a page or revision. 
 
 This module requires read rights.
 This module requires write rights.
 Parameters:
   token          - Patrol token obtained from list=recentchanges
   rcid           - Recentchanges ID to patrol
-Example:[api.php?action=patrol&token=123abc&rcid=230672766](api.php-action-patrol~token-123abc~rcid-230672766)* action=import *Import a page from another wiki, or an XML file
+Example:[api.php?action=patrol&token=123abc&rcid=230672766](api.php)* action=import *Import a page from another wiki, or an XML file
 
 This module requires read rights.
 This module requires write rights.
@@ -969,7 +969,7 @@ Parameters:
   namespace      - For interwiki imports: import to this namespace
                    One value: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 Examples:
-  Import [[meta:Help:Parserfunctions]] to namespace 100 with full history:[api.php?action=import&interwikisource=meta&interwikipage=Help:ParserFunctions&namespace=100&fullhistory&token=123ABC](api.php-action-import~interwikisource-meta~interwikipage-Help-ParserFunctions~namespace-100~fullhistory~token-123ABC)* action=userrights *Add/remove a user to/from groups
+  Import [[meta:Help:Parserfunctions]] to namespace 100 with full history:[api.php?action=import&interwikisource=meta&interwikipage=Help:ParserFunctions&namespace=100&fullhistory&token=123ABC](api.php)* action=userrights *Add/remove a user to/from groups
 
 This module requires read rights.
 This module requires write rights.
@@ -983,7 +983,7 @@ Parameters:
   token          - A userrights token previously retrieved through list=users
   reason         - Reason for the change
                    Default: 
-Example:[api.php?action=userrights&user=FooBot&add=bot&remove=sysop|bureaucrat&token=123ABC](api.php-action-userrights~user-FooBot~add-bot~remove-sysop~bureaucrat~token-123ABC)*** *** *** *** *** *** *** *** *** ***  Permissions *** *** *** *** *** *** *** *** *** **** writeapi *Use of the write API
+Example:[api.php?action=userrights&user=FooBot&add=bot&remove=sysop|bureaucrat&token=123ABC](api.php)*** *** *** *** *** *** *** *** *** ***  Permissions *** *** *** *** *** *** *** *** *** **** writeapi *Use of the write API
 Granted to:
   user, bot* apihighlimits *Use higher limits in API queries (Slow queries: 500 results; Fast queries: 5000 results). The limits for slow queries also apply to multivalue parameters.
 Granted to:
@@ -992,59 +992,59 @@ Granted to:
 This module requires read rights.
 Parameters:
   callback       - If specified, wraps the output into a given function call. For safety, all user-specific data will be restricted.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=json](api.php-action-query~meta-siteinfo~siprop-namespaces~format-json)* format=jsonfm *Output data in JSON format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=json](api.php)* format=jsonfm *Output data in JSON format (pretty-print in HTML)
 
 This module requires read rights.
 Parameters:
   callback       - If specified, wraps the output into a given function call. For safety, all user-specific data will be restricted.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=jsonfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-jsonfm)* format=php *Output data in serialized PHP format
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=jsonfm](api.php)* format=php *Output data in serialized PHP format
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=php](api.php-action-query~meta-siteinfo~siprop-namespaces~format-php)* format=phpfm *Output data in serialized PHP format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=php](api.php)* format=phpfm *Output data in serialized PHP format (pretty-print in HTML)
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=phpfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-phpfm)* format=wddx *Output data in WDDX format
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=phpfm](api.php)* format=wddx *Output data in WDDX format
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=wddx](api.php-action-query~meta-siteinfo~siprop-namespaces~format-wddx)* format=wddxfm *Output data in WDDX format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=wddx](api.php)* format=wddxfm *Output data in WDDX format (pretty-print in HTML)
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=wddxfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-wddxfm)* format=xml *Output data in XML format
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=wddxfm](api.php)* format=xml *Output data in XML format
 
 This module requires read rights.
 Parameters:
   xmldoublequote - If specified, double quotes all attributes and content.
   xslt           - If specified, adds <xslt> as stylesheet
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=xml](api.php-action-query~meta-siteinfo~siprop-namespaces~format-xml)* format=xmlfm *Output data in XML format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=xml](api.php)* format=xmlfm *Output data in XML format (pretty-print in HTML)
 
 This module requires read rights.
 Parameters:
   xmldoublequote - If specified, double quotes all attributes and content.
   xslt           - If specified, adds <xslt> as stylesheet
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=xmlfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-xmlfm)* format=yaml *Output data in YAML format
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=xmlfm](api.php)* format=yaml *Output data in YAML format
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=yaml](api.php-action-query~meta-siteinfo~siprop-namespaces~format-yaml)* format=yamlfm *Output data in YAML format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=yaml](api.php)* format=yamlfm *Output data in YAML format (pretty-print in HTML)
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=yamlfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-yamlfm)* format=rawfm *Output data with the debuging elements in JSON format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=yamlfm](api.php)* format=rawfm *Output data with the debuging elements in JSON format (pretty-print in HTML)
 
 This module requires read rights.
 Parameters:
   callback       - If specified, wraps the output into a given function call. For safety, all user-specific data will be restricted.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=rawfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-rawfm)* format=txt *Output data in PHP's print\_r() format
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=rawfm](api.php)* format=txt *Output data in PHP's print\_r() format
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=txt](api.php-action-query~meta-siteinfo~siprop-namespaces~format-txt)* format=txtfm *Output data in PHP's print\_r() format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=txt](api.php)* format=txtfm *Output data in PHP's print\_r() format (pretty-print in HTML)
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=txtfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-txtfm)* format=dbg *Output data in PHP's var\_export() format
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=txtfm](api.php)* format=dbg *Output data in PHP's var\_export() format
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=dbg](api.php-action-query~meta-siteinfo~siprop-namespaces~format-dbg)* format=dbgfm *Output data in PHP's var\_export() format (pretty-print in HTML)
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=dbg](api.php)* format=dbgfm *Output data in PHP's var\_export() format (pretty-print in HTML)
 
 This module requires read rights.
-Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=dbgfm](api.php-action-query~meta-siteinfo~siprop-namespaces~format-dbgfm)*** Credits: ***API developers:
+Example:[api.php?action=query&meta=siteinfo&siprop=namespaces&format=dbgfm](api.php)*** Credits: ***API developers:
        Roan Kattouw <Firstname>.<Lastname>@home.nl (lead developer Sep 2007-present)
        Victor Vasiliev - vasilvv at gee mail dot com
        Bryan Tong Minh - bryan . tongminh @ gmail . com

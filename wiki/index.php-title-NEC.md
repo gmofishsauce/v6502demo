@@ -11,5 +11,5 @@
 - upD3710
 - uPD7220
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=NEC](index.php-title-NEC)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=NEC](index.php-title-NEC.md)"
 

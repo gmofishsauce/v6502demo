@@ -40,7 +40,7 @@ are separate and independent.
 
 ### IRQ preceding a BRK instruction
 
-(D1x1 was named by Balazs Beregnyei in his [giant schematic](http://www.downloads.reactivemicro.com/Public/Electronics/CPU/6502%!S(MISSING)chematic.pdf).  By all means refer to the schematic but note that it is a description of Rockwell's version of the 6502)
+(D1x1 was named by Balazs Beregnyei in his [giant schematic](http://www.downloads.reactivemicro.com/Public/Electronics/CPU/6502%20Schematic.pdf).  By all means refer to the schematic but note that it is a description of Rockwell's version of the 6502)
 
 [Here's an URL](http://visual6502.org/JSSim/expert.html?graphics=f&a=0&d=58eaeaea&irq0=5&irq1=6&steps=36&loglevel=3&logmore=irq,D1x1,DPControl) which uses CLI and sets off a very short IRQ pulse.
 
@@ -97,15 +97,15 @@ with the writes during RESET suppressed by [transistor t3455](http://visual6502.
 
 ### Resources
 
-- back to parent page [6502Observations](index.php-title-6502Observations)
+- back to parent page [6502Observations](index.php-title-6502Observations.md)
 - [Internals of BRK/IRQ/NMI/RESET on a MOS 6502](http://www.pagetable.com/?p=410) by Michael Steil on pagetable.com
 - [Interrupts in 65xx processors](http://en.wikipedia.org/wiki/Interrupts_in_65xx_processors) (wikipedia)
-- [The B flag](http://nesdev.parodius.com/the%27B%20flag%!&(MISSING)%!B(MISSING)RK%!i(MISSING)nstruction.txt) by Brad Taylor
+- [The B flag](http://nesdev.parodius.com/the%20%27B%27%20flag%20&%20BRK%20instruction.txt) by Brad Taylor
 - [B flag discussion](http://forum.6502.org/viewtopic.php?p=13036#13036) on 6502.org
 - [Investigating Interrupts](http://www.6502.org/tutorials/interrupts.html) tutorial by Garth Wilson
 - [Register Preservation Using The Stack (and a BRK handler)](http://www.6502.org/tutorials/register_preservation.html) tutorial by Bruce Clark
 - IRQ handler in the [BBC micro OS1.20](http://mdfs.net/Docs/Comp/BBC/OS1-20/DC1C)
 - [CPU Interrupts](http://wiki.nesdev.com/w/index.php/CPU_interrupts) on Nesdev wiki
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_BRK\_and\_B\_bit](index.php-title-6502_BRK_and_B_bit)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_BRK\_and\_B\_bit](index.php-title-6502_BRK_and_B_bit.md)"
 

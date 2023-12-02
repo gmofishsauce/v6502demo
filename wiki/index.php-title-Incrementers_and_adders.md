@@ -76,5 +76,5 @@ N fundamental gates total.
 
 - [Wikipedia](http://en.wikipedia.org/wiki/Carry_look-ahead_adder) on Carry look-ahead
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Incrementers\_and\_adders](index.php-title-Incrementers_and_adders)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Incrementers\_and\_adders](index.php-title-Incrementers_and_adders.md)"
 

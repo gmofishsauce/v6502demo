@@ -295,5 +295,5 @@ Note:
 - BRK, JSR, JMP, branches aren't correct.
 - The test could be extended to do special case tests on the illegal opcodes. We can look at bus activity to see what's going on, in order to understand what potential inputs are - it is possible that some instructions do extra write cycles that nobody has measured yet.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_all\_256\_Opcodes](index.php-title-6502_all_256_Opcodes)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_all\_256\_Opcodes](index.php-title-6502_all_256_Opcodes.md)"
 

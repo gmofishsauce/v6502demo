@@ -5,7 +5,7 @@
 ## 6507 Decode ROM
 
 #### From VisualChips
-(Redirected from [6507 Decode PLA](index.php-title-6507_Decode_PLA~redirect-no))
+(Redirected from [6507 Decode PLA](index.php-title-6507_Decode_PLA.md))
 
 The Decode ROM[1](#endnote-1) is a 130x21 bits ROM in the 6502 that is used to decode the instruction and to control various units of the CPU.
 
@@ -243,7 +243,7 @@ gmatch[1] = b0
 gmatch[2] = b1
 gmatch[3] = !b0 && !b1
 
-bin = ("%!b(MISSING)" %!o(MISSING)pc)
+bin = ("%08b" % opc)
 
 input = Array.new
 
@@ -261,8 +261,8 @@ end
 end
 ```
 
-It also needs to read a file 'pla.txt' which has a tabulation [as found here](index.php-title-6502_all_256_Opcodes).
+It also needs to read a file 'pla.txt' which has a tabulation [as found here](index.php-title-6502_all_256_Opcodes.md).
 
 ### Notes
-[^1](#ref-1) The "Decode ROM" is named as a ROM in [Hanson's block diagram](index.php-title-Hanson~27s_Block_Diagram), although it has wordline inputs and no address decoder. It is sometimes described as a PLA although it also lacks an AND plane. It is a structured layout of NOR gates with many common inputs, as compared to the unstructured gates found in the central decode logic, sometimes known as the random logic (meaning not structured).Retrieved from "[http://visual6502.org/wiki/index.php?title=6507\_Decode\_ROM](index.php-title-6507_Decode_ROM)"
+[^1](#ref-1) The "Decode ROM" is named as a ROM in [Hanson's block diagram](index.php-title-Hanson~s_Block_Diagram.md), although it has wordline inputs and no address decoder. It is sometimes described as a PLA although it also lacks an AND plane. It is a structured layout of NOR gates with many common inputs, as compared to the unstructured gates found in the central decode logic, sometimes known as the random logic (meaning not structured).Retrieved from "[http://visual6502.org/wiki/index.php?title=6507\_Decode\_ROM](index.php-title-6507_Decode_ROM.md)"
 

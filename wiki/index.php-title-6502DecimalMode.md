@@ -22,7 +22,7 @@ The two operands, and the carry in, are added as a pair of nibbles. The carry-ou
 
 Some of the tests below are found in Bruce Clark's [V flag tutorial](http://www.6502.org/tutorials/vflag.html#b). Others are taken from failing cases when running his [decimal mode test suite](http://www.6502.org/tutorials/decimal_mode.html#B).
 
-(For other test suites, see [6502TestPrograms](wiki/wiki/index.php-title-6502TestPrograms.md))
+(For other test suites, see [6502TestPrograms](index.php-title-6502TestPrograms.md))
 
 **Contents**
 
@@ -88,7 +88,7 @@ The first note of the difference is this odd contact cut which has no surroundin
 
 ![t3212 and t1329 in visual6502](images/7/76/6502-decimal-subtract-visual6502.png)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-6502-decimal-subtract-visual6502.png.md)
+[(Link to larger image)](index.php-title-File-6502-decimal-subtract-visual6502.png.md)
 
 The corresponding adjustment for ADC [(dpc18\_#DAA)](http://visual6502.org/JSSim/expert.html?nosim=t&find=dpc18_~DAA&panx=257.4&pany=417.3&zoom=2.4) affects three transistors: [t2750, t2202, t2556](http://visual6502.org/JSSim/expert.html?nosim=t&find=t2750,t2202,t2556&panx=249.9&pany=456.7&zoom=5.0)
 
@@ -96,11 +96,11 @@ In the case of t2556 the control line runs through the transistor - but still th
 
 ![Image (no description given)](images/8/89/NES-2A03-decimal-DAA-removed.png)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-NES-2A03-decimal-DAA-removed.png.md)
+[(Link to larger image)](index.php-title-File-NES-2A03-decimal-DAA-removed.png.md)
 
 ![Image (no description given)](images/thumb/7/78/6502-decimal-DAA-removed-visual6502.png/278px-6502-decimal-DAA-removed-visual6502.png)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-6502-decimal-DAA-removed-visual6502.png.md)
+[(Link to larger image)](index.php-title-File-6502-decimal-DAA-removed-visual6502.png.md)
 
 With these 5 transistors removed, there was no need to change the decode ROM and no need to change the status register.
 
@@ -110,5 +110,5 @@ With these 5 transistors removed, there was no need to change the decode ROM and
 - [Blog post](http://metopal.com/2012/02/12/famicom-brain/) "Whence Came the Famicom’s Brain?" by Nathan Altice
 - [2A03 chip images](http://www.qmtpro.com/~nes/chipimages/#rp2a03) on Quietus' reverse-engineering site
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502DecimalMode](wiki/index.php-title-6502DecimalMode.md)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502DecimalMode](index.php-title-6502DecimalMode.md)"
 

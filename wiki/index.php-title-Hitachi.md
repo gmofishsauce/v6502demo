@@ -8,5 +8,5 @@
 
 - HD6309
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Hitachi](index.php-title-Hitachi)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Hitachi](index.php-title-Hitachi.md)"
 

@@ -216,7 +216,7 @@ controlled buffer, while EXT\_DB\_OUT outputs the signal on the vertical databus
 
 ![Rca1802-detail-annotated.jpg](images/f/f4/Rca1802-detail-annotated.jpg)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-Rca1802-detail-annotated.jpg.md)
+[(Link to larger image)](index.php-title-File-Rca1802-detail-annotated.jpg.md)
 
 Above we see a detail of our high-resolution images, showing several logic gates laid out with their complementary pullup and pulldown trees in their respective areas (Orange on green is NMOS, purple on blue is PMOS.)  The power supply to each gate is the substrate (or well) so there are fewer contacts than in the usual technologies.
 
@@ -230,7 +230,7 @@ So here we see an alternative layout technique, where an isolated region is crea
 
 ![Rca1802-detail2-nor4.png](images/4/42/Rca1802-detail2-nor4.png)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-Rca1802-detail2-nor4.png.md)
+[(Link to larger image)](index.php-title-File-Rca1802-detail2-nor4.png.md)
 
 #### Resources
 
@@ -253,5 +253,5 @@ So here we see an alternative layout technique, where an isolated region is crea
 - [Chuck Bigham's](http://www.bramblyhill.com/post/2013/02/12/Simulating-the-RCA-1802-control-logic.aspx) simulation of the control logic
 - [One](http://groups.yahoo.com/group/cosmacelf/message/12418) of several discussion threads in Yahoo "cosmacelf" group
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=RCA\_1802E](wiki/index.php-title-RCA_1802E.md)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=RCA\_1802E](index.php-title-RCA_1802E.md)"
 

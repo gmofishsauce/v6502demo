@@ -6,7 +6,7 @@
 
 #### From VisualChips
 
-[[#endnote\_{{{1}}}|{{{1}}}]][Template:Documentation](index.php-title-Template-Documentation~action-edit~redlink-1)
+[[#endnote\_{{{1}}}|{{{1}}}]][Template:Documentation](index.php-title-Template-Documentation.md)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Template:Ref](index.php-title-Template-Ref)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Template:Ref](index.php-title-Template-Ref.md)"
 

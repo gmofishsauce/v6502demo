@@ -20,8 +20,6 @@ See [Wikipedia](http://en.wikipedia.org/wiki/Motorola_6800) for good technical a
 
 We [depackaged, deprocessed and photographed](http://www.visual6502.org/images/pages/Motorola_6800_die_shots.html) a later depletion-load version of the chip, which shows signs in the layout of the previous enhancement-load version.  Ijor then captured polygons from the photos - here are JPEG images, which may be easier to explore than the svg format:
 
-
-
 ![Medium size](images/7/77/Mc6800a-Layout-svg-150h.jpg)
 
 [(Link to larger image)](http://www.visual6502.org/images/6800/mc6800a-Layout-svg-1200w.jpg)
@@ -55,7 +53,7 @@ Here's the block diagram from the [1976 topology patent](http://www.google.com/p
 
 ![M6800-arch.png](images/e/ea/M6800-arch.png)
 
-[(Link to larger image)](index.php-title-File-M6800-arch.png)
+[(Link to larger image)](index.php-title-File-M6800-arch.png.md)
 
 #### Resources
 
@@ -66,5 +64,5 @@ Here's the block diagram from the [1976 topology patent](http://www.google.com/p
 - [US Patent 4090236](http://www.freepatentsonline.com/4090236.pdf) for single power supply NMOS microprocessor (filed 1976, granted '78) contains block diagrams, state transition diagrams, instruction decode tables, circuit and logic diagrams
 - [US Patent 3987418](http://www.google.com/patents/about?id=6OkAAAAAEBAJ) for MOS microprocessor topography (filed 1974, granted '76) contains floorplan, low resolution layout mask images, block diagram
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Motorola\_6800](index.php-title-Motorola_6800)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Motorola\_6800](index.php-title-Motorola_6800.md)"
 

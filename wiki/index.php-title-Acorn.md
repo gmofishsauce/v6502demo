@@ -18,5 +18,5 @@ Acorn's computers used a variety of Ferranti ULAs, none of which have yet been r
 - A 12-tile array in a lidded ceramic package (probably labelled 12C021M).  Theo Markettos and Sergei Skorobogatov have photographed the die and C.S. has stitched the images and produced a corrected monochrome image of the metallisation layer. No images released yet, no netlist extracted yet.
 - [macrophotograph](http://retroclinic.com/misc/12c021.jpg) of the chip in delidded package (Mark Haysman of retroclinic.com)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Acorn](index.php-title-Acorn)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Acorn](index.php-title-Acorn.md)"
 

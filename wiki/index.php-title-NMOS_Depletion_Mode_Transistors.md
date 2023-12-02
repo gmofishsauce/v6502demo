@@ -48,5 +48,5 @@ Here are some cases found on the 6502 which require some judgement and explanati
 
 The precharges for all four internal busses are enhancement mode.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=NMOS\_Depletion\_Mode\_Transistors](index.php-title-NMOS_Depletion_Mode_Transistors)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=NMOS\_Depletion\_Mode\_Transistors](index.php-title-NMOS_Depletion_Mode_Transistors.md)"
 

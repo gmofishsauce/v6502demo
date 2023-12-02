@@ -10,5 +10,5 @@
 
 We have photographs of the metal layer, and have started capturing the polygons.  No public information yet.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Z8400](index.php-title-Z8400)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Z8400](index.php-title-Z8400.md)"
 

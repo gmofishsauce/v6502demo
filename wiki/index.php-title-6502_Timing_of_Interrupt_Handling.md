@@ -54,7 +54,7 @@ Perhaps this is because 'doIRQ' (line 480) is not set during the last vector fet
 ```
 
 - [lost NMI](http://visual6502.org/JSSim/expert.html?graphics=f&loglevel=1&logmore=Execute,nmi,~NMIP,irq,480,629,INTG&steps=88&a=0011&d=58&a=fffe&d=2000&a=0020&d=e840&r=0010&nmi0=26&nmi1=31&irq0=12&irq1=74&a=0014&d=78) (NMI during IRQ handling, showing that 2.5 cycles is too short for an NMI to be serviced if it falls during this critical time of fetching the IRQ vector)
-- [IRQ delayed by branch](http://visual6502.org/JSSim/expert.html?graphics=f&loglevel=1&logmore=Execute,nmi,%!N(MISSING)MIP,irq,480,629,INTG&steps=88&a=0010&d=58e8&a=fffe&d=2000&a=0020&d=e840&r=0010&nmi0=26&nmi1=31&irq0=11&irq1=74&a=0012&d=d0fe&a=0014&d=78). As can be seen from previous simulations, the CPU will normally examine 'do IRQ' on the last cycle of an instruction and if it is set, will clear 'normal' (line 629) and set INTG.
+- [IRQ delayed by branch](http://visual6502.org/JSSim/expert.html?graphics=f&loglevel=1&logmore=Execute,nmi,%23NMIP,irq,480,629,INTG&steps=88&a=0010&d=58e8&a=fffe&d=2000&a=0020&d=e840&r=0010&nmi0=26&nmi1=31&irq0=11&irq1=74&a=0012&d=d0fe&a=0014&d=78). As can be seen from previous simulations, the CPU will normally examine 'do IRQ' on the last cycle of an instruction and if it is set, will clear 'normal' (line 629) and set INTG.
 
 However, in the last cycle of BNE (branch taken, no page cross), although the IRQ has been asserted and 'do IRQ' has been set true (cycle 6), the 'normal' and INTG lines are not updated.  So the CPU continues with the next instruction, also BNE. Again 'do IRQ' is examined and the 'normal' and INTG are updated, but not during the last cycle of the instruction (as per MOS Tech specs) but actually during the next-to-last cycle (see cycle 13).  Note if the branch were not taken, it would be the last cycle of the instruction.
 
@@ -66,12 +66,12 @@ Now that I think of it, the fact that INTG is set on the second cycle of any bra
 
 #### Resources
 
-- back to parent page [6502Observations](index.php-title-6502Observations)
+- back to parent page [6502Observations](index.php-title-6502Observations.md)
 - [A taken branch delays interrupt handling by one instruction](http://forum.6502.org/viewtopic.php?t=1634) forum thread on 6502.org
 - [A Taken branch before NMI delays NMI execution by one full instruction](http://www.atariage.com/forums/topic/168550-a-taken-branch-before-nmi-delays-nmi-execution-by-one-full-instruction/) forum thread on AtariAge
 - [CLI - My 8502 is defective ???](http://www.commodore128.org/index.php?topic=3863) forum thread on commodore128.org
 - [Effects of SEI and CLI delayed by one opcode?](http://forum.6502.org/viewtopic.php?t=1817) forum thread on 6502.org
 - [How can POKEY IRQ Timers mess up NMI timing?](http://www.atariage.com/forums/topic/148595-how-can-pokey-irq-timers-mess-up-nmi-timing/page__st__100__p__1816157#entry1816157) forum thread on AtariAge (missed NMI)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Timing\_of\_Interrupt\_Handling](index.php-title-6502_Timing_of_Interrupt_Handling)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Timing\_of\_Interrupt\_Handling](index.php-title-6502_Timing_of_Interrupt_Handling.md)"
 

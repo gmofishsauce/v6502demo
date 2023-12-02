@@ -16,5 +16,5 @@ Fell in love with computers at an early age, soldered up a kit computer while at
 - Number of those based on 6502: 4
 - Most-visited websites: 6502.org, lwn.net
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=User:EdS](index.php-title-User-EdS)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=User:EdS](index.php-title-User-EdS.md)"
 

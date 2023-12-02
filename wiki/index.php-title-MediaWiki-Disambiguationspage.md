@@ -8,5 +8,5 @@
 
 Template:disambig
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=MediaWiki:Disambiguationspage](index.php-title-MediaWiki-Disambiguationspage)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=MediaWiki:Disambiguationspage](index.php-title-MediaWiki-Disambiguationspage.md)"
 

@@ -29,7 +29,7 @@ The, "some situations", mentioned are for the Read-Modify-Write (RMW) instructio
 
 With all the combinations of parallel independent control and PLA-based control, the 6502's timing control has 24 states. A total of eleven nodes ("bits") comprise these states. Six of them are the time code applied to the PLA, the remaining five are part of the non-PLA control. The latter five are further divided up into three and two: three are internal-state members of timing generation, and the last two are in the RCL block.
 
-Labeling of the time states derives from the "TIMING GENERATION LOGIC" block and the "CONTROL FLIP-FLOPS" sub-block inside the "RANDOM CONTROL LOGIC" block in [Dr. Donald Hanson's block diagram](http://www.witwright.com/DonPub/6502-Block-Diagram.pdf), and from discussion of timing states in [6502 State Machine](index.php-title-6502_State_Machine).
+Labeling of the time states derives from the "TIMING GENERATION LOGIC" block and the "CONTROL FLIP-FLOPS" sub-block inside the "RANDOM CONTROL LOGIC" block in [Dr. Donald Hanson's block diagram](http://www.witwright.com/DonPub/6502-Block-Diagram.pdf), and from discussion of timing states in [6502 State Machine](index.php-title-6502_State_Machine.md).
 
 The notation developed for trace/debug output, and the notation presented hereafter in this document, uses eight fields. It lists the six explicit (PLA controlling) output nodes in numeric order first, followed by square brackets around the non-explicit internal state of timing generation (three nodes), followed by the state of the two RCL nodes.
 
@@ -203,7 +203,7 @@ T0 .. .. .. .. .. [..] ...  |  .. .. .. .. .. T5 [..] SD2  |  .. .. .. .. .. T5 
 
 In all of the examples above, the time state before the SD1 state is the one that initiates the separate SD1 SD2 signal chain. For zero page addressing mode, the signal is initiated at T2 by a PLA node, and it clock phase propagates to the SD1 node by one cycle later. Contrast this against V0 being activated immediately at T5 by a PLA node for the BRK instruction.
 
-There are still more instructions that use SD1 and SD2. They happen to be RMWs among the illegal/undocumented opcodes. They use all of the addressing modes above (plus Absolute Indexed Y that the official RMWs do not use). They also use the two indirect indexed addressing modes, (zp,X) and (zp),Y. That takes eight cycles, and those addressing modes initiate the signal chain at T5. The mnemonics for the opcodes, according to [6502 all 256 Opcodes](index.php-title-6502_all_256_Opcodes) are SLO, RLA, SRE, RRA, DCP, and ISC.
+There are still more instructions that use SD1 and SD2. They happen to be RMWs among the illegal/undocumented opcodes. They use all of the addressing modes above (plus Absolute Indexed Y that the official RMWs do not use). They also use the two indirect indexed addressing modes, (zp,X) and (zp),Y. That takes eight cycles, and those addressing modes initiate the signal chain at T5. The mnemonics for the opcodes, according to [6502 all 256 Opcodes](index.php-title-6502_all_256_Opcodes.md) are SLO, RLA, SRE, RRA, DCP, and ISC.
 
 ```
 .. .. T2 .. .. .. [..] ...
@@ -419,13 +419,13 @@ finishes normally without really being interrupted.
 
 [Dr. Donald Hanson's block diagram](http://www.witwright.com/DonPub/6502-Block-Diagram.pdf)
 
-[6502 State Machine](index.php-title-6502_State_Machine)
+[6502 State Machine](index.php-title-6502_State_Machine.md)
 
 ["MCS6500 Microcomputer Family Hardware Manual"](http://archive.6502.org/books/mcs6500_family_hardware_manual.pdf)
 
-[6502 all 256 Opcodes](index.php-title-6502_all_256_Opcodes)
+[6502 all 256 Opcodes](index.php-title-6502_all_256_Opcodes.md)
 
 ["A taken branch delays interrupt handling by one instruction"](http://forum.6502.org/viewtopic.php?f=4&t=1634) forum thread
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Timing\_States](index.php-title-6502_Timing_States)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Timing\_States](index.php-title-6502_Timing_States.md)"
 

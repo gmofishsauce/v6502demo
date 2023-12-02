@@ -17,7 +17,7 @@ Self-testing (6502 ROMs and programs):
 - Ruud Baltissen's 8k test ROM from his [VHDL 6502 core](http://www.baltissen.org/zip/rb65-11.zip) (includes source, but only a subset of files found in the [previous version](http://www.baltissen.org/zip/rb65-10.zip))
 - [NES test](http://www.qmtpro.com/~nes/misc/nestest.txt)[rom](http://nickmass.com/images/nestest.nes) by Kevin Horton (24kbyte) (haven't found source for this, he says he hasn't got clean source to release)
 - [AllSuiteA.asm](http://code.google.com/p/hmc-6502/source/browse/trunk/emu/testvectors/AllSuiteA.asm) from the hcm-6502 (verilog) project. ROM available. Load at and reset to 0xf000 and set irq vector to 0xf5a4.
-- [Decimal mode tests by Bruce Clark](http://www.6502.org/tutorials/decimal_mode.html) ADC/SBC (exhaustive, tests all four affected flags.) Some specific [Decimal tests here](index.php-title-6502DecimalMode).
+- [Decimal mode tests by Bruce Clark](http://www.6502.org/tutorials/decimal_mode.html) ADC/SBC (exhaustive, tests all four affected flags.) Some specific [Decimal tests here](index.php-title-6502DecimalMode.md).
 - Test code supplied with [Rob Finch's 6502 core](http://web.archive.org/web/20070707064155/http://www.birdcomputer.ca/Projects/Prj6502/bc6502_page.html) (archive.org) (1500 bytes)
 - [Acid800](http://www.virtualdub.org/beta/Acid800-0.81.7z) by Avery Lee for 8-bit Atari emulators includes some 6502 tests. See [Altirra](http://www.virtualdub.org/altirra.html) page.
 - [ASAP tests](http://asap.git.sourceforge.net/git/gitweb.cgi?p=asap/asap;a=tree;f=test) by Piotr Fusik includes an exhaustive test for ADC, SBC and 0x6B as well as a few tests for other undocumented opcodes
@@ -40,5 +40,5 @@ References:
 - [6502.org topic "Op-code testing"](http://forum.6502.org/viewtopic.php?t=547)
 - [6502.org topic "Functional Test for the NMOS 6502 - request for verification"](http://forum.6502.org/viewtopic.php?f=2&t=2241)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502TestPrograms](index.php-title-6502TestPrograms)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502TestPrograms](index.php-title-6502TestPrograms.md)"
 

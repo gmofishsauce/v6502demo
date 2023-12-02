@@ -6,13 +6,13 @@
 
 #### From VisualChips
 
-This page discusses the 6502 datapath, using the terminology from [Hanson's Block Diagram](index.php-title-Hanson~27s_Block_Diagram) and is probably best understood by [reference to it](http://www.pagetable.com/?p=39)
+This page discusses the 6502 datapath, using the terminology from [Hanson's Block Diagram](index.php-title-Hanson~s_Block_Diagram.md) and is probably best understood by [reference to it](http://www.pagetable.com/?p=39)
 
 We're interested in which datapath control signals are active in each of the two phases.
 
 A full cycle consists of phi1 and phi2.  When we say a signal is "effective", we mean it actually does something.
 
-All datapath control signals are latched during phi2; they are set mostly from opcode and timing data, but also some internal state.  We work broadly from left to right. (Which is right to left on [Balazs' schematic](index.php-title-Balazs~27_schematic_and_documents))
+All datapath control signals are latched during phi2; they are set mostly from opcode and timing data, but also some internal state.  We work broadly from left to right. (Which is right to left on [Balazs' schematic](index.php-title-Balazs~_schematic_and_documents.md))
 
 **Contents**
 
@@ -42,7 +42,7 @@ ADL/ABL, ADH/ABH We already saw these.  Effective on the next phi1. 0/ADL0, 0/AD
 #### The register file
 Y/SB, X/SB, SB/Y, SB/X Move the X and Y registers from/to the SB.  Latched on phi2, just like everything else; effective on the next phi1. SB/S, S/S, effective on the next phi1. S/SB, S/ADL, effective on phi2 and the next phi1. The S register is actually two latches in series.  This makes it possible to read a value from SB and write a value to ADL at the same time.  On phi2, the value from the "in" latch is forwarded to the "out" latch (and onto the driven bus, if any).
 
-(Note the [two "tuning fork" structures](index.php-title-6502_datapath_control_timing_fix), which have contacts
+(Note the [two "tuning fork" structures](index.php-title-6502_datapath_control_timing_fix.md), which have contacts
 either on the top or bottom, which select whether X, Y, A write SB
 and DB only during phi1, or slightly longer, during "not phi2". We think this might be a timing fix, or an option left open until after silicon showed which choice worked best)
 
@@ -129,5 +129,5 @@ As Balazs used another naming scheme in his very useful but incomplete schematic
 | Dkx3 | DL/ADH | dpc42\_DL/ADH | pass-connect adh to mux node driven by idl |
 | Dkx1 | DL/DB | dpc43\_DL/DB | pass-connect idb to mux node driven by idl |
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_datapath](index.php-title-6502_datapath)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_datapath](index.php-title-6502_datapath.md)"
 

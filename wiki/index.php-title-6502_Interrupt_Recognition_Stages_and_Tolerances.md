@@ -8,7 +8,7 @@
 
 6502 Interrupt Recognition Stages and Tolerances
 
-The following is based upon drawing the node and transistor networks out on paper from visual6502 data, and conducting experiments with the simulator. References are made to 6502 clock states that are described in [6502 Timing States](index.php-title-6502_Timing_States), which may be used as a primer for this exposition.
+The following is based upon drawing the node and transistor networks out on paper from visual6502 data, and conducting experiments with the simulator. References are made to 6502 clock states that are described in [6502 Timing States](index.php-title-6502_Timing_States.md), which may be used as a primer for this exposition.
 
 **Contents**
 
@@ -183,7 +183,7 @@ NMI line down and kept down for at least six (6) clock transitions. This covers 
 
 After six transitions when put down at the worst case time, the NMI line may be safely raised during T1 phase 1, and NMI stage 1 will have been successfully recognized when that state, T1 phase 1, was clocked in. The first instruction of the IRQ/BRK handler will run and then stage 2 of NMI will be recognized, causing the next fetch cycle to start a new BRK instruction that jumps to the NMI handler.
 
-Putting NMI down at T5 phase 1 or later and raising it back up again before T1 phase 1 will cause the "lost NMI" condition noted in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling).
+Putting NMI down at T5 phase 1 or later and raising it back up again before T1 phase 1 will cause the "lost NMI" condition noted in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling.md).
 
 RES:
 
@@ -304,13 +304,13 @@ F933 JMP 0200    ; Jump to user code
 
 ### External References
 
-"lost NMI" in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling)
+"lost NMI" in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling.md)
 
-[6502 Timing States](index.php-title-6502_Timing_States)
+[6502 Timing States](index.php-title-6502_Timing_States.md)
 
 ### Further Reading
 
-[6502 Interrupt Hijacking](index.php-title-6502_Interrupt_Hijacking)
+[6502 Interrupt Hijacking](index.php-title-6502_Interrupt_Hijacking.md)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Interrupt\_Recognition\_Stages\_and\_Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Interrupt\_Recognition\_Stages\_and\_Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances.md)"
 

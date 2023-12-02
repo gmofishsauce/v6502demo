@@ -23,5 +23,5 @@
 - P8085AH CPU
 - P8275
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Intel](index.php-title-Intel)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Intel](index.php-title-Intel.md)"
 

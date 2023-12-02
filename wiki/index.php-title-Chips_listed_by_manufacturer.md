@@ -5,7 +5,7 @@
 ## Chips in our collection
 
 #### From VisualChips
-(Redirected from [Chips listed by manufacturer](index.php-title-Chips_listed_by_manufacturer~redirect-no))
+(Redirected from [Chips listed by manufacturer](index.php-title-Chips_listed_by_manufacturer.md))
 
 Here we list the chips in our collection, some of which are generously donated.
 
@@ -72,7 +72,7 @@ Detailed information and links to die shots may be found on specific chips pages
 | Intel | P8080A-2 | 79xx | L2057569 (1979) | DIP40 | | | 4 | | | CPU | |
 | Intel | P8085AH | 76xx | 9849 (1976) | DIP40 | | | 2 | | | CPU | |
 | Intel | P8275 | | L2167191 1976 | DIP40 | | | 2 | | | VID | CRTC |
-| MOS Technology | [6502](index.php-title-MOS_6502) | 8316 | 1683 | DIP40 | | | 9:[Sim](http://www.visual6502.org/JSSim/expert.html) | 3510 | 19530 | CPU | Our 1st visual sim |
+| MOS Technology | [6502](index.php-title-MOS_6502.md) | 8316 | 1683 | DIP40 | | | 9:[Sim](http://www.visual6502.org/JSSim/expert.html) | 3510 | 19530 | CPU | Our 1st visual sim |
 | MOS Technology | 6504 | | 6504A | | | | 3:[DPKG](http://visual6502.org/images/pages/MOS_6504_die_shots.html) | | | CPU | |
 | MOS Technology | 6504 | 7551 | MCS 6504 5175, 75156 | DIP28 | | | 3:[DPKG](http://visual6502.org/images/pages/MOS_6504_die_shots.html) | | | CPU | |
 | MOS Technology | 6504 | 7603 | MCS 6504 0376, 75158 | DIP28 | | | 3:[DPKG](http://visual6502.org/images/pages/MOS_6504_die_shots.html) | | | CPU | |
@@ -93,7 +93,7 @@ Detailed information and links to die shots may be found on specific chips pages
 | MOS Technology | 8520 | 8813 | MOS 8520A-1 1388 24 | DIP40 | F.W. | 2011-05-16 | 2 | | | | HMOS version of 6526 port chip with different counter |
 | MOSTEK | Z80 | 8229 | MK3880N | DIP40 | | | 2 | | | CPU | MOSTEK Z80 2nd sourced |
 | Motorola | 2114 | 8203 | MCM21L14P30 D8203 | DIP18 | | | 3:DPKG | | | SRAM | 1kx4 bit |
-| Motorola | [6800](index.php-title-Motorola_6800) | 8616 | MC68A00P R7E8616 | DIP40 | | | 9:[Sim](http://www.visual6502.org/JSSim/expert-6800.html)[Die Shots](http://www.visual6502.org/images/pages/Motorola_6800_die_shots.html) | | | CPU | Our 2nd visual sim |
+| Motorola | [6800](index.php-title-Motorola_6800.md) | 8616 | MC68A00P R7E8616 | DIP40 | | | 9:[Sim](http://www.visual6502.org/JSSim/expert-6800.html)[Die Shots](http://www.visual6502.org/images/pages/Motorola_6800_die_shots.html) | | | CPU | Our 2nd visual sim |
 | Motorola | 6808 | 7847 | MC6808P 4H7847 | DIP40 | | | 2 | | | CPU | |
 | Motorola | 6809 | 8446 | MC68B09EP | DIP40 | K.H | 2011-01-22 | 2 | | | CPU | External-clock, E and Q, 2MHz |
 | Motorola | 6810 | 8321 | MCM6810P JF38321 | DIP24 | | | 2 | | | SRAM | 128x8 bit.  Modern RAM chips can be used as replacement |
@@ -103,7 +103,7 @@ Detailed information and links to die shots may be found on specific chips pages
 | Motorola | 6850 | 7938 | MC6850P 7938 | DIP24 | | | 2 | | | I/O | |
 | Motorola | 6845 | 8733 | MC68B45SP | DIP40 | K.H | 2011-01-22 | 2 | | | VID | Popular video address sequencer, used in many old machines. |
 | Motorola | 6854 | 9218 | MC6854 | DIP28 | K.H | 2011-01-22 | 2 | | | I/O | Advanced Data Link Controller |
-| Motorola | [68000](index.php-title-Motorola_68000) | 8818 | MC68000L10 3A72E8818 | DIP64 | | | 6:[Die Shots](http://www.visual6502.org/images/pages/Motorola_68000.html) | | | CPU | Famous CPU of Apple Macintosh, Atari ST, Neo Geo, etc. |
+| Motorola | [68000](index.php-title-Motorola_68000.md) | 8818 | MC68000L10 3A72E8818 | DIP64 | | | 6:[Die Shots](http://www.visual6502.org/images/pages/Motorola_68000.html) | | | CPU | Famous CPU of Apple Macintosh, Atari ST, Neo Geo, etc. |
 | Motorola | 68008 | 8334 | MC68008 | DIP52 | K.H | 2011-01-22 | 2 | | | CPU | ceramic, metal lid. 8-bit bus interface |
 | Motorola | 68882 | 9020 | XC68882RC40A, 0C35H, DEXH9020 | PGA68 | K.H | 2011-08-20 | 2 | | | FPU | X=experimental, prototype? |
 | Motorola | 68882 RC25A | 9446 | MC68882RC25A 1C12R QEPP9446, MSIA LTPPQ-7 | PGA | FRS | 2013-06-03 | 2 | | | FPU | |
@@ -131,7 +131,7 @@ Detailed information and links to die shots may be found on specific chips pages
 | Nintendo | NES PPU | | | | | | 1 | | | VID | |
 | Nintendo | SNES motherboard | | | | B.E. | | 2 | | | | |
 | Pravetz | CM630P | 8744 | CM630P 8744 | DIP40 | [J.C.](http://www.cpushack.com) | 2011-01-21 | 2 | | | CPU | Bulgarian 6502 clone |
-| RCA | [1802](index.php-title-RCA_1802E) | | CDP1802E RCA 115R | DIP40 | [J.C.](http://www.cpushack.com) | | 4:[Die Shots](http://www.visual6502.org/images/pages/RCA_1802_die_shots.html) | | | CPU | Space-faring pioneering CMOS with loopy transistors |
+| RCA | [1802](index.php-title-RCA_1802E.md) | | CDP1802E RCA 115R | DIP40 | [J.C.](http://www.cpushack.com) | | 4:[Die Shots](http://www.visual6502.org/images/pages/RCA_1802_die_shots.html) | | | CPU | Space-faring pioneering CMOS with loopy transistors |
 | Sega | Sega Genesis 16 | | | Whole | FRS | 2013-06-06 | 2 | | | CON | |
 | Siemens/Intel | SAB8748 | 7808 | 1978 | DIP40 | M.T. | 2010-09-21 | 2 | | | MCU | 8048 microcontroller, EPROM version |
 | Signetics | SCN68681 | | | PLCC44 | K.H | 2011-01-22 | 2 | | | I/O | 68000 compatible basic UART |
@@ -173,23 +173,46 @@ Detailed information and links to die shots may be found on specific chips pages
 
 Original resolution stitches and photographic source material can be found [here](http://uxul.org/~noname/visual6502/).
 
-A.S. : Andreas Schiffler, USAB.E. : Bryan Edewaard, USAC.S. : Christian Sattler, UKF.W. : Frank Wolf, Karlsruhe area, GermanyFRS  : Fabio R. Schmidlin
-G.H  : Gerrit\_Heitsch, GermanyJ.C. : John Culver, USAJ.P. : Joe Parsell, Indiana, USAI.vP : Ivo van Poorten, NetherlandsK.H  : Keith Howell, UKKevH : Kevin Horton, Indiana, USAM.S. : [Michael Steil](http://www.pagetable.com), USAM.N. : [Mike Naberezny](http://mikenaberezny.com), USAP.M. : Peter Monta, USAQ.   : [Quietust](http://www.qmtpro.com/~nes/chipimages/index.php)
+A.S. : Andreas Schiffler, USA
+B.E. : Bryan Edewaard, USA
+C.S. : Christian Sattler, UK
+F.W. : Frank Wolf, Karlsruhe area, Germany
+FRS  : Fabio R. Schmidlin
+G.H  : Gerrit\_Heitsch, Germany
+J.C. : John Culver, USA
+J.P. : Joe Parsell, Indiana, USA
+I.vP : Ivo van Poorten, Netherlands
+K.H  : Keith Howell, UK
+KevH : Kevin Horton, Indiana, USA
+M.S. : [Michael Steil](http://www.pagetable.com), USA
+M.N. : [Mike Naberezny](http://mikenaberezny.com), USA
+P.M. : Peter Monta, USA
+Q.   : [Quietust](http://www.qmtpro.com/~nes/chipimages/index.php)
 
 ### Status level codes
 
-0: Samples wanted 1: Samples awaiting delivery 2: Samples acquired, analysis not started 3: Depackaged 4: Top surface (metal) photographed 5: Metal removed, polysilicon photographed 6: Polysilicon removed, substrate photographed 7: Modeling, capturing, vectorizing components 8: Simulation bring-up, debug 9: Online simulation XX: Chip damaged in processing
+0: Samples wanted
+1: Samples awaiting delivery
+2: Samples acquired, analysis not started
+3: Depackaged
+4: Top surface (metal) photographed
+5: Metal removed, polysilicon photographed
+6: Polysilicon removed, substrate photographed
+7: Modeling, capturing, vectorizing components
+8: Simulation bring-up, debug
+9: Online simulation
+XX: Chip damaged in processing
 
 ### Chips by Manufacturer
 
 Some of the above chips have a status page or further description
 
-- [Acorn](index.php-title-Acorn)
-- [Atari](index.php-title-Atari)
+- [Acorn](index.php-title-Acorn.md)
+- [Atari](index.php-title-Atari.md)
 
 ### Other similar projects
 
-See [Other Chip Image Sites](index.php-title-Other_Chip_Image_Sites)
+See [Other Chip Image Sites](index.php-title-Other_Chip_Image_Sites.md)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Chips\_in\_our\_collection](index.php-title-Chips_in_our_collection)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Chips\_in\_our\_collection](index.php-title-Chips_in_our_collection.md)"
 

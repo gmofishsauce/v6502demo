@@ -8,7 +8,7 @@
 
 6502 Interrupt Hijacking
 
-The following is based upon drawing the node and transistor networks out on paper from visual6502 data, and conducting experiments with the simulator. In explaining the various behaviors, references are made to 6502 clock states and stages of interrupt recognition that are described in [6502 Timing States](index.php-title-6502_Timing_States) and [6502 Interrupt Recognition Stages and Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances), which may be used as primers for this exposition.
+The following is based upon drawing the node and transistor networks out on paper from visual6502 data, and conducting experiments with the simulator. In explaining the various behaviors, references are made to 6502 clock states and stages of interrupt recognition that are described in [6502 Timing States](index.php-title-6502_Timing_States.md) and [6502 Interrupt Recognition Stages and Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances.md), which may be used as primers for this exposition.
 
 **Contents**
 
@@ -27,7 +27,7 @@ Some obscure niches of behavior may be observed instead when the interrupt lines
 
 ### NMI Hijacking IRQ/BRK
 
-First introduced to this wiki by the link, "late NMI", in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling), it is possible for higher-priority interrupts to hijack lower priority interrupts during the BRK instruction that is serving them.
+First introduced to this wiki by the link, "late NMI", in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling.md), it is possible for higher-priority interrupts to hijack lower priority interrupts during the BRK instruction that is serving them.
 
 The "late NMI" is an example of a full hijack, where a higher priority interrupt arrives after the BRK instruction for a lower priority interrupt has already started. The higher priority interrupt changes the addresses used when the BRK instruction actually fetches the vector during clock states T5 and T6: the vector selection is not fixed and "remembered" when the BRK instruction starts, or at any time before. Vector selection is independently parameterized by the NMI and RES interrupts, instead.
 
@@ -41,7 +41,7 @@ Back to the subject of actual hijackings: If NMI could appear one cycle later, i
 
 Unfortunately for this scenario (or fortunately, from the designer's P.O.V.), the 6502 has some explicit engineering to prevent an NMI half-hijacking IRQ and BRK. The node chain ~VEC, pipe~VEC, 1578, 1368 is the secret sauce. ~VEC is low during T5 and T6 of a BRK instruction, which are the cycles that internally command the low and high byte fetches, respectively, of the jump vector (each internal command takes one cycle to appear at the address pins and Read/Write pin externally). The node pipe~VEC is connected to ~VEC only during phase 2. pipe~VEC grounds 1578 and it grounds 1368 in turn. The therapeutic effect is that node 1368 is kept grounded from T5 phase 2 through T0 phase 1. That prevents NMI low from being passed through to cause the NMI to be recognized at stage 1 and affect the vector fetches. NMI stage 1 is not allowed to be recognized through all of T6 and T0 at the tail end of BRK execution. As long as the NMI line stays down, the NMI will finally be stage-1-recognized at T1 phase 1. That will allow the first instruction of the IRQ/BRK handler to run before the BRK for the NMI is started.
 
-If NMI is released under the above circumstances before T1 phase 1 is clocked in, then the NMI is entirely missed. See also the "lost NMI" condition noted in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling).
+If NMI is released under the above circumstances before T1 phase 1 is clocked in, then the NMI is entirely missed. See also the "lost NMI" condition noted in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling.md).
 
 ### RES Hijacking NMI and IRQ/BRK
 
@@ -55,7 +55,7 @@ Restated: <RES low>FD is fetched instead of <RES high><RES low> for the jumped-t
 
 The foiled full hijack behavior is actually a subset of what happens when RES is released too early after having been put down during T4 of a BRK instruction. Releasing RES one cycle later than for this full hijack case results in a different nonsensical address for the jumped-to opcode. Tipping the hat, the effective address is <<RES low>FD><RES low>. In this case, the 6502 has had the extra cycle needed to separately fetch the high byte of the jump vector (the cycle it was starved of in the other case), but fetched from <RES low>FD (like the opcode in the other case) instead of FFFD. The extra cycle also allows the low byte of the RES vector to appear in its proper position as the low byte of the opcode address.
 
-Releasing RES two cycles later results in starting a new BRK instruction that jumps normally to the RES handler. This is because RES is held down long enough to prevent RES recognition stage 2 from being shut off by the already-running BRK instruction, and stage 2 still being alive will cause the next fetch cycle to start a new BRK instruction. The full description of what happens is covered by the worst-case RES invocation section under "Tolerances" in [6502 Interrupt Recognition Stages and Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances). Demonstrations of all cases are present there.
+Releasing RES two cycles later results in starting a new BRK instruction that jumps normally to the RES handler. This is because RES is held down long enough to prevent RES recognition stage 2 from being shut off by the already-running BRK instruction, and stage 2 still being alive will cause the next fetch cycle to start a new BRK instruction. The full description of what happens is covered by the worst-case RES invocation section under "Tolerances" in [6502 Interrupt Recognition Stages and Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances.md). Demonstrations of all cases are present there.
 
 For RES half-hijacking, the RES line must be put down a full cycle later than for the full hijack case, strictly during T5. It must also be released a cycle later than for full, strictly during T6.
 
@@ -92,7 +92,7 @@ Halfcycle 21 NMI0 during T4 phase 2 of IRQ BRK
 Halfcycle 22 NMI1 during T5 phase 1 of IRQ BRK
 ```
 
-[Thwarted half-hijack of an IRQ by NMI](http://visual6502.org/JSSim/expert.html?graphics=f&steps=50&logmore=Execute,nmi,res,irq,~NMIG,RESP,IRQP,p2,INTG,RESG,State,tcstate,TState,Phi&a=0200&d=EAEA&a=20FD&d=4C20F9&a=F810&d=40&a=F910&d=4C20F9&a=F920&d=584C0002&a=F930&d=4C20F9&a=FA30&d=486840&a=FFFA&d=10F820F930FA&irq0=11&irq1=12&nmi0=23&nmi1=28) (and NMI line held long enough for the NMI to not be missed. See also "lost NMI" in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling)).
+[Thwarted half-hijack of an IRQ by NMI](http://visual6502.org/JSSim/expert.html?graphics=f&steps=50&logmore=Execute,nmi,res,irq,~NMIG,RESP,IRQP,p2,INTG,RESG,State,tcstate,TState,Phi&a=0200&d=EAEA&a=20FD&d=4C20F9&a=F810&d=40&a=F910&d=4C20F9&a=F920&d=584C0002&a=F930&d=4C20F9&a=FA30&d=486840&a=FFFA&d=10F820F930FA&irq0=11&irq1=12&nmi0=23&nmi1=28) (and NMI line held long enough for the NMI to not be missed. See also "lost NMI" in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling.md)).
 
 The BRK instruction started by an IRQ is not successfully co-opted by a late NMI and runs the first instruction of the IRQ handler, then interrupted by the NMI and runs the NMI handler.
 
@@ -175,11 +175,11 @@ FA32 RTI
 
 ### External References
 
-"late NMI" and "lost NMI" in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling)
+"late NMI" and "lost NMI" in [6502 Timing of Interrupt Handling](index.php-title-6502_Timing_of_Interrupt_Handling.md)
 
-[6502 Timing States](index.php-title-6502_Timing_States)
+[6502 Timing States](index.php-title-6502_Timing_States.md)
 
-[6502 Interrupt Recognition Stages and Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances)
+[6502 Interrupt Recognition Stages and Tolerances](index.php-title-6502_Interrupt_Recognition_Stages_and_Tolerances.md)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Interrupt\_Hijacking](index.php-title-6502_Interrupt_Hijacking)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Interrupt\_Hijacking](index.php-title-6502_Interrupt_Hijacking.md)"
 

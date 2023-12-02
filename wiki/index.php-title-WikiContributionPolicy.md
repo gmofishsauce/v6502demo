@@ -41,10 +41,10 @@ This is how we view the wiki:
 - The majority of the content should be our factual findings, and our progress.
 - Also explanations, if we have good ones not found elsewhere, and if they arise from our reverse engineering.
 - Anything which can be migrated out to Wikipedia and accepted there need not be kept here.
-- Page names should have meaningful prefixes so the [alphabetic index](index.php-title-Special-AllPages) makes sense
+- Page names should have meaningful prefixes so the [alphabetic index](index.php-title-Special-AllPages.md) makes sense
 - Pages should not consist of an unadorned list - there should be an orientation paragraph and optionally a sentence for each sub page.
 - For example, we might have a list of pages one for each chip in progress, and that list can be decorated with a brief statement of the state of play. (Even though that is a minor duplication of information.)
 - Most pages should have a Resources section with external links - we don't need citations everywhere, but we do want to be part of a larger web.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=WikiContributionPolicy](index.php-title-WikiContributionPolicy)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=WikiContributionPolicy](index.php-title-WikiContributionPolicy.md)"
 

@@ -10,5 +10,5 @@ This template for footnotes originates from one of the wikipedia solutions. Medi
 
 The current version is not quite right: there's no label in the HTML anchor, so the footnote cannot return to the parent.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Template\_talk:Ref](index.php-title-Template_talk-Ref)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Template\_talk:Ref](index.php-title-Template_talk-Ref.md)"
 

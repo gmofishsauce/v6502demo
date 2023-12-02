@@ -18,5 +18,5 @@ The classic and best 6502 block diagram is taken from Donald F. Hanson's paper "
 
 [Cleaned up version copyrighted 2011 on the author's website.](http://www.witwright.com/DonPub/6502-Block-Diagram.pdf) "This is the result of work done in 1982 from the blueprint of the 6502 microprocessor"
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Hanson%!!(MISSING)s(MISSING)\_Block\_Diagram](index.php-title-Hanson~27s_Block_Diagram)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Hanson%27s\_Block\_Diagram](index.php-title-Hanson~s_Block_Diagram.md)"
 

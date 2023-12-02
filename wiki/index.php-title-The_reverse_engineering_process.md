@@ -81,7 +81,7 @@ Mailing lists, blogs and forum postings:
 - [post](http://lists.cloud9.co.uk/pipermail/bbc-micro/2010-October/009443.html) containing Christian Sattler's advice on photography
 - [The Decapping Project WIP Page: A Blog About Decapping For MAME](http://decap.mameworld.info/)
 
-See also our [Educational Resources](index.php-title-Educational_Resources) page
+See also our [Educational Resources](index.php-title-Educational_Resources.md) page
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=The\_reverse\_engineering\_process](index.php-title-The_reverse_engineering_process)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=The\_reverse\_engineering\_process](index.php-title-The_reverse_engineering_process.md)"
 

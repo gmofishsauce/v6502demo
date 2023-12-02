@@ -46,51 +46,41 @@ In January 2010 user Xor on the 6502.org forum [finalised](http://forum.6502.org
 
 By late January 2010 Peter had his model running Space Invaders, on an OHO FPGA module replacing the 6507 in an original Atari 2600 console.
 
-
-
 ![6507-demo0.jpg](images/thumb/f/f6/6507-demo0.jpg/640px-6507-demo0.jpg)
 
-[(Link to larger image)](index.php-title-File-6507-demo0.jpg)
-
-
+[(Link to larger image)](index.php-title-File-6507-demo0.jpg.md)
 
 ![6507-demo1.jpg](images/thumb/c/c9/6507-demo1.jpg/640px-6507-demo1.jpg)
 
-[(Link to larger image)](index.php-title-File-6507-demo1.jpg)
+[(Link to larger image)](index.php-title-File-6507-demo1.jpg.md)
 
 #### Passing a test suite
 
-Since then, Peter has made further improvements, and Ingo Korb has [joined in](https://github.com/ikorb/FPGA-netlist-tools), and run [Wolfgang Lorenz' testsuite](index.php-title-6502TestPrograms) in a 1541 disk drive, passing all legal opcodes and failing on 16 unsupported opcodes.  (It is expected that a simulated digital model will not behave precisely as a physical CPU when it comes to these deservedly unsupported opcodes - they cause [essentially analogue behaviour](index.php-title-6502_Opcode_8B_~XAA~_ANE~). It's also true that the FPGA module does not behave, electrically, precisely like an NMOS part.)
+Since then, Peter has made further improvements, and Ingo Korb has [joined in](https://github.com/ikorb/FPGA-netlist-tools), and run [Wolfgang Lorenz' testsuite](index.php-title-6502TestPrograms.md) in a 1541 disk drive, passing all legal opcodes and failing on 16 unsupported opcodes.  (It is expected that a simulated digital model will not behave precisely as a physical CPU when it comes to these deservedly unsupported opcodes - they cause [essentially analogue behaviour](index.php-title-6502_Opcode_8B_~XAA~_ANE~.md). It's also true that the FPGA module does not behave, electrically, precisely like an NMOS part.)
 
 Ingo has also had success running on FPGA in real time as a CPU replacement in other systems: an Apple IIe clone, VIC20, C64. Ingo has implemented a manual tuning system for the clock delay. (The Apple II Europlus was an unsuccessful experiment - it is thought that the clock skew compensation cannot deal with the slow RAM access times.)
 
-
-
 ![6502-fpga-apple2-img 0040.jpg](images/thumb/6/6e/6502-fpga-apple2-img_0040.jpg/640px-6502-fpga-apple2-img_0040.jpg)
 
-[(Link to larger image)](index.php-title-File-6502-fpga-apple2-img_0040.jpg)
-
-
+[(Link to larger image)](index.php-title-File-6502-fpga-apple2-img_0040.jpg.md)
 
 ![6502-fpga-vic20-img 0039.jpg](images/thumb/7/70/6502-fpga-vic20-img_0039.jpg/640px-6502-fpga-vic20-img_0039.jpg)
 
-[(Link to larger image)](index.php-title-File-6502-fpga-vic20-img_0039.jpg)
+[(Link to larger image)](index.php-title-File-6502-fpga-vic20-img_0039.jpg.md)
 
 More pictures, showing functioning vintage software (click through for full size):
 
-
-
 ![6502-fpga-apple2-overview-IMG 1086.jpg](images/thumb/b/b2/6502-fpga-apple2-overview-IMG_1086.jpg/240px-6502-fpga-apple2-overview-IMG_1086.jpg)
 
-[(Link to larger image)](index.php-title-File-6502-fpga-apple2-overview-IMG_1086.jpg)
+[(Link to larger image)](index.php-title-File-6502-fpga-apple2-overview-IMG_1086.jpg.md)
 
 ![6502-fpga-vic20-overview-IMG 1081.jpg](images/thumb/c/c3/6502-fpga-vic20-overview-IMG_1081.jpg/240px-6502-fpga-vic20-overview-IMG_1081.jpg)
 
-[(Link to larger image)](index.php-title-File-6502-fpga-vic20-overview-IMG_1081.jpg)
+[(Link to larger image)](index.php-title-File-6502-fpga-vic20-overview-IMG_1081.jpg.md)
 
 ![6502-fpga-c64-overview-IMG 1080.jpg](images/thumb/3/37/6502-fpga-c64-overview-IMG_1080.jpg/240px-6502-fpga-c64-overview-IMG_1080.jpg)
 
-[(Link to larger image)](index.php-title-File-6502-fpga-c64-overview-IMG_1080.jpg)
+[(Link to larger image)](index.php-title-File-6502-fpga-c64-overview-IMG_1080.jpg.md)
 
 #### Further work
 
@@ -105,5 +95,5 @@ Work continues on stability and on the maximum speed of the FPGA model. For this
 - [OHO FPGA modules](http://www.google.co.uk/search?q=GODIL40_XC3S250E)
 - [Enterpoint's FPGA modules](http://enterpoint.co.uk/shop/en/48-craignell1.html)
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_-\_simulating\_in\_real\_time\_on\_an\_FPGA](index.php-title-6502_-_simulating_in_real_time_on_an_FPGA)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_-\_simulating\_in\_real\_time\_on\_an\_FPGA](index.php-title-6502_-_simulating_in_real_time_on_an_FPGA.md)"
 

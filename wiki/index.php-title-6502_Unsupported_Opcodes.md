@@ -8,7 +8,7 @@
 
 The 6502 is famous for doing interesting and sometimes useful things when the program includes invalid (or unspecified) opcodes.
 
-For a list of all opcodes and some explanation of what they do, see [6502 all 256 Opcodes](index.php-title-6502_all_256_Opcodes).
+For a list of all opcodes and some explanation of what they do, see [6502 all 256 Opcodes](index.php-title-6502_all_256_Opcodes.md).
 
 The visual6502 simulator can help when investigating what these opcodes do, and why - see below for a few cases and pointers for exploration.
 
@@ -18,7 +18,7 @@ The visual6502 simulator can help when investigating what these opcodes do, and 
 - [KIL](http://visual6502.org/JSSim/expert.html?graphics=f&steps=26&a=0&d=ea42eaea&loglevel=2) will put the T-state counter into an unrecoverable state
 - [XAA #$5A](http://visual6502.org/JSSim/expert.html?graphics=f&steps=26&a=0&d=a9ffa2f08b5aeaea&loglevel=2&logmore=DPControl) (also known as ANE) with A=FF
 - and [with A=00](http://visual6502.org/JSSim/expert.html?graphics=f&steps=26&a=0&d=a900a2f08b5aeaea&loglevel=2&logmore=DPControl) shows A is OR with 00 before AND with X and the immediate value
-- for more detail see the explanation page: [6502 Opcode 8B (XAA, ANE)](index.php-title-6502_Opcode_8B_~XAA~_ANE~)
+- for more detail see the explanation page: [6502 Opcode 8B (XAA, ANE)](index.php-title-6502_Opcode_8B_~XAA~_ANE~.md)
 
 ### some background
 
@@ -32,7 +32,7 @@ But note that the underlying circuit data which we now have includes transistor 
 
 ### resources
 
-- back to parent page [6502Observations](index.php-title-6502Observations)
+- back to parent page [6502Observations](index.php-title-6502Observations.md)
 - [Michael Steil's presentation at 27C3](http://www.youtube.com/watch?v=N9DYmlprCKA#t=5m20) youtube link direct to section on illegal opcodes
 - [How MOS 6502 Illegal Opcodes really work](http://www.pagetable.com/?p=39) on Michael Steil's blog
 - [64doc.txt](http://www.viceteam.org/plain/64doc.txt) by VICE team
@@ -44,5 +44,5 @@ But note that the underlying circuit data which we now have includes transistor 
 - [Vice BUGS document](http://www.viceteam.org/plain/BUGS) mentions XAA being used in a Mastertronic loader
 - [An examination of an early tape loader](http://www.atlantis-prophecy.org/recollection/?load=online&issue=1&sub=article&id=4) by Fungus/Nostalgia/Onslaught
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Unsupported\_Opcodes](index.php-title-6502_Unsupported_Opcodes)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_Unsupported\_Opcodes](index.php-title-6502_Unsupported_Opcodes.md)"
 

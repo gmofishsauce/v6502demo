@@ -22,17 +22,17 @@ Notes on the original 650X schematics from MOS Technology.
 
 #### Origin
 
-In 1995 Donald F. Hanson, Ph.D., published a paper based in part on the 6502 blueprints.  His original work was to reverse engineer a detailed [block diagram](wiki/wiki/index.php-title-Hanson~s_Block_Diagram.md) of the processor.  At the time he received the blueprints from MOS Technology in 1979, he had agreed to keep them confidential, except for educational use.  Earlier this year (2011), visual6502.org contacted Dr. Hanson.  After some negotiations, he agreed to provide scans of the original blueprints, for educational use only.  The blueprints he received were labeled Rev. C and contained a preliminary design.  Since the complete and error-free design (which we refer to as Rev D) is already known through the work of visual6502.org, Dr. Hanson felt that he could provide the Rev. C blueprints to visual6502.org for their historical value, provided that they be used for educational use.
+In 1995 Donald F. Hanson, Ph.D., published a paper based in part on the 6502 blueprints.  His original work was to reverse engineer a detailed [block diagram](index.php-title-Hanson~s_Block_Diagram.md) of the processor.  At the time he received the blueprints from MOS Technology in 1979, he had agreed to keep them confidential, except for educational use.  Earlier this year (2011), visual6502.org contacted Dr. Hanson.  After some negotiations, he agreed to provide scans of the original blueprints, for educational use only.  The blueprints he received were labeled Rev. C and contained a preliminary design.  Since the complete and error-free design (which we refer to as Rev D) is already known through the work of visual6502.org, Dr. Hanson felt that he could provide the Rev. C blueprints to visual6502.org for their historical value, provided that they be used for educational use.
 
 On this page we present some reduced-size images of those scans, and some findings from the information on them.
 
 ![Image (no description given)](images/thumb/6/6a/6502_schematic_sheet2-8-12-75.jpeg/600px-6502_schematic_sheet2-8-12-75.jpeg)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-6502_schematic_sheet2-8-12-75.jpeg.md)
+[(Link to larger image)](index.php-title-File-6502_schematic_sheet2-8-12-75.jpeg.md)
 
 ![Image (no description given)](images/thumb/5/59/6502_schematic_sheet1-11-74.jpeg/600px-6502_schematic_sheet1-11-74.jpeg)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-6502_schematic_sheet1-11-74.jpeg.md)
+[(Link to larger image)](index.php-title-File-6502_schematic_sheet1-11-74.jpeg.md)
 
 #### Overview
 
@@ -48,11 +48,11 @@ The presumed die size including scribe lane is marked at bottom of sheet 1: 168 
 
 ![Image (no description given)](images/thumb/9/9e/6502_schematic_sheet1-11-74.id.jpeg/400px-6502_schematic_sheet1-11-74.id.jpeg)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-6502_schematic_sheet1-11-74.id.jpeg.md)
+[(Link to larger image)](index.php-title-File-6502_schematic_sheet1-11-74.id.jpeg.md)
 
 ![Image (no description given)](images/thumb/1/10/6502_schematic_sheet2-8-12-75.id.jpeg/400px-6502_schematic_sheet2-8-12-75.id.jpeg)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-6502_schematic_sheet2-8-12-75.id.jpeg.md)
+[(Link to larger image)](index.php-title-File-6502_schematic_sheet2-8-12-75.id.jpeg.md)
 
 #### Pin Names
 
@@ -65,7 +65,7 @@ Some of the pad names are different from the modern 6502 pin names:
 
 ![650X-CPS-pad.png](images/1/13/650X-CPS-pad.png)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-650X-CPS-pad.png.md)
+[(Link to larger image)](index.php-title-File-650X-CPS-pad.png.md)
 
 #### Chip Versions: 6501, 6502 and 6504
 
@@ -75,7 +75,7 @@ For example here are some options relating to the on-chip clocks, which differ d
 
 ![650X-onchipclocking.png](images/thumb/1/1b/650X-onchipclocking.png/400px-650X-onchipclocking.png)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-650X-onchipclocking.png.md)
+[(Link to larger image)](index.php-title-File-650X-onchipclocking.png.md)
 
 The T1 or SYNC pin is believed to require a slight change too between 6501 and 6502, which is possible in metal, but does not appear on the schematics.
 
@@ -85,7 +85,7 @@ The 6504 is a 28-pin version which requires the inputs NMI, RDY and SO to be tie
 
 ![650X-revC-ROR-pla.png](images/5/56/650X-revC-ROR-pla.png)
 
-[(Link to larger image)](wiki/wiki/index.php-title-File-650X-revC-ROR-pla.png.md)
+[(Link to larger image)](index.php-title-File-650X-revC-ROR-pla.png.md)
 
 The Revision C of the 6502 has the famous ROR bug. We can see the cause in the PLA: lines 82 and 83, right in the middle, decode T0:0100101x and 010xxx1x, where they should decode T0:01x0101x and 01xxxx1x.  That is, one extra pull-down on each line. Because of this, SRS is not set for ROR instructions, which causes these instructions to set SUMS and therefore shift left, and not to use the carry bit. See [Michael Steil's investigation](http://www.pagetable.com/?p=406) into this.
 
@@ -111,11 +111,11 @@ Thanks to the following for their observations and assistance
 - Segher Boessenkool
 - Michael Steil
 - Donald F Hanson, for making the scans of the 6502 available to us
-- Department of Electrical Engineering, University of Mississippi, University, MS, for supporting Prof. Hanson’s work on the 6502 including the drafting of the [block diagram](wiki/wiki/index.php-title-Hanson~s_Block_Diagram.md).
+- Department of Electrical Engineering, University of Mississippi, University, MS, for supporting Prof. Hanson’s work on the 6502 including the drafting of the [block diagram](index.php-title-Hanson~s_Block_Diagram.md).
 
 #### References
 
 - Donald F. Hanson, [["A VHDL Conversion Tool for Logic Equations with Embedded D Latches,"](http://www.witwright.com/DonPub/DSH_6502_ComputerArch.pdf)], Technical Committee on Computer Architecture Newsletter, pp. 49-56, Spring 1995, IEEE Computer Society.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=650X\_Schematic\_Notes](wiki/index.php-title-650X_Schematic_Notes.md)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=650X\_Schematic\_Notes](index.php-title-650X_Schematic_Notes.md)"
 

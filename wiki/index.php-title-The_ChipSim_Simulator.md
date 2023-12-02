@@ -40,5 +40,5 @@ TBC
 - [source code](https://github.com/trebonian/visual6502) on github
 - [Intel 4004 anniversary project](http://www.4004.com/) includes Lajos Kintli's simulator
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=The\_ChipSim\_Simulator](index.php-title-The_ChipSim_Simulator)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=The\_ChipSim\_Simulator](index.php-title-The_ChipSim_Simulator.md)"
 

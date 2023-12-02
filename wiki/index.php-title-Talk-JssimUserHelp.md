@@ -11,5 +11,5 @@ Jeff
 
 - I've filled out some of the stubs. Cheers, Ed
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Talk:JssimUserHelp](index.php-title-Talk-JssimUserHelp)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Talk:JssimUserHelp](index.php-title-Talk-JssimUserHelp.md)"
 

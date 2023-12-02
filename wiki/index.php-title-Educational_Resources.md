@@ -14,12 +14,12 @@ Here are some general resources we've found:
 - also [the video](http://www.youtube.com/watch?v=JtXvUoPx4Qs) "From Nand to Tetris In 12 Steps"
 - [SimCom](http://www.mulawa.net/mulawa/simcom/simcom.html?primes) an in-browser simple computer by Peter Hewitt
 - the [intro page](http://www.mulawa.net/mulawa/simcom/simcom1.html)
-- [Introduction to Vlsi Systems](http://www.amazon.com/Introduction-Vlsi-Systems-Carver-Mead/dp/0201043580) (book) by Mead and Conway ([see also wikipedia](http://en.wikipedia.org/wiki/Mead_%!_(MISSING)Conway_revolution))
+- [Introduction to Vlsi Systems](http://www.amazon.com/Introduction-Vlsi-Systems-Carver-Mead/dp/0201043580) (book) by Mead and Conway ([see also wikipedia](http://en.wikipedia.org/wiki/Mead_%26_Conway_revolution))
 - Lynn Conway's [VLSI Archive](http://ai.eecs.umich.edu/people/conway/VLSI/VLSIarchive.mainlinks.html) (website)
 - [Structured Computer Organization](http://www.amazon.com/Structured-Computer-Organization-Andrew-Tanenbaum/dp/0131485210) (book) by Andrew S. Tanenbaum
 - With an [OLPC XO-1](http://en.wikipedia.org/wiki/OLPC_XO-1) you can program from the metal up using [Open Firmware](http://en.wikipedia.org/wiki/IEEE1275)
 
 Others are listed on the [links page](http://visual6502.org/links.html) of our website.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Educational\_Resources](index.php-title-Educational_Resources)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Educational\_Resources](index.php-title-Educational_Resources.md)"
 

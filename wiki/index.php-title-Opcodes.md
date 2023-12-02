@@ -5,7 +5,7 @@
 ## 6502 all 256 Opcodes
 
 #### From VisualChips
-(Redirected from [Opcodes](index.php-title-Opcodes~redirect-no))
+(Redirected from [Opcodes](index.php-title-Opcodes.md))
 
 Starting from [Graham's table](http://www.oxyron.de/html/opcodes02.html), Michael Steil constructed a 3 column table containing the opcode, the mnemomic, the addressing mode and the number of clock cycles.
 
@@ -296,5 +296,5 @@ Note:
 - BRK, JSR, JMP, branches aren't correct.
 - The test could be extended to do special case tests on the illegal opcodes. We can look at bus activity to see what's going on, in order to understand what potential inputs are - it is possible that some instructions do extra write cycles that nobody has measured yet.
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_all\_256\_Opcodes](index.php-title-6502_all_256_Opcodes)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=6502\_all\_256\_Opcodes](index.php-title-6502_all_256_Opcodes.md)"
 

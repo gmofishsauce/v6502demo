@@ -12,5 +12,5 @@ Segher Boessenkool annotated these photos with signal names and some tracing of 
 
 - [19Mbyte png file](http://impulzus.sch.bme.hu/6502/download/6502_full.png) Full die, distorted aspect ratio
 
-Retrieved from "[http://visual6502.org/wiki/index.php?title=Photos\_of\_R6502](index.php-title-Photos_of_R6502)"
+Retrieved from "[http://visual6502.org/wiki/index.php?title=Photos\_of\_R6502](index.php-title-Photos_of_R6502.md)"
 
