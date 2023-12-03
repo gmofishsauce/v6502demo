@@ -418,16 +418,51 @@ func urlSafeUrl(origUrl string) string {
 		return origUrl
 	}
 
-	// Anchors we do a simple transformation on, which sometimes works.
-	// Issue #011 points out that other times, it doesn't; needs work.
+	// Anchor links. This is extremely complicated.
+	// First, Github Markdown automatically creates anchors for <Hn> headings.
+	// It does this by applying some rules, which I found here:
+	//
+	// https://gist.github.com/asabaylus/3071099?permalink_comment_id=1593627#gistcomment-1593627
+	// 1. It downcases the heading (string).
+	// 2. It removes anything that is not a letter, number, space or hyphen
+	//		(see the source for how Unicode is handled)
+	// 3. It changes any space to a hyphen.
+	// 4. If that is not unique, add "-1", "-2", "-3",... to make it unique
+	//
+	// Here, we don't have a header; we have a URL that might refer to a header,
+	// or to other places. So all we can hope for is to make it _look like_ GH
+	// Markdown created the anchor URL.  Also, I don't think we can hope to apply
+	// rule (4) since we're working on a link, here, not a header--we have no way
+	// to know if there is a uniqueness problem.
+	//
+	// But there is a second complication. The WikiMedia software that generated
+	// the input HTML also had a rule for processing headers into anchor links.
+	// It didn't _remove_ non-URL characters: it took the escaped form of the
+	// of the URL with e.g. %27 and such, and simply replaces the % sign with
+	// a legal URL character, dot. But in order to apply Markdown's rule 2, above,
+	// we need to reconstruct the illegal characters so we can remove them. So we
+	// need to expand escapes in-line, but not ordinary HTML escapes like %27 - 
+	// we need to expand .27 as if it was %27. And then we can apply rules 1, 2,
+	// and 3 from above, and hope rule 4 doesn't get us.
 	if strings.HasPrefix(origUrl, "#") {
-		// On Github anchors need to be #sym where sym is lower case
-		// and separated by hyphens. In this wiki it seems like most
-		// of them are mixed case, have no spaces and are separate by
-		// underscores. This will handle them but not more.
-		s := strings.ToLower(origUrl)
-		s = strings.ReplaceAll(s, "_", "-")
-		return s
+		s := expandEscapesInLine(origUrl, '.')
+		var sb strings.Builder
+		sb.WriteRune('#')
+		for _, c := range s {
+			switch {
+			case c >= '0' && c <= '9':
+				sb.WriteRune(c)
+			case c >= 'a' && c <= 'z':
+				sb.WriteRune(c)
+			case c >= 'A' && c <= 'Z':
+				sb.WriteRune(c | 0x20)
+			case c == '-' || c == ' ':
+				sb.WriteRune('-')
+			default:
+				// drop the character
+			}
+		}
+		return sb.String()
 	}
 
 	u, err := url.Parse(origUrl)
@@ -447,7 +482,7 @@ func urlSafeUrl(origUrl string) string {
 		s += "?title=" + t[0] + ".md"
 	}
 	//dbg("u.Path=%s u.RawQuery=%s combined=%s", u.Path, u.RawQuery, s)
-	s = makeUrlSafePath(expandEscapesInLine(s))
+	s = makeUrlSafePath(expandEscapesInLine(s, '%'))
 
 	// "If s doesn't start with prefix, s is returned unchanged."
 	s = strings.TrimPrefix(s, "/wiki/")
@@ -487,7 +522,11 @@ func twoDigitHexAsciiToAsciiByte(ms byte, ls byte) byte {
 	return byte(result)
 }
 
-func expandEscapesInLine(s string) string {
+// Expand '%27' sequences back to their non-URL equivalents.
+// We also need to do this when the escape character is not
+// the usual % sign - for explanation, see the long comment
+// in urlSafeUrl().
+func expandEscapesInLine(s string, escChar rune) string {
 	n := len(s)
 	var sb strings.Builder
 	skip := 0
@@ -495,7 +534,7 @@ func expandEscapesInLine(s string) string {
 	for i, c := range s {
 		if skip > 0 {
 			skip--
-		} else if c == '%' && i+2 < n && isAsciiHexDigit(s[i+1]) && isAsciiHexDigit(s[i+2]) {
+		} else if c == escChar && i+2 < n && isAsciiHexDigit(s[i+1]) && isAsciiHexDigit(s[i+2]) {
 			sb.WriteByte(twoDigitHexAsciiToAsciiByte(s[i+1], s[i+2]))
 			skip = 2
 		} else {
