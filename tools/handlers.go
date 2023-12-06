@@ -366,9 +366,14 @@ func doImgClose(n *html.Node, cx *context) error {
 }
 
 func doHeaderOpen(n *html.Node, cx *context) error {
+	if cx.InHeader {
+		fatal("nested header")
+	}
 	if cx.InTable() {
 		// Markdown can't put headers in table cells,
 		// we just turn the header into boldface text.
+		// We also don't support anchor links into
+		// headers in tables.
 		cx.emitSingleSpaceNeeded()
 		cx.emitString("**")
 		return nil
@@ -377,10 +382,15 @@ func doHeaderOpen(n *html.Node, cx *context) error {
 	cx.emitParagraphBreakNeeded()
 	cx.emitString(hashes[0:1 + int(n.Data[1] - '0')])
 	cx.emitSingleSpaceNeeded()
+	cx.InHeader = true
+	cx.HeaderText = ""
 	return nil
 }
 
 func doHeaderClose(n *html.Node, cx *context) error {
+	cx.InHeader = false
+	cx.AnchorMap[wikiMediaAnchor(cx.HeaderText)] = jekyllAnchor(cx.HeaderText)
+	cx.HeaderText = ""
 	if cx.InTable() {
 		cx.emitString("**")
 		cx.emitSingleSpaceNeeded()
@@ -667,6 +677,9 @@ func doDocType(n *html.Node, cx *context) error {
 func doText(n *html.Node, cx *context) error {
 	if cx.InScript {
 		return nil
+	}
+	if cx.InHeader {
+		cx.HeaderText += n.Data
 	}
 	s := strings.TrimSpace(n.Data)
 	if len(s) != 0 {

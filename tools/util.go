@@ -42,6 +42,9 @@ type context struct {
 	NestingDepth int
 	Markdown strings.Builder
 	InFileToc bool
+	InHeader bool
+	HeaderText string
+	AnchorMap map[string]string
 	InImgTag bool
 	InJumpToNav bool
 	InMagnify bool
@@ -65,7 +68,7 @@ type context struct {
 }
 
 func NewContext(outdir string, inpath string) *context {
-	return &context{OutputDirectory: outdir, InputFilePath: inpath}
+	return &context{OutputDirectory: outdir, InputFilePath: inpath, AnchorMap: map[string]string{}}
 }
 
 func (cx *context) EnterList() {
@@ -187,10 +190,14 @@ func (cx *context) emitStringDirect(s string) {
 // Newlines and spaces are absolutely critical in markdown; what's intuitive
 // for human users is not obvious to a computer. We try to emit everything
 // without any leading or trailing whitespace and instead insert these control
-// characters which are ASCII DC1 through DC3 and so on if we need more.
+// characters which are ASCII DC1 through DC3 and so on.
+//
+// AnchorStart and AnchorEnd are used for a separate post-pass.
 const SingleSpace rune = 0x11 // ASCII DC1
 const SingleNewline rune = 0x12
 const DoubleNewline rune = 0x13 // ASCII DC3
+const AnchorStart rune = 0x1C // FS
+const AnchorEnd rune = 0x1D // GS
 
 func (cx *context) emitSingleSpaceNeeded() {
 	cx.Markdown.WriteRune(SingleSpace)
@@ -266,8 +273,9 @@ func writeWhite(maxWhite rune, sb *strings.Builder) {
 	}
 }
 
-// Combine white markers in the argument string and
-// return a new string with spaces and/or newlines.
+// Combine white markers in the argument string and return
+// a new string with spaces and/or newlines. This pass
+// ignores anchors. See expandAnchors().
 func expandWhiteSpace(s string) string {
 	var sb strings.Builder
 	var inWhite bool
@@ -418,51 +426,10 @@ func urlSafeUrl(origUrl string) string {
 		return origUrl
 	}
 
-	// Anchor links. This is extremely complicated.
-	// First, Github Markdown automatically creates anchors for <Hn> headings.
-	// It does this by applying some rules, which I found here:
-	//
-	// https://gist.github.com/asabaylus/3071099?permalink_comment_id=1593627#gistcomment-1593627
-	// 1. It downcases the heading (string).
-	// 2. It removes anything that is not a letter, number, space or hyphen
-	//		(see the source for how Unicode is handled)
-	// 3. It changes any space to a hyphen.
-	// 4. If that is not unique, add "-1", "-2", "-3",... to make it unique
-	//
-	// Here, we don't have a header; we have a URL that might refer to a header,
-	// or to other places. So all we can hope for is to make it _look like_ GH
-	// Markdown created the anchor URL.  Also, I don't think we can hope to apply
-	// rule (4) since we're working on a link, here, not a header--we have no way
-	// to know if there is a uniqueness problem.
-	//
-	// But there is a second complication. The WikiMedia software that generated
-	// the input HTML also had a rule for processing headers into anchor links.
-	// It didn't _remove_ non-URL characters: it took the escaped form of the
-	// of the URL with e.g. %27 and such, and simply replaces the % sign with
-	// a legal URL character, dot. But in order to apply Markdown's rule 2, above,
-	// we need to reconstruct the illegal characters so we can remove them. So we
-	// need to expand escapes in-line, but not ordinary HTML escapes like %27 - 
-	// we need to expand .27 as if it was %27. And then we can apply rules 1, 2,
-	// and 3 from above, and hope rule 4 doesn't get us.
+	// Anchors require special and elaborate handling.
+	// See the comment above wikiMediaAnchor().
 	if strings.HasPrefix(origUrl, "#") {
-		s := expandEscapesInLine(origUrl, '.')
-		var sb strings.Builder
-		sb.WriteRune('#')
-		for _, c := range s {
-			switch {
-			case c >= '0' && c <= '9':
-				sb.WriteRune(c)
-			case c >= 'a' && c <= 'z':
-				sb.WriteRune(c)
-			case c >= 'A' && c <= 'Z':
-				sb.WriteRune(c | 0x20)
-			case c == '-' || c == ' ':
-				sb.WriteRune('-')
-			default:
-				// drop the character
-			}
-		}
-		return sb.String()
+		return string(AnchorStart) + wikiMediaAnchor(origUrl[1:]) + string(AnchorEnd)
 	}
 
 	u, err := url.Parse(origUrl)
@@ -621,3 +588,155 @@ func fatal(format string, args... any) {
 	os.Exit(1)
 }
 
+// Anchor links. This is extremely complicated.
+//
+// Anchors are in-page links that target the "id" (or less commonly, "name")
+// attributes of other tags. They are commonly used for table of contents
+// links. The begin with a '#' character and do not contain a scheme or a
+// path; they are just a string of legal URL characters (letters, digits,
+// and - _ ~ . characters). This is all according to the specs.
+//
+// When the Jekyll Markdown processor reads the .md file and renders it as
+// HTML, it automatically creates anchor targets ("id" attributes) for  <Hn>
+// headings. It does this by applying some rules to the heading text. See:
+//
+// https://gist.github.com/asabaylus/3071099?permalink_comment_id=1593627#gistcomment-1593627
+//
+// 1. Jekyll downcases the heading (string).
+// 2. It removes anything that is not a letter, number, space, hyphen, or
+//		underscore (see the source via link above for how Unicode is handled)
+// 3. It changes any space to a hyphen
+// 4. If that is not unique, add "-1", "-2", "-3",... to make it unique
+//
+// Note that Github Markdown and Jekyll are not necessarily the same. The
+// rules above originally referred to Github Markdown, and didn't cover the
+// case of embedded _ (underscore) characters. I verified by eye that these
+// rules seem for apply to Jekyll also, except that I added the case for
+// underscores and didn't verify it for Github Markdown.
+//
+// But the WikiMedia software that generated the anchor links in the HTML we're
+// reading also had a rule for processing headers into anchor links. Its rules
+// were (apparently - I reverse engineered these) ...
+//
+// 1. Start with the header text (from the user's standpoint, the link target)
+// 2. Remove all the spaces--leading, trailing, and embedded.
+// 3. URL-escape the text, converting non-URL characters to %XX escapes.
+// 4. Convert all non-URL characters, including % (percent) to dots.
+//
+// It doesn't _remove_ non-URL characters: it takes the escaped form of the URL
+// with e.g. %27 and such, and simply replaces the % sign with a legal URL
+// character, dot, to make e.g. .27 in the anchor URL.
+//
+// This transformation loses critical information - the word boundaries, which
+// were preserved in Jekyll's transformation. So the WikiMedia anchor lnks are
+// useless to us, although any anchor link that was just letters (e.g. "#title")
+// makes it through both transformations unchanged and so happens to just work.
+//
+// So, what to do. There are several approaches that might work, but this one
+// seems the most direct:
+//
+// 0. We assume that all anchor links target headers and don't handle others.
+// 1. When we find a header (H1 through H6) we create an entry in global map.
+//    The key is the header text with WikiMedia's algorithm applied. The value
+//    is the header text with Jekyll's transformation applied.
+// 2. When we find an anchor link, we write the link in the output, exactly as
+//    we found it. But we surround it with ANCHOR_START and ANCHOR_END marker
+//    characters (control characters).
+// 3. When we expand whitespace at the end, we recognize the ANCHOR_START, get
+//    the text to the ANCHOR_END, look the value up in the global map, and emit
+//    value as the anchor link.
+//
+// Here's an example. The original page can be seen in the Wayback Machine here:
+// https://web.archive.org/web/20210405071351/http://visual6502.org/wiki/index.php?title=RCA_1802E
+//
+// In the ToC, it says: 2.1 1. /ARO, /ALO
+//
+// This is made up a generated heading "2.1 " created by the processor for
+// nested lists followed by a textual header "1. /ARO, /ALO". The "1. " in the
+// textual header is probably a mistaken attempt by the original page author to
+// give correct subheading numbers.
+//
+// The View Page source shows this for the link in the ToC:
+// <li class="toclevel-2 tocsection-3">
+//    <a href="#1._.2FARO.2C_.2FALO">
+//        <span class="tocnumber">2.1</span>
+//        <span class="toctext">1. /ARO, /ALO</span>
+//    </a>
+// </li>
+//
+// Below in the page, we find:
+// <h4>
+//     <span class="mw-headline" id="1._.2FARO.2C_.2FALO"> 1. /ARO, /ALO </span>
+// </h4>
+//
+// When Jekyll processes the .md file we generate and renders it as HTML again,
+// it generates the following HTML from the header tag:
+//
+// <h5 id="1-aro-alo">1. /ARO, /ALO</h5>
+//
+// This results from applying Jekyll's rules: (1) downcase the heading, giving
+// "1. /aro, /alo"; (2) remove anything that is not a letter, number, space, hyphen,
+// or underscore, giving "1 aro alo"; (3) replace spaces with hyphens, giving
+// "1-aro-alo" as the id of the heading tag. This is what the anchor link must
+// reference in the generated .md file. So when we encounter the ToC link, we
+// write the href (which is the result of WikiMedia running its algorithm),
+// surrounded by marker characters AnchorStart and AnchorEnd. The emitted stream
+// is buffered in memory. When we encounter the header, we run both algorithms and
+// create a map from WikiMedia version to Jekyll version. Finally, we post-process
+// the emitted string looking for AnchorStart. When we find it, we replace the URL
+// with the Jekyll version, which will work in the HTML rendered from the generated
+// .md file.
+//
+func jekyllAnchor(anchor string) string {
+	return "FIXME-JEK-"+anchor
+}
+
+func wikiMediaAnchor(anchor string) string {
+	return "FIXME-WM-"+anchor
+}
+
+func expandAnchors(s string) string {
+	var result strings.Builder
+	var anchor strings.Builder
+	inAnchor := false
+
+	for _, c := range s {
+		if !inAnchor {
+			if c == AnchorStart {
+				inAnchor = true
+				anchor.Reset()
+			} else {
+				result.WriteRune(c)
+			}
+		} else { // in an anchor
+			if c == AnchorEnd {
+				TODO("expandAchors")
+			} else {
+				anchor.WriteRune(c)
+			}
+		}
+	}
+	return result.String()
+}
+
+/*
+		s := expandEscapesInLine(origUrl, '.')
+		var sb strings.Builder
+		sb.WriteRune('#')
+		for _, c := range s {
+			switch {
+			case c >= '0' && c <= '9':
+				sb.WriteRune(c)
+			case c >= 'a' && c <= 'z':
+				sb.WriteRune(c)
+			case c >= 'A' && c <= 'Z':
+				sb.WriteRune(c | 0x20)
+			case c == '-' || c == ' ':
+				sb.WriteRune('-')
+			// XXX HANDLE UNDERSCORE
+			default:
+				// drop the character
+			}
+		}
+		return sb.String()
+*/
