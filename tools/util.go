@@ -763,6 +763,8 @@ func jekyllAnchor(headerText string) string {
 	for _, c := range s {
 		if c == ' ' {
 			sb.WriteRune('-')
+		} else if c == '_' {
+			sb.WriteRune('_')
 		} else if isLetterOrDigit(c) {
 			sb.WriteRune(c)
 		} // else nothing - drop c
