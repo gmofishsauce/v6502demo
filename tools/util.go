@@ -695,7 +695,7 @@ func fatal(format string, args... any) {
 // .md file. Hopefully.  ;-)
 //
 
-func isValidUrlChar(c rune) bool {
+func isLetterOrDigit(c rune) bool {
 	switch {
 	case c >= 'a' && c <= 'z':
 		return true
@@ -703,7 +703,14 @@ func isValidUrlChar(c rune) bool {
 		return true
 	case c >= '0' && c <= '9':
 		return true
-	case c == '.' || c == '-' || c == '_' || c == '~':
+	}
+	return false
+}
+
+func isValidUrlChar(c rune) bool {
+	if isLetterOrDigit(c) {
+		return true
+	} else if c == '.' || c == '-' || c == '_' || c == '~' {
 		return true
 	}
 	return false
@@ -756,7 +763,7 @@ func jekyllAnchor(headerText string) string {
 	for _, c := range s {
 		if c == ' ' {
 			sb.WriteRune('-')
-		} else if isValidUrlChar(c) {
+		} else if isLetterOrDigit(c) {
 			sb.WriteRune(c)
 		} // else nothing - drop c
 	}
@@ -793,7 +800,7 @@ func expandAnchors(s string, cx *context) string {
 				} else {
 					dbg("Found %s for %s\n", anchor.String(), jekyllAnchor)
 				}
-				result.WriteString(jekyllAnchor)
+				result.WriteString("#" + jekyllAnchor)
 				inAnchor = false
 			} else {
 				anchor.WriteRune(c)
