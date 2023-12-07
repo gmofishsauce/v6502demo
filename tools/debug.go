@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+   "runtime/debug"
 )
 
 // Print debug output. This is just fprintf to stderr.
@@ -48,6 +49,10 @@ func dbg2(s string, args... any) {
     }
 	s = "[at " + where + "]: " + s + "\n"
 	fmt.Fprintf(os.Stderr, s, args...)
+}
+
+func st() {
+	debug.PrintStack()
 }
 
 var todoDone = make(map[string]bool)

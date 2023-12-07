@@ -448,7 +448,6 @@ func urlSafeUrl(origUrl string) string {
 		// Not worried about multiple "title=" query strings
 		s += "?title=" + t[0] + ".md"
 	}
-	//dbg("u.Path=%s u.RawQuery=%s combined=%s", u.Path, u.RawQuery, s)
 	s = makeUrlSafePath(expandEscapesInLine(s, '%'))
 
 	// "If s doesn't start with prefix, s is returned unchanged."
@@ -458,7 +457,6 @@ func urlSafeUrl(origUrl string) string {
 		Host: u.Host,
 		Path: s,
 	}
-	dbg("urlSafeUrl %s => %s", origUrl, result.String())
 	return result.String()
 }
 
@@ -487,6 +485,11 @@ func twoDigitHexAsciiToAsciiByte(ms byte, ls byte) byte {
 		result += ls - 'a'
 	}
 	return byte(result)
+}
+
+func asciiRuneToTwoDigitHexAscii(c rune) string {
+	const digs = "0123456789ABCDEF"
+	return string(digs[(c >> 4)&0xF]) + string(digs[c&0xF])
 }
 
 // Expand '%27' sequences back to their non-URL equivalents.
@@ -612,7 +615,8 @@ func fatal(format string, args... any) {
 // rules above originally referred to Github Markdown, and didn't cover the
 // case of embedded _ (underscore) characters. I verified by eye that these
 // rules seem for apply to Jekyll also, except that I added the case for
-// underscores and didn't verify it for Github Markdown.
+// underscores and didn't verify it for Github Markdown. Also, we don't bother
+// even attempting to handle the last rule; hopefully this won't matter.
 //
 // But the WikiMedia software that generated the anchor links in the HTML we're
 // reading also had a rule for processing headers into anchor links. Its rules
@@ -628,7 +632,7 @@ func fatal(format string, args... any) {
 // character, dot, to make e.g. .27 in the anchor URL.
 //
 // This transformation loses critical information - the word boundaries, which
-// were preserved in Jekyll's transformation. So the WikiMedia anchor lnks are
+// were preserved in Jekyll's transformation. So the WikiMedia anchor links are
 // useless to us, although any anchor link that was just letters (e.g. "#title")
 // makes it through both transformations unchanged and so happens to just work.
 //
@@ -678,27 +682,99 @@ func fatal(format string, args... any) {
 // "1. /aro, /alo"; (2) remove anything that is not a letter, number, space, hyphen,
 // or underscore, giving "1 aro alo"; (3) replace spaces with hyphens, giving
 // "1-aro-alo" as the id of the heading tag. This is what the anchor link must
-// reference in the generated .md file. So when we encounter the ToC link, we
-// write the href (which is the result of WikiMedia running its algorithm),
-// surrounded by marker characters AnchorStart and AnchorEnd. The emitted stream
-// is buffered in memory. When we encounter the header, we run both algorithms and
-// create a map from WikiMedia version to Jekyll version. Finally, we post-process
+// reference in the generated .md file.
+//
+// So when we encounter the ToC link, we write the href (which is the result of
+// WikiMedia running its algorithm), surrounded by marker characters AnchorStart
+// and AnchorEnd. (The emitted stream is buffered in memory for later postprocessing.)
+//
+// When we encounter the header, we run both algorithms and create a map from WikiMedia
+// version of the anchor to the text of the Jekyll version. Finally, we post-process
 // the emitted string looking for AnchorStart. When we find it, we replace the URL
 // with the Jekyll version, which will work in the HTML rendered from the generated
-// .md file.
+// .md file. Hopefully.  ;-)
 //
-func jekyllAnchor(anchor string) string {
-	return "FIXME-JEK-"+anchor
+
+func isValidUrlChar(c rune) bool {
+	switch {
+	case c >= 'a' && c <= 'z':
+		return true
+	case c >= 'A' && c <= 'Z':
+		return true
+	case c >= '0' && c <= '9':
+		return true
+	case c == '.' || c == '-' || c == '_' || c == '~':
+		return true
+	}
+	return false
 }
 
-func wikiMediaAnchor(anchor string) string {
-	return "FIXME-WM-"+anchor
+// Convert an anchor link target like "1._/ARO,_/ALO" to an escaped
+// fragment like "1._%2FARO%2C_%2FALO". The underscores in the argument
+// string may come from the caller or from the original text being parsed.
+func escapeFragment(f string) string {
+	var sb strings.Builder
+	for _, c := range f {
+		if isValidUrlChar(c) {
+			sb.WriteRune(c)
+		} else {
+			sb.WriteString("%" + asciiRuneToTwoDigitHexAscii(c))
+		}
+	}
+	return sb.String()
 }
 
-func expandAnchors(s string) string {
+func wikiMediaAnchor(headerText string) string {
+	// 1. Start with the header text (from the user's standpoint, the link target)
+	// 2. Remove leading and trailing spaces; convert embedded spaces to underscores.
+	// 3. URL-escape the text, converting non-URL characters to %XX escapes.
+	// 4. Convert all non-URL characters, including % (percent) to dots.
+
+	s := strings.ReplaceAll(strings.TrimSpace(headerText), " ", "_")
+	f := escapeFragment(s)
+	dbg("HEADER TEXT %s ESCAPED FRAGMENT %s\n", headerText, f)
+	
+	var sb strings.Builder
+	for _, c := range f {
+		if isValidUrlChar(c) {
+			sb.WriteRune(c)
+		} else {
+			sb.WriteRune('.')
+		}
+	}
+	return sb.String()
+}
+
+func jekyllAnchor(headerText string) string {
+	// 0. trim leading and trailing spaces - not documented but seems to be right
+	// 1. Downcase the heading (string).
+	// 2. Removes anything that is not a letter, number, space, hyphen, or	underscore
+	// 3. Change any space to a hyphen
+
+	var sb strings.Builder
+	s := strings.TrimSpace(strings.ToLower(headerText))
+	for _, c := range s {
+		if c == ' ' {
+			sb.WriteRune('-')
+		} else if isValidUrlChar(c) {
+			sb.WriteRune(c)
+		} // else nothing - drop c
+	}
+	return sb.String()
+}
+
+// Scan the entire text (generated markdown) for AnchorStart characters.
+// When one is found, collect the text up AnchorEnd. Look the collected
+// text up in the map and emit the value as the anchor.
+func expandAnchors(s string, cx *context) string {
 	var result strings.Builder
 	var anchor strings.Builder
 	inAnchor := false
+
+	fmt.Fprintf(os.Stderr, "Anchor Map\n")
+	for k, v := range cx.AnchorMap {
+		fmt.Fprintf(os.Stderr, "Anchor Map \"%s\" => \"%s\"\n", k, v)
+	}
 
 	for _, c := range s {
 		if !inAnchor {
@@ -710,7 +786,15 @@ func expandAnchors(s string) string {
 			}
 		} else { // in an anchor
 			if c == AnchorEnd {
-				TODO("expandAchors")
+				jekyllAnchor, ok := cx.AnchorMap[anchor.String()]
+				if !ok {
+					dbg("AnchorEnd: no key for %s\n", anchor.String())
+					jekyllAnchor = "link-could-not-be-patched"
+				} else {
+					dbg("Found %s for %s\n", anchor.String(), jekyllAnchor)
+				}
+				result.WriteString(jekyllAnchor)
+				inAnchor = false
 			} else {
 				anchor.WriteRune(c)
 			}
@@ -718,25 +802,3 @@ func expandAnchors(s string) string {
 	}
 	return result.String()
 }
-
-/*
-		s := expandEscapesInLine(origUrl, '.')
-		var sb strings.Builder
-		sb.WriteRune('#')
-		for _, c := range s {
-			switch {
-			case c >= '0' && c <= '9':
-				sb.WriteRune(c)
-			case c >= 'a' && c <= 'z':
-				sb.WriteRune(c)
-			case c >= 'A' && c <= 'Z':
-				sb.WriteRune(c | 0x20)
-			case c == '-' || c == ' ':
-				sb.WriteRune('-')
-			// XXX HANDLE UNDERSCORE
-			default:
-				// drop the character
-			}
-		}
-		return sb.String()
-*/

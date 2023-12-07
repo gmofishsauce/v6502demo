@@ -76,7 +76,6 @@ var mdPass = opTable {
 	},
 	elementPostFuncs: map[atom.Atom] opFunc{
 		atom.A:  doAtagClose,
-		atom.Body: doHtmlClose,
 		atom.Div: doDivClose,
 		atom.H1: doHeaderClose,
 		atom.H2: doHeaderClose,
@@ -307,6 +306,7 @@ func doHtmlClose(n *html.Node, cx *context) error {
 	inFileName := path.Base(cx.InputFilePath)
 	outPath := path.Join(outDir, inFileName) + ".md"
 	s := expandWhiteSpace(cx.Markdown.String())
+	s = expandAnchors(s, cx)
 	err := os.WriteFile(outPath, []byte(s), 0644)
 	if err != nil {
 		fatal("write result to \"%s\" failed: %v", outPath, err)
