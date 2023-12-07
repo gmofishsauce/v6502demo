@@ -9,7 +9,7 @@
 
 - [Overview](#overview)
 - [Microphotography](#microphotography)
-- [De-layering](#de-layering)
+- [De-layering](#delayering)
 - [Resources](#resources)
 
 ### Overview

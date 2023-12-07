@@ -17,7 +17,7 @@ Manchester carry chain.
 
 **Contents**
 
-- [Bit-serial incrementer](#bit-serial-incrementer)
+- [Bit-serial incrementer](#bitserial-incrementer)
 - [Alternating polarity carry chain](#alternating-polarity-carry-chain)
 - [Manchester carry chain](#manchester-carry-chain)
 - [Resources](#resources)

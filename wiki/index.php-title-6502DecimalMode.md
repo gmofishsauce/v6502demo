@@ -28,7 +28,7 @@ Some of the tests below are found in Bruce Clark's [V flag tutorial](http://www.
 
 - [Tests for ADC](#tests-for-adc)
 - [Tests for SBC](#tests-for-sbc)
-- [Decimal mode and the NES' RP2A03G](#decimal-mode-and-the-nes.27-rp2a03g)
+- [Decimal mode and the NES' RP2A03G](#decimal-mode-and-the-nes-rp2a03g)
 - [References](#references)
 
 #### Tests for ADC

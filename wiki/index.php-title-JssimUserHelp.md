@@ -26,14 +26,14 @@ For help on reading the layout, interpreting transistor circuits, and more about
 **Contents**
 
 - [Help for simple mode](#help-for-simple-mode)
-- [Graphics help (basic)](#graphics-help-.28basic.29)
+- [Graphics help (basic)](#graphics-help-basic)
 - [Running the program](#running-the-program)
 - [Modifying the program](#modifying-the-program)
 - [Help for advanced mode](#help-for-advanced-mode)
-- [Graphics help (advanced)](#graphics-help-.28advanced.29)
-- [Running the program](#running-the-program-2)
+- [Graphics help (advanced)](#graphics-help-advanced)
+- [Running the program](#link-could-not-be-patched)
 - [Interacting with the program](#interacting-with-the-program)
-- [Modifying the program](#modifying-the-program-2)
+- [Modifying the program](#link-could-not-be-patched)
 - [Tracing machine state](#tracing-machine-state)
 - [Busses and signals of interest](#busses-and-signals-of-interest)
 - [URL interface](#url-interface)

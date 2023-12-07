@@ -13,9 +13,9 @@ The following is based upon drawing the node and transistor networks out on pape
 **Contents**
 
 - [Introduction](#introduction)
-- [NMI Hijacking IRQ/BRK](#nmi-hijacking-irq.2fbrk)
-- [RES Hijacking NMI and IRQ/BRK](#res-hijacking-nmi-and-irq.2fbrk)
-- [BRK Protected from NMI vs. Unprotected from RES](#brk-protected-from-nmi-vs.-unprotected-from-res)
+- [NMI Hijacking IRQ/BRK](#nmi-hijacking-irqbrk)
+- [RES Hijacking NMI and IRQ/BRK](#res-hijacking-nmi-and-irqbrk)
+- [BRK Protected from NMI vs. Unprotected from RES](#brk-protected-from-nmi-vs-unprotected-from-res)
 - [Demonstrations](#demonstrations)
 - [External References](#external-references)
 

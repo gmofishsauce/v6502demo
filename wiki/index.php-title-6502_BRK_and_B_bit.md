@@ -14,7 +14,7 @@ Much has been said about these - it's common to find confusion about the behavio
 
 - [the B flag and the various mechanisms](#the-b-flag-and-the-various-mechanisms)
 - [IRQ preceding a BRK instruction](#irq-preceding-a-brk-instruction)
-- [late NMI will not half-modify vector reads](#late-nmi-will-not-half-modify-vector-reads)
+- [late NMI will not half-modify vector reads](#late-nmi-will-not-halfmodify-vector-reads)
 - [NMI preceding a BRK](#nmi-preceding-a-brk)
 - [NMI masked by BRK](#nmi-masked-by-brk)
 - [masking of the stack writes during RESET](#masking-of-the-stack-writes-during-reset)

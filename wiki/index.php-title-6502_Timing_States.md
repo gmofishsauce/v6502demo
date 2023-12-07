@@ -11,7 +11,7 @@
 - [Time States Seen Around Instruction Execution](#time-states-seen-around-instruction-execution)
 - [Branch Instructions Timing States](#branch-instructions-timing-states)
 - [BRK Instruction Timing States](#brk-instruction-timing-states)
-- [The RMW Instructions' Timing States](#the-rmw-instructions.27-timing-states)
+- [The RMW Instructions' Timing States](#the-rmw-instructions-timing-states)
 - [Forever Instructions](#forever-instructions)
 - [Time States That Do Not Occur During Normal Instruction Execution](#time-states-that-do-not-occur-during-normal-instruction-execution)
 - [Demonstration of All Time States](#demonstration-of-all-time-states)

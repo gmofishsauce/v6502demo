@@ -707,10 +707,10 @@ func isLetterOrDigit(c rune) bool {
 	return false
 }
 
-func isValidUrlChar(c rune) bool {
+func isValidUrlCharNotTilde(c rune) bool {
 	if isLetterOrDigit(c) {
 		return true
-	} else if c == '.' || c == '-' || c == '_' || c == '~' {
+	} else if c == '.' || c == '-' || c == '_' {
 		return true
 	}
 	return false
@@ -722,7 +722,7 @@ func isValidUrlChar(c rune) bool {
 func escapeFragment(f string) string {
 	var sb strings.Builder
 	for _, c := range f {
-		if isValidUrlChar(c) {
+		if isValidUrlCharNotTilde(c) {
 			sb.WriteRune(c)
 		} else {
 			sb.WriteString("%" + asciiRuneToTwoDigitHexAscii(c))
@@ -743,7 +743,7 @@ func wikiMediaAnchor(headerText string) string {
 	
 	var sb strings.Builder
 	for _, c := range f {
-		if isValidUrlChar(c) {
+		if isValidUrlCharNotTilde(c) {
 			sb.WriteRune(c)
 		} else {
 			sb.WriteRune('.')
