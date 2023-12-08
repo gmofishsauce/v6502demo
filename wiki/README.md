@@ -1,6 +1,6 @@
 #### Welcome to the **recovered** [`visual6502.org`](http://visual6502.org) Wiki!
 
-You can browse the wiki's [main page](./wiki/index.php-title-Main_Page),
+You can browse the wiki's [main page](./index.php-title-Main_Page),
 which contains a link to the index of all pages.
 
 Links back to the top-level [`visual6502.org`](http://visual6502.org) site are retained,
