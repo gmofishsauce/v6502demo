@@ -1,4 +1,4 @@
-**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**
+**Recovered visual6502.org wiki - beta release**
 
 # Photos of MOS 6502D - VisualChips
 

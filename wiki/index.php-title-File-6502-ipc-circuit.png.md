@@ -1,4 +1,4 @@
-**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**
+**Recovered visual6502.org wiki - beta release**
 
 # File:6502-ipc-circuit.png - VisualChips
 

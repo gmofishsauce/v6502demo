@@ -1,4 +1,4 @@
-**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**
+**Recovered visual6502.org wiki - beta release**
 
 # 6502 Opcode 8B (XAA, ANE) - VisualChips
 

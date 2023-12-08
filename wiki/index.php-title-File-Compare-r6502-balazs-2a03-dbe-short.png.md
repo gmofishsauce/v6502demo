@@ -1,4 +1,4 @@
-**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**
+**Recovered visual6502.org wiki - beta release**
 
 # File:Compare-r6502-balazs-2a03-dbe-short.png - VisualChips
 

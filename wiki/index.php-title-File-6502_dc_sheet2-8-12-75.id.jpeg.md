@@ -1,4 +1,4 @@
-**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**
+**Recovered visual6502.org wiki - beta release**
 
 # File:6502 dc sheet2-8-12-75.id.jpeg - VisualChips
 

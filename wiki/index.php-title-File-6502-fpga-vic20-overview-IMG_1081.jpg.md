@@ -1,4 +1,4 @@
-**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**
+**Recovered visual6502.org wiki - beta release**
 
 # File:6502-fpga-vic20-overview-IMG 1081.jpg - VisualChips
 

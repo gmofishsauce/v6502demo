@@ -518,7 +518,6 @@ func makeUrlSafePath(p string) string {
 	dir := path.Dir(p)
 	base := path.Base(p)
 	result := path.Join(dir, urlSafeName(base))
-	//dbg("makeUrlSafePath %s => %s", p, result)
 	return result
 }
 
@@ -547,7 +546,6 @@ func urlSafeName(origName string) string {
 			result.WriteByte('~')
 		}
 	}
-	//dbg("urlSafeName %s => %s", origName, result.String())
 	return result.String()
 }
 
@@ -739,7 +737,6 @@ func wikiMediaAnchor(headerText string) string {
 
 	s := strings.ReplaceAll(strings.TrimSpace(headerText), " ", "_")
 	f := escapeFragment(s)
-	dbg("HEADER TEXT %s ESCAPED FRAGMENT %s\n", headerText, f)
 	
 	var sb strings.Builder
 	for _, c := range f {
@@ -797,10 +794,7 @@ func expandAnchors(s string, cx *context) string {
 			if c == AnchorEnd {
 				jekyllAnchor, ok := cx.AnchorMap[anchor.String()]
 				if !ok {
-					dbg("AnchorEnd: no key for %s\n", anchor.String())
 					jekyllAnchor = "link-could-not-be-patched"
-				} else {
-					dbg("Found %s for %s\n", anchor.String(), jekyllAnchor)
 				}
 				result.WriteString("#" + jekyllAnchor)
 				inAnchor = false

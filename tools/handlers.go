@@ -670,7 +670,7 @@ func doUlClose(n *html.Node, cx *context) error {
 }
 
 func doDocType(n *html.Node, cx *context) error {
-	cx.emitString("**INCOMPLETE DRAFT OF RECOVERED WIKI PAGE**\n")
+	cx.emitString("**Recovered visual6502.org wiki - beta release**\n")
 	return nil
 }
 

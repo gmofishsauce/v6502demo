@@ -1,4 +1,4 @@
-# Welcome to the visual6502.org Wiki Recovery Repo
+# Welcome to the visual6502.org Wiki Recovery Repo!
 
 Between about 2007 and 2015, a team of dedicated hobbyists did significant
 reverse engineering work on several early microprocessors, particularly the
@@ -6,13 +6,12 @@ venerable 6502. Their work can be found at [visual6502.org](http://visual6502.or
 
 The team maintained a wiki that used MediaWiki technology. The wiki is no longer
 functional, [as you can see](http://visual6502.org/wiki).  This repository
-represents my personal effort to restore this content to easy availability on
-the internet.
+represents my personal effort to **restore** the wiki's content to availability
+on the internet.
 
-This site, however, is not a wiki; it is historical documentation. It is a
+_This_ site, however, is not a wiki; it is historical documentation. It is a
 [static, markdown-base website](https://gmofishsauce.github.io/v6502demo/wiki)
-in Github Pages. It is still under construction. The process used to build the
-site is described below.
+in Github Pages. The process used to build the site is described below.
 
 The original Wiki states:
 
@@ -146,35 +145,6 @@ Interestingly, none of the image files seems to have any illegal URL characters 
 This suggests that MediaWiki has similar set of remapping rules that it applies to uploaded
 images.
 
-### Fix additional broken names
-
-Much later (Thanksgiving 2023) I found that there were a bunch of files with `!` characters
-in their names. I'm currently trying to understand the situation with these. There are broken
-links with similar but not identical names.
-
-$ find wiki/images | grep '[0-9]\!'
-wiki/images/archive/7/75/20110221102837!6502-ipc-circuit.png
-wiki/images/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
-wiki/images/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
-wiki/images/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
-wiki/images/archive/5/58/20110220170427!6502-ipc-logic.png
-wiki/images/archive/5/58/20110220140415!6502-ipc-logic.png
-wiki/images/archive/5/58/20110220181007!6502-ipc-logic.png
-wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png
-wiki/images/thumb/archive/7/75/20110221102837!6502-ipc-circuit.png/120px-6502-ipc-circuit.png
-wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png
-wiki/images/thumb/archive/7/78/20120909173741!6502-decimal-DAA-removed-visual6502.png/120px-6502-decimal-DAA-removed-visual6502.png
-wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png
-wiki/images/thumb/archive/4/42/20110313092919!Rca1802-detail2-nor4.png/120px-Rca1802-detail2-nor4.png
-wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png
-wiki/images/thumb/archive/e/e3/20110110194756!6502-XAA-Idb-sb.png/120px-6502-XAA-Idb-sb.png
-wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220170427!6502-ipc-logic.png/120px-6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220140415!6502-ipc-logic.png/120px-6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png
-wiki/images/thumb/archive/5/58/20110220181007!6502-ipc-logic.png/120px-6502-ipc-logic.png
-
 ### Set up Github Pages and create some README files
 
 I enabled Github Pages for the entire repo. Much of the repo is not accessible through the Pages
@@ -183,28 +153,6 @@ files in effect.
 
 ### Write the .md files
 
-TBD:
-
-This is the point of the whole exercise: writing a static markdown file that captures all the
-valuable content of the original MediaWiki page. This step includes updating all the URLs that
-may have pointed to renamed files. All the hrefs in the wiki fall into one of the catagories
-described by the following sequence of `grep -v` commands:
-
-```
-grep href * |\
-	grep -v 'href="/wiki' |\
-	grep -v "api.php" |\
-	grep -v 'href="#[A-Za-z]' |\
-	grep -v 'http://visual6502' |\
-	grep -v "http://[A-Za-z]" |\
-	grep -v "https://[A-Za-z]" |\
-	grep -v 'href="/favicon.ico"' |\
-	grep -v 'href="#[0-9]'
-```
-
-The first line alone produces over 8500 lines of output, of which the `grep -v` commands
-filter all but one line, an FTP link. The markdown generator will have to deal with all
-the filtered URL types when they are encountered (they may not be, because the hrefs may
-be found in HTML tags that the markdown processor ignores; note for example the "api.php"
-links to the MediaWiki API).
-
+Several weeks were spent creating an HTML to markdown translator specific to the MediaWiki pages
+in the visual6502 wiki. The details are out of scope for this README; see the source (in ./tools)
+for details.
